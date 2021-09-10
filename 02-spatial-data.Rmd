@@ -1,0 +1,16 @@
+# (PART) Foundations {-}
+
+# Geographic data in R {#spatial-class}
+
+```{r setup, echo=FALSE, results='hide'}
+ex2 = tempfile(fileext = ".Rmd")
+on.exit(unlink(ex2))
+download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_02-ex.Rmd", ex2)
+```
+
+```{r, echo=FALSE, results='asis'}
+res = knitr::knit_child(ex2, quiet = TRUE,
+                        options = list(include = TRUE, message = FALSE))
+cat(res, sep = '\n')
+```
+
