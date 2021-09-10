@@ -1,5 +1,5 @@
 --- 
-title: 'Geocomputation with R: solutions'
+title: 'Geocomputation with R: Solutions'
 author: 'Robin Lovelace, Jakub Nowosad, Jannes Muenchow'
 date: '`r Sys.Date()`'
 site: bookdown::bookdown_site

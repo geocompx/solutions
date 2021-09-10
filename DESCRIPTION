@@ -1,0 +1,20 @@
+Type: Compendium
+Package: Geocomputation with R: Solutions
+Title: Geocomputation with R: Solutions
+Version: 0.0.2
+Authors@R: c(person("Robin", "Lovelace", role = c("aut")), 
+    person("Jakub", "Nowosad", email = "nowosad.jakub@gmail.com",
+    role = c("aut", "cre")),
+    person("Jannes", "Muenchow", role = c("aut")))
+Description: Open source book on R for reproducible,
+    geographic research
+License: CC BY-NC-ND 4.0
+Imports: 
+    bookdown,
+    downlit,
+    bslib,
+    geocompkg
+Remotes: 
+    geocompr/geocompkg
+Encoding: UTF-8
+LazyData: true
