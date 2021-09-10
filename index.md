@@ -14,3 +14,4 @@ cover-image: "images/cover.png"
 url: https://geocompr.github.io/solutions/
 ---
 
+# Geocomputation with R: Solutions
