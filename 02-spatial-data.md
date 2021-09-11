@@ -12,15 +12,26 @@
 
 
 
+<style>
+body
+  { counter-reset: source-line 0; }
+pre.numberSource code
+  { counter-reset: none; }
+</style>
+
+```{.r .numberLines .lineAnchors}
+library(sf)
+library(spData)
+library(terra)
+```
+
 1. Use `summary()` on the geometry column of the `world` data object. What does the output tell us about:
     - Its geometry type?
     - The number of countries?
     - Its coordinate reference system (CRS)?
     
 
-```r
-library(sf)
-library(spData)
+```{.r .numberLines .lineAnchors}
 summary(world)
 #>     iso_a2           name_long          continent          region_un        
 #>  Length:177         Length:177         Length:177         Length:177        
@@ -64,8 +75,7 @@ Find two similarities and two differences between the image on your computer and
 1. Create an empty `SpatRaster` object called `my_raster` with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.
 
-```r
-library(terra)
+```{.r .numberLines .lineAnchors}
 my_raster = rast(ncol = 10, nrow = 10,
                  vals = sample(0:10, size = 10 * 10, replace = TRUE))
 ```
@@ -73,8 +83,7 @@ my_raster = rast(ncol = 10, nrow = 10,
 1. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
 What kind of information can you get about the properties of this file?
 
-```r
-library(terra)
+```{.r .numberLines .lineAnchors}
 nlcd = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 dim(nlcd)
 #> [1] 1359 1073    1
