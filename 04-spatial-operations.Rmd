@@ -1,11 +1,9 @@
-# (PART) Foundations {-}
-
-# Geographic data in R {#spatial-class}
+# Spatial data operations {#spatial-operations}
 
 ```{r setup, echo=FALSE, results='hide'}
 ex = tempfile(fileext = ".Rmd")
 on.exit(unlink(ex))
-download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_02-ex.Rmd", ex)
+download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_04-ex.Rmd", ex)
 ```
 
 ```{r, echo=FALSE, results='asis'}
@@ -13,4 +11,3 @@ res = knitr::knit_child(ex, quiet = TRUE,
                         options = list(include = TRUE, message = FALSE))
 cat(res, sep = '\n')
 ```
-

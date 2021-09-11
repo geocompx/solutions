@@ -1,11 +1,9 @@
-# (PART) Foundations {-}
-
-# Geographic data in R {#spatial-class}
+# Introduction {#intro}
 
 ```{r setup, echo=FALSE, results='hide'}
 ex = tempfile(fileext = ".Rmd")
 on.exit(unlink(ex))
-download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_02-ex.Rmd", ex)
+download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_01-ex.Rmd", ex)
 ```
 
 ```{r, echo=FALSE, results='asis'}
