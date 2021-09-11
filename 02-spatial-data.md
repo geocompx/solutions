@@ -6,12 +6,8 @@
 
 
 ```
+#> Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1
 #> terra version 1.4.2
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:knitr':
-#> 
-#>     spin
 ```
 
 
@@ -20,14 +16,51 @@
     - Its geometry type?
     - The number of countries?
     - Its coordinate reference system (CRS)?
-1. Run the code that 'generated' the map of the world in Figure \@ref(fig:contpop) at the end of Section \@ref(base-args).
+    
+
+```r
+library(sf)
+library(spData)
+summary(world)
+#>     iso_a2           name_long          continent          region_un        
+#>  Length:177         Length:177         Length:177         Length:177        
+#>  Class :character   Class :character   Class :character   Class :character  
+#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>   subregion             type              area_km2             pop          
+#>  Length:177         Length:177         Min.   :    2417   Min.   :5.63e+04  
+#>  Class :character   Class :character   1st Qu.:   46185   1st Qu.:3.75e+06  
+#>  Mode  :character   Mode  :character   Median :  185004   Median :1.04e+07  
+#>                                        Mean   :  832558   Mean   :4.28e+07  
+#>                                        3rd Qu.:  621860   3rd Qu.:3.07e+07  
+#>                                        Max.   :17018507   Max.   :1.36e+09  
+#>                                                           NA's   :10        
+#>     lifeExp       gdpPercap                 geom    
+#>  Min.   :50.6   Min.   :   597   MULTIPOLYGON :177  
+#>  1st Qu.:65.0   1st Qu.:  3752   epsg:4326    :  0  
+#>  Median :72.9   Median : 10734   +proj=long...:  0  
+#>  Mean   :70.9   Mean   : 17106                      
+#>  3rd Qu.:76.8   3rd Qu.: 24233                      
+#>  Max.   :83.6   Max.   :120860                      
+#>  NA's   :10     NA's   :17
+```
+
+1. Run the code that 'generated' the map of the world in Section 2.2.4 Base plot arguments.
 Find two similarities and two differences between the image on your computer and that in the book.
     - What does the `cex` argument do (see `?plot`)?
     - Why was `cex` set to the `sqrt(world$pop) / 10000`?
     - Bonus: experiment with different ways to visualize the global population.
-1. Use `plot()` to create maps of Nigeria in context (see Section \@ref(base-args)).
+
+    
+1. Use `plot()` to create maps of Nigeria in context (see Section 2.2.4 Base plot arguments).
     - Adjust the `lwd`, `col` and `expandBB` arguments of `plot()`. 
     - Challenge: read the documentation of `text()` and annotate the map.
+
+
+
 1. Create an empty `SpatRaster` object called `my_raster` with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.
 
@@ -36,7 +69,6 @@ library(terra)
 my_raster = rast(ncol = 10, nrow = 10,
                  vals = sample(0:10, size = 10 * 10, replace = TRUE))
 ```
-
 
 1. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
 What kind of information can you get about the properties of this file?
