@@ -1,4 +1,3 @@
-geocomputation-with-r-solutions
 intro
 spatial-class
 attr

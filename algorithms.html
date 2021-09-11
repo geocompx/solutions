@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions</title>
+<title>Chapter 10 Scripts, algorithms and functions | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
 <meta name="description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions">
+<meta property="og:title" content="Chapter 10 Scripts, algorithms and functions | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/algorithms.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <meta property="og:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions">
+<meta name="twitter:title" content="Chapter 10 Scripts, algorithms and functions | Geocomputation with R: Solutions">
 <meta name="twitter:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,25 +45,26 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="spatial-class.html"><span class="header-section-number">3</span> Geographic data in R</a></li>
-<li><a class="" href="attr.html"><span class="header-section-number">4</span> Attribute data operations</a></li>
-<li><a class="" href="spatial-operations.html"><span class="header-section-number">5</span> Spatial data operations</a></li>
-<li><a class="" href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></li>
-<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
-<li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
+<li><a class="" href="spatial-class.html"><span class="header-section-number">2</span> Geographic data in R</a></li>
+<li><a class="" href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></li>
+<li><a class="" href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></li>
+<li><a class="" href="geometric-operations.html"><span class="header-section-number">5</span> Geometry operations</a></li>
+<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></li>
+<li><a class="" href="read-write.html"><span class="header-section-number">7</span> Geographic data I/O</a></li>
 <li class="book-part">Extensions</li>
-<li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
-<li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
-<li><a class="active" href="algorithms.html"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></li>
+<li><a class="" href="adv-map.html"><span class="header-section-number">8</span> Making maps with R</a></li>
+<li><a class="" href="gis.html"><span class="header-section-number">9</span> Bridges to GIS software</a></li>
+<li><a class="active" href="algorithms.html"><span class="header-section-number">10</span> Scripts, algorithms and functions</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
 <li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">13</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">14</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">15</span> Ecology</a></li>
-<li><a class="" href="conclusion.html"><span class="header-section-number">16</span> Conclusion</a></li>
+<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
+<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
+<li><a class="" href="conclusion.html"><span class="header-section-number">15</span> Conclusion</a></li>
 </ul>
 
         <div class="book-extra">
@@ -73,16 +74,16 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="algorithms" class="section level1">
 <h1>
-<span class="header-section-number">11</span> Scripts, algorithms and functions<a class="anchor" aria-label="anchor" href="#algorithms"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Scripts, algorithms and functions<a class="anchor" aria-label="anchor" href="#algorithms"><i class="fas fa-link"></i></a>
 </h1>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></div>
-<div class="next"><a href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></div>
+<div class="prev"><a href="gis.html"><span class="header-section-number">9</span> Bridges to GIS software</a></div>
+<div class="next"><a href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#algorithms"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#algorithms"><span class="header-section-number">10</span> Scripts, algorithms and functions</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
