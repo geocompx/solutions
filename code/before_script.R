@@ -1,5 +1,5 @@
 library(methods)
-library(knitr)
+suppressPackageStartupMessages(library(knitr))
 opts_chunk$set(
         background = "#FCFCFC", # code chunk color in latex
         comment = "#>",
