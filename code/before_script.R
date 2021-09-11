@@ -1,6 +1,5 @@
 library(methods)
-suppressPackageStartupMessages(library(knitr))
-opts_chunk$set(
+knitr::opts_chunk$set(
         background = "#FCFCFC", # code chunk color in latex
         comment = "#>",
         collapse = TRUE,
@@ -15,8 +14,8 @@ opts_chunk$set(
         dpi = 105 # this creates 2*105 dpi at 6in, which is 300 dpi at 4.2in, see the  EmilHvitfeldt/smltar repo
 )
 # https://github.com/EmilHvitfeldt/smltar/issues/114
-hook_output = knit_hooks$get('output')
-knit_hooks$set(output = function(x, options) {
+hook_output = knitr::knit_hooks$get('output')
+knitr::knit_hooks$set(output = function(x, options) {
         # this hook is used only when the linewidth option is not NULL
         if (!is.null(n <- options$linewidth)) {
                 x = knitr:::split_lines(x)
