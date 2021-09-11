@@ -1,13 +1,13 @@
 bookdown::bs4_book:
   theme:
-    primary: "#3860b6" #links  
+    primary: "#2FB534" #links  
     base_font: 
       google: 
         family: Lato
     heading_font:
       google:
         family: Montserrat
-        wght: 600
+        wght: 500
     code_font:
       google: 
         family: Roboto Mono
