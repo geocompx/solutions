@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions</title>
+<title>Chapter 8 Geographic data I/O | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="description" content="List and describe three types of vector, raster, and geodatabase formats. Name at least two differences between read_sf() and the more well-known function st_read(). Read the cycle_hire_xy.csv...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
+<meta property="og:title" content="Chapter 8 Geographic data I/O | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://geocompr.github.io/solutions/">
+<meta property="og:url" content="https://geocompr.github.io/solutions/read-write.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta property="og:description" content="List and describe three types of vector, raster, and geodatabase formats. Name at least two differences between read_sf() and the more well-known function st_read(). Read the cycle_hire_xy.csv...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="twitter:title" content="Chapter 8 Geographic data I/O | Geocomputation with R: Solutions">
+<meta name="twitter:description" content="List and describe three types of vector, raster, and geodatabase formats. Name at least two differences between read_sf() and the more well-known function st_read(). Read the cycle_hire_xy.csv...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">Foundations</li>
 <li><a class="" href="spatial-class.html"><span class="header-section-number">3</span> Geographic data in R</a></li>
@@ -53,7 +53,7 @@
 <li><a class="" href="spatial-operations.html"><span class="header-section-number">5</span> Spatial data operations</a></li>
 <li><a class="" href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></li>
 <li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
-<li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
+<li><a class="active" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
 <li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
@@ -71,23 +71,38 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="geocomputation-with-r-solutions" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="read-write" class="section level1">
 <h1>
-<span class="header-section-number">1</span> Geocomputation with R: Solutions<a class="anchor" aria-label="anchor" href="#geocomputation-with-r-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Geographic data I/O<a class="anchor" aria-label="anchor" href="#read-write"><i class="fas fa-link"></i></a>
 </h1>
-
+<ol style="list-style-type: decimal">
+<li><p>List and describe three types of vector, raster, and geodatabase formats.</p></li>
+<li><p>Name at least two differences between <code>read_sf()</code> and the more well-known function <code>st_read()</code>.</p></li>
+<li><p>Read the <code>cycle_hire_xy.csv</code> file from the <strong>spData</strong> package as a spatial object (Hint: it is located in the <code>misc\</code> folder).
+What is a geometry type of the loaded object?</p></li>
+<li><p>Download the borders of Germany using <strong>rnaturalearth</strong>, and create a new object called <code>germany_borders</code>.
+Write this new object to a file of the GeoPackage format.</p></li>
+<li><p>Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>raster</strong> package.
+Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rdrr.io/pkg/raster/man/subset.html">raster::subset()</a></code>).</p></li>
+<li><p>Create a static map of Germany’s borders, and save it to a PNG file.</p></li>
+<li><p>Create an interactive map using data from the <code>cycle_hire_xy.csv</code> file.
+Export this map to a file called <code>cycle_hire.html</code>.</p></li>
+</ol>
 </div>
+
+
+
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">2</span> Introduction</a></div>
+<div class="prev"><a href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></div>
+<div class="next"><a href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#geocomputation-with-r-solutions"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#read-write"><span class="header-section-number">8</span> Geographic data I/O</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/07-read-write-plot.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/07-read-write-plot.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

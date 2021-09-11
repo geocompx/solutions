@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions</title>
+<title>Chapter 7 Reprojecting geographic data | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="description" content="Create a new object called nz_wgs by transforming nz object into the WGS84 CRS. Create an object of class crs for both and use this to query their CRSs. With reference to the bounding box of each...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
+<meta property="og:title" content="Chapter 7 Reprojecting geographic data | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://geocompr.github.io/solutions/">
+<meta property="og:url" content="https://geocompr.github.io/solutions/reproj-geo-data.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta property="og:description" content="Create a new object called nz_wgs by transforming nz object into the WGS84 CRS. Create an object of class crs for both and use this to query their CRSs. With reference to the bounding box of each...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="twitter:title" content="Chapter 7 Reprojecting geographic data | Geocomputation with R: Solutions">
+<meta name="twitter:description" content="Create a new object called nz_wgs by transforming nz object into the WGS84 CRS. Create an object of class crs for both and use this to query their CRSs. With reference to the bounding box of each...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -45,14 +45,14 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">Foundations</li>
 <li><a class="" href="spatial-class.html"><span class="header-section-number">3</span> Geographic data in R</a></li>
 <li><a class="" href="attr.html"><span class="header-section-number">4</span> Attribute data operations</a></li>
 <li><a class="" href="spatial-operations.html"><span class="header-section-number">5</span> Spatial data operations</a></li>
 <li><a class="" href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></li>
-<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
+<li><a class="active" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
 <li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
@@ -71,23 +71,48 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="geocomputation-with-r-solutions" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="reproj-geo-data" class="section level1">
 <h1>
-<span class="header-section-number">1</span> Geocomputation with R: Solutions<a class="anchor" aria-label="anchor" href="#geocomputation-with-r-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Reprojecting geographic data<a class="anchor" aria-label="anchor" href="#reproj-geo-data"><i class="fas fa-link"></i></a>
 </h1>
-
+<!-- CRS CONVERSION -->
+<!-- 1. vector reprojection exercise (e.g. modification of proj4) -->
+<ol style="list-style-type: decimal">
+<li>
+<p>Create a new object called <code>nz_wgs</code> by transforming <code>nz</code> object into the WGS84 CRS.</p>
+<ul>
+<li>Create an object of class <code>crs</code> for both and use this to query their CRSs.</li>
+<li>With reference to the bounding box of each object, what units does each CRS use?</li>
+<li>Remove the CRS from <code>nz_wgs</code> and plot the result: what is wrong with this map of New Zealand and why?</li>
+</ul>
+</li>
+<li><p>Transform the <code>world</code> dataset to the transverse Mercator projection (<code>"+proj=tmerc"</code>) and plot the result.
+What has changed and why?
+Try to transform it back into WGS 84 and plot the new object.
+Why does the new object differ from the original one?</p></li>
+<li><p>Transform the continuous raster (<code>con_raster</code>) into NAD83 / UTM zone 12N using the nearest neighbor interpolation method.
+What has changed?
+How does it influence the results?</p></li>
+<li><p>Transform the categorical raster (<code>cat_raster</code>) into WGS 84 using the bilinear interpolation method.
+What has changed?
+How does it influence the results?</p></li>
+<li><p>Create your own <code>proj4string</code>.
+It should have the Lambert Azimuthal Equal Area (<code>laea</code>) projection, the WGS84 ellipsoid, the longitude of projection center of 95 degrees west, the latitude of projection center of 60 degrees north, and its units should be in meters.
+Next, subset Canada from the <code>world</code> object and transform it into the new projection.
+Plot and compare a map before and after the transformation.</p></li>
+</ol>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">2</span> Introduction</a></div>
+<div class="prev"><a href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></div>
+<div class="next"><a href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#geocomputation-with-r-solutions"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#reproj-geo-data"><span class="header-section-number">7</span> Reprojecting geographic data</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/06-reproj.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/06-reproj.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

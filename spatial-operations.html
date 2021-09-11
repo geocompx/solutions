@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions</title>
+<title>Chapter 5 Spatial data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
+<meta property="og:title" content="Chapter 5 Spatial data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://geocompr.github.io/solutions/">
+<meta property="og:url" content="https://geocompr.github.io/solutions/spatial-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta property="og:description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Geocomputation with R: Solutions | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
+<meta name="twitter:title" content="Chapter 5 Spatial data operations | Geocomputation with R: Solutions">
+<meta name="twitter:description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -45,12 +45,12 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">2</span> Introduction</a></li>
 <li class="book-part">Foundations</li>
 <li><a class="" href="spatial-class.html"><span class="header-section-number">3</span> Geographic data in R</a></li>
 <li><a class="" href="attr.html"><span class="header-section-number">4</span> Attribute data operations</a></li>
-<li><a class="" href="spatial-operations.html"><span class="header-section-number">5</span> Spatial data operations</a></li>
+<li><a class="active" href="spatial-operations.html"><span class="header-section-number">5</span> Spatial data operations</a></li>
 <li><a class="" href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></li>
 <li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
 <li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
@@ -71,23 +71,45 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="geocomputation-with-r-solutions" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="spatial-operations" class="section level1">
 <h1>
-<span class="header-section-number">1</span> Geocomputation with R: Solutions<a class="anchor" aria-label="anchor" href="#geocomputation-with-r-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Spatial data operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
 </h1>
-
+<ol style="list-style-type: decimal">
+<li><p>It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
+How many of these high points does the Canterbury region contain?</p></li>
+<li><p>Which region has the second highest number of <code>nz_height</code> points in, and how many does it have?</p></li>
+<li>
+<p>Generalizing the question to all regions: how many of New Zealand’s 16 regions contain points which belong to the top 100 highest points in the country? Which regions?</p>
+<ul>
+<li>Bonus: create a table listing these regions in order of the number of points and their name.</li>
+</ul>
+</li>
+<li><p>Use <code><a href="https://rdrr.io/r/utils/data.html">data(dem, package = "spDataLarge")</a></code>, and reclassify the elevation in three classes: low, medium and high.
+Secondly, attach the NDVI raster (<code><a href="https://rdrr.io/r/utils/data.html">data(ndvi, package = "spDataLarge")</a></code>) and compute the mean NDVI and the mean elevation for each altitudinal class.</p></li>
+<li><p>Apply a line detection filter to <code>raster(system.file("external/rlogo.grd", package = "raster"))</code>.
+Plot the result.
+Hint: Read <code>?raster::focal()</code>.</p></li>
+<li><p>Calculate the NDVI of a Landsat image.
+Use the Landsat image provided by the <strong>spDataLarge</strong> package (<code><a href="https://rdrr.io/r/base/system.file.html">system.file("raster/landsat.tif", package="spDataLarge")</a></code>).</p></li>
+<li><p>A StackOverflow <a href="https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances">post</a> shows how to compute distances to the nearest coastline using <code><a href="https://rdrr.io/pkg/raster/man/distance.html">raster::distance()</a></code>.
+Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use <code>getData()</code>).
+Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km.
+Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation.
+Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.</p></li>
+</ol>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">2</span> Introduction</a></div>
+<div class="prev"><a href="attr.html"><span class="header-section-number">4</span> Attribute data operations</a></div>
+<div class="next"><a href="geometric-operations.html"><span class="header-section-number">6</span> Geometry operations</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#geocomputation-with-r-solutions"><span class="header-section-number">1</span> Geocomputation with R: Solutions</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#spatial-operations"><span class="header-section-number">5</span> Spatial data operations</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/04-spatial-operations.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/04-spatial-operations.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
