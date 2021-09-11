@@ -77,7 +77,7 @@
 </h1>
 <p>Some of the exercises use a vector (<code>random_points</code>) and raster dataset (<code>ndvi</code>) from the <strong>RQGIS</strong> package.
 They also use a polygonal ‘convex hull’ derived from the vector dataset (<code>ch</code>) to represent the area of interest:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># library(RQGIS)</span>
 <span class="co"># data(random_points)</span>
 <span class="co"># data(ndvi)</span>
@@ -86,14 +86,14 @@ They also use a polygonal ‘convex hull’ derived from the vector dataset (<co
 <ol style="list-style-type: decimal">
 <li>
 <p>Generate and plot simplified versions of the <code>nz</code> dataset.
-Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.00005) for <code>ms_simplify()</code> and <code>dTolerance</code> (from 100 to 100,000) <code>st_simplify()</code> .</p>
+Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.00005) for <code>ms_simplify()</code> and <code>dTolerance</code> (from 100 to 100,000) <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify()</a></code> .</p>
 <ul>
 <li>At what value does the form of the result start to break down for each method, making New Zealand unrecognizable?</li>
-<li>Advanced: What is different about the geometry type of the results from <code>st_simplify()</code> compared with the geometry type of <code>ms_simplify()</code>? What problems does this create and how can this be resolved?</li>
+<li>Advanced: What is different about the geometry type of the results from <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify()</a></code> compared with the geometry type of <code>ms_simplify()</code>? What problems does this create and how can this be resolved?</li>
 </ul>
 </li>
 <li><p>In the first exercise in Chapter <a href="spatial-operations.html#spatial-operations">4</a> it was established that Canterbury region had 70 of the 101 highest points in New Zealand.
-Using <code>st_buffer()</code>, how many points in <code>nz_height</code> are within 100 km of Canterbury?</p></li>
+Using <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code>, how many points in <code>nz_height</code> are within 100 km of Canterbury?</p></li>
 <li><p>Find the geographic centroid of New Zealand.
 How far is it from the geographic centroid of Canterbury?</p></li>
 <li>
@@ -109,7 +109,7 @@ Hint: you need to use a two-element vector for this transformation.</p>
 <p>Subset the point in <code>p</code> that is contained within <code>x</code> <em>and</em> <code>y</code> (see Section <a href="#clipping"><strong>??</strong></a> and Figure <a href="#fig:venn-clip"><strong>??</strong></a>).</p>
 <ul>
 <li>Using base subsetting operators.</li>
-<li>Using an intermediary object created with <code>st_intersection()</code>.</li>
+<li>Using an intermediary object created with <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection()</a></code>.</li>
 </ul>
 </li>
 <li><p>Calculate the length of the boundary lines of US states in meters.

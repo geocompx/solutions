@@ -5,33 +5,21 @@
 
 
 
-```
+```r
+library(sf)
 #> Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1
+library(spData)
+library(terra)
 #> terra version 1.4.2
 ```
 
-
-
-<style>
-body
-  { counter-reset: source-line 0; }
-pre.numberSource code
-  { counter-reset: none; }
-</style>
-
-```{.r .numberLines .lineAnchors}
-library(sf)
-library(spData)
-library(terra)
-```
-
-1. Use `summary()` on the geometry column of the `world` data object. What does the output tell us about:
+E1. Use `summary()` on the geometry column of the `world` data object. What does the output tell us about:
     - Its geometry type?
     - The number of countries?
     - Its coordinate reference system (CRS)?
     
 
-```{.r .numberLines .lineAnchors}
+```r
 summary(world)
 #>     iso_a2           name_long          continent          region_un        
 #>  Length:177         Length:177         Length:177         Length:177        
@@ -59,31 +47,31 @@ summary(world)
 #>  NA's   :10     NA's   :17
 ```
 
-1. Run the code that 'generated' the map of the world in Section 2.2.4 Base plot arguments.
+E2. Run the code that 'generated' the map of the world in Section 2.2.4 Base plot arguments.
 Find two similarities and two differences between the image on your computer and that in the book.
     - What does the `cex` argument do (see `?plot`)?
     - Why was `cex` set to the `sqrt(world$pop) / 10000`?
     - Bonus: experiment with different ways to visualize the global population.
 
     
-1. Use `plot()` to create maps of Nigeria in context (see Section 2.2.4 Base plot arguments).
+E3. Use `plot()` to create maps of Nigeria in context (see Section 2.2.4 Base plot arguments).
     - Adjust the `lwd`, `col` and `expandBB` arguments of `plot()`. 
     - Challenge: read the documentation of `text()` and annotate the map.
 
 
 
-1. Create an empty `SpatRaster` object called `my_raster` with 10 columns and 10 rows.
+E4. Create an empty `SpatRaster` object called `my_raster` with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.
 
-```{.r .numberLines .lineAnchors}
+```r
 my_raster = rast(ncol = 10, nrow = 10,
                  vals = sample(0:10, size = 10 * 10, replace = TRUE))
 ```
 
-1. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
+E5. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
 What kind of information can you get about the properties of this file?
 
-```{.r .numberLines .lineAnchors}
+```r
 nlcd = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 dim(nlcd)
 #> [1] 1359 1073    1
