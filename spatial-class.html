@@ -81,11 +81,11 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/spData/">spData</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
 <span class="co">#&gt; terra version 1.4.2</span></code></pre></div>
-<p>E1. Use <code><a href="https://rdrr.io/pkg/terra/man/summary.html">summary()</a></code> on the geometry column of the <code>world</code> data object. What does the output tell us about:
-- Its geometry type?
+<p>E1. Use <code><a href="https://rdrr.io/pkg/terra/man/summary.html">summary()</a></code> on the geometry column of the <code>world</code> data object. What does the output tell us about:</p>
+<pre><code>- Its geometry type?
 - The number of countries?
-- Its coordinate reference system (CRS)?</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+- Its coordinate reference system (CRS)?</code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/summary.html">summary</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span>
 <span class="co">#&gt;     iso_a2           name_long          continent          region_un        </span>
 <span class="co">#&gt;  Length:177         Length:177         Length:177         Length:177        </span>
@@ -112,21 +112,21 @@
 <span class="co">#&gt;  Max.   :83.6   Max.   :120860                      </span>
 <span class="co">#&gt;  NA's   :10     NA's   :17</span></code></pre></div>
 <p>E2. Run the code that ‘generated’ the map of the world in Section 2.2.4 Base plot arguments.
-Find two similarities and two differences between the image on your computer and that in the book.
-- What does the <code>cex</code> argument do (see <code><a href="https://r-spatial.github.io/sf/reference/plot.html">?plot</a></code>)?
-- Why was <code>cex</code> set to the <code>sqrt(world$pop) / 10000</code>?
-- Bonus: experiment with different ways to visualize the global population.</p>
-<p>E3. Use <code><a href="https://r-spatial.github.io/sf/reference/plot.html">plot()</a></code> to create maps of Nigeria in context (see Section 2.2.4 Base plot arguments).
-- Adjust the <code>lwd</code>, <code>col</code> and <code>expandBB</code> arguments of <code><a href="https://r-spatial.github.io/sf/reference/plot.html">plot()</a></code>.
-- Challenge: read the documentation of <code><a href="https://rdrr.io/pkg/terra/man/text.html">text()</a></code> and annotate the map.</p>
+Find two similarities and two differences between the image on your computer and that in the book.</p>
+<pre><code>- What does the `cex` argument do (see `?plot`)?
+- Why was `cex` set to the `sqrt(world$pop) / 10000`?
+- Bonus: experiment with different ways to visualize the global population.</code></pre>
+<p>E3. Use <code><a href="https://r-spatial.github.io/sf/reference/plot.html">plot()</a></code> to create maps of Nigeria in context (see Section 2.2.4 Base plot arguments).</p>
+<pre><code>- Adjust the `lwd`, `col` and `expandBB` arguments of `plot()`. 
+- Challenge: read the documentation of `text()` and annotate the map.</code></pre>
 <p>E4. Create an empty <code>SpatRaster</code> object called <code>my_raster</code> with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">10</span>,
                  vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, size <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>E5. Read-in the <code>raster/nlcd.tif</code> file from the <strong>spDataLarge</strong> package.
 What kind of information can you get about the properties of this file?</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nlcd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/nlcd.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">dim</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1359 1073    1</span>
