@@ -6,24 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Spatial data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
+<meta name="description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/spatial-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
+<meta property="og:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of these high points does the Canterbury region...">
+<meta name="twitter:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Lato-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Montserrat-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -71,33 +71,77 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="spatial-operations" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="spatial-operations" class="section level1" number="4">
 <h1>
 <span class="header-section-number">4</span> Spatial data operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
 </h1>
-<ol style="list-style-type: decimal">
-<li><p>It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
-How many of these high points does the Canterbury region contain?</p></li>
-<li><p>Which region has the second highest number of <code>nz_height</code> points in, and how many does it have?</p></li>
-<li>
-<p>Generalizing the question to all regions: how many of New Zealand’s 16 regions contain points which belong to the top 100 highest points in the country? Which regions?</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">nz</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">nz_height</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span></code></pre></div>
+<p>E1. It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
+How many of these high points does the Canterbury region contain?</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mtennekes/tmap">tmap</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tmap_mode.html">tmap_mode</a></span><span class="op">(</span><span class="st">"view"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz_height</span><span class="op">)</span>
+<span class="va">canterbury</span> <span class="op">=</span> <span class="va">nz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Name</span> <span class="op">==</span> <span class="st">"Canterbury"</span><span class="op">)</span>
+<span class="va">canterbury_height</span> <span class="op">=</span> <span class="va">nz_height</span><span class="op">[</span><span class="va">canterbury</span>, <span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">canterbury_height</span><span class="op">)</span> <span class="co"># answer: 70</span></code></pre></div>
+<p>E2. Which region has the second highest number of <code>nz_height</code> points in, and how many does it have?</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span>
+<span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span>
+<span class="va">nz_height_combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Name</span>, <span class="va">count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt;         Name count</span>
+<span class="co">#&gt; 1 West Coast    22</span></code></pre></div>
+<p>E3. Generalizing the question to all regions: how many of New Zealand’s 16 regions contain points which belong to the top 100 highest points in the country? Which regions?</p>
 <ul>
 <li>Bonus: create a table listing these regions in order of the number of points and their name.</li>
 </ul>
-</li>
-<li><p>Use <code><a href="https://rdrr.io/r/utils/data.html">data(dem, package = "spDataLarge")</a></code>, and reclassify the elevation in three classes: low, medium and high.
-Secondly, attach the NDVI raster (<code><a href="https://rdrr.io/r/utils/data.html">data(ndvi, package = "spDataLarge")</a></code>) and compute the mean NDVI and the mean elevation for each altitudinal class.</p></li>
-<li><p>Apply a line detection filter to <code>raster(system.file("external/rlogo.grd", package = "raster"))</code>.
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span>
+<span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span>
+<span class="va">nz_height_combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Name</span>, <span class="va">count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/pkg/terra/man/na.omit.html">na.omit</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;                Name count</span>
+<span class="co">#&gt; 1        Canterbury    70</span>
+<span class="co">#&gt; 2        West Coast    22</span>
+<span class="co">#&gt; 3           Waikato     3</span>
+<span class="co">#&gt; 4 Manawatu-Wanganui     2</span>
+<span class="co">#&gt; 5             Otago     2</span>
+<span class="co">#&gt; 6         Southland     1</span>
+<span class="co">#&gt; 7       Marlborough     1</span></code></pre></div>
+<p>E4. Use <code>data(dem, package = "spDataLarge")</code>, and reclassify the elevation in three classes: low, medium and high.
+Secondly, attach the NDVI raster (<code>data(ndvi, package = "spDataLarge")</code>) and compute the mean NDVI and the mean elevation for each altitudinal class.</p>
+<p>E5. Apply a line detection filter to <code>raster(system.file("external/rlogo.grd", package = "raster"))</code>.
 Plot the result.
-Hint: Read <code>?raster::focal()</code>.</p></li>
-<li><p>Calculate the NDVI of a Landsat image.
-Use the Landsat image provided by the <strong>spDataLarge</strong> package (<code><a href="https://rdrr.io/r/base/system.file.html">system.file("raster/landsat.tif", package="spDataLarge")</a></code>).</p></li>
-<li><p>A StackOverflow <a href="https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances">post</a> shows how to compute distances to the nearest coastline using <code><a href="https://rdrr.io/pkg/raster/man/distance.html">raster::distance()</a></code>.
+Hint: Read <code>?raster::focal()</code>.</p>
+<p>E6. Calculate the NDVI of a Landsat image.
+Use the Landsat image provided by the <strong>spDataLarge</strong> package (<code>system.file("raster/landsat.tif", package = "spDataLarge")</code>).</p>
+<p>E7. A StackOverflow <a href="https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances">post</a> shows how to compute distances to the nearest coastline using <code><a href="https://rdrr.io/pkg/raster/man/distance.html">raster::distance()</a></code>.
 Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use <code>getData()</code>).
 Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation.
-Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.</p></li>
-</ol>
+Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.</p>
+
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></div>
@@ -121,7 +165,7 @@ Note: it may be wise to increase the cell size of the input raster to reduce com
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-09-11.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

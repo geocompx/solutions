@@ -7,11 +7,14 @@
 
 ```r
 library(sf)
-#> Linking to GEOS 3.9.0, GDAL 3.2.1, PROJ 7.2.1
+#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
 library(spData)
 library(terra)
-#> terra version 1.4.2
+#> terra version 1.4.21
 ```
+
+<!--toDo: rl -->
+<!--add solutions to E1-E3!-->
 
 E1. Use `summary()` on the geometry column of the `world` data object. What does the output tell us about:
 
@@ -69,20 +72,113 @@ Assign random values between 0 and 10 to the new raster and plot it.
 ```r
 my_raster = rast(ncol = 10, nrow = 10,
                  vals = sample(0:10, size = 10 * 10, replace = TRUE))
+plot(my_raster)
 ```
+
+<img src="02-spatial-data_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
 
 E5. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
 What kind of information can you get about the properties of this file?
 
 ```r
 nlcd = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
-dim(nlcd)
+dim(nlcd) # dimensions
 #> [1] 1359 1073    1
-res(nlcd)
+res(nlcd) # resolution
 #> [1] 31.5 31.5
-ext(nlcd)
+ext(nlcd) # extent
 #> SpatExtent : 301903.344386758, 335735.354381954, 4111244.46098842, 4154086.47216415 (xmin, xmax, ymin, ymax)
-crs(nlcd)
-#> [1] "PROJCRS[\"NAD83 / UTM zone 12N\",\n    BASEGEOGCRS[\"NAD83\",\n        DATUM[\"North American Datum 1983\",\n            ELLIPSOID[\"GRS 1980\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        ID[\"EPSG\",4269]],\n    CONVERSION[\"UTM zone 12N\",\n        METHOD[\"Transverse Mercator\",\n            ID[\"EPSG\",9807]],\n        PARAMETER[\"Latitude of natural origin\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8801]],\n        PARAMETER[\"Longitude of natural origin\",-111,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8802]],\n        PARAMETER[\"Scale factor at natural origin\",0.9996,\n            SCALEUNIT[\"unity\",1],\n            ID[\"EPSG\",8805]],\n        PARAMETER[\"False easting\",500000,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8806]],\n        PARAMETER[\"False northing\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8807]]],\n    CS[Cartesian,2],\n        AXIS[\"(E)\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1]],\n        AXIS[\"(N)\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1]],\n    USAGE[\n        SCOPE[\"Engineering survey, topographic mapping.\"],\n        AREA[\"North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan.  United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming.\"],\n        BBOX[31.33,-114,84,-108]],\n    ID[\"EPSG\",26912]]"
+nlyr(nlcd) # number of layers
+#> [1] 1
+cat(crs(nlcd)) # CRS
+#> PROJCRS["NAD83 / UTM zone 12N",
+#>     BASEGEOGCRS["NAD83",
+#>         DATUM["North American Datum 1983",
+#>             ELLIPSOID["GRS 1980",6378137,298.257222101,
+#>                 LENGTHUNIT["metre",1]]],
+#>         PRIMEM["Greenwich",0,
+#>             ANGLEUNIT["degree",0.0174532925199433]],
+#>         ID["EPSG",4269]],
+#>     CONVERSION["UTM zone 12N",
+#>         METHOD["Transverse Mercator",
+#>             ID["EPSG",9807]],
+#>         PARAMETER["Latitude of natural origin",0,
+#>             ANGLEUNIT["degree",0.0174532925199433],
+#>             ID["EPSG",8801]],
+#>         PARAMETER["Longitude of natural origin",-111,
+#>             ANGLEUNIT["degree",0.0174532925199433],
+#>             ID["EPSG",8802]],
+#>         PARAMETER["Scale factor at natural origin",0.9996,
+#>             SCALEUNIT["unity",1],
+#>             ID["EPSG",8805]],
+#>         PARAMETER["False easting",500000,
+#>             LENGTHUNIT["metre",1],
+#>             ID["EPSG",8806]],
+#>         PARAMETER["False northing",0,
+#>             LENGTHUNIT["metre",1],
+#>             ID["EPSG",8807]]],
+#>     CS[Cartesian,2],
+#>         AXIS["(E)",east,
+#>             ORDER[1],
+#>             LENGTHUNIT["metre",1]],
+#>         AXIS["(N)",north,
+#>             ORDER[2],
+#>             LENGTHUNIT["metre",1]],
+#>     USAGE[
+#>         SCOPE["unknown"],
+#>         AREA["North America - 114°W to 108°W and NAD83 by country"],
+#>         BBOX[31.33,-114,84,-108]],
+#>     ID["EPSG",26912]]
 ```
+
+E6. Check the CRS of the `raster/nlcd.tif` file from the **spDataLarge** package. 
+What kind of information you can learn from it?
+
+```r
+cat(crs(nlcd))
+#> PROJCRS["NAD83 / UTM zone 12N",
+#>     BASEGEOGCRS["NAD83",
+#>         DATUM["North American Datum 1983",
+#>             ELLIPSOID["GRS 1980",6378137,298.257222101,
+#>                 LENGTHUNIT["metre",1]]],
+#>         PRIMEM["Greenwich",0,
+#>             ANGLEUNIT["degree",0.0174532925199433]],
+#>         ID["EPSG",4269]],
+#>     CONVERSION["UTM zone 12N",
+#>         METHOD["Transverse Mercator",
+#>             ID["EPSG",9807]],
+#>         PARAMETER["Latitude of natural origin",0,
+#>             ANGLEUNIT["degree",0.0174532925199433],
+#>             ID["EPSG",8801]],
+#>         PARAMETER["Longitude of natural origin",-111,
+#>             ANGLEUNIT["degree",0.0174532925199433],
+#>             ID["EPSG",8802]],
+#>         PARAMETER["Scale factor at natural origin",0.9996,
+#>             SCALEUNIT["unity",1],
+#>             ID["EPSG",8805]],
+#>         PARAMETER["False easting",500000,
+#>             LENGTHUNIT["metre",1],
+#>             ID["EPSG",8806]],
+#>         PARAMETER["False northing",0,
+#>             LENGTHUNIT["metre",1],
+#>             ID["EPSG",8807]]],
+#>     CS[Cartesian,2],
+#>         AXIS["(E)",east,
+#>             ORDER[1],
+#>             LENGTHUNIT["metre",1]],
+#>         AXIS["(N)",north,
+#>             ORDER[2],
+#>             LENGTHUNIT["metre",1]],
+#>     USAGE[
+#>         SCOPE["unknown"],
+#>         AREA["North America - 114°W to 108°W and NAD83 by country"],
+#>         BBOX[31.33,-114,84,-108]],
+#>     ID["EPSG",26912]]
+```
+
+The WKT above describes a two-dimensional projected coordinate reference system.
+It is based on the GRS 1980 ellipsoid with  North American Datum 1983  and the Greenwich prime meridian.
+It used the Transverse Mercator projection to transform from geographic to projected CRS (UTM zone 12N).
+Its first axis is related to eastness, while the second one is related to northness, and both axes have units in meters.
+The SRID of the above CRS is "EPSG:26912".
 

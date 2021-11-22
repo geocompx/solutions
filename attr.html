@@ -6,24 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Attribute data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package: library(spData) data(us_states) data(us_states_df) us_states is a spatial object (of class sf),...">
+<meta name="description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package. You must have attached the package, and other packages used in the attribute operations chapter...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Attribute data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/attr.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package: library(spData) data(us_states) data(us_states_df) us_states is a spatial object (of class sf),...">
+<meta property="og:description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package. You must have attached the package, and other packages used in the attribute operations chapter...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Attribute data operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package: library(spData) data(us_states) data(us_states_df) us_states is a spatial object (of class sf),...">
+<meta name="twitter:description" content="For these exercises we will use the us_states and us_states_df datasets from the spData package. You must have attached the package, and other packages used in the attribute operations chapter...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Lato-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Roboto%20Mono-0.4.0/font.css" rel="stylesheet">
 <link href="libs/_Montserrat-0.4.0/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -71,77 +71,81 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="attr" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="attr" class="section level1" number="3">
 <h1>
 <span class="header-section-number">3</span> Attribute data operations<a class="anchor" aria-label="anchor" href="#attr"><i class="fas fa-link"></i></a>
 </h1>
-<p>For these exercises we will use the <code>us_states</code> and <code>us_states_df</code> datasets from the <strong>spData</strong> package:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/spData/">spData</a></span><span class="op">)</span>
+<p>For these exercises we will use the <code>us_states</code> and <code>us_states_df</code> datasets from the <strong>spData</strong> package.
+You must have attached the package, and other packages used in the attribute operations chapter (<strong>sf</strong>, <strong>dplyr</strong>, <strong>terra</strong>) with commands such as <code><a href="https://nowosad.github.io/spData/">library(spData)</a></code> before attempting these exercises</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
+<span class="co">#&gt; terra version 1.4.21</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'terra'</span>
+<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     src</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/spData/">spData</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">us_states_df</span><span class="op">)</span></code></pre></div>
 <p><code>us_states</code> is a spatial object (of class <code>sf</code>), containing geometry and a few attributes (including name, region, area, and population) of states within the contiguous United States.
 <code>us_states_df</code> is a data frame (of class <code>data.frame</code>) containing the name and additional variables (including median income and poverty level, for the years 2010 and 2015) of US states, including Alaska, Hawaii and Puerto Rico.
 The data comes from the United States Census Bureau, and is documented in <code><a href="https://nowosad.github.io/spData/reference/us_states.html">?us_states</a></code> and <code><a href="https://nowosad.github.io/spData/reference/us_states_df.html">?us_states_df</a></code>.</p>
-<!-- Attribute subsetting -->
-<ol style="list-style-type: decimal">
-<li>Create a new object called <code>us_states_name</code> that contains only the <code>NAME</code> column from the <code>us_states</code> object.
-What is the class of the new object and what makes it geographic? <!--why there is a "sf" part? -->
-</li>
-<li>Select columns from the <code>us_states</code> object which contain population data.
+<p>E1. Create a new object called <code>us_states_name</code> that contains only the <code>NAME</code> column from the <code>us_states</code> object using either base R (<code>[</code>) or tidyverse (<code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>) syntax.
+What is the class of the new object and what makes it geographic?</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">us_states_name</span> <span class="op">=</span> <span class="va">us_states</span><span class="op">[</span><span class="st">"NAME"</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">us_states_name</span><span class="op">)</span>
+<span class="co">#&gt; [1] "sf"         "data.frame"</span></code></pre></div>
+<p>E2. Select columns from the <code>us_states</code> object which contain population data.
 Obtain the same result using a different command (bonus: try to find three ways of obtaining the same result).
-Hint: try to use helper functions, such as <code>contains</code> or <code>starts_with</code> from <strong>dplyr</strong> (see <code>?contains</code>).</li>
-<li>Find all states with the following characteristics (bonus find <em>and</em> plot them):
+Hint: try to use helper functions, such as <code>contains</code> or <code>starts_with</code> from <strong>dplyr</strong> (see <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">?contains</a></code>).</p>
+<p>E3. Find all states with the following characteristics (bonus find <em>and</em> plot them):</p>
 <ul>
 <li>Belong to the Midwest region.</li>
 <li>Belong to the West region, have an area below 250,000 km<sup>2</sup><em>and</em> in 2015 a population greater than 5,000,000 residents (hint: you may need to use the function <code><a href="https://rdrr.io/pkg/units/man/units.html">units::set_units()</a></code> or <code><a href="https://rdrr.io/pkg/terra/man/catalyze.html">as.numeric()</a></code>).</li>
-<li>Belong to the South region, had an area larger than 150,000 km<sup>2</sup> or a total population in 2015 larger than 7,000,000 residents.
-<!-- Attribute aggregation -->
-</li>
+<li>Belong to the South region, had an area larger than 150,000 km<sup>2</sup> or a total population in 2015 larger than 7,000,000 residents.</li>
 </ul>
-</li>
-<li>What was the total population in 2015 in the <code>us_states</code> dataset?
-What was the minimum and maximum total population in 2015?</li>
-<li>How many states are there in each region?</li>
-<li>What was the minimum and maximum total population in 2015 in each region?
-What was the total population in 2015 in each region?
-<!-- Attribute joining -->
-</li>
-<li>Add variables from <code>us_states_df</code> to <code>us_states</code>, and create a new object called <code>us_states_stats</code>.
+<p>E4. What was the total population in 2015 in the <code>us_states</code> dataset?
+What was the minimum and maximum total population in 2015?</p>
+<p>E5. How many states are there in each region?</p>
+<p>E6. What was the minimum and maximum total population in 2015 in each region?
+What was the total population in 2015 in each region?</p>
+<p>E7. Add variables from <code>us_states_df</code> to <code>us_states</code>, and create a new object called <code>us_states_stats</code>.
 What function did you use and why?
 Which variable is the key in both datasets?
-What is the class of the new object?</li>
-<li>
-<code>us_states_df</code> has two more rows than <code>us_states</code>.
-How can you find them? (hint: try to use the <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">dplyr::anti_join()</a></code> function)
-<!-- Attribute creation -->
-</li>
-<li>What was the population density in 2015 in each state?
-What was the population density in 2010 in each state?</li>
-<li>How much has population density changed between 2010 and 2015 in each state?
-Calculate the change in percentages and map them.</li>
-<li>Change the columns’ names in <code>us_states</code> to lowercase. (Hint: helper functions - <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code> and <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> may help.)
-<!-- Mixed exercises -->
-<!-- combination of use of select, mutate, group_by, summarize, etc  -->
-</li>
-<li>Using <code>us_states</code> and <code>us_states_df</code> create a new object called <code>us_states_sel</code>.
+What is the class of the new object?</p>
+<p>E8. <code>us_states_df</code> has two more rows than <code>us_states</code>.
+How can you find them? (hint: try to use the <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">dplyr::anti_join()</a></code> function)</p>
+<p>E9. What was the population density in 2015 in each state?
+What was the population density in 2010 in each state?</p>
+<p>E10. How much has population density changed between 2010 and 2015 in each state?
+Calculate the change in percentages and map them.</p>
+<p>E11. Change the columns’ names in <code>us_states</code> to lowercase. (Hint: helper functions - <code><a href="https://rdrr.io/r/base/chartr.html">tolower()</a></code> and <code><a href="https://rdrr.io/r/base/colnames.html">colnames()</a></code> may help.)</p>
+<p>E12. Using <code>us_states</code> and <code>us_states_df</code> create a new object called <code>us_states_sel</code>.
 The new object should have only two variables - <code>median_income_15</code> and <code>geometry</code>.
-Change the name of the <code>median_income_15</code> column to <code>Income</code>.</li>
-<li>Calculate the change in the number of residents living below the poverty level between 2010 and 2015 for each state. (Hint: See ?us_states_df for documentation on the poverty level columns.)
-Bonus: Calculate the change in the <em>percentage</em> of residents living below the poverty level in each state.</li>
-<li>What was the minimum, average and maximum state’s number of people living below the poverty line in 2015 for each region?
-Bonus: What is the region with the largest increase in people living below the poverty line?
-<!-- Raster exercises -->
-</li>
-<li>Create a raster from scratch with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
+Change the name of the <code>median_income_15</code> column to <code>Income</code>.</p>
+<p>E13. Calculate the change in the number of residents living below the poverty level between 2010 and 2015 for each state. (Hint: See ?us_states_df for documentation on the poverty level columns.)
+Bonus: Calculate the change in the <em>percentage</em> of residents living below the poverty level in each state.</p>
+<p>E14. What was the minimum, average and maximum state’s number of people living below the poverty line in 2015 for each region?
+Bonus: What is the region with the largest increase in people living below the poverty line?</p>
+<p>E15. Create a raster from scratch with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
 Fill it with random numbers.
-Extract the values of the four corner cells.</li>
-<li>What is the most common class of our example raster <code>grain</code> (hint: <code><a href="https://rdrr.io/pkg/terra/man/modal.html">modal()</a></code>)?</li>
-<li>Plot the histogram and the boxplot of the <code><a href="https://rdrr.io/r/utils/data.html">data(dem, package = "spDataLarge")</a></code> raster.
-<!-- 1. Now attach also `data(ndvi, package = "spDataLarge")`.  -->
-<!-- Create a raster stack using `dem` and `ndvi`, and make a `pairs()` plot. -->
-</li>
-</ol>
+Extract the values of the four corner cells.</p>
+<p>E16. What is the most common class of our example raster <code>grain</code> (hint: <code><a href="https://rdrr.io/pkg/terra/man/modal.html">modal()</a></code>)?</p>
+<p>E17. Plot the histogram and the boxplot of the <code>data(dem, package = "spDataLarge")</code> raster.</p>
+
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="spatial-class.html"><span class="header-section-number">2</span> Geographic data in R</a></div>
@@ -165,7 +169,7 @@ Extract the values of the four corner cells.</li>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-09-11.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
