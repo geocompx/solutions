@@ -8,6 +8,6 @@ download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_05
 
 ```{r, echo=FALSE, results='asis'}
 res = knitr::knit_child(ex, quiet = TRUE,
-                        options = list(include = TRUE))
+                        options = list(include = TRUE, eval = FALSE))
 cat(res, sep = '\n')
 ```
