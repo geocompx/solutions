@@ -81,8 +81,23 @@
 What is a geometry type of the loaded object?</p>
 <p>E4. Download the borders of Germany using <strong>rnaturalearth</strong>, and create a new object called <code>germany_borders</code>.
 Write this new object to a file of the GeoPackage format.</p>
-<p>E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>raster</strong> package.
-Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rdrr.io/pkg/raster/man/subset.html">raster::subset()</a></code>).</p>
+<p>E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>geodata</strong> package.
+Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rdrr.io/pkg/terra/man/subset.html">terra::subset()</a></code>).</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geodata</span><span class="op">)</span>
+<span class="co">#&gt; Loading required package: terra</span>
+<span class="co">#&gt; terra version 1.5.0</span>
+<span class="va">gmmt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/geodata/man/worldclim.html">worldclim_global</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"tmin"</span>, res <span class="op">=</span> <span class="fl">5</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span>
+<span class="co">#&gt;  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"</span>
+<span class="co">#&gt;  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"</span>
+<span class="co">#&gt;  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span>
+
+<span class="va">gmmt_june</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/subset.html">subset</a></span><span class="op">(</span><span class="va">gmmt</span>, <span class="st">"wc2.1_5m_tmin_06"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt_june</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">gmmt_june</span>, <span class="st">"tmin_june.tif"</span><span class="op">)</span></code></pre></div>
+<p><img src="07-read-write-plot_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"><img src="07-read-write-plot_files/figure-html/unnamed-chunk-2-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E6. Create a static map of Germany’s borders, and save it to a PNG file.</p>
 <p>E7. Create an interactive map using data from the <code>cycle_hire_xy.csv</code> file.
 Export this map to a file called <code>cycle_hire.html</code>.</p>
@@ -113,7 +128,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

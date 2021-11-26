@@ -10,7 +10,7 @@ library(sf)
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
 library(spData)
 library(terra)
-#> terra version 1.4.21
+#> terra version 1.5.0
 ```
 
 <!--toDo: rl -->

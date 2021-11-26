@@ -76,7 +76,7 @@
 <span class="header-section-number">3</span> Attribute data operations<a class="anchor" aria-label="anchor" href="#attr"><i class="fas fa-link"></i></a>
 </h1>
 <p>For these exercises we will use the <code>us_states</code> and <code>us_states_df</code> datasets from the <strong>spData</strong> package.
-You must have attached the package, and other packages used in the attribute operations chapter (<strong>sf</strong>, <strong>dplyr</strong>, <strong>terra</strong>) with commands such as <code><a href="https://nowosad.github.io/spData/">library(spData)</a></code> before attempting these exercises</p>
+You must have attached the package, and other packages used in the attribute operations chapter (<strong>sf</strong>, <strong>dplyr</strong>, <strong>terra</strong>) with commands such as <code><a href="https://nowosad.github.io/spData/">library(spData)</a></code> before attempting these exercises:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
 <span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</span>
@@ -90,7 +90,7 @@ You must have attached the package, and other packages used in the attribute ope
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
-<span class="co">#&gt; terra version 1.4.21</span>
+<span class="co">#&gt; terra version 1.5.0</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'terra'</span>
 <span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
@@ -143,8 +143,46 @@ Bonus: What is the region with the largest increase in people living below the p
 <p>E15. Create a raster from scratch with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
 Fill it with random numbers.
 Extract the values of the four corner cells.</p>
-<p>E16. What is the most common class of our example raster <code>grain</code> (hint: <code><a href="https://rdrr.io/pkg/terra/man/modal.html">modal()</a></code>)?</p>
-<p>E17. Plot the histogram and the boxplot of the <code>data(dem, package = "spDataLarge")</code> raster.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">r</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="fl">9</span>, ncol <span class="op">=</span> <span class="fl">9</span>, res <span class="op">=</span> <span class="fl">0.5</span>,
+         xmin <span class="op">=</span> <span class="fl">0</span>, xmax <span class="op">=</span> <span class="fl">4.5</span>, ymin <span class="op">=</span> <span class="fl">0</span>, ymax <span class="op">=</span> <span class="fl">4.5</span>,
+         vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">81</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># using cell IDs</span>
+<span class="va">r</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">81</span> <span class="op">-</span> <span class="fl">9</span> <span class="op">+</span> <span class="fl">1</span>, <span class="fl">81</span><span class="op">)</span><span class="op">]</span>
+<span class="co">#&gt;    lyr.1</span>
+<span class="co">#&gt; 1  1.434</span>
+<span class="co">#&gt; 2 -0.265</span>
+<span class="co">#&gt; 3 -0.587</span>
+<span class="co">#&gt; 4 -2.593</span>
+<span class="va">r</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">ncol</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+<span class="co">#&gt;    lyr.1</span>
+<span class="co">#&gt; 1  1.434</span>
+<span class="co">#&gt; 2 -0.265</span>
+<span class="co">#&gt; 3 -0.587</span>
+<span class="co">#&gt; 4 -2.593</span></code></pre></div>
+<p>E16. What is the most common class of our example raster <code>grain</code> (hint: <code>modal</code>)?</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">grain</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/grain.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/global.html">global</a></span><span class="op">(</span><span class="va">grain</span>, fun <span class="op">=</span> <span class="va">modal</span><span class="op">)</span> <span class="co">#only one value is shown when there are ties</span>
+<span class="co">#&gt;       global</span>
+<span class="co">#&gt; grain      1</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/freq.html">freq</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span> <span class="co">#the most common classes are silt and sand (13 cells)</span>
+<span class="co">#&gt;   layer value count label</span>
+<span class="co">#&gt; 1     1     0    10  clay</span>
+<span class="co">#&gt; 2     1     1    13  silt</span>
+<span class="co">#&gt; 3     1     2    13  sand</span></code></pre></div>
+<p>E17. Plot the histogram and the boxplot of the <code>dem.tif</code> file from the <strong>spDataLarge</strong> package (<code>system.file("raster/dem.tif", package = "spDataLarge")</code>).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/dem.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/hist.html">hist</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>
+
+<span class="co"># we can also use ggplot2 after converting SpatRaster to a data frame</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-2.png" width="100%" style="display: block; margin: auto;"><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-3.png" width="100%" style="display: block; margin: auto;"><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-4.png" width="100%" style="display: block; margin: auto;"></p>
 
 </div>
   <div class="chapter-nav">
@@ -169,7 +207,7 @@ Extract the values of the four corner cells.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

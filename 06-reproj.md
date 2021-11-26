@@ -3,6 +3,12 @@
 
 
 
+```r
+library(terra)
+#> terra version 1.5.0
+```
+
+
 E1. Create a new object called `nz_wgs` by transforming `nz` object into the WGS84 CRS.
 
 - Create an object of class `crs` for both and use this to query their CRSs.
@@ -11,7 +17,7 @@ E1. Create a new object called `nz_wgs` by transforming `nz` object into the WGS
 
 ```r
 st_crs(nz)
-nz_wgs = st_transform(nz, 4326)
+nz_wgs = st_transform(nz, "EPSG:4326")
 nz_crs = st_crs(nz)
 nz_wgs_crs = st_crs(nz_wgs)
 nz_crs$epsg
@@ -19,7 +25,7 @@ nz_wgs_crs$epsg
 st_bbox(nz)
 st_bbox(nz_wgs)
 nz_wgs_NULL_crs = st_set_crs(nz_wgs, NA)
-nz_27700 = st_transform(nz_wgs, 27700)
+nz_27700 = st_transform(nz_wgs, "EPSG:27700")
 par(mfrow = c(1, 3))
 plot(st_geometry(nz))
 plot(st_geometry(nz_wgs))
@@ -39,7 +45,7 @@ Why does the new object differ from the original one?
 # see https://github.com/r-spatial/sf/issues/509
 world_tmerc = st_transform(world, "+proj=tmerc")
 plot(st_geometry(world_tmerc))
-world_4326 = st_transform(world_tmerc, 4326)
+world_4326 = st_transform(world_tmerc, "EPSG:4326")
 plot(st_geometry(world_4326))
 ```
 
@@ -48,31 +54,61 @@ What has changed?
 How does it influence the results?
 
 ```r
-con_raster = raster(system.file("raster/srtm.tif", package = "spDataLarge"))
-con_raster_utm12n = projectRaster(con_raster, crs = utm12n, method = "ngb")
+con_raster = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
+con_raster_utm12n = project(con_raster, "EPSG:32612", method = "near")
 con_raster_utm12n
+#> class       : SpatRaster 
+#> dimensions  : 515, 422, 1  (nrow, ncol, nlyr)
+#> resolution  : 83.5, 83.5  (x, y)
+#> extent      : 301062, 336313, 4111111, 4154131  (xmin, xmax, ymin, ymax)
+#> coord. ref. : WGS 84 / UTM zone 12N (EPSG:32612) 
+#> source      : memory 
+#> name        : srtm 
+#> min value   : 1024 
+#> max value   : 2892
+
+plot(con_raster)
+plot(con_raster_utm12n)
 ```
+
+<img src="06-reproj_files/figure-html/06-reproj-38-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-reproj_files/figure-html/06-reproj-38-2.png" width="100%" style="display: block; margin: auto;" />
 
 E4. Transform the categorical raster (`cat_raster`) into WGS 84 using the bilinear interpolation method.
 What has changed?
 How does it influence the results?
 
 ```r
-wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
-cat_raster_wgs84 = projectRaster(cat_raster, crs = wgs84, method = "bilinear")
+cat_raster = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
+cat_raster_wgs84 = project(cat_raster, "EPSG:4326", method = "bilinear")
 cat_raster_wgs84
+#> class       : SpatRaster 
+#> dimensions  : 1246, 1244, 1  (nrow, ncol, nlyr)
+#> resolution  : 0.000315, 0.000315  (x, y)
+#> extent      : -113, -113, 37.1, 37.5  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> source      : memory 
+#> name        : levels 
+#> min value   :      1 
+#> max value   :      8
+
+plot(cat_raster)
+plot(cat_raster_wgs84)
 ```
 
-E5. Create your own `proj4string`. 
-It should have the Lambert Azimuthal Equal Area (`laea`) projection, the WGS84 ellipsoid, the longitude of projection center of 95 degrees west, the latitude of projection center of 60 degrees north, and its units should be in meters.
-Next, subset Canada from the `world` object and transform it into the new projection. 
-Plot and compare a map before and after the transformation.
+<img src="06-reproj_files/figure-html/06-reproj-39-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-reproj_files/figure-html/06-reproj-39-2.png" width="100%" style="display: block; margin: auto;" />
 
-```r
-new_p4s = "+proj=laea +ellps=WGS84 +lon_0=-95 +lat_0=60 +units=m"
-canada = dplyr::filter(world, name_long == "Canada")
-new_canada = st_transform(canada, new_p4s)
-par(mfrow = c(1, 2))
-plot(st_geometry(canada), graticule = TRUE, axes = TRUE)
-plot(st_geometry(new_canada), graticule = TRUE, axes = TRUE)
-```
+<!--toDo:jn-->
+<!--improve/replace/modify the following q-->
+<!-- E5. Create your own `proj4string`.  -->
+<!-- It should have the Lambert Azimuthal Equal Area (`laea`) projection, the WGS84 ellipsoid, the longitude of projection center of 95 degrees west, the latitude of projection center of 60 degrees north, and its units should be in meters. -->
+<!-- Next, subset Canada from the `world` object and transform it into the new projection.  -->
+<!-- Plot and compare a map before and after the transformation. -->
+
+<!-- ```{r 06-reproj-40} -->
+<!-- new_p4s = "+proj=laea +ellps=WGS84 +lon_0=-95 +lat_0=60 +units=m" -->
+<!-- canada = dplyr::filter(world, name_long == "Canada") -->
+<!-- new_canada = st_transform(canada, new_p4s) -->
+<!-- par(mfrow = c(1, 2)) -->
+<!-- plot(st_geometry(canada), graticule = TRUE, axes = TRUE) -->
+<!-- plot(st_geometry(new_canada), graticule = TRUE, axes = TRUE) -->
+<!-- ``` -->

@@ -4,7 +4,7 @@
 
 
 For these exercises we will use the `us_states` and `us_states_df` datasets from the **spData** package.
-You must have attached the package, and other packages used in the attribute operations chapter (**sf**, **dplyr**, **terra**) with commands such as `library(spData)` before attempting these exercises
+You must have attached the package, and other packages used in the attribute operations chapter (**sf**, **dplyr**, **terra**) with commands such as `library(spData)` before attempting these exercises:
 
 ```r
 library(sf)
@@ -19,7 +19,7 @@ library(dplyr)
 #> 
 #>     intersect, setdiff, setequal, union
 library(terra)
-#> terra version 1.4.21
+#> terra version 1.5.0
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:dplyr':
@@ -91,6 +91,51 @@ E15. Create a raster from scratch with nine rows and columns and a resolution of
 Fill it with random numbers.
 Extract the values of the four corner cells. 
 
-E16. What is the most common class of our example raster `grain` (hint: `modal()`)?
+```r
+r = rast(nrow = 9, ncol = 9, res = 0.5,
+         xmin = 0, xmax = 4.5, ymin = 0, ymax = 4.5,
+         vals = rnorm(81))
+# using cell IDs
+r[c(1, 9, 81 - 9 + 1, 81)]
+#>    lyr.1
+#> 1  1.434
+#> 2 -0.265
+#> 3 -0.587
+#> 4 -2.593
+r[c(1, nrow(r)), c(1, ncol(r))]
+#>    lyr.1
+#> 1  1.434
+#> 2 -0.265
+#> 3 -0.587
+#> 4 -2.593
+```
 
-E17. Plot the histogram and the boxplot of the `data(dem, package = "spDataLarge")` raster. 
+E16. What is the most common class of our example raster `grain` (hint: `modal`)?
+
+```r
+grain = rast(system.file("raster/grain.tif", package = "spData"))
+global(grain, fun = modal) #only one value is shown when there are ties
+#>       global
+#> grain      1
+freq(grain) #the most common classes are silt and sand (13 cells)
+#>   layer value count label
+#> 1     1     0    10  clay
+#> 2     1     1    13  silt
+#> 3     1     2    13  sand
+```
+
+E17. Plot the histogram and the boxplot of the `dem.tif` file from the **spDataLarge** package (`system.file("raster/dem.tif", package = "spDataLarge")`). 
+
+```r
+dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
+hist(dem)
+boxplot(dem)
+
+# we can also use ggplot2 after converting SpatRaster to a data frame
+library(ggplot2)
+ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
+#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()
+```
+
+<img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-2.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-3.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/unnamed-chunk-4-4.png" width="100%" style="display: block; margin: auto;" />

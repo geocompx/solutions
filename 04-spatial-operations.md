@@ -67,18 +67,96 @@ nz_height_combined %>%
 #> 7       Marlborough     1
 ```
 
-E4. Use `data(dem, package = "spDataLarge")`, and reclassify the elevation in three classes: low, medium and high.
-Secondly, attach the NDVI raster (`data(ndvi, package = "spDataLarge")`) and compute the mean NDVI and the mean elevation for each altitudinal class.
+E4. Use `dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))`, and reclassify the elevation in three classes: low (<300), medium and high (>500).
+Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))`) and compute the mean NDVI and the mean elevation for each altitudinal class.
 
-E5. Apply a line detection filter to `raster(system.file("external/rlogo.grd", package = "raster"))`.
+```r
+library(terra)
+#> terra version 1.5.0
+#> 
+#> Attaching package: 'terra'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     src
+dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
+ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
+
+#1
+dem_rcl = matrix(c(-Inf, 300, 0, 300, 500, 1, 500, Inf, 2), ncol = 3, byrow = TRUE)
+dem_reclass = classify(dem, dem_rcl)
+levels(dem_reclass) = c("low", "medium", "high")
+plot(dem_reclass)
+
+#2
+zonal(c(dem, ndvi), dem_reclass, fun = "mean")
+#>      dem dem   ndvi
+#> 1    low 274 -0.363
+#> 2 medium 392 -0.289
+#> 3   high 765 -0.208
+```
+
+<img src="04-spatial-operations_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+
+E5. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = "terra"))`.
 Plot the result.
-Hint: Read `?raster::focal()`.
+Hint: Read `?terra::focal()`.
 
-E6. Calculate the NDVI of a Landsat image. 
+```r
+# from the focal help page (?terra::focal()):
+# Laplacian filter: filter=matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)
+# Sobel filters (for edge detection): 
+# fx=matrix(c(-1,-2,-1,0,0,0,1,2,1), nrow=3) 
+# fy=matrix(c(1,0,-1,2,0,-2,1,0,-1), nrow=3)
+
+# just retrieve the first channel of the R logo
+r = rast(system.file("ex/logo.tif", package = "terra"))
+# compute the Sobel filter
+filter_x = matrix(c(-1, -2, -1, 0, 0, 0, 1, 2, 1), nrow = 3)
+sobel_x = focal(r, w = filter_x)
+plot(sobel_x, col = c("white", "black"))
+
+filter_y = matrix(c(1, 0, -1, 2, 0, -2, 1, 0, -1), nrow = 3)
+sobel_y = focal(r, w = filter_y)
+plot(sobel_y, col = c("black", "white"))
+```
+
+<img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-2.png" width="100%" style="display: block; margin: auto;" />
+
+E6. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
+Also, calculate a correlation between NDVI and NDWI for this area.
 
-E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
-Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `getData()`).
-Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km.
-Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation.
-Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.
+```r
+file = system.file("raster/landsat.tif", package = "spDataLarge")
+multi_rast = rast(file)
+
+ndvi_fun = function(nir, red){
+  (nir - red) / (nir + red)
+}
+ndvi_rast = lapp(multi_rast[[c(4, 3)]], fun = ndvi_fun)
+plot(ndvi_rast)
+
+ndwi_fun = function(green, nir){
+    (green - nir) / (green + nir)
+}
+
+ndwi_rast = lapp(multi_rast[[c(2, 4)]], fun = ndwi_fun)
+plot(ndwi_rast)
+
+two_rasts = c(ndvi_rast, ndwi_rast)
+names(two_rasts) = c("ndvi", "ndwi")
+two_rasts_df = as.data.frame(two_rasts)
+cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
+#> [1] -0.913
+```
+
+<img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-2.png" width="100%" style="display: block; margin: auto;" />
+
+
+<!--toDo:jn-->
+<!--improve/replace/modify the following q-->
+<!-- E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`. -->
+<!-- Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `getData()`). -->
+<!-- Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km. -->
+<!-- Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation. -->
+<!-- Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation. -->
