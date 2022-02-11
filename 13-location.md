@@ -1,1 +1,0 @@
-# Geomarketing {#location}

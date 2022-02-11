@@ -3,13 +3,6 @@ spatial-class
 attr
 spatial-operations
 geometric-operations
+raster-vector
 reproj-geo-data
 read-write
-adv-map
-gis
-algorithms
-spatial-cv
-transport
-location
-eco
-conclusion

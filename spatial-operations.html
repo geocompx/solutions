@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Spatial data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
+<meta name="description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/spatial-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
+<meta property="og:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
+<meta name="twitter:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -52,18 +52,9 @@
 <li><a class="" href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></li>
 <li><a class="active" href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></li>
 <li><a class="" href="geometric-operations.html"><span class="header-section-number">5</span> Geometry operations</a></li>
-<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></li>
-<li><a class="" href="read-write.html"><span class="header-section-number">7</span> Geographic data I/O</a></li>
-<li class="book-part">Extensions</li>
-<li><a class="" href="adv-map.html"><span class="header-section-number">8</span> Making maps with R</a></li>
-<li><a class="" href="gis.html"><span class="header-section-number">9</span> Bridges to GIS software</a></li>
-<li><a class="" href="algorithms.html"><span class="header-section-number">10</span> Scripts, algorithms and functions</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
-<li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
-<li><a class="" href="conclusion.html"><span class="header-section-number">15</span> Conclusion</a></li>
+<li><a class="" href="raster-vector.html"><span class="header-section-number">6</span> Raster-vector interactions</a></li>
+<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
+<li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,9 +66,9 @@
 <h1>
 <span class="header-section-number">4</span> Spatial data operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1</span>
+<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
@@ -91,15 +82,17 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">nz_height</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span></code></pre></div>
 <p>E1. It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
 How many of these high points does the Canterbury region contain?</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mtennekes/tmap">tmap</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tmap_mode.html">tmap_mode</a></span><span class="op">(</span><span class="st">"view"</span><span class="op">)</span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span>
+<span class="co"># tmap_mode("view")</span>
 <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz_height</span><span class="op">)</span>
 <span class="va">canterbury</span> <span class="op">=</span> <span class="va">nz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Name</span> <span class="op">==</span> <span class="st">"Canterbury"</span><span class="op">)</span>
 <span class="va">canterbury_height</span> <span class="op">=</span> <span class="va">nz_height</span><span class="op">[</span><span class="va">canterbury</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">canterbury_height</span><span class="op">)</span> <span class="co"># answer: 70</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">canterbury_height</span><span class="op">)</span> <span class="co"># answer: 70</span>
+<span class="co">#&gt; [1] 70</span></code></pre></div>
+<div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E2. Which region has the second highest number of <code>nz_height</code> points in, and how many does it have?</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span>
 <span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span>
 <span class="va">nz_height_combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -113,7 +106,7 @@ How many of these high points does the Canterbury region contain?</p>
 <ul>
 <li>Bonus: create a table listing these regions in order of the number of points and their name.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span>
 <span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span>
 <span class="va">nz_height_combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -131,9 +124,9 @@ How many of these high points does the Canterbury region contain?</p>
 <span class="co">#&gt; 7       Marlborough     1</span></code></pre></div>
 <p>E4. Use <code>dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))</code>, and reclassify the elevation in three classes: low (&lt;300), medium and high (&gt;500).
 Secondly, read the NDVI raster (<code>ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))</code>) and compute the mean NDVI and the mean elevation for each altitudinal class.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
-<span class="co">#&gt; terra version 1.5.0</span>
+<span class="co">#&gt; terra 1.5.20</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'terra'</span>
 <span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
@@ -154,11 +147,11 @@ Secondly, read the NDVI raster (<code>ndvi = rast(system.file("raster/ndvi.tif",
 <span class="co">#&gt; 1    low 274 -0.363</span>
 <span class="co">#&gt; 2 medium 392 -0.289</span>
 <span class="co">#&gt; 3   high 765 -0.208</span></code></pre></div>
-<div class="inline-figure"><img src="04-spatial-operations_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Apply a line detection filter to <code>rast(system.file("ex/logo.tif", package = "terra"))</code>.
 Plot the result.
 Hint: Read <code>?terra::focal()</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># from the focal help page (?terra::focal()):</span>
 <span class="co"># Laplacian filter: filter=matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)</span>
 <span class="co"># Sobel filters (for edge detection): </span>
@@ -175,11 +168,11 @@ Hint: Read <code>?terra::focal()</code>.</p>
 <span class="va">filter_y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">sobel_y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/focal.html">focal</a></span><span class="op">(</span><span class="va">r</span>, w <span class="op">=</span> <span class="va">filter_y</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">sobel_y</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/04-ex-e5-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E6. Calculate the Normalized Difference Water Index (NDWI; <code>(green - nir)/(green + nir)</code>) of a Landsat image.
 Use the Landsat image provided by the <strong>spDataLarge</strong> package (<code>system.file("raster/landsat.tif", package = "spDataLarge")</code>).
 Also, calculate a correlation between NDVI and NDWI for this area.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/landsat.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span>
 <span class="va">multi_rast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span>
 
@@ -201,14 +194,43 @@ Also, calculate a correlation between NDVI and NDWI for this area.</p>
 <span class="va">two_rasts_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">two_rasts</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">two_rasts_df</span><span class="op">$</span><span class="va">ndvi</span>, <span class="va">two_rasts_df</span><span class="op">$</span><span class="va">ndwi</span><span class="op">)</span>
 <span class="co">#&gt; [1] -0.913</span></code></pre></div>
-<p><img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-2.png" width="100%" style="display: block; margin: auto;"></p>
-<!--toDo:jn-->
-<!--improve/replace/modify the following q-->
-<!-- E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`. -->
-<!-- Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `getData()`). -->
-<!-- Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km. -->
-<!-- Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation. -->
-<!-- Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation. -->
+<p><img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p>E7. A StackOverflow <a href="https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances">post</a> shows how to compute distances to the nearest coastline using <code><a href="https://rdrr.io/pkg/raster/man/distance.html">raster::distance()</a></code>.
+Try to do something similar but with <code><a href="https://rdrr.io/pkg/terra/man/distance.html">terra::distance()</a></code>: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use <code><a href="https://rdrr.io/pkg/geodata/man/elevation.html">geodata::elevation_30s()</a></code>).
+Convert the resulting distances from meters to kilometers.
+Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Fetch the DEM data for Spain</span>
+<span class="va">spain_dem</span> <span class="op">=</span> <span class="fu">geodata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/geodata/man/elevation.html">elevation_30s</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Spain"</span>, path <span class="op">=</span> <span class="st">"."</span>, mask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span>
+<span class="va">spain_dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">spain_dem</span>, fact <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
+
+<span class="co"># According to the documentation, terra::distance() will calculate distance</span>
+<span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span>
+<span class="co"># distance to the coast, we need a raster that has NA values over land and any</span>
+<span class="co"># other value over water</span>
+<span class="va">water_mask</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">spain_dem</span><span class="op">)</span>
+<span class="va">water_mask</span><span class="op">[</span><span class="va">water_mask</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span>
+
+<span class="co"># Use the distance() function on this mask to get distance to the coast</span>
+<span class="va">distance_to_coast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/distance.html">distance</a></span><span class="op">(</span><span class="va">water_mask</span><span class="op">)</span>
+<span class="co"># convert distance into km</span>
+<span class="va">distance_to_coast_km</span> <span class="op">=</span> <span class="va">distance_to_coast</span> <span class="op">/</span> <span class="fl">1000</span>
+
+<span class="co"># Plot the result</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">distance_to_coast_km</span>, main <span class="op">=</span> <span class="st">"Distance to the coast (km)"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>E8. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
+Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># now let's weight each 100 altitudinal meters by an additional distance of 10 km</span>
+<span class="va">distance_to_coast_km2</span> <span class="op">=</span> <span class="va">distance_to_coast_km</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">spain_dem</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span>
+<span class="co"># plot the result</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">distance_to_coast_km2</span><span class="op">)</span>
+<span class="co"># visualize the difference</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">distance_to_coast_km</span> <span class="op">-</span> <span class="va">distance_to_coast_km2</span><span class="op">)</span></code></pre></div>
+<p><img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/04-ex-e8-2.png" width="100%" style="display: block; margin: auto;"></p>
 
 </div>
   <div class="chapter-nav">
@@ -233,7 +255,7 @@ Also, calculate a correlation between NDVI and NDWI for this area.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-02-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

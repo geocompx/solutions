@@ -3,25 +3,20 @@
 
 
 
-```
-#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
-#> terra version 1.5.0
-```
-
-
-
-Some of the exercises use a vector (`zion_points`) and raster dataset (`srtm`) from the **spDataLarge** package.
-They also use a polygonal 'convex hull' derived from the vector dataset (`ch`) to represent the area of interest:
-
 ```r
 library(sf)
-library(terra)
+#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 library(spData)
-zion_points = read_sf(system.file("vector/zion_points.gpkg", package = "spDataLarge"))
-srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
-ch = st_combine(zion_points) %>%
-  st_convex_hull() %>% 
-  st_as_sf()
+library(spDataLarge)
 ```
 
 E1. Generate and plot simplified versions of the `nz` dataset.
@@ -32,6 +27,9 @@ Experiment with different values of `keep` (ranging from 0.5 to 0.00005) for `ms
 
 ```r
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.5))
+#> Registered S3 method overwritten by 'geojsonlint':
+#>   method         from 
+#>   print.location dplyr
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.05))
 # Starts to breakdown here at 0.5% of the points:
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.005))
@@ -50,13 +48,20 @@ plot(st_simplify(st_geometry(nz), dTolerance = 100000, preserveTopology = TRUE))
 nz_simple_poly = st_simplify(st_geometry(nz), dTolerance = 10000) %>% 
   st_sfc() %>% 
   st_cast("POLYGON")
+#> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
+
+#> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
 nz_simple_multipoly = st_simplify(st_geometry(nz), dTolerance = 10000) %>% 
   st_sfc() %>% 
   st_cast("MULTIPOLYGON")
 plot(nz_simple_poly)
 length(nz_simple_poly)
+#> [1] 16
 nrow(nz)
+#> [1] 16
 ```
+
+<img src="05-geometry-operations_files/figure-html/05-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-4.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-5.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-6.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-7.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-8.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-9.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-10.png" width="100%" style="display: block; margin: auto;" />
 
 E2. In the first exercise in Chapter Spatial data operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand. 
 Using `st_buffer()`, how many points in `nz_height` are within 100 km of Canterbury?
@@ -66,6 +71,7 @@ canterbury = nz[nz$Name == "Canterbury", ]
 cant_buff = st_buffer(canterbury, 100)
 nz_height_near_cant = nz_height[cant_buff, ]
 nrow(nz_height_near_cant) # 75 - 5 more
+#> [1] 75
 ```
 
 E3. Find the geographic centroid of New Zealand. 
@@ -73,8 +79,13 @@ How far is it from the geographic centroid of Canterbury?
 
 ```r
 cant_cent = st_centroid(canterbury)
+#> Warning in st_centroid.sf(canterbury): st_centroid assumes attributes are
+#> constant over geometries of x
 nz_centre = st_centroid(st_union(nz))
 st_distance(cant_cent, nz_centre) # 234 km
+#> Units: [m]
+#>        [,1]
+#> [1,] 234193
 ```
 
 E4. Most world maps have a north-up orientation.
@@ -87,25 +98,31 @@ Hint: you need to use a two-element vector for this transformation.
 ```r
 world_sfc = st_geometry(world)
 world_sfc_mirror = world_sfc * c(1, -1)
+#> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
+#> shorter
 plot(world_sfc)
 plot(world_sfc_mirror)
 
 us_states_sfc = st_geometry(us_states)
 us_states_sfc_mirror = us_states_sfc * c(1, -1)
+#> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
+#> shorter
 plot(us_states_sfc)
 plot(us_states_sfc_mirror)
 ## nicer plot
-library(ggrepel)
-us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) %>% 
-  st_coordinates() %>%
-  as_data_frame() %>% 
-  mutate(name = us_states$NAME)
-us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)
-ggplot(data = us_states_sfc_mirror_sf) +
-  geom_sf(color = "white") +
-  geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +
-  theme_void() 
+# library(ggrepel)
+# us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) %>% 
+#   st_coordinates() %>%
+#   as_data_frame() %>% 
+#   mutate(name = us_states$NAME)
+# us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)
+# ggplot(data = us_states_sfc_mirror_sf) +
+#   geom_sf(color = "white") +
+#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +
+#   theme_void() 
 ```
+
+<img src="05-geometry-operations_files/figure-html/05-ex-e4-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-4.png" width="100%" style="display: block; margin: auto;" />
 
 E5. Subset the point in `p` that is contained within `x` *and* `y`.
 
@@ -117,6 +134,12 @@ p_in_y = p[y]
 p_in_xy = p_in_y[x]
 x_and_y = st_intersection(x, y)
 p[x_and_y]
+#> Geometry set for 1 feature 
+#> Geometry type: POINT
+#> Dimension:     XY
+#> Bounding box:  xmin: 0.305 ymin: 1.43 xmax: 0.305 ymax: 1.43
+#> CRS:           NA
+#> POINT (0.305 1.43)
 ```
 
 E6. Calculate the length of the boundary lines of US states in meters.
@@ -128,133 +151,61 @@ us_states2163 = st_transform(us_states, "EPSG:2163")
 us_states_bor = st_cast(us_states2163, "MULTILINESTRING")
 us_states_bor$borders = st_length(us_states_bor)
 arrange(us_states_bor, borders)
+#> Simple feature collection with 49 features and 7 fields
+#> Geometry type: MULTILINESTRING
+#> Dimension:     XY
+#> Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000
+#> Projected CRS: US National Atlas Equal Area
+#> First 10 features:
+#>    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15
+#> 1     11 District of Columbia    South   178 [km^2]       584400       647484
+#> 2     44         Rhode Island Norteast  2743 [km^2]      1056389      1053661
+#> 3     10             Delaware    South  5182 [km^2]       881278       926454
+#> 4     09          Connecticut Norteast 12977 [km^2]      3545837      3593222
+#> 5     34           New Jersey Norteast 20274 [km^2]      8721577      8904413
+#> 6     50              Vermont Norteast 24866 [km^2]       624258       626604
+#> 7     33        New Hampshire Norteast 24026 [km^2]      1313939      1324201
+#> 8     25        Massachusetts Norteast 20911 [km^2]      6477096      6705586
+#> 9     45       South Carolina    South 80904 [km^2]      4511428      4777576
+#> 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645
+#>        borders                       geometry
+#> 1    60323 [m] MULTILINESTRING ((1950825 -...
+#> 2   304594 [m] MULTILINESTRING ((2332242 4...
+#> 3   408049 [m] MULTILINESTRING ((2036308 -...
+#> 4   514090 [m] MULTILINESTRING ((2142347 2...
+#> 5   746942 [m] MULTILINESTRING ((2057740 -...
+#> 6   778204 [m] MULTILINESTRING ((2048149 3...
+#> 7   782644 [m] MULTILINESTRING ((2182313 3...
+#> 8  1017375 [m] MULTILINESTRING ((2416684 3...
+#> 9  1275280 [m] MULTILINESTRING ((1531823 -...
+#> 10 1436288 [m] MULTILINESTRING ((1031129 -...
 arrange(us_states_bor, -borders)
+#> Simple feature collection with 49 features and 7 fields
+#> Geometry type: MULTILINESTRING
+#> Dimension:     XY
+#> Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000
+#> Projected CRS: US National Atlas Equal Area
+#> First 10 features:
+#>    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders
+#> 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961585 [m]
+#> 2     06 California    West 409747 [km^2]     36637290     38421464 3810226 [m]
+#> 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574933 [m]
+#> 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951059 [m]
+#> 5     30    Montana    West 380829 [km^2]       973739      1014699 2821788 [m]
+#> 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568711 [m]
+#> 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563963 [m]
+#> 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405725 [m]
+#> 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378721 [m]
+#> 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340809 [m]
+#>                          geometry
+#> 1  MULTILINESTRING ((-269040 -...
+#> 2  MULTILINESTRING ((-1717278 ...
+#> 3  MULTILINESTRING ((1110644 1...
+#> 4  MULTILINESTRING ((1853170 -...
+#> 5  MULTILINESTRING ((-1161496 ...
+#> 6  MULTILINESTRING ((-1294787 ...
+#> 7  MULTILINESTRING ((202212 44...
+#> 8  MULTILINESTRING ((2099962 -...
+#> 9  MULTILINESTRING ((-803303 -...
+#> 10 MULTILINESTRING ((-1658594 ...
 ```
-
-E7. Crop the `srtm` raster using (1) the `zion_points` dataset and (2) the `ch` dataset.
-Are there any differences in the output maps?
-Next, mask `srtm` using these two datasets.
-Can you see any difference now?
-How can you explain that?
-
-```r
-plot(srtm)
-plot(st_geometry(zion_points), add = TRUE)
-plot(ch, add = TRUE)
-
-srtm_crop1 = crop(srtm, vect(zion_points))
-srtm_crop2 = crop(srtm, vect(ch))
-plot(srtm_crop1)
-plot(srtm_crop2)
-
-srtm_mask1 = mask(srtm, vect(zion_points))
-srtm_mask2 = mask(srtm, vect(ch))
-plot(srtm_mask1)
-plot(srtm_mask2)
-```
-
-<img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-4.png" width="100%" style="display: block; margin: auto;" />
-
-E8. Firstly, extract values from `srtm` at the points represented in `zion_points`.
-Next, extract average values of `srtm` using a 90 buffer around each point from `zion_points` and compare these two sets of values. 
-When would extracting values by buffers be more suitable than by points alone?
-
-```r
-zion_points_buf = st_buffer(zion_points, dist = 90)
-plot(srtm)
-plot(st_geometry(zion_points_buf), add = TRUE)
-plot(ch, add = TRUE)
-
-zion_points_points = extract(srtm, vect(zion_points))
-zion_points_buf = extract(srtm, vect(zion_points_buf))
-plot(zion_points_points$srtm, zion_points_buf$srtm2)
-```
-
-<img src="05-geometry-operations_files/figure-html/05-geometry-operations-76-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-76-2.png" width="100%" style="display: block; margin: auto;" />
-
-E9. Subset points higher than 3100 meters in New Zealand (the `nz_height` object) and create a template raster with a resolution of 3 km for the extent of the new point dataset. 
-Using these two new objects:
-
-- Count numbers of the highest points in each grid cell.
-- Find the maximum elevation in each grid cell.
-
-```r
-nz_height3100 = dplyr::filter(nz_height, elevation > 3100)
-new_graticule = st_graticule(nz_height3100, datum = "EPSG:2193")
-plot(st_geometry(nz_height3100), graticule = new_graticule, axes = TRUE)
-
-nz_template = rast(ext(nz_height3100), resolution = 3000, crs = crs(nz_height3100))
-
-nz_raster = rasterize(vect(nz_height3100), nz_template, 
-                       field = "elevation", fun = "length")
-plot(nz_raster)
-plot(st_geometry(nz_height3100), add = TRUE)
-
-nz_raster2 = rasterize(vect(nz_height3100), nz_template, 
-                       field = "elevation", fun = max)
-plot(nz_raster2)
-plot(st_geometry(nz_height3100), add = TRUE)
-```
-
-<img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-3.png" width="100%" style="display: block; margin: auto;" />
-
-E10. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 by 6 km) and plot the result.
-
-- Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?
-- Name two advantages and disadvantages of reducing raster resolution.
-
-```r
-nz_raster_low = raster::aggregate(nz_raster, fact = 2, fun = sum, na.rm = TRUE)
-res(nz_raster_low)
-#> [1] 6000 6000
-
-nz_resample = resample(nz_raster_low, nz_raster)
-plot(nz_raster_low)
-plot(nz_resample) # the results are spread over a greater area and there are border issues
-plot(nz_raster)
-```
-
-<img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-3.png" width="100%" style="display: block; margin: auto;" />
-
-Advantages:
-
-- lower memory use
-- faster processing
-- good for viz in some cases
-
-Disadvantages:
-
-- removes geographic detail
-- adds another processing step
-
-E11. Polygonize the `grain` dataset and filter all squares representing clay.
-
-```r
-grain = rast(system.file("raster/grain.tif", package = "spData"))
-```
-
-- Name two advantages and disadvantages of vector data over raster data.
-- When would it be useful to convert rasters to vectors in your work?
-
-```r
-grain_poly = as.polygons(grain) %>% 
-  st_as_sf()
-levels(grain)
-#> [[1]]
-#> [1] "clay" "silt" "sand"
-clay = dplyr::filter(grain_poly, grain == "clay")
-plot(clay)
-```
-
-<img src="05-geometry-operations_files/figure-html/05-geometry-operations-79-1.png" width="100%" style="display: block; margin: auto;" />
-
-Advantages: 
-
-- can be used to subset other vector objects
-- can do affine transformations and use sf/dplyr verbs
-
-Disadvantages: 
-
-- better consistency
-- fast processing on some operations
-- functions developed for some domains

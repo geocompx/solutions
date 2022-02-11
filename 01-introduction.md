@@ -7,7 +7,9 @@ E1. Think about the terms 'GIS'\index{GIS}, 'GDS' and 'geocomputation' described
 
 E2. Provide three reasons for using a scriptable language such as R for geocomputation instead of using a graphical user interface (GUI) based GIS such as QGIS\index{QGIS}.
 
-E3. Name two advantages and two disadvantages of using mature vs recent packages for geographic data analysis\index{geographic data analysis} (for example **sp** vs **sf**\index{sf}, or **raster** vs **terra**).
+E3. Think about a real world problem you would like to solve with geographic data that could help people living in your local area and sketch a map of the geographic processes involved.
+
+E4. Consider the datasets needed to represent the problem computationally and sketch a workflow for processing them, resulting in outputs that could help inform decision making related to the problem you thought of in the previous exercise. Use a pen and paper or a digital sketching tool such as Excalidraw.
 
 <!--toDo: rl -->
 <!--add solutions!-->

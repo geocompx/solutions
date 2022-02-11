@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Geometry operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 #&gt; terra version 1.5.0 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They also use a...">
+<meta name="description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Geometry operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/geometric-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 #&gt; terra version 1.5.0 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They also use a...">
+<meta property="og:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Geometry operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1 #&gt; terra version 1.5.0 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They also use a...">
+<meta name="twitter:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -52,18 +52,9 @@
 <li><a class="" href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></li>
 <li><a class="" href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></li>
 <li><a class="active" href="geometric-operations.html"><span class="header-section-number">5</span> Geometry operations</a></li>
-<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></li>
-<li><a class="" href="read-write.html"><span class="header-section-number">7</span> Geographic data I/O</a></li>
-<li class="book-part">Extensions</li>
-<li><a class="" href="adv-map.html"><span class="header-section-number">8</span> Making maps with R</a></li>
-<li><a class="" href="gis.html"><span class="header-section-number">9</span> Bridges to GIS software</a></li>
-<li><a class="" href="algorithms.html"><span class="header-section-number">10</span> Scripts, algorithms and functions</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
-<li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
-<li><a class="" href="conclusion.html"><span class="header-section-number">15</span> Conclusion</a></li>
+<li><a class="" href="raster-vector.html"><span class="header-section-number">6</span> Raster-vector interactions</a></li>
+<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
+<li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
 </ul>
 
         <div class="book-extra">
@@ -75,27 +66,31 @@
 <h1>
 <span class="header-section-number">5</span> Geometry operations<a class="anchor" aria-label="anchor" href="#geometric-operations"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code>#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
-#&gt; terra version 1.5.0</code></pre>
-<p>Some of the exercises use a vector (<code>zion_points</code>) and raster dataset (<code>srtm</code>) from the <strong>spDataLarge</strong> package.
-They also use a polygonal ‘convex hull’ derived from the vector dataset (<code>ch</code>) to represent the area of interest:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nowosad.github.io/spData/">spData</a></span><span class="op">)</span>
-<span class="va">zion_points</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vector/zion_points.gpkg"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">srtm</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ch</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_combine</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_convex_hull</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Nowosad/spData">spDataLarge</a></span><span class="op">)</span></code></pre></div>
 <p>E1. Generate and plot simplified versions of the <code>nz</code> dataset.
 Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.00005) for <code>ms_simplify()</code> and <code>dTolerance</code> (from 100 to 100,000) <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify()</a></code>.</p>
 <ul>
 <li>At what value does the form of the result start to break down for each method, making New Zealand unrecognizable?</li>
 <li>Advanced: What is different about the geometry type of the results from <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify()</a></code> compared with the geometry type of <code>ms_simplify()</code>? What problems does this create and how can this be resolved?</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Registered S3 method overwritten by 'geojsonlint':</span>
+<span class="co">#&gt;   method         from </span>
+<span class="co">#&gt;   print.location dplyr</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># Starts to breakdown here at 0.5% of the points:</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span><span class="op">)</span>
@@ -114,183 +109,154 @@ Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.000
 <span class="va">nz_simple_poly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"POLYGON"</span><span class="op">)</span>
+<span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
+
+<span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
 <span class="va">nz_simple_multipoly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"MULTIPOLYGON"</span><span class="op">)</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span></code></pre></div>
+<span class="co">#&gt; [1] 16</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>
+<span class="co">#&gt; [1] 16</span></code></pre></div>
+<p><img src="05-geometry-operations_files/figure-html/05-ex-e1-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-4.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-5.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-6.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-7.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-8.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-9.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-10.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E2. In the first exercise in Chapter Spatial data operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand.
 Using <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code>, how many points in <code>nz_height</code> are within 100 km of Canterbury?</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">canterbury</span> <span class="op">=</span> <span class="va">nz</span><span class="op">[</span><span class="va">nz</span><span class="op">$</span><span class="va">Name</span> <span class="op">==</span> <span class="st">"Canterbury"</span>, <span class="op">]</span>
 <span class="va">cant_buff</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">canterbury</span>, <span class="fl">100</span><span class="op">)</span>
 <span class="va">nz_height_near_cant</span> <span class="op">=</span> <span class="va">nz_height</span><span class="op">[</span><span class="va">cant_buff</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz_height_near_cant</span><span class="op">)</span> <span class="co"># 75 - 5 more</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz_height_near_cant</span><span class="op">)</span> <span class="co"># 75 - 5 more</span>
+<span class="co">#&gt; [1] 75</span></code></pre></div>
 <p>E3. Find the geographic centroid of New Zealand.
 How far is it from the geographic centroid of Canterbury?</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cant_cent</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">canterbury</span><span class="op">)</span>
+<span class="co">#&gt; Warning in st_centroid.sf(canterbury): st_centroid assumes attributes are</span>
+<span class="co">#&gt; constant over geometries of x</span>
 <span class="va">nz_centre</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance</a></span><span class="op">(</span><span class="va">cant_cent</span>, <span class="va">nz_centre</span><span class="op">)</span> <span class="co"># 234 km</span></code></pre></div>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance</a></span><span class="op">(</span><span class="va">cant_cent</span>, <span class="va">nz_centre</span><span class="op">)</span> <span class="co"># 234 km</span>
+<span class="co">#&gt; Units: [m]</span>
+<span class="co">#&gt;        [,1]</span>
+<span class="co">#&gt; [1,] 234193</span></code></pre></div>
 <p>E4. Most world maps have a north-up orientation.
 A world map with a south-up orientation could be created by a reflection (one of the affine transformations not mentioned in this chapter) of the <code>world</code> object’s geometry.
 Write code to do so.
 Hint: you need to use a two-element vector for this transformation.
 Bonus: create an upside-down map of your country.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">world_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span>
 <span class="va">world_sfc_mirror</span> <span class="op">=</span> <span class="va">world_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span>
+<span class="co">#&gt; shorter</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc</span><span class="op">)</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc_mirror</span><span class="op">)</span>
 
 <span class="va">us_states_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span>
 <span class="va">us_states_sfc_mirror</span> <span class="op">=</span> <span class="va">us_states_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span>
+<span class="co">#&gt; shorter</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc</span><span class="op">)</span>
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span>
 <span class="co">## nicer plot</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
-<span class="va">us_states_sfc_mirror_labels</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="va">us_states</span><span class="op">$</span><span class="va">NAME</span><span class="op">)</span>
-<span class="va">us_states_sfc_mirror_sf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_set_geometry</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="va">us_states_sfc_mirror</span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">us_states_sfc_mirror_sf</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_text_repel</span><span class="op">(</span>data <span class="op">=</span> <span class="va">us_states_sfc_mirror_labels</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>, min.segment.length <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
+<span class="co"># library(ggrepel)</span>
+<span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) %&gt;% </span>
+<span class="co">#   st_coordinates() %&gt;%</span>
+<span class="co">#   as_data_frame() %&gt;% </span>
+<span class="co">#   mutate(name = us_states$NAME)</span>
+<span class="co"># us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)</span>
+<span class="co"># ggplot(data = us_states_sfc_mirror_sf) +</span>
+<span class="co">#   geom_sf(color = "white") +</span>
+<span class="co">#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +</span>
+<span class="co">#   theme_void() </span></code></pre></div>
+<p><img src="05-geometry-operations_files/figure-html/05-ex-e4-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-4.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E5. Subset the point in <code>p</code> that is contained within <code>x</code> <em>and</em> <code>y</code>.</p>
 <ul>
 <li>Using base subsetting operators.</li>
 <li>Using an intermediary object created with <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection()</a></code>.</li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p_in_y</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">y</span><span class="op">]</span>
 <span class="va">p_in_xy</span> <span class="op">=</span> <span class="va">p_in_y</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>
 <span class="va">x_and_y</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-<span class="va">p</span><span class="op">[</span><span class="va">x_and_y</span><span class="op">]</span></code></pre></div>
+<span class="va">p</span><span class="op">[</span><span class="va">x_and_y</span><span class="op">]</span>
+<span class="co">#&gt; Geometry set for 1 feature </span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0.305 ymin: 1.43 xmax: 0.305 ymax: 1.43</span>
+<span class="co">#&gt; CRS:           NA</span>
+<span class="co">#&gt; POINT (0.305 1.43)</span></code></pre></div>
 <p>E6. Calculate the length of the boundary lines of US states in meters.
 Which state has the longest border and which has the shortest?
 Hint: The <code>st_length</code> function computes the length of a <code>LINESTRING</code> or <code>MULTILINESTRING</code> geometry.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">us_states2163</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="st">"EPSG:2163"</span><span class="op">)</span>
 <span class="va">us_states_bor</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="va">us_states2163</span>, <span class="st">"MULTILINESTRING"</span><span class="op">)</span>
 <span class="va">us_states_bor</span><span class="op">$</span><span class="va">borders</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_length</a></span><span class="op">(</span><span class="va">us_states_bor</span><span class="op">)</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="va">borders</span><span class="op">)</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span></code></pre></div>
-<p>E7. Crop the <code>srtm</code> raster using (1) the <code>zion_points</code> dataset and (2) the <code>ch</code> dataset.
-Are there any differences in the output maps?
-Next, mask <code>srtm</code> using these two datasets.
-Can you see any difference now?
-How can you explain that?</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ch</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span>
+<span class="co">#&gt; Geometry type: MULTILINESTRING</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span>
+<span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span>
+<span class="co">#&gt; First 10 features:</span>
+<span class="co">#&gt;    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15</span>
+<span class="co">#&gt; 1     11 District of Columbia    South   178 [km^2]       584400       647484</span>
+<span class="co">#&gt; 2     44         Rhode Island Norteast  2743 [km^2]      1056389      1053661</span>
+<span class="co">#&gt; 3     10             Delaware    South  5182 [km^2]       881278       926454</span>
+<span class="co">#&gt; 4     09          Connecticut Norteast 12977 [km^2]      3545837      3593222</span>
+<span class="co">#&gt; 5     34           New Jersey Norteast 20274 [km^2]      8721577      8904413</span>
+<span class="co">#&gt; 6     50              Vermont Norteast 24866 [km^2]       624258       626604</span>
+<span class="co">#&gt; 7     33        New Hampshire Norteast 24026 [km^2]      1313939      1324201</span>
+<span class="co">#&gt; 8     25        Massachusetts Norteast 20911 [km^2]      6477096      6705586</span>
+<span class="co">#&gt; 9     45       South Carolina    South 80904 [km^2]      4511428      4777576</span>
+<span class="co">#&gt; 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645</span>
+<span class="co">#&gt;        borders                       geometry</span>
+<span class="co">#&gt; 1    60323 [m] MULTILINESTRING ((1950825 -...</span>
+<span class="co">#&gt; 2   304594 [m] MULTILINESTRING ((2332242 4...</span>
+<span class="co">#&gt; 3   408049 [m] MULTILINESTRING ((2036308 -...</span>
+<span class="co">#&gt; 4   514090 [m] MULTILINESTRING ((2142347 2...</span>
+<span class="co">#&gt; 5   746942 [m] MULTILINESTRING ((2057740 -...</span>
+<span class="co">#&gt; 6   778204 [m] MULTILINESTRING ((2048149 3...</span>
+<span class="co">#&gt; 7   782644 [m] MULTILINESTRING ((2182313 3...</span>
+<span class="co">#&gt; 8  1017375 [m] MULTILINESTRING ((2416684 3...</span>
+<span class="co">#&gt; 9  1275280 [m] MULTILINESTRING ((1531823 -...</span>
+<span class="co">#&gt; 10 1436288 [m] MULTILINESTRING ((1031129 -...</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span>
+<span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span>
+<span class="co">#&gt; Geometry type: MULTILINESTRING</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span>
+<span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span>
+<span class="co">#&gt; First 10 features:</span>
+<span class="co">#&gt;    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders</span>
+<span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961585 [m]</span>
+<span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810226 [m]</span>
+<span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574933 [m]</span>
+<span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951059 [m]</span>
+<span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2821788 [m]</span>
+<span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568711 [m]</span>
+<span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563963 [m]</span>
+<span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405725 [m]</span>
+<span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378721 [m]</span>
+<span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340809 [m]</span>
+<span class="co">#&gt;                          geometry</span>
+<span class="co">#&gt; 1  MULTILINESTRING ((-269040 -...</span>
+<span class="co">#&gt; 2  MULTILINESTRING ((-1717278 ...</span>
+<span class="co">#&gt; 3  MULTILINESTRING ((1110644 1...</span>
+<span class="co">#&gt; 4  MULTILINESTRING ((1853170 -...</span>
+<span class="co">#&gt; 5  MULTILINESTRING ((-1161496 ...</span>
+<span class="co">#&gt; 6  MULTILINESTRING ((-1294787 ...</span>
+<span class="co">#&gt; 7  MULTILINESTRING ((202212 44...</span>
+<span class="co">#&gt; 8  MULTILINESTRING ((2099962 -...</span>
+<span class="co">#&gt; 9  MULTILINESTRING ((-803303 -...</span>
+<span class="co">#&gt; 10 MULTILINESTRING ((-1658594 ...</span></code></pre></div>
 
-<span class="va">srtm_crop1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/crop.html">crop</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span><span class="op">)</span>
-<span class="va">srtm_crop2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/crop.html">crop</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">ch</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_crop1</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_crop2</span><span class="op">)</span>
-
-<span class="va">srtm_mask1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/mask.html">mask</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span><span class="op">)</span>
-<span class="va">srtm_mask2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/mask.html">mask</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">ch</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_mask1</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_mask2</span><span class="op">)</span></code></pre></div>
-<p><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-75-4.png" width="100%" style="display: block; margin: auto;"></p>
-<p>E8. Firstly, extract values from <code>srtm</code> at the points represented in <code>zion_points</code>.
-Next, extract average values of <code>srtm</code> using a 90 buffer around each point from <code>zion_points</code> and compare these two sets of values.
-When would extracting values by buffers be more suitable than by points alone?</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">zion_points_buf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">zion_points</span>, dist <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">zion_points_buf</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ch</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">zion_points_points</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span><span class="op">)</span>
-<span class="va">zion_points_buf</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">srtm</span>, <span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">zion_points_buf</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">zion_points_points</span><span class="op">$</span><span class="va">srtm</span>, <span class="va">zion_points_buf</span><span class="op">$</span><span class="va">srtm2</span><span class="op">)</span></code></pre></div>
-<p><img src="05-geometry-operations_files/figure-html/05-geometry-operations-76-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-76-2.png" width="100%" style="display: block; margin: auto;"></p>
-<p>E9. Subset points higher than 3100 meters in New Zealand (the <code>nz_height</code> object) and create a template raster with a resolution of 3 km for the extent of the new point dataset.
-Using these two new objects:</p>
-<ul>
-<li>Count numbers of the highest points in each grid cell.</li>
-<li>Find the maximum elevation in each grid cell.</li>
-</ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nz_height3100</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">elevation</span> <span class="op">&gt;</span> <span class="fl">3100</span><span class="op">)</span>
-<span class="va">new_graticule</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_graticule.html">st_graticule</a></span><span class="op">(</span><span class="va">nz_height3100</span>, datum <span class="op">=</span> <span class="st">"EPSG:2193"</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, graticule <span class="op">=</span> <span class="va">new_graticule</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">nz_template</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/ext.html">ext</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, resolution <span class="op">=</span> <span class="fl">3000</span>, crs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/crs.html">crs</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">nz_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rasterize.html">rasterize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, <span class="va">nz_template</span>, 
-                       field <span class="op">=</span> <span class="st">"elevation"</span>, fun <span class="op">=</span> <span class="st">"length"</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="va">nz_raster2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rasterize.html">rasterize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, <span class="va">nz_template</span>, 
-                       field <span class="op">=</span> <span class="st">"elevation"</span>, fun <span class="op">=</span> <span class="va">max</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster2</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-77-3.png" width="100%" style="display: block; margin: auto;"></p>
-<p>E10. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 by 6 km) and plot the result.</p>
-<ul>
-<li>Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?</li>
-<li>Name two advantages and disadvantages of reducing raster resolution.</li>
-</ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nz_raster_low</span> <span class="op">=</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">nz_raster</span>, fact <span class="op">=</span> <span class="fl">2</span>, fun <span class="op">=</span> <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">res</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span>
-<span class="co">#&gt; [1] 6000 6000</span>
-
-<span class="va">nz_resample</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">nz_raster_low</span>, <span class="va">nz_raster</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_resample</span><span class="op">)</span> <span class="co"># the results are spread over a greater area and there are border issues</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster</span><span class="op">)</span></code></pre></div>
-<p><img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-78-3.png" width="100%" style="display: block; margin: auto;"></p>
-<p>Advantages:</p>
-<ul>
-<li>lower memory use</li>
-<li>faster processing</li>
-<li>good for viz in some cases</li>
-</ul>
-<p>Disadvantages:</p>
-<ul>
-<li>removes geographic detail</li>
-<li>adds another processing step</li>
-</ul>
-<p>E11. Polygonize the <code>grain</code> dataset and filter all squares representing clay.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grain</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/grain.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<ul>
-<li>Name two advantages and disadvantages of vector data over raster data.</li>
-<li>When would it be useful to convert rasters to vectors in your work?</li>
-</ul>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">grain_poly</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.spatvector.html">as.polygons</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html">levels</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] "clay" "silt" "sand"</span>
-<span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">clay</span><span class="op">)</span></code></pre></div>
-<div class="inline-figure"><img src="05-geometry-operations_files/figure-html/05-geometry-operations-79-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>Advantages:</p>
-<ul>
-<li>can be used to subset other vector objects</li>
-<li>can do affine transformations and use sf/dplyr verbs</li>
-</ul>
-<p>Disadvantages:</p>
-<ul>
-<li>better consistency</li>
-<li>fast processing on some operations</li>
-<li>functions developed for some domains</li>
-</ul>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></div>
-<div class="next"><a href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></div>
+<div class="next"><a href="raster-vector.html"><span class="header-section-number">6</span> Raster-vector interactions</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav"><li><a class="nav-link" href="#geometric-operations"><span class="header-section-number">5</span> Geometry operations</a></li></ul>
@@ -310,7 +276,7 @@ Using these two new objects:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-02-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

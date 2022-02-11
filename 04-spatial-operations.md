@@ -5,7 +5,7 @@
 
 ```r
 library(sf)
-#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
+#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -24,12 +24,15 @@ How many of these high points does the Canterbury region contain?
 
 ```r
 library(tmap)
-tmap_mode("view")
+# tmap_mode("view")
 qtm(nz) + qtm(nz_height)
 canterbury = nz %>% filter(Name == "Canterbury")
 canterbury_height = nz_height[canterbury, ]
 nrow(canterbury_height) # answer: 70
+#> [1] 70
 ```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" />
 
 E2. Which region has the second highest number of `nz_height` points in, and how many does it have?
 
@@ -72,7 +75,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra version 1.5.0
+#> terra 1.5.20
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:dplyr':
@@ -95,7 +98,7 @@ zonal(c(dem, ndvi), dem_reclass, fun = "mean")
 #> 3   high 765 -0.208
 ```
 
-<img src="04-spatial-operations_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e4-1.png" width="100%" style="display: block; margin: auto;" />
 
 E5. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = "terra"))`.
 Plot the result.
@@ -120,7 +123,7 @@ sobel_y = focal(r, w = filter_y)
 plot(sobel_y, col = c("black", "white"))
 ```
 
-<img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/unnamed-chunk-4-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e5-2.png" width="100%" style="display: block; margin: auto;" />
 
 E6. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
@@ -150,13 +153,48 @@ cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 #> [1] -0.913
 ```
 
-<img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/unnamed-chunk-5-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" width="100%" style="display: block; margin: auto;" />
 
+E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
+Try to do something similar but with `terra::distance()`: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `geodata::elevation_30s()`).
+Convert the resulting distances from meters to kilometers.
+Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.
 
-<!--toDo:jn-->
-<!--improve/replace/modify the following q-->
-<!-- E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`. -->
-<!-- Retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `getData()`). -->
-<!-- Second, use a simple approach to weight the distance raster with elevation (other weighting approaches are possible, include flow direction and steepness); every 100 altitudinal meters should increase the distance to the coast by 10 km. -->
-<!-- Finally, compute the difference between the raster using the Euclidean distance and the raster weighted by elevation. -->
-<!-- Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation. -->
+```r
+# Fetch the DEM data for Spain
+spain_dem = geodata::elevation_30s(country = "Spain", path = ".", mask = FALSE)
+
+# Reduce the resolution by a factor of 20 to speed up calculations
+spain_dem = aggregate(spain_dem, fact = 20)
+
+# According to the documentation, terra::distance() will calculate distance
+# for all cells that are NA to the nearest cell that are not NA. To calculate
+# distance to the coast, we need a raster that has NA values over land and any
+# other value over water
+water_mask = is.na(spain_dem)
+water_mask[water_mask == 0] = NA
+
+# Use the distance() function on this mask to get distance to the coast
+distance_to_coast = distance(water_mask)
+# convert distance into km
+distance_to_coast_km = distance_to_coast / 1000
+
+# Plot the result
+plot(distance_to_coast_km, main = "Distance to the coast (km)")
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;" />
+
+E8. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
+Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.
+
+```r
+# now let's weight each 100 altitudinal meters by an additional distance of 10 km
+distance_to_coast_km2 = distance_to_coast_km + ((spain_dem / 100) * 10)
+# plot the result
+plot(distance_to_coast_km2)
+# visualize the difference
+plot(distance_to_coast_km - distance_to_coast_km2)
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e8-2.png" width="100%" style="display: block; margin: auto;" />

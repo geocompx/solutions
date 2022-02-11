@@ -4,18 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 Geographic data I/O | Geocomputation with R: Solutions</title>
+<title>Chapter 8 Geographic data I/O | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="E1. List and describe three types of vector, raster, and geodatabase formats. E2. Name at least two differences between read_sf() and the more well-known function st_read(). E3. Read the...">
+<meta name="description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(terra) #&gt; terra 1.5.20 E1. List and describe three types of vector, raster, and geodatabase formats....">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Geographic data I/O | Geocomputation with R: Solutions">
+<meta property="og:title" content="Chapter 8 Geographic data I/O | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/read-write.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="E1. List and describe three types of vector, raster, and geodatabase formats. E2. Name at least two differences between read_sf() and the more well-known function st_read(). E3. Read the...">
+<meta property="og:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(terra) #&gt; terra 1.5.20 E1. List and describe three types of vector, raster, and geodatabase formats....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Geographic data I/O | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="E1. List and describe three types of vector, raster, and geodatabase formats. E2. Name at least two differences between read_sf() and the more well-known function st_read(). E3. Read the...">
+<meta name="twitter:title" content="Chapter 8 Geographic data I/O | Geocomputation with R: Solutions">
+<meta name="twitter:description" content="library(sf) #&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE library(terra) #&gt; terra 1.5.20 E1. List and describe three types of vector, raster, and geodatabase formats....">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -52,18 +52,9 @@
 <li><a class="" href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></li>
 <li><a class="" href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></li>
 <li><a class="" href="geometric-operations.html"><span class="header-section-number">5</span> Geometry operations</a></li>
-<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></li>
-<li><a class="active" href="read-write.html"><span class="header-section-number">7</span> Geographic data I/O</a></li>
-<li class="book-part">Extensions</li>
-<li><a class="" href="adv-map.html"><span class="header-section-number">8</span> Making maps with R</a></li>
-<li><a class="" href="gis.html"><span class="header-section-number">9</span> Bridges to GIS software</a></li>
-<li><a class="" href="algorithms.html"><span class="header-section-number">10</span> Scripts, algorithms and functions</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
-<li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
-<li><a class="" href="conclusion.html"><span class="header-section-number">15</span> Conclusion</a></li>
+<li><a class="" href="raster-vector.html"><span class="header-section-number">6</span> Raster-vector interactions</a></li>
+<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
+<li><a class="active" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
 </ul>
 
         <div class="book-extra">
@@ -71,22 +62,70 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="read-write" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="read-write" class="section level1" number="8">
 <h1>
-<span class="header-section-number">7</span> Geographic data I/O<a class="anchor" aria-label="anchor" href="#read-write"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Geographic data I/O<a class="anchor" aria-label="anchor" href="#read-write"><i class="fas fa-link"></i></a>
 </h1>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span>
+<span class="co">#&gt; terra 1.5.20</span></code></pre></div>
 <p>E1. List and describe three types of vector, raster, and geodatabase formats.</p>
+<p>Vector formats: Shapefile (old format supported by many programs), GeoPackage (more recent format with better support of attribute data) and GeoJSON (common format for web mapping).</p>
+<p>Raster formats: GeoTiff, Arc ASCII, R-raster (see book for descriptions).</p>
+<p>Database formats: PostGIS, SQLite, FileGDB (see book for details).</p>
 <p>E2. Name at least two differences between <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf()</a></code> and the more well-known function <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code>.</p>
-<p>E3. Read the <code>cycle_hire_xy.csv</code> file from the <strong>spData</strong> package as a spatial object (Hint: it is located in the <code>misc\</code> folder).
+<p><code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code> prints outputs and keeps strings as text strings (<code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code> creates factors). This can be seen from the source code of <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf()</a></code>, which show’s it wraps <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read()</a></code>:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">read_sf</span>
+<span class="co">#&gt; function (..., quiet = TRUE, stringsAsFactors = FALSE, as_tibble = TRUE) </span>
+<span class="co">#&gt; {</span>
+<span class="co">#&gt;     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, </span>
+<span class="co">#&gt;         as_tibble = as_tibble)</span>
+<span class="co">#&gt; }</span>
+<span class="co">#&gt; &lt;bytecode: 0x55bede2cc2b0&gt;</span>
+<span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></code></pre></div>
+<p>E3. Read the <code>cycle_hire_xy.csv</code> file from the <strong>spData</strong> package as a spatial object (Hint: it is located in the <code>misc</code> folder).
 What is a geometry type of the loaded object?</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">c_h</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"misc/cycle_hire_xy.csv"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">c_h</span>
+<span class="co">#&gt; Simple feature collection with 742 features and 5 fields</span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: -0.237 ymin: 51.5 xmax: -0.00228 ymax: 51.5</span>
+<span class="co">#&gt; CRS:           NA</span>
+<span class="co">#&gt; First 10 features:</span>
+<span class="co">#&gt;    id               name             area nbikes nempty             geometry</span>
+<span class="co">#&gt; 1   1       River Street      Clerkenwell      4     14   POINT (-0.11 51.5)</span>
+<span class="co">#&gt; 2   2 Phillimore Gardens       Kensington      2     34  POINT (-0.198 51.5)</span>
+<span class="co">#&gt; 3   3 Christopher Street Liverpool Street      0     32 POINT (-0.0846 51.5)</span>
+<span class="co">#&gt; 4   4  St. Chad's Street     King's Cross      4     19  POINT (-0.121 51.5)</span>
+<span class="co">#&gt; 5   5     Sedding Street    Sloane Square     15     12  POINT (-0.157 51.5)</span>
+<span class="co">#&gt; 6   6 Broadcasting House       Marylebone      0     18  POINT (-0.144 51.5)</span>
+<span class="co">#&gt; 7   7   Charlbert Street  St. John's Wood     15      0  POINT (-0.168 51.5)</span>
+<span class="co">#&gt; 8   8         Lodge Road  St. John's Wood      5     13   POINT (-0.17 51.5)</span>
+<span class="co">#&gt; 9   9     New Globe Walk         Bankside      3     16 POINT (-0.0964 51.5)</span>
+<span class="co">#&gt; 10 10        Park Street         Bankside      1     17 POINT (-0.0928 51.5)</span></code></pre></div>
 <p>E4. Download the borders of Germany using <strong>rnaturalearth</strong>, and create a new object called <code>germany_borders</code>.
 Write this new object to a file of the GeoPackage format.</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ropenscilabs/rnaturalearth">rnaturalearth</a></span><span class="op">)</span>
+<span class="va">germany_borders</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/rnaturalearth/man/ne_countries.html">ne_countries</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Germany"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">germany_borders</span><span class="op">)</span>
+<span class="co">#&gt; Warning: plotting the first 10 out of 63 attributes; use max.plot = 63 to plot</span>
+<span class="co">#&gt; all</span>
+<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html">st_write</a></span><span class="op">(</span><span class="va">germany_borders</span>, <span class="st">"germany_borders.gpkg"</span><span class="op">)</span>
+<span class="co">#&gt; Writing layer `germany_borders' to data source </span>
+<span class="co">#&gt;   `germany_borders.gpkg' using driver `GPKG'</span>
+<span class="co">#&gt; Writing 1 features with 63 fields and geometry type Polygon.</span></code></pre></div>
+<div class="inline-figure"><img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>geodata</strong> package.
 Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rdrr.io/pkg/terra/man/subset.html">terra::subset()</a></code>).</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geodata</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: terra</span>
-<span class="co">#&gt; terra version 1.5.0</span>
 <span class="va">gmmt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/geodata/man/worldclim.html">worldclim_global</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"tmin"</span>, res <span class="op">=</span> <span class="fl">5</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"</span>
@@ -97,26 +136,33 @@ Extract the June values, and save them to a file named <code>tmin_june.tif</code
 <span class="va">gmmt_june</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/subset.html">subset</a></span><span class="op">(</span><span class="va">gmmt</span>, <span class="st">"wc2.1_5m_tmin_06"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt_june</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">gmmt_june</span>, <span class="st">"tmin_june.tif"</span><span class="op">)</span></code></pre></div>
-<p><img src="07-read-write-plot_files/figure-html/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"><img src="07-read-write-plot_files/figure-html/unnamed-chunk-2-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="08-read-write-plot_files/figure-html/08-ex-e5-1.png" width="100%" style="display: block; margin: auto;"><img src="08-read-write-plot_files/figure-html/08-ex-e5-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E6. Create a static map of Germany’s borders, and save it to a PNG file.</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"germany.png"</span>, width <span class="op">=</span> <span class="fl">350</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">germany_borders</span><span class="op">)</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; png </span>
+<span class="co">#&gt;   2</span></code></pre></div>
 <p>E7. Create an interactive map using data from the <code>cycle_hire_xy.csv</code> file.
 Export this map to a file called <code>cycle_hire.html</code>.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview">mapview</a></span><span class="op">)</span>
+<span class="va">mapview_obj</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">c_h</span>, zcol <span class="op">=</span> <span class="st">"nbikes"</span>, legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapshot.html">mapshot</a></span><span class="op">(</span><span class="va">mapview_obj</span>, file <span class="op">=</span> <span class="st">"cycle_hire.html"</span><span class="op">)</span></code></pre></div>
 
 </div>
-
-
-
   <div class="chapter-nav">
-<div class="prev"><a href="reproj-geo-data.html"><span class="header-section-number">6</span> Reprojecting geographic data</a></div>
-<div class="next"><a href="adv-map.html"><span class="header-section-number">8</span> Making maps with R</a></div>
+<div class="prev"><a href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#read-write"><span class="header-section-number">7</span> Geographic data I/O</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#read-write"><span class="header-section-number">8</span> Geographic data I/O</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/07-read-write-plot.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/07-read-write-plot.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/geocompr/solutions/blob/main/08-read-write-plot.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/geocompr/solutions/edit/main/08-read-write-plot.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -128,7 +174,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2021-11-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-02-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
