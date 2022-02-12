@@ -5,8 +5,12 @@
 
 ```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+#> terra 1.5.20
 #> 
 #> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:terra':
+#> 
+#>     intersect, src, union
 #> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
@@ -14,6 +18,7 @@
 #> 
 #>     intersect, setdiff, setequal, union
 library(sf)
+library(terra)
 library(dplyr)
 library(spData)
 library(spDataLarge)
@@ -209,3 +214,32 @@ arrange(us_states_bor, -borders)
 #> 9  MULTILINESTRING ((-803303 -...
 #> 10 MULTILINESTRING ((-1658594 ...
 ```
+
+E7. Read the srtm.tif file into R (`srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))`).
+This raster has a resolution of 0.00083 by 0.00083 degrees. 
+Change its resolution to 0.01 by 0.01 degrees using all of the method available in the **terra** package.
+Visualize the results.
+Can you notice any differences between the results of these resampling methods?
+
+```r
+srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
+rast_template = rast(ext(srtm), res = 0.01)
+srtm_resampl1 = resample(srtm, y = rast_template, method = "bilinear")
+srtm_resampl2 = resample(srtm, y = rast_template, method = "near")
+srtm_resampl3 = resample(srtm, y = rast_template, method = "cubic")
+srtm_resampl4 = resample(srtm, y = rast_template, method = "cubicspline")
+srtm_resampl5 = resample(srtm, y = rast_template, method = "lanczos")
+
+srtm_resampl_all = c(srtm_resampl1, srtm_resampl2, srtm_resampl3,
+                     srtm_resampl4, srtm_resampl5)
+plot(srtm_resampl_all)
+
+# differences
+plot(srtm_resampl_all - srtm_resampl1)
+plot(srtm_resampl_all - srtm_resampl2)
+plot(srtm_resampl_all - srtm_resampl3)
+plot(srtm_resampl_all - srtm_resampl4)
+plot(srtm_resampl_all - srtm_resampl5)
+```
+
+<img src="05-geometry-operations_files/figure-html/05-ex-e7-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-4.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-5.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-6.png" width="100%" style="display: block; margin: auto;" />
