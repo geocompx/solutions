@@ -3,13 +3,8 @@
 
 
 
-For these exercises we will use the `us_states` and `us_states_df` datasets from the **spData** package.
-You must have attached the package, and other packages used in the attribute operations chapter (**sf**, **dplyr**, **terra**) with commands such as `library(spData)` before attempting these exercises:
-
-```r
-library(sf)
+```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -18,13 +13,23 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-library(terra)
 #> terra 1.5.20
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:dplyr':
 #> 
 #>     src
+```
+
+
+
+For these exercises we will use the `us_states` and `us_states_df` datasets from the **spData** package.
+You must have attached the package, and other packages used in the attribute operations chapter (**sf**, **dplyr**, **terra**) with commands such as `library(spData)` before attempting these exercises:
+
+```r
+library(sf)
+library(dplyr)
+library(terra)
 library(spData)
 data(us_states)
 data(us_states_df)

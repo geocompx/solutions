@@ -3,11 +3,11 @@
 
 
 
-```r
-library(sf)
+```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-library(terra)
 #> terra 1.5.20
+library(sf)
+library(terra)
 library(spData)
 ```
 

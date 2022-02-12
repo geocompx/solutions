@@ -3,11 +3,11 @@
 
 
 
-```r
-library(sf)
+```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-library(terra)
 #> terra 1.5.20
+library(sf)
+library(terra)
 ```
 
 E1. List and describe three types of vector, raster, and geodatabase formats.
@@ -30,7 +30,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55bede2cc2b0>
+#> <bytecode: 0x5601608ca0b0>
 #> <environment: namespace:sf>
 ```
 

@@ -3,10 +3,8 @@
 
 
 
-```r
-library(sf)
+```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -15,6 +13,8 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+library(sf)
+library(dplyr)
 data(nz, package = "spData")
 data(nz_height, package = "spData")
 ```
