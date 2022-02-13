@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-#> terra 1.5.20
+#> terra 1.5.19
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:terra':
@@ -235,11 +235,11 @@ srtm_resampl_all = c(srtm_resampl1, srtm_resampl2, srtm_resampl3,
 plot(srtm_resampl_all)
 
 # differences
-plot(srtm_resampl_all - srtm_resampl1)
-plot(srtm_resampl_all - srtm_resampl2)
-plot(srtm_resampl_all - srtm_resampl3)
-plot(srtm_resampl_all - srtm_resampl4)
-plot(srtm_resampl_all - srtm_resampl5)
+plot(srtm_resampl_all - srtm_resampl1, range = c(-300, 300))
+plot(srtm_resampl_all - srtm_resampl2, range = c(-300, 300))
+plot(srtm_resampl_all - srtm_resampl3, range = c(-300, 300))
+plot(srtm_resampl_all - srtm_resampl4, range = c(-300, 300))
+plot(srtm_resampl_all - srtm_resampl5, range = c(-300, 300))
 ```
 
 <img src="05-geometry-operations_files/figure-html/05-ex-e7-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-4.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-5.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e7-6.png" width="100%" style="display: block; margin: auto;" />

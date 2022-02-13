@@ -75,7 +75,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.5.20
+#> terra 1.5.19
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:dplyr':
