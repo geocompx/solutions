@@ -15,12 +15,13 @@
 #>     intersect, setdiff, setequal, union
 library(sf)
 library(dplyr)
-data(nz, package = "spData")
-data(nz_height, package = "spData")
+library(spData)
 ```
 
 E1. It was established in Section \@ref(spatial-vec) that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
 How many of these high points does the Canterbury region contain?
+
+**Bonus:** plot the result using the `plot()` function to show all of New Zealand, `canterbury` region highlighted in yellow, high points in Canterbury represented with black dots and  
 
 ```r
 library(tmap)
@@ -28,13 +29,19 @@ library(tmap)
 qtm(nz) + qtm(nz_height)
 canterbury = nz %>% filter(Name == "Canterbury")
 canterbury_height = nz_height[canterbury, ]
+nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
 nrow(canterbury_height) # answer: 70
 #> [1] 70
+
+plot(nz$geom)
+plot(canterbury$geom, col = "yellow", add = TRUE)
+plot(nz_not_canterbury_height$geometry, pch = 4, col = "blue", add = TRUE)
+plot(canterbury_height$geometry, pch = 3, col = "red", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e1-2.png" width="100%" style="display: block; margin: auto;" />
 
-E2. Which region has the second highest number of `nz_height` points in, and how many does it have?
+E2. Which region has the second highest number of `nz_height` points, and how many does it have?
 
 ```r
 nz_height_count = aggregate(nz_height, nz, length)
@@ -53,8 +60,24 @@ E3. Generalizing the question to all regions: how many of New Zealand's 16 regio
 - Bonus: create a table listing these regions in order of the number of points and their name.
 
 ```r
+# Base R way:
 nz_height_count = aggregate(nz_height, nz, length)
 nz_height_combined = cbind(nz, count = nz_height_count$elevation)
+plot(nz_height_combined)
+
+# Tidyverse way:
+nz_height_joined = st_join(nz_height, nz %>% select(Name))
+# Calculate n. points in each region - this contains the result
+nz_height_counts = nz_height_joined %>% 
+  group_by(Name) %>% 
+  summarise(count = n())
+
+# Optionally join results with nz geometries:
+nz_height_combined = left_join(nz, nz_height_counts %>% sf::st_drop_geometry())
+#> Joining, by = "Name"
+# plot(nz_height_combined) # Check: results identical to base R result
+
+# Generate a summary table
 nz_height_combined %>% 
   st_drop_geometry() %>% 
   dplyr::select(Name, count) %>% 
@@ -70,7 +93,108 @@ nz_height_combined %>%
 #> 7       Marlborough     1
 ```
 
-E4. Use `dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))`, and reclassify the elevation in three classes: low (<300), medium and high (>500).
+<img src="04-spatial-operations_files/figure-html/04-ex-e3-1.png" width="100%" style="display: block; margin: auto;" />
+
+E4. Test your knowledge of spatial predicates by finding out and plotting how US states relate to each other and other spatial objects.
+
+The starting point of this exercise is to create an object representing Colorado state in the USA. Do this with the command 
+`colorado = us_states[us_states$NAME == "Colorado",]` (base R) or with with the  `filter()` function (tidyverse) and plot the resulting object in the context of US states.
+
+- Create a new object representing all the states that geographically intersect with Colorado and plot the result (hint: the most concise way to do this is with the subsetting method `[`).
+- Create another object representing all the objects that touch (have a shared boundary with) Colorado and plot the result (hint: remember you can use the argument `op = st_intersects` and other spatial relations during spatial subsetting operations in base R).
+- Bonus: create a straight line from the centroid of the District of Columbia near the East coast to the centroid of California near the West coast of the USA (hint: functions `st_centroid()`, `st_union()` and `st_cast()` described in Chapter 5 may help) and identify which states this long East-West line crosses.
+
+```r
+colorado = us_states[us_states$NAME == "Colorado", ]
+plot(us_states$geometry)
+plot(colorado$geometry, col = "grey", add = TRUE)
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+intersects_with_colorado = us_states[colorado, , op = st_intersects]
+plot(us_states$geometry, main = "States that intersect with Colorado")
+plot(intersects_with_colorado$geometry, col = "grey", add = TRUE)
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+# Alternative but more verbose solutions
+# 2: With intermediate object, one list for each state
+sel_intersects_colorado = st_intersects(us_states, colorado)
+sel_intersects_colorado_list = lengths(sel_intersects_colorado) > 0
+intersects_with_colorado = us_states[sel_intersects_colorado_list, ]
+
+# 3: With intermediate object, one index for each state
+sel_intersects_colorado2 = st_intersects(colorado, us_states)
+sel_intersects_colorado2
+#> Sparse geometry binary predicate list of length 1, where the predicate
+#> was `intersects'
+#>  1: 2, 3, 9, 19, 37, 39, 45, 49
+us_states$NAME[unlist(sel_intersects_colorado2)]
+#> [1] "Arizona"    "Colorado"   "Kansas"     "Oklahoma"   "Nebraska"  
+#> [6] "New Mexico" "Utah"       "Wyoming"
+
+# 4: With tidyverse
+us_states %>% 
+  st_filter(y = colorado, .predicate = st_intersects)
+#> Simple feature collection with 8 features and 6 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: -115 ymin: 31.3 xmax: -94.4 ymax: 45
+#> Geodetic CRS:  NAD83
+#>   GEOID       NAME  REGION          AREA total_pop_10 total_pop_15
+#> 1    04    Arizona    West 295281 [km^2]      6246816      6641928
+#> 2    08   Colorado    West 269573 [km^2]      4887061      5278906
+#> 3    20     Kansas Midwest 213037 [km^2]      2809329      2892987
+#> 4    40   Oklahoma   South 180971 [km^2]      3675339      3849733
+#> 5    31   Nebraska Midwest 200272 [km^2]      1799125      1869365
+#> 6    35 New Mexico    West 314886 [km^2]      2013122      2084117
+#> 7    49       Utah    West 219860 [km^2]      2657236      2903379
+#> 8    56    Wyoming    West 253310 [km^2]       545579       579679
+#>                         geometry
+#> 1 MULTIPOLYGON (((-115 32.7, ...
+#> 2 MULTIPOLYGON (((-109 41, -1...
+#> 3 MULTIPOLYGON (((-102 40, -1...
+#> 4 MULTIPOLYGON (((-103 37, -1...
+#> 5 MULTIPOLYGON (((-104 43, -1...
+#> 6 MULTIPOLYGON (((-109 37, -1...
+#> 7 MULTIPOLYGON (((-114 42, -1...
+#> 8 MULTIPOLYGON (((-104 45, -1...
+touches_colorado = us_states[colorado, , op = st_touches]
+plot(us_states$geometry, main = "States that touch Colorado")
+plot(touches_colorado$geometry, col = "grey", add = TRUE)
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+washington_to_cali = us_states %>% 
+  filter(grepl(pattern = "Columbia|Cali", x = NAME)) %>% 
+  st_centroid() %>% 
+  st_union() %>% 
+  st_cast("LINESTRING")
+#> Warning in st_centroid.sf(.): st_centroid assumes attributes are constant over
+#> geometries of x
+states_crossed = us_states[washington_to_cali, , op = st_crosses]
+#> although coordinates are longitude/latitude, st_crosses assumes that they are planar
+states_crossed$NAME
+#>  [1] "Colorado"             "Indiana"              "Kansas"              
+#>  [4] "Missouri"             "Nevada"               "West Virginia"       
+#>  [7] "California"           "District of Columbia" "Illinois"            
+#> [10] "Kentucky"             "Ohio"                 "Utah"                
+#> [13] "Virginia"
+plot(us_states$geometry, main = "States crossed by a straight line\n from the District of Columbia to central California")
+plot(states_crossed$geometry, col = "grey", add = TRUE)
+plot(washington_to_cali, add = TRUE)
+```
+
+<img src="04-spatial-operations_files/figure-html/04-ex-4-5-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+E5. Use `dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))`, and reclassify the elevation in three classes: low (<300), medium and high (>500).
 Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))`) and compute the mean NDVI and the mean elevation for each altitudinal class.
 
 ```r
@@ -98,9 +222,9 @@ zonal(c(dem, ndvi), dem_reclass, fun = "mean")
 #> 3   high 765 -0.208
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e4-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" width="100%" style="display: block; margin: auto;" />
 
-E5. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = "terra"))`.
+E6. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = "terra"))`.
 Plot the result.
 Hint: Read `?terra::focal()`.
 
@@ -123,9 +247,9 @@ sobel_y = focal(r, w = filter_y)
 plot(sobel_y, col = c("black", "white"))
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e5-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" width="100%" style="display: block; margin: auto;" />
 
-E6. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
+E7. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
 Also, calculate a correlation between NDVI and NDWI for this area.
 
@@ -153,9 +277,9 @@ cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 #> [1] -0.913
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e7-2.png" width="100%" style="display: block; margin: auto;" />
 
-E7. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
+E8. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
 Try to do something similar but with `terra::distance()`: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `geodata::elevation_30s()`).
 Convert the resulting distances from meters to kilometers.
 Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.
@@ -183,9 +307,9 @@ distance_to_coast_km = distance_to_coast / 1000
 plot(distance_to_coast_km, main = "Distance to the coast (km)")
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;" />
 
-E8. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
+E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.
 
 ```r
@@ -197,4 +321,4 @@ plot(distance_to_coast_km2)
 plot(distance_to_coast_km - distance_to_coast_km2)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e8-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e9-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e9-2.png" width="100%" style="display: block; margin: auto;" />
