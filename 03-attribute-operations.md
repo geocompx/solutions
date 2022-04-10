@@ -13,7 +13,7 @@
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-#> terra 1.5.24
+#> terra 1.5.27
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:dplyr':
