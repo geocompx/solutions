@@ -211,12 +211,12 @@ ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 #1
 dem_rcl = matrix(c(-Inf, 300, 0, 300, 500, 1, 500, Inf, 2), ncol = 3, byrow = TRUE)
 dem_reclass = classify(dem, dem_rcl)
-levels(dem_reclass) = c("low", "medium", "high")
+levels(dem_reclass) = data.frame(id = 0:2, cats = c("low", "medium", "high"))
 plot(dem_reclass)
 
 #2
 zonal(c(dem, ndvi), dem_reclass, fun = "mean")
-#>      dem dem   ndvi
+#>     cats dem   ndvi
 #> 1    low 274 -0.363
 #> 2 medium 392 -0.289
 #> 3   high 765 -0.208
@@ -251,7 +251,7 @@ plot(sobel_y, col = c("black", "white"))
 
 E7. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
-Also, calculate a correlation between NDVI and NDWI for this area.
+Also, calculate a correlation between NDVI and NDWI for this area (hint: you can use the `layerCor()` function).
 
 ```r
 file = system.file("raster/landsat.tif", package = "spDataLarge")
@@ -272,6 +272,14 @@ plot(ndwi_rast)
 
 two_rasts = c(ndvi_rast, ndwi_rast)
 names(two_rasts) = c("ndvi", "ndwi")
+
+# correlation -- option 1
+layerCor(two_rasts, fun = cor)
+#>        ndvi   ndwi
+#> ndvi  1.000 -0.913
+#> ndwi -0.913  1.000
+
+# correlation -- option 2
 two_rasts_df = as.data.frame(two_rasts)
 cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 #> [1] -0.913
@@ -282,7 +290,7 @@ cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 E8. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
 Try to do something similar but with `terra::distance()`: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `geodata::elevation_30s()`).
 Convert the resulting distances from meters to kilometers.
-Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation.
+Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation (`aggregate()`).
 
 ```r
 # Fetch the DEM data for Spain

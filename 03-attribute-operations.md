@@ -483,18 +483,16 @@ r[c(1, nrow(r)), c(1, ncol(r))]
 #> 4 -2.593
 ```
 
-E16. What is the most common class of our example raster `grain` (hint: `modal`)?
+E16. What is the most common class of our example raster `grain`?
 
 ```r
 grain = rast(system.file("raster/grain.tif", package = "spData"))
-global(grain, fun = modal) # only one value is shown when there are ties
-#>       global
-#> grain      1
-freq(grain) # the most common classes are silt and sand (13 cells)
+freq(grain) |> 
+  arrange(-count )# the most common classes are silt and sand (13 cells)
 #>   layer value count
-#> 1     1  clay    10
-#> 2     1  silt    13
-#> 3     1  sand    13
+#> 1     1  silt    13
+#> 2     1  sand    13
+#> 3     1  clay    10
 ```
 
 E17. Plot the histogram and the boxplot of the `dem.tif` file from the **spDataLarge** package (`system.file("raster/dem.tif", package = "spDataLarge")`). 

@@ -19,7 +19,7 @@ Raster formats: GeoTiff, Arc ASCII, R-raster (see book for descriptions).
 Database formats: PostGIS, SQLite, FileGDB (see book for details).
 
 
-E2. Name at least two differences between `read_sf()` and the more well-known function `st_read()`.
+E2. Name at least two differences between the **sf** functions `read_sf()` and `st_read()`.
 
 `st_read()` prints outputs and keeps strings as text strings (`st_read()` creates factors). This can be seen from the source code of `read_sf()`, which show's it wraps `st_read()`:
 
@@ -30,7 +30,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x56332c5bd6b8>
+#> <bytecode: 0x561fef320a98>
 #> <environment: namespace:sf>
 ```
 
