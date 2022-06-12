@@ -104,7 +104,7 @@ Obtain the same result using a different command (bonus: try to find three ways 
 Hint: try to use helper functions, such as `contains` or `matches` from **dplyr** (see `?contains`).
 
 ```r
-us_states %>% dplyr::select(total_pop_10, total_pop_15)
+us_states |> dplyr::select(total_pop_10, total_pop_15)
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -124,7 +124,7 @@ us_states %>% dplyr::select(total_pop_10, total_pop_15)
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states %>% dplyr::select(starts_with("total_pop"))
+us_states |> dplyr::select(starts_with("total_pop"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -144,7 +144,7 @@ us_states %>% dplyr::select(starts_with("total_pop"))
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states %>% dplyr::select(contains("total_pop"))
+us_states |> dplyr::select(contains("total_pop"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -164,7 +164,7 @@ us_states %>% dplyr::select(contains("total_pop"))
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states %>% dplyr::select(matches("tal_p"))
+us_states |> dplyr::select(matches("tal_p"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -191,7 +191,7 @@ E3. Find all states with the following characteristics (bonus find *and* plot th
 - Belong to the South region, had an area larger than 150,000 km^2^ or a total population in 2015 larger than 7,000,000 residents.
 
 ```r
-us_states %>% 
+us_states |> 
   filter(REGION == "Midwest")
 #> Simple feature collection with 12 features and 6 fields
 #> Geometry type: MULTIPOLYGON
@@ -222,7 +222,7 @@ us_states %>%
 #> 9  MULTIPOLYGON (((-85.6 45.6,...
 #> 10 MULTIPOLYGON (((-104 43, -1...
 
-us_states %>% filter(REGION == "West", AREA < units::set_units(250000, km^2),total_pop_15 > 5000000)
+us_states |> filter(REGION == "West", AREA < units::set_units(250000, km^2), total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -233,7 +233,7 @@ us_states %>% filter(REGION == "West", AREA < units::set_units(250000, km^2),tot
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
 # or
-us_states %>% filter(REGION == "West", as.numeric(AREA) < 250000,total_pop_15 > 5000000)
+us_states |> filter(REGION == "West", as.numeric(AREA) < 250000, total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -244,7 +244,7 @@ us_states %>% filter(REGION == "West", as.numeric(AREA) < 250000,total_pop_15 > 
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
 
-us_states %>% filter(REGION == "South", AREA > units::set_units(150000, km^2), total_pop_15 > 7000000)
+us_states |> filter(REGION == "South", AREA > units::set_units(150000, km^2), total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -259,7 +259,7 @@ us_states %>% filter(REGION == "South", AREA > units::set_units(150000, km^2), t
 #> 2 MULTIPOLYGON (((-85.6 35, -...
 #> 3 MULTIPOLYGON (((-103 36.5, ...
 # or
-us_states %>% filter(REGION == "South", as.numeric(AREA) > 150000, total_pop_15 > 7000000)
+us_states |> filter(REGION == "South", as.numeric(AREA) > 150000, total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -279,7 +279,7 @@ E4. What was the total population in 2015 in the `us_states` dataset?
 What was the minimum and maximum total population in 2015?
 
 ```r
-us_states %>% summarize(total_pop = sum(total_pop_15),
+us_states |> summarize(total_pop = sum(total_pop_15),
                         min_pop = min(total_pop_15),
                         max_pop = max(total_pop_15))
 #> Simple feature collection with 1 feature and 3 fields
@@ -294,8 +294,8 @@ us_states %>% summarize(total_pop = sum(total_pop_15),
 E5. How many states are there in each region?
 
 ```r
-us_states %>%
-  group_by(REGION) %>%
+us_states |>
+  group_by(REGION) |>
   summarize(nr_of_states = n())
 #> Simple feature collection with 4 features and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -315,8 +315,8 @@ E6. What was the minimum and maximum total population in 2015 in each region?
 What was the total population in 2015 in each region?
 
 ```r
-us_states %>%
-  group_by(REGION) %>%
+us_states |>
+  group_by(REGION) |>
   summarize(min_pop = min(total_pop_15),
             max_pop = max(total_pop_15),
             tot_pop = sum(total_pop_15))
@@ -340,7 +340,7 @@ Which variable is the key in both datasets?
 What is the class of the new object?
 
 ```r
-us_states_stats = us_states %>%
+us_states_stats = us_states |>
   left_join(us_states_df, by = c("NAME" = "state"))
 class(us_states_stats)
 #> [1] "sf"         "data.frame"
@@ -350,7 +350,7 @@ E8. `us_states_df` has two more rows than `us_states`.
 How can you find them? (hint: try to use the `dplyr::anti_join()` function)
 
 ```r
-us_states_df %>%
+us_states_df |>
   anti_join(st_drop_geometry(us_states), by = c("state" = "NAME"))
 #> # A tibble: 2 × 5
 #>   state  median_income_10 median_income_15 poverty_level_10 poverty_level_15
@@ -363,7 +363,7 @@ E9. What was the population density in 2015 in each state?
 What was the population density in 2010 in each state?
 
 ```r
-us_states2 = us_states %>%
+us_states2 = us_states |>
   mutate(pop_dens_15 = total_pop_15/AREA,
          pop_dens_10 = total_pop_10/AREA)
 ```
@@ -372,7 +372,7 @@ E10. How much has population density changed between 2010 and 2015 in each state
 Calculate the change in percentages and map them.
 
 ```r
-us_popdens_change = us_states2 %>%
+us_popdens_change = us_states2 |>
   mutate(pop_dens_diff_10_15 = pop_dens_15 - pop_dens_10,
          pop_dens_diff_10_15p = (pop_dens_diff_10_15/pop_dens_15) * 100)
 plot(us_popdens_change["pop_dens_diff_10_15p"])
@@ -420,8 +420,8 @@ The new object should have only two variables - `median_income_15` and `geometry
 Change the name of the `median_income_15` column to `Income`.
 
 ```r
-us_states_sel = us_states %>%
-  left_join(us_states_df, by = c("NAME" = "state")) %>%
+us_states_sel = us_states |>
+  left_join(us_states_df, by = c("NAME" = "state")) |>
   dplyr::select(Income = median_income_15)
 ```
 
@@ -429,14 +429,15 @@ E13. Calculate the change in the number of residents living below the poverty le
 Bonus: Calculate the change in the *percentage* of residents living below the poverty level in each state.
 
 ```r
-us_pov_change = us_states %>%
-  left_join(us_states_df, by = c("NAME" = "state")) %>%
+us_pov_change = us_states |>
+  left_join(us_states_df, by = c("NAME" = "state")) |>
   mutate(pov_change = poverty_level_15 - poverty_level_10)
  
 # Bonus
-us_pov_pct_change = us_states %>%
-  left_join(us_states_df, by = c("NAME" = "state")) %>%
-  mutate(pov_pct_10 = (poverty_level_10 / total_pop_10) * 100, pov_pct_15 = (poverty_level_15 / total_pop_15) * 100) %>%
+us_pov_pct_change = us_states |>
+  left_join(us_states_df, by = c("NAME" = "state")) |>
+  mutate(pov_pct_10 = (poverty_level_10 / total_pop_10) * 100, 
+         pov_pct_15 = (poverty_level_15 / total_pop_15) * 100) |>
   mutate(pov_pct_change = pov_pct_15 - pov_pct_10)
 ```
 
@@ -444,18 +445,18 @@ E14. What was the minimum, average and maximum state's number of people living b
 Bonus: What is the region with the largest increase in people living below the poverty line?
 
 ```r
-us_pov_change_reg = us_pov_change %>%
-  group_by(REGION) %>%
+us_pov_change_reg = us_pov_change |>
+  group_by(REGION) |>
   summarize(min_state_pov_15 = min(poverty_level_15),
             mean_state_pov_15 = mean(poverty_level_15),
             max_state_pov_15 = max(poverty_level_15))
 
 # Bonus
-us_pov_change %>%
-  group_by(REGION) %>%
-  summarize(region_pov_change = sum(pov_change)) %>%
-  filter(region_pov_change == max(region_pov_change)) %>%
-  pull(REGION) %>%
+us_pov_change |>
+  group_by(REGION) |>
+  summarize(region_pov_change = sum(pov_change)) |>
+  filter(region_pov_change == max(region_pov_change)) |>
+  pull(REGION) |>
   as.character()
 #> [1] "South"
 ```

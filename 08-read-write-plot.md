@@ -30,7 +30,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x561fef320a98>
+#> <bytecode: 0x55bde2561348>
 #> <environment: namespace:sf>
 ```
 
@@ -38,7 +38,7 @@ E3. Read the `cycle_hire_xy.csv` file from the **spData** package as a spatial o
 What is a geometry type of the loaded object? 
 
 ```r
-c_h = read.csv(system.file("misc/cycle_hire_xy.csv", package = "spData")) %>% 
+c_h = read.csv(system.file("misc/cycle_hire_xy.csv", package = "spData")) |> 
   st_as_sf(coords = c("X", "Y"))
 c_h
 #> Simple feature collection with 742 features and 5 fields

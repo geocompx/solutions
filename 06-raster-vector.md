@@ -19,8 +19,8 @@ library(spData)
 zion_points_path = system.file("vector/zion_points.gpkg", package = "spDataLarge")
 zion_points = read_sf(zion_points_path)
 srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
-ch = st_combine(zion_points) %>%
-  st_convex_hull() %>% 
+ch = st_combine(zion_points) |>
+  st_convex_hull() |> 
   st_as_sf()
 ```
 
@@ -131,7 +131,7 @@ grain = rast(system.file("raster/grain.tif", package = "spData"))
 - When would it be useful to convert rasters to vectors in your work?
 
 ```r
-grain_poly = as.polygons(grain) %>% 
+grain_poly = as.polygons(grain) |> 
   st_as_sf()
 levels(grain)
 #> [[1]]

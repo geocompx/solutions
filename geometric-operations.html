@@ -113,14 +113,14 @@ Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.000
 
 <span class="co"># Problem: st_simplify returns POLYGON and MULTIPOLYGON results, affecting plotting</span>
 <span class="co"># Cast into a single geometry type to resolve this</span>
-<span class="va">nz_simple_poly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">nz_simple_poly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"POLYGON"</span><span class="op">)</span>
 <span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
 
 <span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
-<span class="va">nz_simple_multipoly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">nz_simple_multipoly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
   <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"MULTIPOLYGON"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
@@ -168,9 +168,9 @@ Bonus: create an upside-down map of your country.</p>
 <span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span>
 <span class="co">## nicer plot</span>
 <span class="co"># library(ggrepel)</span>
-<span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) %&gt;% </span>
-<span class="co">#   st_coordinates() %&gt;%</span>
-<span class="co">#   as_data_frame() %&gt;% </span>
+<span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) |&gt; </span>
+<span class="co">#   st_coordinates() |&gt;</span>
+<span class="co">#   as_data_frame() |&gt; </span>
 <span class="co">#   mutate(name = us_states$NAME)</span>
 <span class="co"># us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)</span>
 <span class="co"># ggplot(data = us_states_sfc_mirror_sf) +</span>
@@ -308,7 +308,7 @@ Can you notice any differences between the results of these resampling methods?<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-06-05.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-06-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

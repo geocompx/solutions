@@ -27,7 +27,7 @@ How many of these high points does the Canterbury region contain?
 library(tmap)
 # tmap_mode("view")
 qtm(nz) + qtm(nz_height)
-canterbury = nz %>% filter(Name == "Canterbury")
+canterbury = nz |> filter(Name == "Canterbury")
 canterbury_height = nz_height[canterbury, ]
 nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
 nrow(canterbury_height) # answer: 70
@@ -46,10 +46,10 @@ E2. Which region has the second highest number of `nz_height` points, and how ma
 ```r
 nz_height_count = aggregate(nz_height, nz, length)
 nz_height_combined = cbind(nz, count = nz_height_count$elevation)
-nz_height_combined %>% 
-  st_drop_geometry() %>% 
-  dplyr::select(Name, count) %>% 
-  arrange(desc(count)) %>% 
+nz_height_combined |> 
+  st_drop_geometry() |> 
+  dplyr::select(Name, count) |> 
+  arrange(desc(count)) |> 
   slice(2)
 #>         Name count
 #> 1 West Coast    22
@@ -66,22 +66,22 @@ nz_height_combined = cbind(nz, count = nz_height_count$elevation)
 plot(nz_height_combined)
 
 # Tidyverse way:
-nz_height_joined = st_join(nz_height, nz %>% select(Name))
+nz_height_joined = st_join(nz_height, nz |> select(Name))
 # Calculate n. points in each region - this contains the result
-nz_height_counts = nz_height_joined %>% 
-  group_by(Name) %>% 
+nz_height_counts = nz_height_joined |> 
+  group_by(Name) |> 
   summarise(count = n())
 
 # Optionally join results with nz geometries:
-nz_height_combined = left_join(nz, nz_height_counts %>% sf::st_drop_geometry())
+nz_height_combined = left_join(nz, nz_height_counts |> sf::st_drop_geometry())
 #> Joining, by = "Name"
 # plot(nz_height_combined) # Check: results identical to base R result
 
 # Generate a summary table
-nz_height_combined %>% 
-  st_drop_geometry() %>% 
-  dplyr::select(Name, count) %>% 
-  arrange(desc(count)) %>% 
+nz_height_combined |> 
+  st_drop_geometry() |> 
+  dplyr::select(Name, count) |> 
+  arrange(desc(count)) |> 
   na.omit()
 #>                Name count
 #> 1        Canterbury    70
@@ -138,7 +138,7 @@ us_states$NAME[unlist(sel_intersects_colorado2)]
 #> [6] "New Mexico" "Utah"       "Wyoming"
 
 # 4: With tidyverse
-us_states %>% 
+us_states |> 
   st_filter(y = colorado, .predicate = st_intersects)
 #> Simple feature collection with 8 features and 6 fields
 #> Geometry type: MULTIPOLYGON
@@ -171,13 +171,13 @@ plot(touches_colorado$geometry, col = "grey", add = TRUE)
 <img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
-washington_to_cali = us_states %>% 
-  filter(grepl(pattern = "Columbia|Cali", x = NAME)) %>% 
-  st_centroid() %>% 
-  st_union() %>% 
+washington_to_cali = us_states |> 
+  filter(grepl(pattern = "Columbia|Cali", x = NAME)) |> 
+  st_centroid() |> 
+  st_union() |> 
   st_cast("LINESTRING")
-#> Warning in st_centroid.sf(.): st_centroid assumes attributes are constant over
-#> geometries of x
+#> Warning in st_centroid.sf(filter(us_states, grepl(pattern = "Columbia|Cali", :
+#> st_centroid assumes attributes are constant over geometries of x
 states_crossed = us_states[washington_to_cali, , op = st_crosses]
 #> although coordinates are longitude/latitude, st_crosses assumes that they are planar
 states_crossed$NAME
