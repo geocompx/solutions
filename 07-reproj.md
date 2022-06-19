@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-#> terra 1.5.21
+#> terra 1.5.34
 library(sf)
 library(terra)
 library(spData)
@@ -135,7 +135,7 @@ plot(cat_raster_wgs84)
 
 <!--toDo:jn-->
 <!--improve/replace/modify the following q-->
-<!-- E5. Create your own `proj4string`.  -->
+<!-- E5. Create your own proj-string.  -->
 <!-- It should have the Lambert Azimuthal Equal Area (`laea`) projection, the WGS84 ellipsoid, the longitude of projection center of 95 degrees west, the latitude of projection center of 60 degrees north, and its units should be in meters. -->
 <!-- Next, subset Canada from the `world` object and transform it into the new projection.  -->
 <!-- Plot and compare a map before and after the transformation. -->

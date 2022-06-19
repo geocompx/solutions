@@ -13,12 +13,7 @@
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-#> terra 1.5.21
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     src
+#> terra 1.5.34
 ```
 
 
@@ -505,11 +500,6 @@ boxplot(dem)
 
 # we can also use ggplot2 after converting SpatRaster to a data frame
 library(ggplot2)
-#> 
-#> Attaching package: 'ggplot2'
-#> The following object is masked from 'package:terra':
-#> 
-#>     arrow
 ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()

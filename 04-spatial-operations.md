@@ -199,12 +199,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.5.21
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     src
+#> terra 1.5.34
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
