@@ -21,7 +21,7 @@ library(spData)
 E1. It was established in Section \@ref(spatial-vec) that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
 How many of these high points does the Canterbury region contain?
 
-**Bonus:** plot the result using the `plot()` function to show all of New Zealand, `canterbury` region highlighted in yellow, high points in Canterbury represented with black dots and  
+**Bonus:** plot the result using the `plot()` function to show all of New Zealand, `canterbury` region highlighted in yellow, high points in Canterbury represented by red crosses (hint: `pch = 7`) and high points in other parts of New Zealand represented by blue circles. See the help page `?points` for details with an illustration of different `pch` values.
 
 ```r
 library(tmap)
@@ -33,10 +33,10 @@ nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
 nrow(canterbury_height) # answer: 70
 #> [1] 70
 
-plot(nz$geom)
-plot(canterbury$geom, col = "yellow", add = TRUE)
-plot(nz_not_canterbury_height$geometry, pch = 4, col = "blue", add = TRUE)
-plot(canterbury_height$geometry, pch = 3, col = "red", add = TRUE)
+plot(st_geometry(nz))
+plot(st_geometry(canterbury), col = "yellow", add = TRUE)
+plot(nz_not_canterbury_height$geometry, pch = 1, col = "blue", add = TRUE)
+plot(canterbury_height$geometry, pch = 4, col = "red", add = TRUE)
 ```
 
 <img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e1-2.png" width="100%" style="display: block; margin: auto;" />
