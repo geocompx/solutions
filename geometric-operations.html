@@ -94,89 +94,89 @@ Experiment with different values of <code>keep</code> (ranging from 0.5 to 0.000
 <li>Advanced: What is different about the geometry type of the results from <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify()</a></code> compared with the geometry type of <code>ms_simplify()</code>? What problems does this create and how can this be resolved?</li>
 </ul>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'geojsonlint':</span>
-<span class="co">#&gt;   method         from </span>
-<span class="co">#&gt;   print.location dplyr</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Starts to breakdown here at 0.5% of the points:</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># At this point no further simplification changes the result</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.0005</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.00005</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Starts to breakdown at 10 km:</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100000</span>, preserveTopology <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Problem: st_simplify returns POLYGON and MULTIPOLYGON results, affecting plotting</span>
-<span class="co"># Cast into a single geometry type to resolve this</span>
-<span class="va">nz_simple_poly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"POLYGON"</span><span class="op">)</span>
-<span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
-
-<span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span>
-<span class="va">nz_simple_multipoly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"MULTIPOLYGON"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">length</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span>
-<span class="co">#&gt; [1] 16</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>
-<span class="co">#&gt; [1] 16</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Registered S3 method overwritten by 'geojsonlint':</span></span>
+<span><span class="co">#&gt;   method         from </span></span>
+<span><span class="co">#&gt;   print.location dplyr</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Starts to breakdown here at 0.5% of the points:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># At this point no further simplification changes the result</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.0005</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu">rmapshaper</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html">ms_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, keep <span class="op">=</span> <span class="fl">0.00005</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Starts to breakdown at 10 km:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">100000</span>, preserveTopology <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Problem: st_simplify returns POLYGON and MULTIPOLYGON results, affecting plotting</span></span>
+<span><span class="co"># Cast into a single geometry type to resolve this</span></span>
+<span><span class="va">nz_simple_poly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"POLYGON"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only</span></span>
+<span><span class="va">nz_simple_multipoly</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_simplify</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span>, dTolerance <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="st">"MULTIPOLYGON"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">nz_simple_poly</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 16</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 16</span></span></code></pre></div>
 <p><img src="05-geometry-operations_files/figure-html/05-ex-e1-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-4.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-5.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-6.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-7.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-8.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-9.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e1-10.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E2. In the first exercise in Chapter Spatial data operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand.
 Using <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code>, how many points in <code>nz_height</code> are within 100 km of Canterbury?</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">canterbury</span> <span class="op">=</span> <span class="va">nz</span><span class="op">[</span><span class="va">nz</span><span class="op">$</span><span class="va">Name</span> <span class="op">==</span> <span class="st">"Canterbury"</span>, <span class="op">]</span>
-<span class="va">cant_buff</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">canterbury</span>, <span class="fl">100</span><span class="op">)</span>
-<span class="va">nz_height_near_cant</span> <span class="op">=</span> <span class="va">nz_height</span><span class="op">[</span><span class="va">cant_buff</span>, <span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz_height_near_cant</span><span class="op">)</span> <span class="co"># 75 - 5 more</span>
-<span class="co">#&gt; [1] 75</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">canterbury</span> <span class="op">=</span> <span class="va">nz</span><span class="op">[</span><span class="va">nz</span><span class="op">$</span><span class="va">Name</span> <span class="op">==</span> <span class="st">"Canterbury"</span>, <span class="op">]</span></span>
+<span><span class="va">cant_buff</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">canterbury</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">nz_height_near_cant</span> <span class="op">=</span> <span class="va">nz_height</span><span class="op">[</span><span class="va">cant_buff</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">nrow</a></span><span class="op">(</span><span class="va">nz_height_near_cant</span><span class="op">)</span> <span class="co"># 75 - 5 more</span></span>
+<span><span class="co">#&gt; [1] 75</span></span></code></pre></div>
 <p>E3. Find the geographic centroid of New Zealand.
 How far is it from the geographic centroid of Canterbury?</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cant_cent</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">canterbury</span><span class="op">)</span>
-<span class="co">#&gt; Warning in st_centroid.sf(canterbury): st_centroid assumes attributes are</span>
-<span class="co">#&gt; constant over geometries of x</span>
-<span class="va">nz_centre</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance</a></span><span class="op">(</span><span class="va">cant_cent</span>, <span class="va">nz_centre</span><span class="op">)</span> <span class="co"># 234 km</span>
-<span class="co">#&gt; Units: [m]</span>
-<span class="co">#&gt;        [,1]</span>
-<span class="co">#&gt; [1,] 234193</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cant_cent</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">canterbury</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in st_centroid.sf(canterbury): st_centroid assumes attributes are</span></span>
+<span><span class="co">#&gt; constant over geometries of x</span></span>
+<span><span class="va">nz_centre</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_distance</a></span><span class="op">(</span><span class="va">cant_cent</span>, <span class="va">nz_centre</span><span class="op">)</span> <span class="co"># 234 km</span></span>
+<span><span class="co">#&gt; Units: [m]</span></span>
+<span><span class="co">#&gt;        [,1]</span></span>
+<span><span class="co">#&gt; [1,] 234193</span></span></code></pre></div>
 <p>E4. Most world maps have a north-up orientation.
 A world map with a south-up orientation could be created by a reflection (one of the affine transformations not mentioned in this chapter) of the <code>world</code> object’s geometry.
 Write code to do so.
 Hint: you need to use a two-element vector for this transformation.
 Bonus: create an upside-down map of your country.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">world_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span>
-<span class="va">world_sfc_mirror</span> <span class="op">=</span> <span class="va">world_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span>
-<span class="co">#&gt; shorter</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc_mirror</span><span class="op">)</span>
-
-<span class="va">us_states_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span>
-<span class="va">us_states_sfc_mirror</span> <span class="op">=</span> <span class="va">us_states_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span>
-<span class="co">#&gt; shorter</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span>
-<span class="co">## nicer plot</span>
-<span class="co"># library(ggrepel)</span>
-<span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) |&gt; </span>
-<span class="co">#   st_coordinates() |&gt;</span>
-<span class="co">#   as_data_frame() |&gt; </span>
-<span class="co">#   mutate(name = us_states$NAME)</span>
-<span class="co"># us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)</span>
-<span class="co"># ggplot(data = us_states_sfc_mirror_sf) +</span>
-<span class="co">#   geom_sf(color = "white") +</span>
-<span class="co">#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +</span>
-<span class="co">#   theme_void() </span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">world_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span></span>
+<span><span class="va">world_sfc_mirror</span> <span class="op">=</span> <span class="va">world_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span></span>
+<span><span class="co">#&gt; shorter</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc_mirror</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">us_states_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span></span>
+<span><span class="va">us_states_sfc_mirror</span> <span class="op">=</span> <span class="va">us_states_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span></span>
+<span><span class="co">#&gt; shorter</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span></span>
+<span><span class="co">## nicer plot</span></span>
+<span><span class="co"># library(ggrepel)</span></span>
+<span><span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) |&gt; </span></span>
+<span><span class="co">#   st_coordinates() |&gt;</span></span>
+<span><span class="co">#   as_data_frame() |&gt; </span></span>
+<span><span class="co">#   mutate(name = us_states$NAME)</span></span>
+<span><span class="co"># us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)</span></span>
+<span><span class="co"># ggplot(data = us_states_sfc_mirror_sf) +</span></span>
+<span><span class="co">#   geom_sf(color = "white") +</span></span>
+<span><span class="co">#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +</span></span>
+<span><span class="co">#   theme_void() </span></span></code></pre></div>
 <p><img src="05-geometry-operations_files/figure-html/05-ex-e4-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-4.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E5. Run the code in Section <a href="https://geocompr.robinlovelace.net/geometric-operations.html#subsetting-and-clipping">5.2.6</a>. With reference to the objects created in that section, subset the point in <code>p</code> that is contained within <code>x</code> <em>and</em> <code>y</code>.</p>
 <ul>
@@ -184,105 +184,105 @@ Bonus: create an upside-down map of your country.</p>
 <li>Using an intermediary object created with <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p_in_y</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">y</span><span class="op">]</span>
-<span class="va">p_in_xy</span> <span class="op">=</span> <span class="va">p_in_y</span><span class="op">[</span><span class="va">x</span><span class="op">]</span>
-<span class="va">x_and_y</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
-<span class="va">p</span><span class="op">[</span><span class="va">x_and_y</span><span class="op">]</span>
-<span class="co">#&gt; Geometry set for 1 feature </span>
-<span class="co">#&gt; Geometry type: POINT</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 0.305 ymin: 1.43 xmax: 0.305 ymax: 1.43</span>
-<span class="co">#&gt; CRS:           NA</span>
-<span class="co">#&gt; POINT (0.305 1.43)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">p_in_y</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">y</span><span class="op">]</span></span>
+<span><span class="va">p_in_xy</span> <span class="op">=</span> <span class="va">p_in_y</span><span class="op">[</span><span class="va">x</span><span class="op">]</span></span>
+<span><span class="va">x_and_y</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">[</span><span class="va">x_and_y</span><span class="op">]</span></span>
+<span><span class="co">#&gt; Geometry set for 1 feature </span></span>
+<span><span class="co">#&gt; Geometry type: POINT</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: 0.305 ymin: 1.43 xmax: 0.305 ymax: 1.43</span></span>
+<span><span class="co">#&gt; CRS:           NA</span></span>
+<span><span class="co">#&gt; POINT (0.305 1.43)</span></span></code></pre></div>
 <p>E6. Calculate the length of the boundary lines of US states in meters.
 Which state has the longest border and which has the shortest?
 Hint: The <code>st_length</code> function computes the length of a <code>LINESTRING</code> or <code>MULTILINESTRING</code> geometry.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">us_states2163</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="st">"EPSG:2163"</span><span class="op">)</span>
-<span class="va">us_states_bor</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="va">us_states2163</span>, <span class="st">"MULTILINESTRING"</span><span class="op">)</span>
-<span class="va">us_states_bor</span><span class="op">$</span><span class="va">borders</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_length</a></span><span class="op">(</span><span class="va">us_states_bor</span><span class="op">)</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="va">borders</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span>
-<span class="co">#&gt; Geometry type: MULTILINESTRING</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span>
-<span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span>
-<span class="co">#&gt; First 10 features:</span>
-<span class="co">#&gt;    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15</span>
-<span class="co">#&gt; 1     11 District of Columbia    South   178 [km^2]       584400       647484</span>
-<span class="co">#&gt; 2     44         Rhode Island Norteast  2743 [km^2]      1056389      1053661</span>
-<span class="co">#&gt; 3     10             Delaware    South  5182 [km^2]       881278       926454</span>
-<span class="co">#&gt; 4     09          Connecticut Norteast 12977 [km^2]      3545837      3593222</span>
-<span class="co">#&gt; 5     34           New Jersey Norteast 20274 [km^2]      8721577      8904413</span>
-<span class="co">#&gt; 6     50              Vermont Norteast 24866 [km^2]       624258       626604</span>
-<span class="co">#&gt; 7     33        New Hampshire Norteast 24026 [km^2]      1313939      1324201</span>
-<span class="co">#&gt; 8     25        Massachusetts Norteast 20911 [km^2]      6477096      6705586</span>
-<span class="co">#&gt; 9     45       South Carolina    South 80904 [km^2]      4511428      4777576</span>
-<span class="co">#&gt; 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645</span>
-<span class="co">#&gt;        borders                       geometry</span>
-<span class="co">#&gt; 1    60323 [m] MULTILINESTRING ((1950825 -...</span>
-<span class="co">#&gt; 2   304594 [m] MULTILINESTRING ((2332242 4...</span>
-<span class="co">#&gt; 3   408049 [m] MULTILINESTRING ((2036308 -...</span>
-<span class="co">#&gt; 4   514090 [m] MULTILINESTRING ((2142347 2...</span>
-<span class="co">#&gt; 5   746942 [m] MULTILINESTRING ((2057740 -...</span>
-<span class="co">#&gt; 6   778204 [m] MULTILINESTRING ((2048149 3...</span>
-<span class="co">#&gt; 7   782644 [m] MULTILINESTRING ((2182313 3...</span>
-<span class="co">#&gt; 8  1017375 [m] MULTILINESTRING ((2416684 3...</span>
-<span class="co">#&gt; 9  1275280 [m] MULTILINESTRING ((1531823 -...</span>
-<span class="co">#&gt; 10 1436288 [m] MULTILINESTRING ((1031129 -...</span>
-<span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span>
-<span class="co">#&gt; Geometry type: MULTILINESTRING</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span>
-<span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span>
-<span class="co">#&gt; First 10 features:</span>
-<span class="co">#&gt;    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders</span>
-<span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961585 [m]</span>
-<span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810226 [m]</span>
-<span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574933 [m]</span>
-<span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951059 [m]</span>
-<span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2821788 [m]</span>
-<span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568711 [m]</span>
-<span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563963 [m]</span>
-<span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405725 [m]</span>
-<span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378721 [m]</span>
-<span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340809 [m]</span>
-<span class="co">#&gt;                          geometry</span>
-<span class="co">#&gt; 1  MULTILINESTRING ((-269040 -...</span>
-<span class="co">#&gt; 2  MULTILINESTRING ((-1717278 ...</span>
-<span class="co">#&gt; 3  MULTILINESTRING ((1110644 1...</span>
-<span class="co">#&gt; 4  MULTILINESTRING ((1853170 -...</span>
-<span class="co">#&gt; 5  MULTILINESTRING ((-1161496 ...</span>
-<span class="co">#&gt; 6  MULTILINESTRING ((-1294787 ...</span>
-<span class="co">#&gt; 7  MULTILINESTRING ((202212 44...</span>
-<span class="co">#&gt; 8  MULTILINESTRING ((2099962 -...</span>
-<span class="co">#&gt; 9  MULTILINESTRING ((-803303 -...</span>
-<span class="co">#&gt; 10 MULTILINESTRING ((-1658594 ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">us_states2163</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="st">"EPSG:2163"</span><span class="op">)</span></span>
+<span><span class="va">us_states_bor</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="va">us_states2163</span>, <span class="st">"MULTILINESTRING"</span><span class="op">)</span></span>
+<span><span class="va">us_states_bor</span><span class="op">$</span><span class="va">borders</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_length</a></span><span class="op">(</span><span class="va">us_states_bor</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="va">borders</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
+<span><span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span></span>
+<span><span class="co">#&gt; First 10 features:</span></span>
+<span><span class="co">#&gt;    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15</span></span>
+<span><span class="co">#&gt; 1     11 District of Columbia    South   178 [km^2]       584400       647484</span></span>
+<span><span class="co">#&gt; 2     44         Rhode Island Norteast  2743 [km^2]      1056389      1053661</span></span>
+<span><span class="co">#&gt; 3     10             Delaware    South  5182 [km^2]       881278       926454</span></span>
+<span><span class="co">#&gt; 4     09          Connecticut Norteast 12977 [km^2]      3545837      3593222</span></span>
+<span><span class="co">#&gt; 5     34           New Jersey Norteast 20274 [km^2]      8721577      8904413</span></span>
+<span><span class="co">#&gt; 6     50              Vermont Norteast 24866 [km^2]       624258       626604</span></span>
+<span><span class="co">#&gt; 7     33        New Hampshire Norteast 24026 [km^2]      1313939      1324201</span></span>
+<span><span class="co">#&gt; 8     25        Massachusetts Norteast 20911 [km^2]      6477096      6705586</span></span>
+<span><span class="co">#&gt; 9     45       South Carolina    South 80904 [km^2]      4511428      4777576</span></span>
+<span><span class="co">#&gt; 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645</span></span>
+<span><span class="co">#&gt;        borders                       geometry</span></span>
+<span><span class="co">#&gt; 1    60323 [m] MULTILINESTRING ((1950825 -...</span></span>
+<span><span class="co">#&gt; 2   304594 [m] MULTILINESTRING ((2332242 4...</span></span>
+<span><span class="co">#&gt; 3   408049 [m] MULTILINESTRING ((2036308 -...</span></span>
+<span><span class="co">#&gt; 4   514090 [m] MULTILINESTRING ((2142347 2...</span></span>
+<span><span class="co">#&gt; 5   746942 [m] MULTILINESTRING ((2057740 -...</span></span>
+<span><span class="co">#&gt; 6   778204 [m] MULTILINESTRING ((2048149 3...</span></span>
+<span><span class="co">#&gt; 7   782644 [m] MULTILINESTRING ((2182313 3...</span></span>
+<span><span class="co">#&gt; 8  1017375 [m] MULTILINESTRING ((2416684 3...</span></span>
+<span><span class="co">#&gt; 9  1275280 [m] MULTILINESTRING ((1531823 -...</span></span>
+<span><span class="co">#&gt; 10 1436288 [m] MULTILINESTRING ((1031129 -...</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
+<span><span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span></span>
+<span><span class="co">#&gt; First 10 features:</span></span>
+<span><span class="co">#&gt;    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders</span></span>
+<span><span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961585 [m]</span></span>
+<span><span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810226 [m]</span></span>
+<span><span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574933 [m]</span></span>
+<span><span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951059 [m]</span></span>
+<span><span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2821788 [m]</span></span>
+<span><span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568711 [m]</span></span>
+<span><span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563963 [m]</span></span>
+<span><span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405725 [m]</span></span>
+<span><span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378721 [m]</span></span>
+<span><span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340809 [m]</span></span>
+<span><span class="co">#&gt;                          geometry</span></span>
+<span><span class="co">#&gt; 1  MULTILINESTRING ((-269040 -...</span></span>
+<span><span class="co">#&gt; 2  MULTILINESTRING ((-1717278 ...</span></span>
+<span><span class="co">#&gt; 3  MULTILINESTRING ((1110644 1...</span></span>
+<span><span class="co">#&gt; 4  MULTILINESTRING ((1853170 -...</span></span>
+<span><span class="co">#&gt; 5  MULTILINESTRING ((-1161496 ...</span></span>
+<span><span class="co">#&gt; 6  MULTILINESTRING ((-1294787 ...</span></span>
+<span><span class="co">#&gt; 7  MULTILINESTRING ((202212 44...</span></span>
+<span><span class="co">#&gt; 8  MULTILINESTRING ((2099962 -...</span></span>
+<span><span class="co">#&gt; 9  MULTILINESTRING ((-803303 -...</span></span>
+<span><span class="co">#&gt; 10 MULTILINESTRING ((-1658594 ...</span></span></code></pre></div>
 <p>E7. Read the srtm.tif file into R (<code>srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))</code>).
 This raster has a resolution of 0.00083 by 0.00083 degrees.
 Change its resolution to 0.01 by 0.01 degrees using all of the method available in the <strong>terra</strong> package.
 Visualize the results.
 Can you notice any differences between the results of these resampling methods?</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">srtm</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">rast_template</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/ext.html">ext</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span>, res <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
-<span class="va">srtm_resampl1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span>
-<span class="va">srtm_resampl2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"near"</span><span class="op">)</span>
-<span class="va">srtm_resampl3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"cubic"</span><span class="op">)</span>
-<span class="va">srtm_resampl4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"cubicspline"</span><span class="op">)</span>
-<span class="va">srtm_resampl5</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"lanczos"</span><span class="op">)</span>
-
-<span class="va">srtm_resampl_all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="va">srtm_resampl1</span>, <span class="va">srtm_resampl2</span>, <span class="va">srtm_resampl3</span>,
-                     <span class="va">srtm_resampl4</span>, <span class="va">srtm_resampl5</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span><span class="op">)</span>
-
-<span class="co"># differences</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl1</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl2</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl3</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl4</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl5</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">srtm</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">rast_template</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/ext.html">ext</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span>, res <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">srtm_resampl1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span></span>
+<span><span class="va">srtm_resampl2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"near"</span><span class="op">)</span></span>
+<span><span class="va">srtm_resampl3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"cubic"</span><span class="op">)</span></span>
+<span><span class="va">srtm_resampl4</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"cubicspline"</span><span class="op">)</span></span>
+<span><span class="va">srtm_resampl5</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"lanczos"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">srtm_resampl_all</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">srtm_resampl1</span>, <span class="va">srtm_resampl2</span>, <span class="va">srtm_resampl3</span>,</span>
+<span>                     <span class="va">srtm_resampl4</span>, <span class="va">srtm_resampl5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># differences</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl1</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl2</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl3</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl4</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm_resampl_all</span> <span class="op">-</span> <span class="va">srtm_resampl5</span>, range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="05-geometry-operations_files/figure-html/05-ex-e7-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e7-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e7-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e7-4.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e7-5.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e7-6.png" width="100%" style="display: block; margin: auto;"></p>
 
 </div>
@@ -308,7 +308,7 @@ Can you notice any differences between the results of these resampling methods?<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-06-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-07-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
