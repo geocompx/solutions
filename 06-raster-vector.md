@@ -52,6 +52,8 @@ E2. Firstly, extract values from `srtm` at the points represented in `zion_point
 Next, extract average values of `srtm` using a 90 buffer around each point from `zion_points` and compare these two sets of values. 
 When would extracting values by buffers be more suitable than by points alone?
 
+- Bonus: Implement extraction using the **exactextractr** package and compare the results.
+
 ```r
 zion_points_buf = st_buffer(zion_points, dist = 90)
 plot(srtm)
@@ -59,8 +61,16 @@ plot(st_geometry(zion_points_buf), add = TRUE)
 plot(ch, add = TRUE)
 
 zion_points_points = extract(srtm, vect(zion_points))
-zion_points_buf = extract(srtm, vect(zion_points_buf))
-plot(zion_points_points$srtm, zion_points_buf$srtm2)
+zion_points_buffer = extract(srtm, vect(zion_points_buf), fun = "mean")
+plot(zion_points_points$srtm, zion_points_buffer$srtm)
+
+# Bonus
+# remotes::install_github("isciences/exactextractr")
+# zion_points_buf_2 = exactextractr::exact_extract(x = srtm, y = zion_points_buf,
+#                                                  fun = "mean")
+# 
+# plot(zion_points_points$srtm, zion_points_buf_2)
+# plot(zion_points_buffer$srtm, zion_points_buf_2)
 ```
 
 <img src="06-raster-vector_files/figure-html/06-ex-e2-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e2-2.png" width="100%" style="display: block; margin: auto;" />
