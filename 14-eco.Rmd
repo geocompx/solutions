@@ -1,1 +1,0 @@
-# Ecology {#eco}

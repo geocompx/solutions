@@ -1,1 +1,0 @@
-# Statistical learning {#spatial-cv}
