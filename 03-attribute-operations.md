@@ -13,7 +13,7 @@
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
-#> terra 1.5.34
+#> terra 1.6.3
 ```
 
 

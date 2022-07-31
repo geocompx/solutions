@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Raster-vector interactions | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.5.34 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
+<meta name="description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.3 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Raster-vector interactions | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/raster-vector.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.5.34 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
+<meta property="og:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.3 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Raster-vector interactions | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.5.34 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
+<meta name="twitter:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.3 Some of the exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -70,7 +70,7 @@
 <span class="header-section-number">6</span> Raster-vector interactions<a class="anchor" aria-label="anchor" href="#raster-vector"><i class="fas fa-link"></i></a>
 </h1>
 <pre><code>#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-#&gt; terra 1.5.34</code></pre>
+#&gt; terra 1.6.3</code></pre>
 <p>Some of the exercises use a vector (<code>zion_points</code>) and raster dataset (<code>srtm</code>) from the <strong>spDataLarge</strong> package.
 They also use a polygonal ‘convex hull’ derived from the vector dataset (<code>ch</code>) to represent the area of interest:</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
@@ -139,7 +139,6 @@ Using these two new objects:</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, graticule <span class="op">=</span> <span class="va">new_graticule</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nz_template</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/ext.html">ext</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, resolution <span class="op">=</span> <span class="fl">3000</span>, crs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/crs.html">crs</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: [rast] argument 'crs' should be a character value</span></span>
 <span></span>
 <span><span class="va">nz_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rasterize.html">rasterize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/vect.html">vect</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, <span class="va">nz_template</span>, </span>
 <span>                       field <span class="op">=</span> <span class="st">"elevation"</span>, fun <span class="op">=</span> <span class="st">"length"</span><span class="op">)</span></span>
@@ -189,7 +188,10 @@ Using these two new objects:</p>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/factors.html">levels</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "clay" "silt" "sand"</span></span>
+<span><span class="co">#&gt;   value grain</span></span>
+<span><span class="co">#&gt; 1     0  clay</span></span>
+<span><span class="co">#&gt; 2     1  silt</span></span>
+<span><span class="co">#&gt; 3     2  sand</span></span>
 <span><span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">clay</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-raster-vector_files/figure-html/06-ex-e5-2-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -227,7 +229,7 @@ Using these two new objects:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-07-24.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

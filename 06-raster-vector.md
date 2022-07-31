@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
-#> terra 1.5.34
+#> terra 1.6.3
 ```
 
 
@@ -87,7 +87,6 @@ new_graticule = st_graticule(nz_height3100, datum = "EPSG:2193")
 plot(st_geometry(nz_height3100), graticule = new_graticule, axes = TRUE)
 
 nz_template = rast(ext(nz_height3100), resolution = 3000, crs = crs(nz_height3100))
-#> Warning: [rast] argument 'crs' should be a character value
 
 nz_raster = rasterize(vect(nz_height3100), nz_template, 
                        field = "elevation", fun = "length")
@@ -145,7 +144,10 @@ grain_poly = as.polygons(grain) |>
   st_as_sf()
 levels(grain)
 #> [[1]]
-#> [1] "clay" "silt" "sand"
+#>   value grain
+#> 1     0  clay
+#> 2     1  silt
+#> 3     2  sand
 clay = dplyr::filter(grain_poly, grain == "clay")
 plot(clay)
 ```
