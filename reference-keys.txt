@@ -6,3 +6,4 @@ geometric-operations
 raster-vector
 reproj-geo-data
 read-write
+gis
