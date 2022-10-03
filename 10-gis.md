@@ -13,7 +13,7 @@ library(terra)
 <!-- qgisprocess 1-3 -->
 <!-- sagagis 1 -->
 <!-- sagagis supercells -->
-<!-- expain/mention other segmentation techinques -->
+<!-- explain/mention other segmentation techniques -->
 <!-- mention supercells -- exercises?? -->
 <!-- https://github.com/joaofgoncalves/SegOptim ?? -->
 <!-- rgrass 1 -->
@@ -86,8 +86,8 @@ cmd2 = paste("gdalwarp", our_filepath, "new_elev.tif", "-tr 1 1", "-r bilinear")
 system(cmd2)
 ```
 
-
 <!-- postgis 1? -->
+1. Query all Californian highways from the PostgreSQL/PostGIS\index{PostGIS} database living in the QGIS\index{QGIS} Cloud introduced in this chapter.
 <!-- stac+gdalcubes 1 -->
 
 <!-- 1. Create two overlapping polygons (`poly_1` and `poly_2`) with the help of the **sf**-package (see Chapter \@ref(spatial-class)).  -->
@@ -108,7 +108,3 @@ system(cmd2)
 <!-- Additionally, give `mapview` a try. -->
 
 <!-- 1. Compute catchment area\index{catchment area} and catchment slope of `data("dem", package = "spDataLarge")` using **RSAGA** (see Section \@ref(saga)). -->
-
-
-
-<!-- 1. Query all Californian highways from the PostgreSQL/PostGIS\index{PostGIS} database living in the QGIS\index{QGIS} Cloud introduced in this chapter (see Section \@ref(postgis)). -->
