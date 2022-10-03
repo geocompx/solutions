@@ -9,7 +9,7 @@ rmd_files:
     - "06-raster-vector.Rmd"
     - "07-reproj.Rmd"
     - "08-read-write-plot.Rmd"
-    # - "08-mapping.Rmd"
+    - "09-mapping.Rmd"
     - "10-gis.Rmd"
     # - "10-algorithms.Rmd"
     # - "11-spatial-cv.Rmd"
