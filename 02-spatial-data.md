@@ -6,7 +6,7 @@
 
 
 ```
-#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
 #> terra 1.6.17
 library(sf)
 library(spData)
@@ -177,8 +177,8 @@ cat(crs(nlcd)) # CRS
 #>             ORDER[2],
 #>             LENGTHUNIT["metre",1]],
 #>     USAGE[
-#>         SCOPE["unknown"],
-#>         AREA["North America - 114°W to 108°W and NAD83 by country"],
+#>         SCOPE["Engineering survey, topographic mapping."],
+#>         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
 #>         BBOX[31.33,-114,84,-108]],
 #>     ID["EPSG",26912]]
 ```
@@ -222,8 +222,8 @@ cat(crs(nlcd))
 #>             ORDER[2],
 #>             LENGTHUNIT["metre",1]],
 #>     USAGE[
-#>         SCOPE["unknown"],
-#>         AREA["North America - 114°W to 108°W and NAD83 by country"],
+#>         SCOPE["Engineering survey, topographic mapping."],
+#>         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
 #>         BBOX[31.33,-114,84,-108]],
 #>     ID["EPSG",26912]]
 ```

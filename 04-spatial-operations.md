@@ -4,7 +4,7 @@
 
 
 ```
-#> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':

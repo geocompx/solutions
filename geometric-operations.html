@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Geometry operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
+<meta name="description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Geometry operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/geometric-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
+<meta property="og:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Geometry operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
+<meta name="twitter:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,6 +61,10 @@
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
 <li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
+<li class="book-part">Applications</li>
+<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">13</span> Ecology</a></li>
 </ul>
 
         <div class="book-extra">
@@ -72,7 +76,7 @@
 <h1>
 <span class="header-section-number">5</span> Geometry operations<a class="anchor" aria-label="anchor" href="#geometric-operations"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
 #&gt; terra 1.6.17
 #&gt; 
 #&gt; Attaching package: 'dplyr'
@@ -208,8 +212,8 @@ Hint: The <code>st_length</code> function computes the length of a <code>LINESTR
 <span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
-<span><span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2040000 ymin: -2110000 xmax: 2520000 ymax: 731000</span></span>
+<span><span class="co">#&gt; Projected CRS: NAD27 / US National Atlas Equal Area</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
 <span><span class="co">#&gt;    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15</span></span>
 <span><span class="co">#&gt; 1     11 District of Columbia    South   178 [km^2]       584400       647484</span></span>
@@ -223,45 +227,45 @@ Hint: The <code>st_length</code> function computes the length of a <code>LINESTR
 <span><span class="co">#&gt; 9     45       South Carolina    South 80904 [km^2]      4511428      4777576</span></span>
 <span><span class="co">#&gt; 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645</span></span>
 <span><span class="co">#&gt;        borders                       geometry</span></span>
-<span><span class="co">#&gt; 1    60323 [m] MULTILINESTRING ((1950825 -...</span></span>
-<span><span class="co">#&gt; 2   304594 [m] MULTILINESTRING ((2332242 4...</span></span>
-<span><span class="co">#&gt; 3   408049 [m] MULTILINESTRING ((2036308 -...</span></span>
-<span><span class="co">#&gt; 4   514090 [m] MULTILINESTRING ((2142347 2...</span></span>
-<span><span class="co">#&gt; 5   746942 [m] MULTILINESTRING ((2057740 -...</span></span>
-<span><span class="co">#&gt; 6   778204 [m] MULTILINESTRING ((2048149 3...</span></span>
-<span><span class="co">#&gt; 7   782644 [m] MULTILINESTRING ((2182313 3...</span></span>
-<span><span class="co">#&gt; 8  1017375 [m] MULTILINESTRING ((2416684 3...</span></span>
-<span><span class="co">#&gt; 9  1275280 [m] MULTILINESTRING ((1531823 -...</span></span>
-<span><span class="co">#&gt; 10 1436288 [m] MULTILINESTRING ((1031129 -...</span></span>
+<span><span class="co">#&gt; 1    60330 [m] MULTILINESTRING ((1955479 -...</span></span>
+<span><span class="co">#&gt; 2   304697 [m] MULTILINESTRING ((2338362 4...</span></span>
+<span><span class="co">#&gt; 3   407939 [m] MULTILINESTRING ((2041302 -...</span></span>
+<span><span class="co">#&gt; 4   514571 [m] MULTILINESTRING ((2148010 2...</span></span>
+<span><span class="co">#&gt; 5   747090 [m] MULTILINESTRING ((2062773 -...</span></span>
+<span><span class="co">#&gt; 6   778660 [m] MULTILINESTRING ((2054045 3...</span></span>
+<span><span class="co">#&gt; 7   782892 [m] MULTILINESTRING ((2188613 3...</span></span>
+<span><span class="co">#&gt; 8  1018656 [m] MULTILINESTRING ((2422968 3...</span></span>
+<span><span class="co">#&gt; 9  1275538 [m] MULTILINESTRING ((1534988 -...</span></span>
+<span><span class="co">#&gt; 10 1436255 [m] MULTILINESTRING ((1033797 -...</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
-<span><span class="co">#&gt; Projected CRS: US National Atlas Equal Area</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2040000 ymin: -2110000 xmax: 2520000 ymax: 731000</span></span>
+<span><span class="co">#&gt; Projected CRS: NAD27 / US National Atlas Equal Area</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
 <span><span class="co">#&gt;    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders</span></span>
-<span><span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961585 [m]</span></span>
-<span><span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810226 [m]</span></span>
-<span><span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574933 [m]</span></span>
-<span><span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951059 [m]</span></span>
-<span><span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2821788 [m]</span></span>
-<span><span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568711 [m]</span></span>
-<span><span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563963 [m]</span></span>
-<span><span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405725 [m]</span></span>
-<span><span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378721 [m]</span></span>
-<span><span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340809 [m]</span></span>
+<span><span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4959186 [m]</span></span>
+<span><span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810350 [m]</span></span>
+<span><span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3579183 [m]</span></span>
+<span><span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2949048 [m]</span></span>
+<span><span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2826586 [m]</span></span>
+<span><span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2570606 [m]</span></span>
+<span><span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2567386 [m]</span></span>
+<span><span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2407299 [m]</span></span>
+<span><span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378172 [m]</span></span>
+<span><span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2344358 [m]</span></span>
 <span><span class="co">#&gt;                          geometry</span></span>
-<span><span class="co">#&gt; 1  MULTILINESTRING ((-269040 -...</span></span>
-<span><span class="co">#&gt; 2  MULTILINESTRING ((-1717278 ...</span></span>
-<span><span class="co">#&gt; 3  MULTILINESTRING ((1110644 1...</span></span>
-<span><span class="co">#&gt; 4  MULTILINESTRING ((1853170 -...</span></span>
-<span><span class="co">#&gt; 5  MULTILINESTRING ((-1161496 ...</span></span>
-<span><span class="co">#&gt; 6  MULTILINESTRING ((-1294787 ...</span></span>
-<span><span class="co">#&gt; 7  MULTILINESTRING ((202212 44...</span></span>
-<span><span class="co">#&gt; 8  MULTILINESTRING ((2099962 -...</span></span>
-<span><span class="co">#&gt; 9  MULTILINESTRING ((-803303 -...</span></span>
-<span><span class="co">#&gt; 10 MULTILINESTRING ((-1658594 ...</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  MULTILINESTRING ((-269579 -...</span></span>
+<span><span class="co">#&gt; 2  MULTILINESTRING ((-1720565 ...</span></span>
+<span><span class="co">#&gt; 3  MULTILINESTRING ((1113866 1...</span></span>
+<span><span class="co">#&gt; 4  MULTILINESTRING ((1855611 -...</span></span>
+<span><span class="co">#&gt; 5  MULTILINESTRING ((-1165102 ...</span></span>
+<span><span class="co">#&gt; 6  MULTILINESTRING ((-1298509 ...</span></span>
+<span><span class="co">#&gt; 7  MULTILINESTRING ((202873 44...</span></span>
+<span><span class="co">#&gt; 8  MULTILINESTRING ((2104821 -...</span></span>
+<span><span class="co">#&gt; 9  MULTILINESTRING ((-805019 -...</span></span>
+<span><span class="co">#&gt; 10 MULTILINESTRING ((-1663690 ...</span></span></code></pre></div>
 <p>E7. Read the srtm.tif file into R (<code>srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))</code>).
 This raster has a resolution of 0.00083 by 0.00083 degrees.
 Change its resolution to 0.01 by 0.01 degrees using all of the method available in the <strong>terra</strong> package.
@@ -311,7 +315,7 @@ Can you notice any differences between the results of these resampling methods?<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-10-03.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-11-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -319,6 +323,34 @@ Can you notice any differences between the results of these resampling methods?<
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

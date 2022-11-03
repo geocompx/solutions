@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Geographic data in R | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
+<meta name="description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Geographic data in R | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/spatial-class.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
+<meta property="og:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Geographic data in R | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
+<meta name="twitter:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.17 library(sf) library(spData) library(terra) E1. Use summary() on the geometry column of the world data object...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -61,6 +61,10 @@
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
 <li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
+<li class="book-part">Applications</li>
+<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">13</span> Ecology</a></li>
 </ul>
 
         <div class="book-extra">
@@ -72,7 +76,7 @@
 <h1>
 <span class="header-section-number">2</span> Geographic data in R<a class="anchor" aria-label="anchor" href="#spatial-class"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE
+<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
 #&gt; terra 1.6.17
 library(sf)
 library(spData)
@@ -227,8 +231,8 @@ What kind of information can you get about the properties of this file?</p>
 <span><span class="co">#&gt;             ORDER[2],</span></span>
 <span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
 <span><span class="co">#&gt;     USAGE[</span></span>
-<span><span class="co">#&gt;         SCOPE["unknown"],</span></span>
-<span><span class="co">#&gt;         AREA["North America - 114°W to 108°W and NAD83 by country"],</span></span>
+<span><span class="co">#&gt;         SCOPE["Engineering survey, topographic mapping."],</span></span>
+<span><span class="co">#&gt;         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],</span></span>
 <span><span class="co">#&gt;         BBOX[31.33,-114,84,-108]],</span></span>
 <span><span class="co">#&gt;     ID["EPSG",26912]]</span></span></code></pre></div>
 <p>E6. Check the CRS of the <code>raster/nlcd.tif</code> file from the <strong>spDataLarge</strong> package.
@@ -269,8 +273,8 @@ What kind of information you can learn from it?</p>
 <span><span class="co">#&gt;             ORDER[2],</span></span>
 <span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
 <span><span class="co">#&gt;     USAGE[</span></span>
-<span><span class="co">#&gt;         SCOPE["unknown"],</span></span>
-<span><span class="co">#&gt;         AREA["North America - 114°W to 108°W and NAD83 by country"],</span></span>
+<span><span class="co">#&gt;         SCOPE["Engineering survey, topographic mapping."],</span></span>
+<span><span class="co">#&gt;         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],</span></span>
 <span><span class="co">#&gt;         BBOX[31.33,-114,84,-108]],</span></span>
 <span><span class="co">#&gt;     ID["EPSG",26912]]</span></span></code></pre></div>
 <p>The WKT above describes a two-dimensional projected coordinate reference system.
@@ -302,7 +306,7 @@ The SRID of the above CRS is “EPSG:26912”.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-10-03.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-11-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -310,6 +314,34 @@ The SRID of the above CRS is “EPSG:26912”.</p>
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

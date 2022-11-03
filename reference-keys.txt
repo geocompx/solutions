@@ -8,3 +8,6 @@ reproj-geo-data
 read-write
 adv-map
 gis
+spatial-cv
+transport
+eco
