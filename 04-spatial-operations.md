@@ -179,7 +179,8 @@ washington_to_cali = us_states |>
 #> Warning in st_centroid.sf(filter(us_states, grepl(pattern = "Columbia|Cali", :
 #> st_centroid assumes attributes are constant over geometries of x
 states_crossed = us_states[washington_to_cali, , op = st_crosses]
-#> although coordinates are longitude/latitude, st_crosses assumes that they are planar
+#> although coordinates are longitude/latitude, st_crosses assumes that they are
+#> planar
 states_crossed$NAME
 #>  [1] "Colorado"             "Indiana"              "Kansas"              
 #>  [4] "Missouri"             "Nevada"               "West Virginia"       

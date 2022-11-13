@@ -228,7 +228,8 @@ How many of these high points does the Canterbury region contain?</p>
 <span><span class="co">#&gt; Warning in st_centroid.sf(filter(us_states, grepl(pattern = "Columbia|Cali", :</span></span>
 <span><span class="co">#&gt; st_centroid assumes attributes are constant over geometries of x</span></span>
 <span><span class="va">states_crossed</span> <span class="op">=</span> <span class="va">us_states</span><span class="op">[</span><span class="va">washington_to_cali</span>, , op <span class="op">=</span> <span class="va">st_crosses</span><span class="op">]</span></span>
-<span><span class="co">#&gt; although coordinates are longitude/latitude, st_crosses assumes that they are planar</span></span>
+<span><span class="co">#&gt; although coordinates are longitude/latitude, st_crosses assumes that they are</span></span>
+<span><span class="co">#&gt; planar</span></span>
 <span><span class="va">states_crossed</span><span class="op">$</span><span class="va">NAME</span></span>
 <span><span class="co">#&gt;  [1] "Colorado"             "Indiana"              "Kansas"              </span></span>
 <span><span class="co">#&gt;  [4] "Missouri"             "Nevada"               "West Virginia"       </span></span>
@@ -375,7 +376,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-11-06.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-11-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
