@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#> terra 1.6.17
+#> terra 1.6.41
 library(sf)
 library(terra)
 library(spData)
@@ -98,7 +98,7 @@ con_raster_utm12n
 #> resolution  : 83.5, 83.5  (x, y)
 #> extent      : 301062, 336313, 4111111, 4154131  (xmin, xmax, ymin, ymax)
 #> coord. ref. : WGS 84 / UTM zone 12N (EPSG:32612) 
-#> source      : memory 
+#> source(s)   : memory
 #> name        : srtm 
 #> min value   : 1024 
 #> max value   : 2892
@@ -122,7 +122,7 @@ cat_raster_wgs84
 #> resolution  : 0.000315, 0.000315  (x, y)
 #> extent      : -113, -113, 37.1, 37.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : memory 
+#> source(s)   : memory
 #> name        : levels 
 #> min value   :      1 
 #> max value   :      8

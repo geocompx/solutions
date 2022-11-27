@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#> terra 1.6.17
+#> terra 1.6.41
 library(sf)
 library(terra)
 ```
@@ -30,7 +30,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55c2341e2e30>
+#> <bytecode: 0x55704f844740>
 #> <environment: namespace:sf>
 ```
 

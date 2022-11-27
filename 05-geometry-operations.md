@@ -5,7 +5,7 @@
 
 ```
 #> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#> terra 1.6.17
+#> terra 1.6.41
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:terra':
