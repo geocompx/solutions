@@ -85,15 +85,14 @@ pa = pa[rowSums(pa) != 0, ]
 comm = comm[rowSums(comm) != 0, ]
 set.seed(25072018)
 nmds_pa = vegan::metaMDS(comm = pa, k = 4, try = 500)
-#> Run 0 stress 0.089 
+#> Run 0 stress 0.0889 
 #> Run 1 stress 0.0891 
-#> ... Procrustes: rmse 0.0103  max resid 0.0548 
+#> ... Procrustes: rmse 0.0119  max resid 0.0567 
 #> Run 2 stress 0.0889 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0144  max resid 0.0864 
+#> ... Procrustes: rmse 0.0129  max resid 0.0819 
 #> Run 3 stress 0.0884 
 #> ... New best solution
-#> ... Procrustes: rmse 0.0178  max resid 0.0631 
+#> ... Procrustes: rmse 0.018  max resid 0.0794 
 #> Run 4 stress 0.0887 
 #> ... Procrustes: rmse 0.0123  max resid 0.0611 
 #> Run 5 stress 0.0891 
@@ -126,7 +125,7 @@ nmds_per = vegan::metaMDS(comm = comm, k = 4, try = 500)
 #> Run 0 stress 0.111 
 #> Run 1 stress 0.109 
 #> ... New best solution
-#> ... Procrustes: rmse 0.0561  max resid 0.207 
+#> ... Procrustes: rmse 0.0565  max resid 0.213 
 #> Run 2 stress 0.109 
 #> ... New best solution
 #> ... Procrustes: rmse 0.00323  max resid 0.0101 

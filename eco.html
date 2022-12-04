@@ -19,9 +19,9 @@
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.3/font.css" rel="stylesheet">
-<link href="libs/Roboto_Mono-0.4.3/font.css" rel="stylesheet">
-<link href="libs/Montserrat-0.4.3/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.4/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.4/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.4/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
@@ -150,15 +150,14 @@ What might explain the observed difference?</p>
 <span><span class="va">comm</span> <span class="op">=</span> <span class="va">comm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">25072018</span><span class="op">)</span></span>
 <span><span class="va">nmds_pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">pa</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Run 0 stress 0.089 </span></span>
+<span><span class="co">#&gt; Run 0 stress 0.0889 </span></span>
 <span><span class="co">#&gt; Run 1 stress 0.0891 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0103  max resid 0.0548 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0119  max resid 0.0567 </span></span>
 <span><span class="co">#&gt; Run 2 stress 0.0889 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0144  max resid 0.0864 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0129  max resid 0.0819 </span></span>
 <span><span class="co">#&gt; Run 3 stress 0.0884 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0178  max resid 0.0631 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.018  max resid 0.0794 </span></span>
 <span><span class="co">#&gt; Run 4 stress 0.0887 </span></span>
 <span><span class="co">#&gt; ... Procrustes: rmse 0.0123  max resid 0.0611 </span></span>
 <span><span class="co">#&gt; Run 5 stress 0.0891 </span></span>
@@ -191,7 +190,7 @@ What might explain the observed difference?</p>
 <span><span class="co">#&gt; Run 0 stress 0.111 </span></span>
 <span><span class="co">#&gt; Run 1 stress 0.109 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0561  max resid 0.207 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0565  max resid 0.213 </span></span>
 <span><span class="co">#&gt; Run 2 stress 0.109 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
 <span><span class="co">#&gt; ... Procrustes: rmse 0.00323  max resid 0.0101 </span></span>
@@ -452,7 +451,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-11-27.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
