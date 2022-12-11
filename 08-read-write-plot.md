@@ -14,10 +14,9 @@ E1. List and describe three types of vector, raster, and geodatabase formats.
 
 Vector formats: Shapefile (old format supported by many programs), GeoPackage (more recent format with better support of attribute data) and GeoJSON (common format for web mapping).
 
-Raster formats: GeoTiff, Arc ASCII, R-raster (see book for descriptions).
+Raster formats: GeoTiff, Arc ASCII, ERDAS Imagine (IMG).
 
-Database formats: PostGIS, SQLite, FileGDB (see book for details).
-
+Database formats: PostGIS, SQLite, FileGDB.
 
 E2. Name at least two differences between the **sf** functions `read_sf()` and `st_read()`.
 
@@ -30,7 +29,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55749cd9f3d8>
+#> <bytecode: 0x559d295fa5b0>
 #> <environment: namespace:sf>
 ```
 
