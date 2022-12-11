@@ -16,7 +16,7 @@
 #> The 'qgis_process' command-line utility was not found.
 #> Please run `qgis_configure()` to fix this and rebuild the cache.
 #> See its documentation if you need to preset the path of qgis_process.
-#> terra 1.6.41
+#> terra 1.6.47
 #> 
 #> Attaching package: 'terra'
 #> The following object is masked from 'package:mlr3':
