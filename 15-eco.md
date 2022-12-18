@@ -3,56 +3,6 @@
 
 
 
-```
-#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#> terra 1.6.47
-#> 
-#> Attaching package: 'data.table'
-#> The following object is masked from 'package:terra':
-#> 
-#>     shift
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:data.table':
-#> 
-#>     between, first, last
-#> The following objects are masked from 'package:terra':
-#> 
-#>     intersect, union
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-#> 
-#> Attaching package: 'lgr'
-#> The following object is masked from 'package:ggplot2':
-#> 
-#>     Layout
-#> 
-#> Attaching package: 'mlr3'
-#> The following object is masked from 'package:terra':
-#> 
-#>     resample
-#> Loading required package: paradox
-#> The 'qgis_process' command-line utility was not found.
-#> Please run `qgis_configure()` to fix this and rebuild the cache.
-#> See its documentation if you need to preset the path of qgis_process.
-#> 
-#> Attaching package: 'tictoc'
-#> The following object is masked from 'package:data.table':
-#> 
-#>     shift
-#> The following objects are masked from 'package:terra':
-#> 
-#>     shift, size
-#> Loading required package: permute
-#> Loading required package: lattice
-#> This is vegan 2.6-4
-```
-
-
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
 ```r

@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 Making maps with R | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="description" content="library(sf) library(terra) library(dplyr) library(spData) These exercises rely on a new object, africa. Create it using the world and worldbank_df datasets from the spData package as follows:...">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Making maps with R | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/adv-map.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
+<meta property="og:description" content="library(sf) library(terra) library(dplyr) library(spData) These exercises rely on a new object, africa. Create it using the world and worldbank_df datasets from the spData package as follows:...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 9 Making maps with R | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:terra': #&gt; #&gt;   intersect,...">
+<meta name="twitter:description" content="library(sf) library(terra) library(dplyr) library(spData) These exercises rely on a new object, africa. Create it using the world and worldbank_df datasets from the spData package as follows:...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -76,26 +76,14 @@
 <h1>
 <span class="header-section-number">9</span> Making maps with R<a class="anchor" aria-label="anchor" href="#adv-map"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#&gt; terra 1.6.47
-#&gt; 
-#&gt; Attaching package: 'dplyr'
-#&gt; The following objects are masked from 'package:terra':
-#&gt; 
-#&gt;     intersect, union
-#&gt; The following objects are masked from 'package:stats':
-#&gt; 
-#&gt;     filter, lag
-#&gt; The following objects are masked from 'package:base':
-#&gt; 
-#&gt;     intersect, setdiff, setequal, union
-library(sf)
-library(terra)
-library(dplyr)
-library(spData)</a></code></pre>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jakubnowosad.com/spData/">spData</a></span><span class="op">)</span></span></code></pre></div>
 <p>These exercises rely on a new object, <code>africa</code>.
 Create it using the <code>world</code> and <code>worldbank_df</code> datasets from the <strong>spData</strong> package as follows:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jakubnowosad.com/spData/">spData</a></span><span class="op">)</span></span>
 <span><span class="va">africa</span> <span class="op">=</span> <span class="va">world</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">continent</span> <span class="op">==</span> <span class="st">"Africa"</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">iso_a2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -103,71 +91,71 @@ Create it using the <code>world</code> and <code>worldbank_df</code> datasets fr
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">subregion</span>, <span class="va">gdpPercap</span>, <span class="va">HDI</span>, <span class="va">pop_growth</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="st">"ESRI:102022"</span><span class="op">)</span></span></code></pre></div>
 <p>We will also use <code>zion</code> and <code>nlcd</code> datasets from <strong>spDataLarge</strong>:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zion</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vector/zion.gpkg"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">nlcd</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span></code></pre></div>
 <p>E1. Create a map showing the geographic distribution of the Human Development Index (<code>HDI</code>) across Africa with base <strong>graphics</strong> (hint: use <code><a href="https://rdrr.io/pkg/terra/man/plot.html">plot()</a></code>) and <strong>tmap</strong> packages (hint: use <code>tm_shape(africa) + ...</code>).
 - Name two advantages of each based on the experience.
 - Name three other mapping packages and an advantage of each.
 - Bonus: create three more maps of Africa using these three packages.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E2. Extend the <strong>tmap</strong> created for the previous exercise so the legend has three bins: “High” (<code>HDI</code> above 0.7), “Medium” (<code>HDI</code> between 0.55 and 0.7) and “Low” (<code>HDI</code> below 0.55).
 - Bonus: improve the map aesthetics, for example by changing the legend title, class labels and color palette.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E3. Represent <code>africa</code>’s subregions on the map.
 Change the default color palette and legend title.
 Next, combine this map and the map created in the previous exercise into a single plot.</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E4. Create a land cover map of the Zion National Park.
 - Change the default colors to match your perception of the land cover categories
 - Add a scale bar and north arrow and change the position of both to improve the map’s aesthetic appeal
 - Bonus: Add an inset map of Zion National Park’s location in the context of the Utah state. (Hint: an object representing Utah can be subset from the <code>us_states</code> dataset.)</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E5. Create facet maps of countries in Eastern Africa:
 - With one facet showing HDI and the other representing population growth (hint: using variables <code>HDI</code> and <code>pop_growth</code>, respectively)
 - With a ‘small multiple’ per country</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E6. Building on the previous facet map examples, create animated maps of East Africa:
 - Showing first the spatial distribution of HDI scores then population growth
 - Showing each country in order</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E7. Create an interactive map of Africa:
 - With <strong>tmap</strong>
 - With <strong>mapview</strong>
 - With <strong>leaflet</strong>
 - Bonus: For each approach, add a legend (if not automatically provided) and a scale bar</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E8. Sketch on paper ideas for a web mapping app that could be used to make transport or land-use policies more evidence based:
 - In the city you live, for a couple of users per day
 - In the country you live, for dozens of users per day
 - Worldwide for hundreds of users per day and large data serving requirements</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E9. Update the code in <code>coffeeApp/app.R</code> so that instead of centering on Brazil the user can select which country to focus on:
 - Using <code>textInput()</code>
 - Using <code>selectInput()</code></p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E10. Reproduce Figure <a href="#fig:tmshape"><strong>??</strong></a> and the 1st and 6th panel of Figure <a href="#fig:break-styles"><strong>??</strong></a> as closely as possible using the <strong>ggplot2</strong> package.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E11. Join <code>us_states</code> and <code>us_states_df</code> together and calculate a poverty rate for each state using the new dataset.
 Next, construct a continuous area cartogram based on total population.
 Finally, create and compare two maps of the poverty rate: (1) a standard choropleth map and (2) a map using the created cartogram boundaries.
 What is the information provided by the first and the second map?
 How do they differ from each other?</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 <p>E12. Visualize population growth in Africa.
 Next, compare it with the maps of a hexagonal and regular grid created using the <strong>geogrid</strong> package.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toDo</span></span></code></pre></div>
 
 </div>
@@ -193,7 +181,7 @@ Next, compare it with the maps of a hexagonal and regular grid created using the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-11.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

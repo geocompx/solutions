@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Spatial data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/spatial-operations.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
+<meta property="og:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;   filter, lag #&gt; The...">
+<meta name="twitter:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -76,22 +76,14 @@
 <h1>
 <span class="header-section-number">4</span> Spatial data operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code><a href="https://r-spatial.github.io/sf/">#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#&gt; 
-#&gt; Attaching package: 'dplyr'
-#&gt; The following objects are masked from 'package:stats':
-#&gt; 
-#&gt;     filter, lag
-#&gt; The following objects are masked from 'package:base':
-#&gt; 
-#&gt;     intersect, setdiff, setequal, union
-library(sf)
-library(dplyr)
-library(spData)</a></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jakubnowosad.com/spData/">spData</a></span><span class="op">)</span></span></code></pre></div>
 <p>E1. It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
 How many of these high points does the Canterbury region contain?</p>
 <p><strong>Bonus:</strong> plot the result using the <code><a href="https://rdrr.io/pkg/terra/man/plot.html">plot()</a></code> function to show all of New Zealand, <code>canterbury</code> region highlighted in yellow, high points in Canterbury represented by red crosses (hint: <code>pch = 7</code>) and high points in other parts of New Zealand represented by blue circles. See the help page <code><a href="https://rdrr.io/pkg/terra/man/lines.html">?points</a></code> for details with an illustration of different <code>pch</code> values.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span></span>
 <span><span class="co"># tmap_mode("view")</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/qtm.html">qtm</a></span><span class="op">(</span><span class="va">nz_height</span><span class="op">)</span></span>
@@ -107,7 +99,7 @@ How many of these high points does the Canterbury region contain?</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">canterbury_height</span><span class="op">$</span><span class="va">geometry</span>, pch <span class="op">=</span> <span class="fl">4</span>, col <span class="op">=</span> <span class="st">"red"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;"><img src="04-spatial-operations_files/figure-html/04-ex-e1-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E2. Which region has the second highest number of <code>nz_height</code> points, and how many does it have?</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span></span>
 <span><span class="va">nz_height_combined</span> <span class="op">|&gt;</span> </span>
@@ -121,7 +113,7 @@ How many of these high points does the Canterbury region contain?</p>
 <ul>
 <li>Bonus: create a table listing these regions in order of the number of points and their name.</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Base R way:</span></span>
 <span><span class="va">nz_height_count</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">nz</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">nz_height_combined</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">nz</span>, count <span class="op">=</span> <span class="va">nz_height_count</span><span class="op">$</span><span class="va">elevation</span><span class="op">)</span></span>
@@ -162,17 +154,17 @@ How many of these high points does the Canterbury region contain?</p>
 <li>Create another object representing all the objects that touch (have a shared boundary with) Colorado and plot the result (hint: remember you can use the argument <code>op = st_intersects</code> and other spatial relations during spatial subsetting operations in base R).</li>
 <li>Bonus: create a straight line from the centroid of the District of Columbia near the East coast to the centroid of California near the West coast of the USA (hint: functions <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid()</a></code>, <code><a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast()</a></code> described in Chapter 5 may help) and identify which states this long East-West line crosses.</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colorado</span> <span class="op">=</span> <span class="va">us_states</span><span class="op">[</span><span class="va">us_states</span><span class="op">$</span><span class="va">NAME</span> <span class="op">==</span> <span class="st">"Colorado"</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">colorado</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"grey"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">intersects_with_colorado</span> <span class="op">=</span> <span class="va">us_states</span><span class="op">[</span><span class="va">colorado</span>, , op <span class="op">=</span> <span class="va">st_intersects</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">$</span><span class="va">geometry</span>, main <span class="op">=</span> <span class="st">"States that intersect with Colorado"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">intersects_with_colorado</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"grey"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternative but more verbose solutions</span></span>
 <span><span class="co"># 2: With intermediate object, one list for each state</span></span>
 <span><span class="va">sel_intersects_colorado</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_intersects</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="va">colorado</span><span class="op">)</span></span>
@@ -219,7 +211,7 @@ How many of these high points does the Canterbury region contain?</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">$</span><span class="va">geometry</span>, main <span class="op">=</span> <span class="st">"States that touch Colorado"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">touches_colorado</span><span class="op">$</span><span class="va">geometry</span>, col <span class="op">=</span> <span class="st">"grey"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">washington_to_cali</span> <span class="op">=</span> <span class="va">us_states</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"Columbia|Cali"</span>, x <span class="op">=</span> <span class="va">NAME</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -242,7 +234,7 @@ How many of these high points does the Canterbury region contain?</p>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-4-5-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Use <code>dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))</code>, and reclassify the elevation in three classes: low (&lt;300), medium and high (&gt;500).
 Secondly, read the NDVI raster (<code>ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))</code>) and compute the mean NDVI and the mean elevation for each altitudinal class.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; terra 1.6.47</span></span>
 <span><span class="va">dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/dem.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
@@ -264,7 +256,7 @@ Secondly, read the NDVI raster (<code>ndvi = rast(system.file("raster/ndvi.tif",
 <p>E6. Apply a line detection filter to <code>rast(system.file("ex/logo.tif", package = "terra"))</code>.
 Plot the result.
 Hint: Read <code>?terra::focal()</code>.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># from the focal help page (?terra::focal()):</span></span>
 <span><span class="co"># Laplacian filter: filter=matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)</span></span>
 <span><span class="co"># Sobel filters (for edge detection): </span></span>
@@ -285,7 +277,7 @@ Hint: Read <code>?terra::focal()</code>.</p>
 <p>E7. Calculate the Normalized Difference Water Index (NDWI; <code>(green - nir)/(green + nir)</code>) of a Landsat image.
 Use the Landsat image provided by the <strong>spDataLarge</strong> package (<code>system.file("raster/landsat.tif", package = "spDataLarge")</code>).
 Also, calculate a correlation between NDVI and NDWI for this area (hint: you can use the <code><a href="https://rdrr.io/pkg/terra/man/layerCor.html">layerCor()</a></code> function).</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">file</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/landsat.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">multi_rast</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
 <span></span>
@@ -320,34 +312,34 @@ Also, calculate a correlation between NDVI and NDWI for this area (hint: you can
 Try to do something similar but with <code><a href="https://rdrr.io/pkg/terra/man/distance.html">terra::distance()</a></code>: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use <code><a href="https://rdrr.io/pkg/geodata/man/elevation.html">geodata::elevation_30s()</a></code>).
 Convert the resulting distances from meters to kilometers.
 Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation (<code><a href="https://rdrr.io/pkg/terra/man/aggregate.html">aggregate()</a></code>).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="spatial-operations.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the DEM data for Spain</span></span>
-<span id="cb38-2"><a href="spatial-operations.html#cb38-2" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> geodata<span class="sc">::</span><span class="fu">elevation_30s</span>(<span class="at">country =</span> <span class="st">"Spain"</span>, <span class="at">path =</span> <span class="st">"."</span>, <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-3"><a href="spatial-operations.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="spatial-operations.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span></span>
-<span id="cb38-5"><a href="spatial-operations.html#cb38-5" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> <span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
-<span id="cb38-6"><a href="spatial-operations.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="spatial-operations.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># According to the documentation, terra::distance() will calculate distance</span></span>
-<span id="cb38-8"><a href="spatial-operations.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span></span>
-<span id="cb38-9"><a href="spatial-operations.html#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co"># distance to the coast, we need a raster that has NA values over land and any</span></span>
-<span id="cb38-10"><a href="spatial-operations.html#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># other value over water</span></span>
-<span id="cb38-11"><a href="spatial-operations.html#cb38-11" aria-hidden="true" tabindex="-1"></a>water_mask <span class="ot">=</span> <span class="fu">is.na</span>(spain_dem)</span>
-<span id="cb38-12"><a href="spatial-operations.html#cb38-12" aria-hidden="true" tabindex="-1"></a>water_mask[water_mask <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb38-13"><a href="spatial-operations.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-14"><a href="spatial-operations.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the distance() function on this mask to get distance to the coast</span></span>
-<span id="cb38-15"><a href="spatial-operations.html#cb38-15" aria-hidden="true" tabindex="-1"></a>distance_to_coast <span class="ot">=</span> <span class="fu">distance</span>(water_mask)</span>
-<span id="cb38-16"><a href="spatial-operations.html#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb38-17"><a href="spatial-operations.html#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="sc">|---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span></span>
-<span id="cb38-18"><a href="spatial-operations.html#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="er">=========================================</span></span>
-<span id="cb38-19"><a href="spatial-operations.html#cb38-19" aria-hidden="true" tabindex="-1"></a>                                          </span>
-<span id="cb38-20"><a href="spatial-operations.html#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="co"># convert distance into km</span></span>
-<span id="cb38-21"><a href="spatial-operations.html#cb38-21" aria-hidden="true" tabindex="-1"></a>distance_to_coast_km <span class="ot">=</span> distance_to_coast <span class="sc">/</span> <span class="dv">1000</span></span>
-<span id="cb38-22"><a href="spatial-operations.html#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-23"><a href="spatial-operations.html#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result</span></span>
-<span id="cb38-24"><a href="spatial-operations.html#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance_to_coast_km, <span class="at">main =</span> <span class="st">"Distance to the coast (km)"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="spatial-operations.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the DEM data for Spain</span></span>
+<span id="cb37-2"><a href="spatial-operations.html#cb37-2" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> geodata<span class="sc">::</span><span class="fu">elevation_30s</span>(<span class="at">country =</span> <span class="st">"Spain"</span>, <span class="at">path =</span> <span class="st">"."</span>, <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb37-3"><a href="spatial-operations.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="spatial-operations.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span></span>
+<span id="cb37-5"><a href="spatial-operations.html#cb37-5" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> <span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
+<span id="cb37-6"><a href="spatial-operations.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="spatial-operations.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># According to the documentation, terra::distance() will calculate distance</span></span>
+<span id="cb37-8"><a href="spatial-operations.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span></span>
+<span id="cb37-9"><a href="spatial-operations.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># distance to the coast, we need a raster that has NA values over land and any</span></span>
+<span id="cb37-10"><a href="spatial-operations.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># other value over water</span></span>
+<span id="cb37-11"><a href="spatial-operations.html#cb37-11" aria-hidden="true" tabindex="-1"></a>water_mask <span class="ot">=</span> <span class="fu">is.na</span>(spain_dem)</span>
+<span id="cb37-12"><a href="spatial-operations.html#cb37-12" aria-hidden="true" tabindex="-1"></a>water_mask[water_mask <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb37-13"><a href="spatial-operations.html#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="spatial-operations.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the distance() function on this mask to get distance to the coast</span></span>
+<span id="cb37-15"><a href="spatial-operations.html#cb37-15" aria-hidden="true" tabindex="-1"></a>distance_to_coast <span class="ot">=</span> <span class="fu">distance</span>(water_mask)</span>
+<span id="cb37-16"><a href="spatial-operations.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-17"><a href="spatial-operations.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="sc">|---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span></span>
+<span id="cb37-18"><a href="spatial-operations.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="er">=========================================</span></span>
+<span id="cb37-19"><a href="spatial-operations.html#cb37-19" aria-hidden="true" tabindex="-1"></a>                                          </span>
+<span id="cb37-20"><a href="spatial-operations.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co"># convert distance into km</span></span>
+<span id="cb37-21"><a href="spatial-operations.html#cb37-21" aria-hidden="true" tabindex="-1"></a>distance_to_coast_km <span class="ot">=</span> distance_to_coast <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb37-22"><a href="spatial-operations.html#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="spatial-operations.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result</span></span>
+<span id="cb37-24"><a href="spatial-operations.html#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance_to_coast_km, <span class="at">main =</span> <span class="st">"Distance to the coast (km)"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># now let's weight each 100 altitudinal meters by an additional distance of 10 km</span></span>
 <span><span class="va">distance_to_coast_km2</span> <span class="op">=</span> <span class="va">distance_to_coast_km</span> <span class="op">+</span> <span class="op">(</span><span class="op">(</span><span class="va">spain_dem</span> <span class="op">/</span> <span class="fl">100</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co"># plot the result</span></span>
@@ -379,7 +371,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-11.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

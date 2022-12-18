@@ -3,12 +3,6 @@
 
 
 
-```
-#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#> terra 1.6.47
-```
-
-
 Some of the exercises use a vector (`zion_points`) and raster dataset (`srtm`) from the **spDataLarge** package.
 They also use a polygonal 'convex hull' derived from the vector dataset (`ch`) to represent the area of interest:
 

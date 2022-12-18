@@ -3,29 +3,6 @@
 
 
 
-```
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-#> Loading required package: paradox
-#> The 'qgis_process' command-line utility was not found.
-#> Please run `qgis_configure()` to fix this and rebuild the cache.
-#> See its documentation if you need to preset the path of qgis_process.
-#> terra 1.6.47
-#> 
-#> Attaching package: 'terra'
-#> The following object is masked from 'package:mlr3':
-#> 
-#>     resample
-#> Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-```
-
-
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
 ```r

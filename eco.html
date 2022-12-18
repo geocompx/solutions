@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 13 Ecology | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'data.table' #&gt; The following object is masked from 'package:terra': #&gt; #&gt;   shift...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) library(terra) library(data.table) library(dplyr) library(future)...">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 13 Ecology | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://geocompr.github.io/solutions/eco.html">
 <meta property="og:image" content="https://geocompr.github.io/solutions/images/cover.png">
-<meta property="og:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'data.table' #&gt; The following object is masked from 'package:terra': #&gt; #&gt;   shift...">
+<meta property="og:description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) library(terra) library(data.table) library(dplyr) library(future)...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 13 Ecology | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE #&gt; terra 1.6.47 #&gt; #&gt; Attaching package: 'data.table' #&gt; The following object is masked from 'package:terra': #&gt; #&gt;   shift...">
+<meta name="twitter:description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) library(terra) library(data.table) library(dplyr) library(future)...">
 <meta name="twitter:image" content="https://geocompr.github.io/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -76,54 +76,8 @@
 <h1>
 <span class="header-section-number">13</span> Ecology<a class="anchor" aria-label="anchor" href="#eco"><i class="fas fa-link"></i></a>
 </h1>
-<pre><code>#&gt; Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE
-#&gt; terra 1.6.47
-#&gt; 
-#&gt; Attaching package: 'data.table'
-#&gt; The following object is masked from 'package:terra':
-#&gt; 
-#&gt;     shift
-#&gt; 
-#&gt; Attaching package: 'dplyr'
-#&gt; The following objects are masked from 'package:data.table':
-#&gt; 
-#&gt;     between, first, last
-#&gt; The following objects are masked from 'package:terra':
-#&gt; 
-#&gt;     intersect, union
-#&gt; The following objects are masked from 'package:stats':
-#&gt; 
-#&gt;     filter, lag
-#&gt; The following objects are masked from 'package:base':
-#&gt; 
-#&gt;     intersect, setdiff, setequal, union
-#&gt; 
-#&gt; Attaching package: 'lgr'
-#&gt; The following object is masked from 'package:ggplot2':
-#&gt; 
-#&gt;     Layout
-#&gt; 
-#&gt; Attaching package: 'mlr3'
-#&gt; The following object is masked from 'package:terra':
-#&gt; 
-#&gt;     resample
-#&gt; Loading required package: paradox
-#&gt; The 'qgis_process' command-line utility was not found.
-#&gt; Please run `qgis_configure()` to fix this and rebuild the cache.
-#&gt; See its documentation if you need to preset the path of qgis_process.
-#&gt; 
-#&gt; Attaching package: 'tictoc'
-#&gt; The following object is masked from 'package:data.table':
-#&gt; 
-#&gt;     shift
-#&gt; The following objects are masked from 'package:terra':
-#&gt; 
-#&gt;     shift, size
-#&gt; Loading required package: permute
-#&gt; Loading required package: lattice
-#&gt; This is vegan 2.6-4</code></pre>
 <p>The solutions assume the following packages are attached (other packages will be attached when needed):</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
@@ -143,7 +97,7 @@
 <p>E1. Run a NMDS using the percentage data of the community matrix.
 Report the stress value and compare it to the stress value as retrieved from the NMDS using presence-absence data.
 What might explain the observed difference?</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"comm"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">comm</span>, <span class="st">"pa"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
@@ -250,7 +204,7 @@ Next, compute profile and tangential curvature and add them as additional predic
 Finally, construct a response-predictor matrix.
 The scores of the first NMDS axis (which were the result when using the presence-absence community matrix) rotated in accordance with elevation represent the response variable, and should be joined to <code>random_points</code> (use an inner join).
 To complete the response-predictor matrix, extract the values of the environmental predictor raster object to <code>random_points</code>.</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># first compute the terrain attributes we have also used in the chapter</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span>
@@ -318,7 +272,7 @@ The random forest modeling should include the estimation of optimal hyperparamet
 Parallelize the tuning level (see Section <a href="#svm"><strong>??</strong></a>).
 Report the mean RMSE and use a boxplot to visualize all retrieved RMSEs.
 Please not that this exercise is best solved using the mlr3 functions <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid()</a></code> and <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark()</a></code> (see <a href="https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking" class="uri">https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking</a> for more information).</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mlr3.mlr-org.com">mlr3</a></span><span class="op">)</span></span>
@@ -344,10 +298,10 @@ Please not that this exercise is best solved using the mlr3 functions <code><a h
 <span><span class="co"># random forest</span></span>
 <span><span class="va">lrn_rf</span> <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/mlr_sugar.html">lrn</a></span><span class="op">(</span><span class="st">"regr.ranger"</span>, predict_type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="co"># now define the AutoTuner of the random forest</span></span>
-<span><span class="va">search_space</span> <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://paradox.mlr-org.com/reference/ps.html">ps</a></span><span class="op">(</span></span>
-<span>  mtry <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://paradox.mlr-org.com/reference/Domain.html">p_int</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">ncol</a></span><span class="op">(</span><span class="va">task</span><span class="op">$</span><span class="fu">data</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span>  sample.fraction <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://paradox.mlr-org.com/reference/Domain.html">p_dbl</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">0.2</span>, upper <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span>  min.node.size <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://paradox.mlr-org.com/reference/Domain.html">p_int</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">search_space</span> <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/paradox/man/ps.html">ps</a></span><span class="op">(</span></span>
+<span>  mtry <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/paradox/man/Domain.html">p_int</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/dimensions.html">ncol</a></span><span class="op">(</span><span class="va">task</span><span class="op">$</span><span class="fu">data</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  sample.fraction <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/paradox/man/Domain.html">p_dbl</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">0.2</span>, upper <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>  min.node.size <span class="op">=</span> <span class="fu">paradox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/paradox/man/Domain.html">p_int</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fl">1</span>, upper <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">at_rf</span> <span class="op">=</span> <span class="fu">mlr3tuning</span><span class="fu">::</span><span class="va"><a href="https://mlr3tuning.mlr-org.com/reference/AutoTuner.html">AutoTuner</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  learner <span class="op">=</span> <span class="va">lrn_rf</span>,</span>
@@ -451,7 +405,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-11.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
