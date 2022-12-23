@@ -14,7 +14,7 @@ rmd_files:
     # - "11-algorithms.Rmd"
     - "12-spatial-cv.Rmd"
     - "13-transport.Rmd"
-    # - "14-location.Rmd"
+    - "14-location.Rmd"
     - "15-eco.Rmd"
     # - "16-synthesis.Rmd"
     #- "references.Rmd"
