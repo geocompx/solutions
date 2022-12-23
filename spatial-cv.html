@@ -22,7 +22,7 @@
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.4/font.css" rel="stylesheet">
 <link href="libs/Roboto_Mono-0.4.4/font.css" rel="stylesheet">
 <link href="libs/Montserrat-0.4.4/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -90,7 +90,7 @@
 <span><span class="co"># library(rlang)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-tmap/tmap">tmap</a></span><span class="op">)</span></span></code></pre></div>
-<p>E1. Compute the following terrain attributes from the <code>elev</code> dataset loaded with <code>terra::rast(system.file("raster/ta.tif", package = "spDataLarge"))$elev</code> with the help of R-GIS bridges (see this <a href="https://geocompr.robinlovelace.net/gis.html#gis">Chapter</a>):</p>
+<p>E1. Compute the following terrain attributes from the <code>elev</code> dataset loaded with <code>terra::rast(system.file("raster/ta.tif", package = "spDataLarge"))$elev</code> with the help of R-GIS bridges (see this <a href="https://r.geocompx.org/gis.html#gis">Chapter</a>):</p>
 <pre><code>- Slope
 - Plan curvature
 - Profile curvature
@@ -130,7 +130,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">log10_carea</span><span class="op">)</span> <span class="op">=</span> <span class="st">"log10_carea"</span></span>
 <span><span class="co"># add log_carea and dem to the terrain attributes</span></span>
 <span><span class="va">ta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ta</span>, <span class="va">dem</span>, <span class="va">log10_carea</span><span class="op">)</span></span></code></pre></div>
-<p>E2. Extract the values from the corresponding output rasters to the <code>lsl</code> data frame (<code>data("lsl", package = "spDataLarge"</code>) by adding new variables called <code>slope</code>, <code>cplan</code>, <code>cprof</code>, <code>elev</code> and <code>log_carea</code> (see this <a href="https://geocompr.robinlovelace.net/spatial-cv.html#case-landslide">section</a> for details).</p>
+<p>E2. Extract the values from the corresponding output rasters to the <code>lsl</code> data frame (<code>data("lsl", package = "spDataLarge"</code>) by adding new variables called <code>slope</code>, <code>cplan</code>, <code>cprof</code>, <code>elev</code> and <code>log_carea</code> (see this <a href="https://r.geocompx.org/spatial-cv.html#case-landslide">section</a> for details).</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># attach terrain attribute raster stack (in case you have skipped the previous</span></span>
 <span><span class="co"># exercise)</span></span>
@@ -140,7 +140,7 @@
 <span><span class="co"># extract values to points, i.e., create predictors</span></span>
 <span><span class="va">lsl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ta</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">ta</span>, <span class="va">lsl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">ID</span><span class="op">)</span></span></code></pre></div>
-<p>E3. Use the derived terrain attribute rasters in combination with a GLM to make a spatial prediction map similar to that shown in this <a href="https://geocompr.robinlovelace.net/spatial-cv.html#fig:lsl-susc">Figure</a>.
+<p>E3. Use the derived terrain attribute rasters in combination with a GLM to make a spatial prediction map similar to that shown in this <a href="https://r.geocompx.org/spatial-cv.html#fig:lsl-susc">Figure</a>.
 Running <code>data("study_mask", package = "spDataLarge")</code> attaches a mask of the study area.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># attach data (in case you have skipped exercises 1) and 2)</span></span>
@@ -181,7 +181,7 @@ Running <code>data("study_mask", package = "spDataLarge")</code> attaches a mask
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/tmap/man/tm_layout.html">tm_layout</a></span><span class="op">(</span>outer.margins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.02</span>, <span class="fl">0.02</span><span class="op">)</span>, frame <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>              legend.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"bottom"</span><span class="op">)</span>,</span>
 <span>              legend.title.size <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
-<p>E4. Compute a 100-repeated 5-fold non-spatial cross-validation and spatial CV based on the GLM learner and compare the AUROC values from both resampling strategies with the help of boxplots (see this <a href="https://geocompr.robinlovelace.net/spatial-cv.html#fig:boxplot-cv">Figure</a>).</p>
+<p>E4. Compute a 100-repeated 5-fold non-spatial cross-validation and spatial CV based on the GLM learner and compare the AUROC values from both resampling strategies with the help of boxplots (see this <a href="https://r.geocompx.org/spatial-cv.html#fig:boxplot-cv">Figure</a>).</p>
 <p>Hint: You need to specify a non-spatial resampling strategy.</p>
 <p>Another hint: You might want to solve Excercises 4 to 6 in one go with the help of <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html">mlr3::benchmark()</a></code> and <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">mlr3::benchmark_grid()</a></code> (for more information, please refer to <a href="https://mlr3book.mlr-org.com/performance.html#benchmarking" class="uri">https://mlr3book.mlr-org.com/performance.html#benchmarking</a>).
 When doing so, keep in mind that the computation can take very long, probably several days.
@@ -318,7 +318,7 @@ Leaving the hyperparameters unspecified in <strong>kernlab</strong>’s <code>ks
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-18.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
