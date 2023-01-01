@@ -17,13 +17,12 @@ library(spDataLarge)
 E1. Download the csv file containing inhabitant information for a 100 m cell resolution (https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung_100m_Gitter.zip?__blob=publicationFile&v=3).
 Please note that the unzipped file has a size of 1.23 GB.
 To read it into R you can use `readr::read_csv`.
-This takes 30 seconds on my machine (16 GB RAM)
+This takes 30 seconds on a machine with 16 GB RAM.
 `data.table::fread()` might be even faster, and returns an object of class `data.table()`.
 Use `dplyr::as_tibble()` to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (`inh`) we have created using class mean values.
 
 ```r
-
 # Coarse inhabitant raster (1 km resolution)
 #*******************************************
 
@@ -31,8 +30,7 @@ Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compa
 # previous exercise
 data("census_de", package = "spDataLarge")
 input = dplyr::select(census_de, x = x_mp_1km, y = y_mp_1km, pop = Einwohner,
-                      women = Frauen_A, mean_age = Alter_D,
-                      hh_size = HHGroesse_D)
+                      women = Frauen_A, mean_age = Alter_D, hh_size = HHGroesse_D)
 input_tidy = dplyr::mutate(input, dplyr::across(.fns = ~ifelse(. %in% c(-1, -9), NA, .)))
 input_ras = terra::rast(input_tidy, type = "xyz", crs = "EPSG:3035")
 inh_coarse = input_ras$pop
@@ -43,7 +41,6 @@ inh_coarse = terra::classify(inh_coarse, rcl = rcl, right = NA)
 
 # Fine inhabitant raster (100 m resolution)
 #******************************************
-
 url =
   paste0("https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/",
          "DemografischeGrunddaten/csv_Bevoelkerung_100m_Gitter.zip", 

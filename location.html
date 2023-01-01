@@ -88,21 +88,19 @@
 <p>E1. Download the csv file containing inhabitant information for a 100 m cell resolution (<a href="https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung_100m_Gitter.zip?__blob=publicationFile&amp;v=3" class="uri">https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/DemografischeGrunddaten/csv_Bevoelkerung_100m_Gitter.zip?__blob=publicationFile&amp;v=3</a>).
 Please note that the unzipped file has a size of 1.23 GB.
 To read it into R you can use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv</a></code>.
-This takes 30 seconds on my machine (16 GB RAM)
+This takes 30 seconds on a machine with 16 GB RAM.
 <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code>data.table()</code>.
 Use <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">dplyr::as_tibble()</a></code> to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (<code>inh</code>) we have created using class mean values.</p>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># Coarse inhabitant raster (1 km resolution)</span></span>
+<code class="sourceCode R"><span><span class="co"># Coarse inhabitant raster (1 km resolution)</span></span>
 <span><span class="co">#*******************************************</span></span>
 <span></span>
 <span><span class="co"># inhabitant raster (coarse resolution); this is one of the results of the </span></span>
 <span><span class="co"># previous exercise</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"census_de"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">input</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">census_de</span>, x <span class="op">=</span> <span class="va">x_mp_1km</span>, y <span class="op">=</span> <span class="va">y_mp_1km</span>, pop <span class="op">=</span> <span class="va">Einwohner</span>,</span>
-<span>                      women <span class="op">=</span> <span class="va">Frauen_A</span>, mean_age <span class="op">=</span> <span class="va">Alter_D</span>,</span>
-<span>                      hh_size <span class="op">=</span> <span class="va">HHGroesse_D</span><span class="op">)</span></span>
+<span>                      women <span class="op">=</span> <span class="va">Frauen_A</span>, mean_age <span class="op">=</span> <span class="va">Alter_D</span>, hh_size <span class="op">=</span> <span class="va">HHGroesse_D</span><span class="op">)</span></span>
 <span><span class="va">input_tidy</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">input</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.fns <span class="op">=</span> <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">.</span> <span class="op"><a href="https://rdrr.io/pkg/terra/man/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">9</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">input_ras</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="va">input_tidy</span>, type <span class="op">=</span> <span class="st">"xyz"</span>, crs <span class="op">=</span> <span class="st">"EPSG:3035"</span><span class="op">)</span></span>
 <span><span class="va">inh_coarse</span> <span class="op">=</span> <span class="va">input_ras</span><span class="op">$</span><span class="va">pop</span></span>
@@ -113,7 +111,6 @@ Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compa
 <span></span>
 <span><span class="co"># Fine inhabitant raster (100 m resolution)</span></span>
 <span><span class="co">#******************************************</span></span>
-<span></span>
 <span><span class="va">url</span> <span class="op">=</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"https://www.zensus2011.de/SharedDocs/Downloads/DE/Pressemitteilung/"</span>,</span>
 <span>         <span class="st">"DemografischeGrunddaten/csv_Bevoelkerung_100m_Gitter.zip"</span>, </span>
@@ -267,7 +264,7 @@ Change the age raster accordingly, repeat the remaining analyses and compare the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2022-12-25.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-01-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
