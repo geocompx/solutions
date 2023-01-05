@@ -5,7 +5,7 @@
 ```{r setup, echo=FALSE, results='hide'}
 ex = tempfile(fileext = ".Rmd")
 on.exit(unlink(ex))
-download.file("https://raw.githubusercontent.com/Robinlovelace/geocompr/main/_09-ex.Rmd", ex)
+download.file("https://raw.githubusercontent.com/geocompx/geocompr/main/_09-ex.Rmd", ex)
 ```
 
 ```{r, echo=FALSE, results='asis'}
