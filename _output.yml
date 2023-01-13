@@ -14,5 +14,5 @@ bookdown::bs4_book:
     bg: "#fefefe" #backgrounds
     fg: "#000000" #fonts
   repo: 
-    base: https://github.com/geocompr/solutions
+    base: https://github.com/geocompx/solutions
     branch: main
