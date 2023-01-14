@@ -16,3 +16,4 @@ bookdown::bs4_book:
   repo: 
     base: https://github.com/geocompx/solutions
     branch: main
+  template: style/bs4_book.html
