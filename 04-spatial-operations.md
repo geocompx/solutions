@@ -65,7 +65,7 @@ nz_height_counts = nz_height_joined |>
 
 # Optionally join results with nz geometries:
 nz_height_combined = left_join(nz, nz_height_counts |> sf::st_drop_geometry())
-#> Joining, by = "Name"
+#> Joining with `by = join_by(Name)`
 # plot(nz_height_combined) # Check: results identical to base R result
 
 # Generate a summary table
@@ -191,7 +191,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.6.47
+#> terra 1.7.3
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 

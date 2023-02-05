@@ -19,9 +19,6 @@ Experiment with different values of `keep` (ranging from 0.5 to 0.00005) for `ms
 
 ```r
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.5))
-#> Registered S3 method overwritten by 'geojsonlint':
-#>   method         from 
-#>   print.location dplyr
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.05))
 # Starts to breakdown here at 0.5% of the points:
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.005))
