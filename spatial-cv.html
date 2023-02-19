@@ -191,7 +191,7 @@ Computation time will be shorter the more RAM and cores you have at your disposa
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"lsl"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span>  <span class="co"># landslide points with terrain attributes</span></span>
 <span></span>
 <span><span class="co"># create task</span></span>
-<span><span class="va">task</span> <span class="op">=</span> <span class="va">TaskClassifST</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span><span class="va">task</span> <span class="op">=</span> <span class="va"><a href="https://mlr3spatiotempcv.mlr-org.com/reference/TaskClassifST.html">TaskClassifST</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="st">"lsl_ecuador"</span>,</span>
 <span>  backend <span class="op">=</span> <span class="fu">mlr3</span><span class="fu">::</span><span class="fu"><a href="https://mlr3.mlr-org.com/reference/as_data_backend.html">as_data_backend</a></span><span class="op">(</span><span class="va">lsl</span><span class="op">)</span>, target <span class="op">=</span> <span class="st">"lslpts"</span>, positive <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
 <span>  coordinate_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,</span>
@@ -325,7 +325,7 @@ Leaving the hyperparameters unspecified in <strong>kernlab</strong>’s <code>ks
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-02-12.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-02-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
