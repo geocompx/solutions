@@ -84,7 +84,7 @@ Obtain the same result using a different command (bonus: try to find three ways 
 Hint: try to use helper functions, such as `contains` or `matches` from **dplyr** (see `?contains`).
 
 ```r
-us_states |> dplyr::select(total_pop_10, total_pop_15)
+us_states |> select(total_pop_10, total_pop_15)
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -104,7 +104,7 @@ us_states |> dplyr::select(total_pop_10, total_pop_15)
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states |> dplyr::select(starts_with("total_pop"))
+us_states |> select(starts_with("total_pop"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -124,7 +124,7 @@ us_states |> dplyr::select(starts_with("total_pop"))
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states |> dplyr::select(contains("total_pop"))
+us_states |> select(contains("total_pop"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -144,7 +144,7 @@ us_states |> dplyr::select(contains("total_pop"))
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 
 # or
-us_states |> dplyr::select(matches("tal_p"))
+us_states |> select(matches("tal_p"))
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
@@ -402,7 +402,7 @@ Change the name of the `median_income_15` column to `Income`.
 ```r
 us_states_sel = us_states |>
   left_join(us_states_df, by = c("NAME" = "state")) |>
-  dplyr::select(Income = median_income_15)
+  select(Income = median_income_15)
 ```
 
 E13. Calculate the change in the number of residents living below the poverty level between 2010 and 2015 for each state. (Hint: See ?us_states_df for documentation on the poverty level columns.)

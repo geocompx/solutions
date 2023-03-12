@@ -149,7 +149,7 @@ What is the class of the new object and what makes it geographic?</p>
 Obtain the same result using a different command (bonus: try to find three ways of obtaining the same result).
 Hint: try to use helper functions, such as <code>contains</code> or <code>matches</code> from <strong>dplyr</strong> (see <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">?contains</a></code>).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">total_pop_10</span>, <span class="va">total_pop_15</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">total_pop_10</span>, <span class="va">total_pop_15</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -169,7 +169,7 @@ Hint: try to use helper functions, such as <code>contains</code> or <code>matche
 <span><span class="co">#&gt; 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...</span></span>
 <span></span>
 <span><span class="co"># or</span></span>
-<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"total_pop"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"total_pop"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -189,7 +189,7 @@ Hint: try to use helper functions, such as <code>contains</code> or <code>matche
 <span><span class="co">#&gt; 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...</span></span>
 <span></span>
 <span><span class="co"># or</span></span>
-<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"total_pop"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"total_pop"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -209,7 +209,7 @@ Hint: try to use helper functions, such as <code>contains</code> or <code>matche
 <span><span class="co">#&gt; 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...</span></span>
 <span></span>
 <span><span class="co"># or</span></span>
-<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"tal_p"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">us_states</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"tal_p"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 2 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
@@ -437,7 +437,7 @@ Change the name of the <code>median_income_15</code> column to <code>Income</cod
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">us_states_sel</span> <span class="op">=</span> <span class="va">us_states</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">us_states_df</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NAME"</span> <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>Income <span class="op">=</span> <span class="va">median_income_15</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>Income <span class="op">=</span> <span class="va">median_income_15</span><span class="op">)</span></span></code></pre></div>
 <p>E13. Calculate the change in the number of residents living below the poverty level between 2010 and 2015 for each state. (Hint: See ?us_states_df for documentation on the poverty level columns.)
 Bonus: Calculate the change in the <em>percentage</em> of residents living below the poverty level in each state.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -541,7 +541,7 @@ Extract the values of the four corner cells.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-03-05.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-03-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
