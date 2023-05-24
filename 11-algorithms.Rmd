@@ -1,1 +1,13 @@
 # Scripts, algorithms and functions {#algorithms}
+
+```{r setup, echo=FALSE, results='hide'}
+ex = tempfile(fileext = ".Rmd")
+on.exit(unlink(ex))
+download.file("https://raw.githubusercontent.com/geocompx/geocompr/main/_11-ex.Rmd", ex)
+```
+
+```{r, echo=FALSE, results='asis'}
+res = knitr::knit_child(ex, quiet = TRUE,
+                        options = list(include = TRUE, eval = FALSE))
+cat(res, sep = '\n')
+```
