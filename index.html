@@ -8,7 +8,7 @@
 <title>Welcome | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
 <meta name="description" content="Geocomputation with R is for people who want to analyze, visualize and model geographic data with open source software. It is based on R, a statistical programming language that has powerful data processing, visualization, and geospatial capabilities. The book equips you with the knowledge and skills to tackle a wide range of issues manifested in geographic data, including those with scientific, societal, and environmental implications. This book will interest people from many backgrounds, especially Geographic Information Systems (GIS) users interested in applying their domain-specific knowledge in a powerful open source language for data science, and R users interested in extending their skills to handle spatial data.">
-<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Welcome | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/">
@@ -20,9 +20,9 @@
 <meta name="twitter:image" content="https://r.geocompx.org/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.5/font.css" rel="stylesheet">
-<link href="libs/Roboto_Mono-0.4.5/font.css" rel="stylesheet">
-<link href="libs/Montserrat-0.4.5/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.6/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.6/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.6/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
@@ -59,11 +59,12 @@
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
 <li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
+<li><a class="" href="algorithms.html"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></li>
 <li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
+<li><a class="" href="transport.html"><span class="header-section-number">13</span> Transportation</a></li>
+<li><a class="" href="location.html"><span class="header-section-number">14</span> Geomarketing</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">15</span> Ecology</a></li>
 </ul>
 
         <div class="book-extra">
@@ -90,7 +91,8 @@
     <h2>Note: Second Edition is under construction 🏗</h2>
     <!--<p>Now is a great time to provide feedback</p>-->
         <ul class="list-unstyled">
-<li><a href="https://discord.gg/PMztXYgNxp">Chat on Discord <i class="fab fa-discord"></i></a></li>
+<li><a href="https://r.geocompx.org/">Read the book <i class="fab fa-book"></i></a></li>
+          <li><a href="https://discord.gg/PMztXYgNxp">Chat on Discord <i class="fab fa-discord"></i></a></li>
           <li><a href="https://supportukrainenow.org/">Support Ukraine 🇺🇦
 </a></li>
         </ul>
@@ -116,7 +118,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-03-12.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-05-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

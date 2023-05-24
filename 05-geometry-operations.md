@@ -68,8 +68,7 @@ How far is it from the geographic centroid of Canterbury?
 
 ```r
 cant_cent = st_centroid(canterbury)
-#> Warning in st_centroid.sf(canterbury): st_centroid assumes attributes are
-#> constant over geometries of x
+#> Warning: st_centroid assumes attributes are constant over geometries
 nz_centre = st_centroid(st_union(nz))
 st_distance(cant_cent, nz_centre) # 234 km
 #> Units: [m]

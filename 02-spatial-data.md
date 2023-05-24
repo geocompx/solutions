@@ -63,8 +63,7 @@ Find two similarities and two differences between the image on your computer and
 plot(world["continent"], reset = FALSE)
 cex = sqrt(world$pop) / 10000
 world_cents = st_centroid(world, of_largest = TRUE)
-#> Warning in st_centroid.sf(world, of_largest = TRUE): st_centroid assumes
-#> attributes are constant over geometries of x
+#> Warning: st_centroid assumes attributes are constant over geometries
 plot(st_geometry(world_cents), add = TRUE, cex = cex)
 # - What does the `cex` argument do (see `?plot`)?
 #   It specifies the size of the circles
@@ -108,8 +107,7 @@ plot(st_geometry(world), lty = 3, add = TRUE, border = "grey")
 plot(st_geometry(nigeria), col = "yellow", add = TRUE, border = "darkgrey")
 a = africa[grepl("Niger", africa$name_long), ]
 ncentre = st_centroid(a)
-#> Warning in st_centroid.sf(a): st_centroid assumes attributes are constant over
-#> geometries of x
+#> Warning: st_centroid assumes attributes are constant over geometries
 ncentre_num = st_coordinates(ncentre)
 text(x = ncentre_num[, 1], y = ncentre_num[, 2], labels = a$name_long)
 ```

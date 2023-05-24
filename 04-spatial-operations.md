@@ -167,8 +167,7 @@ washington_to_cali = us_states |>
   st_centroid() |> 
   st_union() |> 
   st_cast("LINESTRING")
-#> Warning in st_centroid.sf(filter(us_states, grepl(pattern = "Columbia|Cali", :
-#> st_centroid assumes attributes are constant over geometries of x
+#> Warning: st_centroid assumes attributes are constant over geometries
 states_crossed = us_states[washington_to_cali, , op = st_crosses]
 #> although coordinates are longitude/latitude, st_crosses assumes that they are
 #> planar
@@ -191,7 +190,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.7.3
+#> terra 1.7.29
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 

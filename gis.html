@@ -8,7 +8,7 @@
 <title>Chapter 10 Bridges to GIS software | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
 <meta name="description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 AM using the r.sun GRASS GIS through...'>
-<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Bridges to GIS software | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/gis.html">
@@ -20,9 +20,9 @@
 <meta name="twitter:image" content="https://r.geocompx.org/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.5/font.css" rel="stylesheet">
-<link href="libs/Roboto_Mono-0.4.5/font.css" rel="stylesheet">
-<link href="libs/Montserrat-0.4.5/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.6/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.6/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.6/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
@@ -59,11 +59,12 @@
 <li class="book-part">Extensions</li>
 <li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
 <li><a class="active" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
-<li><a class="" href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></li>
+<li><a class="" href="algorithms.html"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></li>
 <li class="book-part">Applications</li>
-<li><a class="" href="transport.html"><span class="header-section-number">12</span> Transportation</a></li>
-<li><a class="" href="location.html"><span class="header-section-number">13</span> Geomarketing</a></li>
-<li><a class="" href="eco.html"><span class="header-section-number">14</span> Ecology</a></li>
+<li><a class="" href="transport.html"><span class="header-section-number">13</span> Transportation</a></li>
+<li><a class="" href="location.html"><span class="header-section-number">14</span> Geomarketing</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">15</span> Ecology</a></li>
 </ul>
 
         <div class="book-extra">
@@ -77,15 +78,15 @@
 </h1>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/terra/">terra</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
 <!-- qgisprocess 1-3 -->
 <p>E1. Compute global solar irradiation for an area of <code>system.file("raster/dem.tif", package = "spDataLarge")</code> for March 21 at 11:00 AM using the <code>r.sun</code> GRASS GIS through <strong>qgisprocess</strong>.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paleolimbot/qgisprocess">qgisprocess</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/qgisprocess">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="va">dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/dem.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">slope</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/terrain.html">terrain</a></span><span class="op">(</span><span class="va">dem</span>, <span class="st">"slope"</span>, unit <span class="op">=</span> <span class="st">"degrees"</span><span class="op">)</span></span>
 <span><span class="va">aspect</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/terrain.html">terrain</a></span><span class="op">(</span><span class="va">dem</span>, <span class="st">"aspect"</span>, unit <span class="op">=</span> <span class="st">"degrees"</span><span class="op">)</span></span>
-<span><span class="va">qgis_algo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_has_algorithm.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">qgis_algo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"r.sun"</span>, <span class="va">qgis_algo</span><span class="op">$</span><span class="va">algorithm</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">alg</span> <span class="op">=</span> <span class="st">"grass7:r.sun.incidout"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="va">alg</span><span class="op">)</span></span>
@@ -95,7 +96,7 @@
 <span><span class="va">dem_sun</span></span>
 <span></span>
 <span><span class="co"># output global (total) irradiance/irradiation [W.m-2] for given time</span></span>
-<span><span class="va">gsi_dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/as_qgis_argument.SpatRaster.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">dem_sun</span><span class="op">$</span><span class="va">glob_rad</span><span class="op">)</span></span>
+<span><span class="va">gsi_dem</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_as_terra.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">dem_sun</span><span class="op">$</span><span class="va">glob_rad</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">gsi_dem</span><span class="op">)</span></span></code></pre></div>
 <!-- sagagis 1 -->
@@ -233,7 +234,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 2020-08-01 to 2020-10-31, calculate its NDVI, and then compare it with the results from <code>ndvi.tif</code>.</p>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://brazil-data-cube.github.io/rstac/">rstac</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/appelmar/gdalcubes_R">gdalcubes</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/appelmar/gdalcubes">gdalcubes</a></span><span class="op">)</span></span>
 <span><span class="op">?</span><span class="fu">spDataLarge</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/spDataLarge/man/ndvi.tif.html">ndvi.tif</a></span></span>
 <span><span class="va">ndvi1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/ndvi.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">bbox1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/project.html">project</a></span><span class="op">(</span><span class="va">ndvi1</span>, <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -276,12 +277,13 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></div>
-<div class="next"><a href="spatial-cv.html"><span class="header-section-number">11</span> Statistical learning</a></div>
+<div class="next"><a href="algorithms.html"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <h2>Note: Second Edition is under construction 🏗</h2>
     <!--<p>Now is a great time to provide feedback</p>-->
         <ul class="list-unstyled">
-<li><a href="https://discord.gg/PMztXYgNxp">Chat on Discord <i class="fab fa-discord"></i></a></li>
+<li><a href="https://r.geocompx.org/">Read the book <i class="fab fa-book"></i></a></li>
+          <li><a href="https://discord.gg/PMztXYgNxp">Chat on Discord <i class="fab fa-discord"></i></a></li>
           <li><a href="https://supportukrainenow.org/">Support Ukraine 🇺🇦
 </a></li>
         </ul>
@@ -304,7 +306,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-03-12.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-05-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
