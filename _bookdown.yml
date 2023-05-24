@@ -11,7 +11,7 @@ rmd_files:
     - "08-read-write-plot.Rmd"
     - "09-mapping.Rmd"
     - "10-gis.Rmd"
-    # - "11-algorithms.Rmd"
+    - "11-algorithms.Rmd"
     - "12-spatial-cv.Rmd"
     - "13-transport.Rmd"
     - "14-location.Rmd"
