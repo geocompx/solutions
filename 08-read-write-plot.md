@@ -27,7 +27,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x555cd81b90b0>
+#> <bytecode: 0x55b9cea994c8>
 #> <environment: namespace:sf>
 ```
 
@@ -62,6 +62,10 @@ Write this new object to a file of the GeoPackage format.
 
 ```r
 library(rnaturalearth)
+#> The legacy packages maptools, rgdal, and rgeos, underpinning this package
+#> will retire shortly. Please refer to R-spatial evolution reports on
+#> https://r-spatial.org/r/2023/05/15/evolution4.html for details.
+#> This package is now running under evolution status 0
 germany_borders = ne_countries(country = "Germany", returnclass = "sf")
 plot(germany_borders)
 #> Warning: plotting the first 10 out of 94 attributes; use max.plot = 94 to plot
