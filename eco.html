@@ -104,14 +104,15 @@ What might explain the observed difference?</p>
 <span><span class="va">comm</span> <span class="op">=</span> <span class="va">comm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">25072018</span><span class="op">)</span></span>
 <span><span class="va">nmds_pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">pa</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Run 0 stress 0.0889 </span></span>
+<span><span class="co">#&gt; Run 0 stress 0.089 </span></span>
 <span><span class="co">#&gt; Run 1 stress 0.0891 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0119  max resid 0.0567 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0103  max resid 0.0548 </span></span>
 <span><span class="co">#&gt; Run 2 stress 0.0889 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0129  max resid 0.0819 </span></span>
+<span><span class="co">#&gt; ... New best solution</span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0144  max resid 0.0864 </span></span>
 <span><span class="co">#&gt; Run 3 stress 0.0884 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.018  max resid 0.0794 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0178  max resid 0.0631 </span></span>
 <span><span class="co">#&gt; Run 4 stress 0.0887 </span></span>
 <span><span class="co">#&gt; ... Procrustes: rmse 0.0123  max resid 0.0611 </span></span>
 <span><span class="co">#&gt; Run 5 stress 0.0891 </span></span>
@@ -144,7 +145,7 @@ What might explain the observed difference?</p>
 <span><span class="co">#&gt; Run 0 stress 0.111 </span></span>
 <span><span class="co">#&gt; Run 1 stress 0.109 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0565  max resid 0.213 </span></span>
+<span><span class="co">#&gt; ... Procrustes: rmse 0.0561  max resid 0.207 </span></span>
 <span><span class="co">#&gt; Run 2 stress 0.109 </span></span>
 <span><span class="co">#&gt; ... New best solution</span></span>
 <span><span class="co">#&gt; ... Procrustes: rmse 0.00323  max resid 0.0101 </span></span>
@@ -218,9 +219,12 @@ To complete the response-predictor matrix, extract the values of the environment
 <span><span class="va">pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">comm</span>, <span class="st">"pa"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span></span>
+<span><span class="co"># enable plugins if not already done so</span></span>
+<span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_enable_plugins.html">qgis_enable_plugins</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"grassprovider"</span>, <span class="st">"processing_saga_nextgen"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># compute environmental predictors (ep) catchment slope and catchment area</span></span>
 <span><span class="va">ep</span> <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/qgisprocess/man/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
-<span>  alg <span class="op">=</span> <span class="st">"saga:sagawetnessindex"</span>,</span>
+<span>  alg <span class="op">=</span> <span class="st">"sagang:sagawetnessindex"</span>,</span>
 <span>  DEM <span class="op">=</span> <span class="va">dem</span>,</span>
 <span>  SLOPE_TYPE <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  SLOPE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".sdat"</span><span class="op">)</span>,</span>
@@ -414,7 +418,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-06-18.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-06-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

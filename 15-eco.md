@@ -35,14 +35,15 @@ pa = pa[rowSums(pa) != 0, ]
 comm = comm[rowSums(comm) != 0, ]
 set.seed(25072018)
 nmds_pa = vegan::metaMDS(comm = pa, k = 4, try = 500)
-#> Run 0 stress 0.0889 
+#> Run 0 stress 0.089 
 #> Run 1 stress 0.0891 
-#> ... Procrustes: rmse 0.0119  max resid 0.0567 
+#> ... Procrustes: rmse 0.0103  max resid 0.0548 
 #> Run 2 stress 0.0889 
-#> ... Procrustes: rmse 0.0129  max resid 0.0819 
+#> ... New best solution
+#> ... Procrustes: rmse 0.0144  max resid 0.0864 
 #> Run 3 stress 0.0884 
 #> ... New best solution
-#> ... Procrustes: rmse 0.018  max resid 0.0794 
+#> ... Procrustes: rmse 0.0178  max resid 0.0631 
 #> Run 4 stress 0.0887 
 #> ... Procrustes: rmse 0.0123  max resid 0.0611 
 #> Run 5 stress 0.0891 
@@ -75,7 +76,7 @@ nmds_per = vegan::metaMDS(comm = comm, k = 4, try = 500)
 #> Run 0 stress 0.111 
 #> Run 1 stress 0.109 
 #> ... New best solution
-#> ... Procrustes: rmse 0.0565  max resid 0.213 
+#> ... Procrustes: rmse 0.0561  max resid 0.207 
 #> Run 2 stress 0.109 
 #> ... New best solution
 #> ... Procrustes: rmse 0.00323  max resid 0.0101 
@@ -153,9 +154,12 @@ ndvi = terra::rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 pa = vegan::decostand(comm, "pa")
 pa = pa[rowSums(pa) != 0, ]
 
+# enable plugins if not already done so
+qgisprocess::qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
+
 # compute environmental predictors (ep) catchment slope and catchment area
 ep = qgisprocess::qgis_run_algorithm(
-  alg = "saga:sagawetnessindex",
+  alg = "sagang:sagawetnessindex",
   DEM = dem,
   SLOPE_TYPE = 1,
   SLOPE = tempfile(fileext = ".sdat"),

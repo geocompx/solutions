@@ -88,7 +88,7 @@
 Please note that the unzipped file has a size of 1.23 GB.
 To read it into R you can use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv</a></code>.
 This takes 30 seconds on a machine with 16 GB RAM.
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code>data.table()</code>.
+<code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table()</a></code>.
 Use <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">dplyr::as_tibble()</a></code> to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (<code>inh</code>) we have created using class mean values.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
@@ -195,7 +195,7 @@ Change the age raster accordingly, repeat the remaining analyses and compare the
 <span></span>
 <span><span class="va">polys</span> <span class="op">=</span> <span class="va">pop_agg</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/patches.html">patches</a></span><span class="op">(</span>directions <span class="op">=</span> <span class="fl">8</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.spatvector.html">as.polygons</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/as.polygons.html">as.polygons</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">metros</span> <span class="op">=</span> <span class="va">polys</span> <span class="op">|&gt;</span></span>
@@ -272,7 +272,7 @@ Change the age raster accordingly, repeat the remaining analyses and compare the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-06-18.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-06-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

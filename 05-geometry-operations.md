@@ -181,7 +181,7 @@ arrange(us_states_bor, -borders)
 #> 4     12    Florida   South 151052 [km^2]     18511620     19645772 2949048 [m]
 #> 5     30    Montana    West 380829 [km^2]       973739      1014699 2826586 [m]
 #> 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2570606 [m]
-#> 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2567386 [m]
+#> 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2567389 [m]
 #> 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2407299 [m]
 #> 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378172 [m]
 #> 10    53 Washington    West 175436 [km^2]      6561297      6985464 2344358 [m]
