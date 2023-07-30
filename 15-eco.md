@@ -35,89 +35,9 @@ pa = pa[rowSums(pa) != 0, ]
 comm = comm[rowSums(comm) != 0, ]
 set.seed(25072018)
 nmds_pa = vegan::metaMDS(comm = pa, k = 4, try = 500)
-#> Run 0 stress 0.089 
-#> Run 1 stress 0.0891 
-#> ... Procrustes: rmse 0.0103  max resid 0.0548 
-#> Run 2 stress 0.0889 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0144  max resid 0.0864 
-#> Run 3 stress 0.0884 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0178  max resid 0.0631 
-#> Run 4 stress 0.0887 
-#> ... Procrustes: rmse 0.0123  max resid 0.0611 
-#> Run 5 stress 0.0891 
-#> Run 6 stress 0.0889 
-#> ... Procrustes: rmse 0.0172  max resid 0.0621 
-#> Run 7 stress 0.0886 
-#> ... Procrustes: rmse 0.011  max resid 0.0546 
-#> Run 8 stress 0.0913 
-#> Run 9 stress 0.0896 
-#> Run 10 stress 0.0927 
-#> Run 11 stress 0.0923 
-#> Run 12 stress 0.0902 
-#> Run 13 stress 0.091 
-#> Run 14 stress 0.0884 
-#> ... Procrustes: rmse 0.00567  max resid 0.0321 
-#> Run 15 stress 0.0888 
-#> ... Procrustes: rmse 0.0132  max resid 0.0672 
-#> Run 16 stress 0.0883 
-#> ... New best solution
-#> ... Procrustes: rmse 0.00728  max resid 0.0344 
-#> Run 17 stress 0.0908 
-#> Run 18 stress 0.092 
-#> Run 19 stress 0.0903 
-#> Run 20 stress 0.0896 
-#> *** Best solution was not repeated -- monoMDS stopping criteria:
-#>     20: no. of iterations >= maxit
 nmds_per = vegan::metaMDS(comm = comm, k = 4, try = 500)
-#> Square root transformation
-#> Wisconsin double standardization
-#> Run 0 stress 0.111 
-#> Run 1 stress 0.109 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0561  max resid 0.207 
-#> Run 2 stress 0.109 
-#> ... New best solution
-#> ... Procrustes: rmse 0.00323  max resid 0.0101 
-#> Run 3 stress 0.108 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0233  max resid 0.102 
-#> Run 4 stress 0.109 
-#> Run 5 stress 0.108 
-#> ... Procrustes: rmse 0.00098  max resid 0.00438 
-#> ... Similar to previous best
-#> Run 6 stress 0.11 
-#> Run 7 stress 0.111 
-#> Run 8 stress 0.108 
-#> ... Procrustes: rmse 0.00322  max resid 0.0168 
-#> Run 9 stress 0.11 
-#> Run 10 stress 0.108 
-#> ... Procrustes: rmse 0.00475  max resid 0.0199 
-#> Run 11 stress 0.11 
-#> Run 12 stress 0.109 
-#> Run 13 stress 0.109 
-#> ... Procrustes: rmse 0.0106  max resid 0.0427 
-#> Run 14 stress 0.108 
-#> ... Procrustes: rmse 0.00101  max resid 0.00419 
-#> ... Similar to previous best
-#> Run 15 stress 0.109 
-#> Run 16 stress 0.108 
-#> ... New best solution
-#> ... Procrustes: rmse 0.0013  max resid 0.00505 
-#> ... Similar to previous best
-#> Run 17 stress 0.108 
-#> ... Procrustes: rmse 0.000538  max resid 0.00262 
-#> ... Similar to previous best
-#> Run 18 stress 0.108 
-#> ... Procrustes: rmse 0.00365  max resid 0.017 
-#> Run 19 stress 0.111 
-#> Run 20 stress 0.109 
-#> *** Best solution repeated 2 times
 nmds_pa$stress
-#> [1] 0.0883
 nmds_per$stress
-#> [1] 0.108
 ```
 
 The NMDS using the presence-absence values yields a better result (`nmds_pa$stress`) than the one using percentage data (`nmds_per$stress`).

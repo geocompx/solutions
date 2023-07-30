@@ -24,7 +24,9 @@
 <link href="libs/Roboto_Mono-0.4.7/font.css" rel="stylesheet">
 <link href="libs/Montserrat-0.4.7/font.css" rel="stylesheet">
 <script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.2/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -77,7 +79,7 @@
 <span class="header-section-number">15</span> Ecology<a class="anchor" aria-label="anchor" href="#eco"><i class="fas fa-link"></i></a>
 </h1>
 <p>The solutions assume the following packages are attached (other packages will be attached when needed):</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
@@ -97,96 +99,16 @@
 <p>E1. Run a NMDS using the percentage data of the community matrix.
 Report the stress value and compare it to the stress value as retrieved from the NMDS using presence-absence data.
 What might explain the observed difference?</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"comm"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">comm</span>, <span class="st">"pa"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="va">comm</span> <span class="op">=</span> <span class="va">comm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">25072018</span><span class="op">)</span></span>
 <span><span class="va">nmds_pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">pa</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Run 0 stress 0.089 </span></span>
-<span><span class="co">#&gt; Run 1 stress 0.0891 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0103  max resid 0.0548 </span></span>
-<span><span class="co">#&gt; Run 2 stress 0.0889 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0144  max resid 0.0864 </span></span>
-<span><span class="co">#&gt; Run 3 stress 0.0884 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0178  max resid 0.0631 </span></span>
-<span><span class="co">#&gt; Run 4 stress 0.0887 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0123  max resid 0.0611 </span></span>
-<span><span class="co">#&gt; Run 5 stress 0.0891 </span></span>
-<span><span class="co">#&gt; Run 6 stress 0.0889 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0172  max resid 0.0621 </span></span>
-<span><span class="co">#&gt; Run 7 stress 0.0886 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.011  max resid 0.0546 </span></span>
-<span><span class="co">#&gt; Run 8 stress 0.0913 </span></span>
-<span><span class="co">#&gt; Run 9 stress 0.0896 </span></span>
-<span><span class="co">#&gt; Run 10 stress 0.0927 </span></span>
-<span><span class="co">#&gt; Run 11 stress 0.0923 </span></span>
-<span><span class="co">#&gt; Run 12 stress 0.0902 </span></span>
-<span><span class="co">#&gt; Run 13 stress 0.091 </span></span>
-<span><span class="co">#&gt; Run 14 stress 0.0884 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00567  max resid 0.0321 </span></span>
-<span><span class="co">#&gt; Run 15 stress 0.0888 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0132  max resid 0.0672 </span></span>
-<span><span class="co">#&gt; Run 16 stress 0.0883 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00728  max resid 0.0344 </span></span>
-<span><span class="co">#&gt; Run 17 stress 0.0908 </span></span>
-<span><span class="co">#&gt; Run 18 stress 0.092 </span></span>
-<span><span class="co">#&gt; Run 19 stress 0.0903 </span></span>
-<span><span class="co">#&gt; Run 20 stress 0.0896 </span></span>
-<span><span class="co">#&gt; *** Best solution was not repeated -- monoMDS stopping criteria:</span></span>
-<span><span class="co">#&gt;     20: no. of iterations &gt;= maxit</span></span>
 <span><span class="va">nmds_per</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">comm</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Square root transformation</span></span>
-<span><span class="co">#&gt; Wisconsin double standardization</span></span>
-<span><span class="co">#&gt; Run 0 stress 0.111 </span></span>
-<span><span class="co">#&gt; Run 1 stress 0.109 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0561  max resid 0.207 </span></span>
-<span><span class="co">#&gt; Run 2 stress 0.109 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00323  max resid 0.0101 </span></span>
-<span><span class="co">#&gt; Run 3 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0233  max resid 0.102 </span></span>
-<span><span class="co">#&gt; Run 4 stress 0.109 </span></span>
-<span><span class="co">#&gt; Run 5 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00098  max resid 0.00438 </span></span>
-<span><span class="co">#&gt; ... Similar to previous best</span></span>
-<span><span class="co">#&gt; Run 6 stress 0.11 </span></span>
-<span><span class="co">#&gt; Run 7 stress 0.111 </span></span>
-<span><span class="co">#&gt; Run 8 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00322  max resid 0.0168 </span></span>
-<span><span class="co">#&gt; Run 9 stress 0.11 </span></span>
-<span><span class="co">#&gt; Run 10 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00475  max resid 0.0199 </span></span>
-<span><span class="co">#&gt; Run 11 stress 0.11 </span></span>
-<span><span class="co">#&gt; Run 12 stress 0.109 </span></span>
-<span><span class="co">#&gt; Run 13 stress 0.109 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0106  max resid 0.0427 </span></span>
-<span><span class="co">#&gt; Run 14 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00101  max resid 0.00419 </span></span>
-<span><span class="co">#&gt; ... Similar to previous best</span></span>
-<span><span class="co">#&gt; Run 15 stress 0.109 </span></span>
-<span><span class="co">#&gt; Run 16 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... New best solution</span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.0013  max resid 0.00505 </span></span>
-<span><span class="co">#&gt; ... Similar to previous best</span></span>
-<span><span class="co">#&gt; Run 17 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.000538  max resid 0.00262 </span></span>
-<span><span class="co">#&gt; ... Similar to previous best</span></span>
-<span><span class="co">#&gt; Run 18 stress 0.108 </span></span>
-<span><span class="co">#&gt; ... Procrustes: rmse 0.00365  max resid 0.017 </span></span>
-<span><span class="co">#&gt; Run 19 stress 0.111 </span></span>
-<span><span class="co">#&gt; Run 20 stress 0.109 </span></span>
-<span><span class="co">#&gt; *** Best solution repeated 2 times</span></span>
 <span><span class="va">nmds_pa</span><span class="op">$</span><span class="va">stress</span></span>
-<span><span class="co">#&gt; [1] 0.0883</span></span>
-<span><span class="va">nmds_per</span><span class="op">$</span><span class="va">stress</span></span>
-<span><span class="co">#&gt; [1] 0.108</span></span></code></pre></div>
+<span><span class="va">nmds_per</span><span class="op">$</span><span class="va">stress</span></span></code></pre></div>
 <p>The NMDS using the presence-absence values yields a better result (<code>nmds_pa$stress</code>) than the one using percentage data (<code>nmds_per$stress</code>).
 This might seem surprising at first sight.
 On the other hand, the percentage matrix contains both more information and more noise.
@@ -205,7 +127,7 @@ Next, compute profile and tangential curvature and add them as additional predic
 Finally, construct a response-predictor matrix.
 The scores of the first NMDS axis (which were the result when using the presence-absence community matrix) rotated in accordance with elevation represent the response variable, and should be joined to <code>random_points</code> (use an inner join).
 To complete the response-predictor matrix, extract the values of the environmental predictor raster object to <code>random_points</code>.</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># first compute the terrain attributes we have also used in the chapter</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
@@ -276,7 +198,7 @@ The random forest modeling should include the estimation of optimal hyperparamet
 Parallelize the tuning level.
 Report the mean RMSE and use a boxplot to visualize all retrieved RMSEs.
 Please not that this exercise is best solved using the mlr3 functions <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid()</a></code> and <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark()</a></code> (see <a href="https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking" class="uri">https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking</a> for more information).</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mlr3.mlr-org.com">mlr3</a></span><span class="op">)</span></span>
@@ -418,7 +340,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-07-23.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
