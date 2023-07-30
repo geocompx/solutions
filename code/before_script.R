@@ -3,7 +3,7 @@ knitr::opts_chunk$set(
         background = "#FCFCFC", # code chunk color in latex
         comment = "#>",
         collapse = TRUE,
-        cache = TRUE,
+        # cache = TRUE,
         fig.pos = "t",
         fig.path = "figures/",
         fig.align = "center",
