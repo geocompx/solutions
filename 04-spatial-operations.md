@@ -15,9 +15,6 @@ How many of these high points does the Canterbury region contain?
 **Bonus:** plot the result using the `plot()` function to show all of New Zealand, `canterbury` region highlighted in yellow, high points in Canterbury represented by red crosses (hint: `pch = 7`) and high points in other parts of New Zealand represented by blue circles. See the help page `?points` for details with an illustration of different `pch` values.
 
 ```r
-library(tmap)
-# tmap_mode("view")
-qtm(nz) + qtm(nz_height)
 canterbury = nz |> filter(Name == "Canterbury")
 canterbury_height = nz_height[canterbury, ]
 nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
@@ -30,7 +27,7 @@ plot(nz_not_canterbury_height$geometry, pch = 1, col = "blue", add = TRUE)
 plot(canterbury_height$geometry, pch = 4, col = "red", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e1-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" />
 
 E2. Which region has the second highest number of `nz_height` points, and how many does it have?
 
