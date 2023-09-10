@@ -187,7 +187,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.7.39
+#> terra 1.7.46
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
