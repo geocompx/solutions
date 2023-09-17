@@ -310,30 +310,30 @@ Also, calculate a correlation between NDVI and NDWI for this area (hint: you can
 Try to do something similar but with <code><a href="https://rdrr.io/pkg/terra/man/distance.html">terra::distance()</a></code>: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use <code><a href="https://rdrr.io/pkg/geodata/man/elevation.html">geodata::elevation_30s()</a></code>).
 Convert the resulting distances from meters to kilometers.
 Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation (<code><a href="https://rdrr.io/pkg/terra/man/aggregate.html">aggregate()</a></code>).</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="spatial-operations.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetch the DEM data for Spain</span></span>
-<span id="cb37-2"><a href="spatial-operations.html#cb37-2" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> geodata<span class="sc">::</span><span class="fu">elevation_30s</span>(<span class="at">country =</span> <span class="st">"Spain"</span>, <span class="at">path =</span> <span class="st">"."</span>, <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-3"><a href="spatial-operations.html#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="spatial-operations.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span></span>
-<span id="cb37-5"><a href="spatial-operations.html#cb37-5" aria-hidden="true" tabindex="-1"></a>spain_dem <span class="ot">=</span> <span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
-<span id="cb37-6"><a href="spatial-operations.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="spatial-operations.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># According to the documentation, terra::distance() will calculate distance</span></span>
-<span id="cb37-8"><a href="spatial-operations.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span></span>
-<span id="cb37-9"><a href="spatial-operations.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co"># distance to the coast, we need a raster that has NA values over land and any</span></span>
-<span id="cb37-10"><a href="spatial-operations.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># other value over water</span></span>
-<span id="cb37-11"><a href="spatial-operations.html#cb37-11" aria-hidden="true" tabindex="-1"></a>water_mask <span class="ot">=</span> <span class="fu">is.na</span>(spain_dem)</span>
-<span id="cb37-12"><a href="spatial-operations.html#cb37-12" aria-hidden="true" tabindex="-1"></a>water_mask[water_mask <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb37-13"><a href="spatial-operations.html#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-14"><a href="spatial-operations.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the distance() function on this mask to get distance to the coast</span></span>
-<span id="cb37-15"><a href="spatial-operations.html#cb37-15" aria-hidden="true" tabindex="-1"></a>distance_to_coast <span class="ot">=</span> <span class="fu">distance</span>(water_mask)</span>
-<span id="cb37-16"><a href="spatial-operations.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb37-17"><a href="spatial-operations.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="sc">|---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span></span>
-<span id="cb37-18"><a href="spatial-operations.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="er">=========================================</span></span>
-<span id="cb37-19"><a href="spatial-operations.html#cb37-19" aria-hidden="true" tabindex="-1"></a>                                          </span>
-<span id="cb37-20"><a href="spatial-operations.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="co"># convert distance into km</span></span>
-<span id="cb37-21"><a href="spatial-operations.html#cb37-21" aria-hidden="true" tabindex="-1"></a>distance_to_coast_km <span class="ot">=</span> distance_to_coast <span class="sc">/</span> <span class="dv">1000</span></span>
-<span id="cb37-22"><a href="spatial-operations.html#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-23"><a href="spatial-operations.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result</span></span>
-<span id="cb37-24"><a href="spatial-operations.html#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(distance_to_coast_km, <span class="at">main =</span> <span class="st">"Distance to the coast (km)"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="spatial-operations.html#cb37-1" tabindex="-1"></a><span class="co"># Fetch the DEM data for Spain</span></span>
+<span id="cb37-2"><a href="spatial-operations.html#cb37-2" tabindex="-1"></a>spain_dem <span class="ot">=</span> geodata<span class="sc">::</span><span class="fu">elevation_30s</span>(<span class="at">country =</span> <span class="st">"Spain"</span>, <span class="at">path =</span> <span class="st">"."</span>, <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb37-3"><a href="spatial-operations.html#cb37-3" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="spatial-operations.html#cb37-4" tabindex="-1"></a><span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span></span>
+<span id="cb37-5"><a href="spatial-operations.html#cb37-5" tabindex="-1"></a>spain_dem <span class="ot">=</span> <span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
+<span id="cb37-6"><a href="spatial-operations.html#cb37-6" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="spatial-operations.html#cb37-7" tabindex="-1"></a><span class="co"># According to the documentation, terra::distance() will calculate distance</span></span>
+<span id="cb37-8"><a href="spatial-operations.html#cb37-8" tabindex="-1"></a><span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span></span>
+<span id="cb37-9"><a href="spatial-operations.html#cb37-9" tabindex="-1"></a><span class="co"># distance to the coast, we need a raster that has NA values over land and any</span></span>
+<span id="cb37-10"><a href="spatial-operations.html#cb37-10" tabindex="-1"></a><span class="co"># other value over water</span></span>
+<span id="cb37-11"><a href="spatial-operations.html#cb37-11" tabindex="-1"></a>water_mask <span class="ot">=</span> <span class="fu">is.na</span>(spain_dem)</span>
+<span id="cb37-12"><a href="spatial-operations.html#cb37-12" tabindex="-1"></a>water_mask[water_mask <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb37-13"><a href="spatial-operations.html#cb37-13" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="spatial-operations.html#cb37-14" tabindex="-1"></a><span class="co"># Use the distance() function on this mask to get distance to the coast</span></span>
+<span id="cb37-15"><a href="spatial-operations.html#cb37-15" tabindex="-1"></a>distance_to_coast <span class="ot">=</span> <span class="fu">distance</span>(water_mask)</span>
+<span id="cb37-16"><a href="spatial-operations.html#cb37-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb37-17"><a href="spatial-operations.html#cb37-17" tabindex="-1"></a><span class="sc">|---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span><span class="sc">---------</span><span class="er">|</span></span>
+<span id="cb37-18"><a href="spatial-operations.html#cb37-18" tabindex="-1"></a><span class="er">=========================================</span></span>
+<span id="cb37-19"><a href="spatial-operations.html#cb37-19" tabindex="-1"></a>                                          </span>
+<span id="cb37-20"><a href="spatial-operations.html#cb37-20" tabindex="-1"></a><span class="co"># convert distance into km</span></span>
+<span id="cb37-21"><a href="spatial-operations.html#cb37-21" tabindex="-1"></a>distance_to_coast_km <span class="ot">=</span> distance_to_coast <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb37-22"><a href="spatial-operations.html#cb37-22" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="spatial-operations.html#cb37-23" tabindex="-1"></a><span class="co"># Plot the result</span></span>
+<span id="cb37-24"><a href="spatial-operations.html#cb37-24" tabindex="-1"></a><span class="fu">plot</span>(distance_to_coast_km, <span class="at">main =</span> <span class="st">"Distance to the coast (km)"</span>)</span></code></pre></div>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.</p>
@@ -378,7 +378,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-09-10.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
