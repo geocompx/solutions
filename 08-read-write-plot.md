@@ -18,7 +18,13 @@ Database formats: PostGIS, SQLite, FileGDB.
 
 E2. Name at least two differences between the **sf** functions `read_sf()` and `st_read()`.
 
-`st_read()` prints outputs and keeps strings as text strings (`st_read()` creates factors). This can be seen from the source code of `read_sf()`, which show's it wraps `st_read()`:
+`read_sf()` is simply a 'wrapper' around `st_read()`, meaning that it calls `st_read()` behind the scenes. The differences shown in the output of the `read_sf` are `quiet = TRUE`, `stringsAsFactors = FALSE`, and `as_tibble = TRUE`:
+
+- `read_sf()` outputs are `quiet` by default, meaning less information printed to the console.
+- `read_sf()` outputs are tibbles by default, meaning that they are data frames with some additional features.
+- `read_sf()` does not convert strings to factors by default.
+
+The differences can be seen by running the following commands `nc = st_read(system.file("shape/nc.shp", package="sf"))` and `nc = read_sf(system.file("shape/nc.shp", package="sf"))` from the function's help (`?st_read`).
 
 ```r
 read_sf
@@ -27,8 +33,17 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x562b955d7a20>
+#> <bytecode: 0x55f7cd878fb8>
 #> <environment: namespace:sf>
+nc = st_read(system.file("shape/nc.shp", package="sf"))
+#> Reading layer `nc' from data source 
+#>   `/usr/local/lib/R/site-library/sf/shape/nc.shp' using driver `ESRI Shapefile'
+#> Simple feature collection with 100 features and 14 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: -84.3 ymin: 33.9 xmax: -75.5 ymax: 36.6
+#> Geodetic CRS:  NAD27
+nc = read_sf(system.file("shape/nc.shp", package="sf"))
 ```
 
 E3. Read the `cycle_hire_xy.csv` file from the **spData** package as a spatial object (Hint: it is located in the `misc` folder).
