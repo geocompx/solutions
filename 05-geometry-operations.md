@@ -135,8 +135,8 @@ Which state has the longest border and which has the shortest?
 Hint: The `st_length` function computes the length of a `LINESTRING` or `MULTILINESTRING` geometry.
 
 ```r
-us_states2163 = st_transform(us_states, "EPSG:2163")
-us_states_bor = st_cast(us_states2163, "MULTILINESTRING")
+us_states9311 = st_transform(us_states, "EPSG:9311")
+us_states_bor = st_cast(us_states9311, "MULTILINESTRING")
 us_states_bor$borders = st_length(us_states_bor)
 arrange(us_states_bor, borders)
 #> Simple feature collection with 49 features and 7 fields
