@@ -103,7 +103,7 @@
 <span><span class="co">#&gt;     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, </span></span>
 <span><span class="co">#&gt;         as_tibble = as_tibble)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55930220a188&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5652d77b6030&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></span>
 <span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `nc' from data source </span></span>
@@ -141,7 +141,6 @@ What is a geometry type of the loaded object?</p>
 Write this new object to a file of the GeoPackage format.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rnaturalearth/">rnaturalearth</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Support for Spatial objects (`sp`) will be deprecated in {rnaturalearth} and will be removed in a future release of the package. Please use `sf` objects with {rnaturalearth}. For example: `ne_download(returnclass = 'sf')`</span></span>
 <span><span class="va">germany_borders</span> <span class="op">=</span> <span class="fu"><a href="https://docs.ropensci.org/rnaturalearth/reference/ne_countries.html">ne_countries</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Germany"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">germany_borders</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: plotting the first 10 out of 168 attributes; use max.plot = 168 to</span></span>
@@ -149,7 +148,7 @@ Write this new object to a file of the GeoPackage format.</p>
 <span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html">st_write</a></span><span class="op">(</span><span class="va">germany_borders</span>, <span class="st">"germany_borders.gpkg"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Writing layer `germany_borders' to data source </span></span>
 <span><span class="co">#&gt;   `germany_borders.gpkg' using driver `GPKG'</span></span>
-<span><span class="co">#&gt; Writing 1 features with 168 fields and geometry type Polygon.</span></span></code></pre></div>
+<span><span class="co">#&gt; Writing 1 features with 168 fields and geometry type Multi Polygon.</span></span></code></pre></div>
 <div class="inline-figure"><img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>geodata</strong> package.
 Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rdrr.io/pkg/terra/man/subset.html">terra::subset()</a></code>).</p>
@@ -215,7 +214,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-12-10.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-12-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

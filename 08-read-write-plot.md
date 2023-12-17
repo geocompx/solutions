@@ -33,7 +33,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55930220a188>
+#> <bytecode: 0x5652d77b6030>
 #> <environment: namespace:sf>
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 
@@ -77,7 +77,6 @@ Write this new object to a file of the GeoPackage format.
 
 ```r
 library(rnaturalearth)
-#> Support for Spatial objects (`sp`) will be deprecated in {rnaturalearth} and will be removed in a future release of the package. Please use `sf` objects with {rnaturalearth}. For example: `ne_download(returnclass = 'sf')`
 germany_borders = ne_countries(country = "Germany", returnclass = "sf")
 plot(germany_borders)
 #> Warning: plotting the first 10 out of 168 attributes; use max.plot = 168 to
@@ -85,7 +84,7 @@ plot(germany_borders)
 st_write(germany_borders, "germany_borders.gpkg")
 #> Writing layer `germany_borders' to data source 
 #>   `germany_borders.gpkg' using driver `GPKG'
-#> Writing 1 features with 168 fields and geometry type Polygon.
+#> Writing 1 features with 168 fields and geometry type Multi Polygon.
 ```
 
 <img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;" />
