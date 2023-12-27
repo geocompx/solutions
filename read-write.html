@@ -103,7 +103,7 @@
 <span><span class="co">#&gt;     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, </span></span>
 <span><span class="co">#&gt;         as_tibble = as_tibble)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5652d77b6030&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5598eb564ed0&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></span>
 <span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `nc' from data source </span></span>
@@ -155,7 +155,7 @@ Extract the June values, and save them to a file named <code>tmin_june.tif</code
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geodata</span><span class="op">)</span></span>
 <span><span class="va">gmmt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/geodata/man/worldclim.html">worldclim_global</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"tmin"</span>, res <span class="op">=</span> <span class="fl">5</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/names.html">names</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"</span></span>
 <span><span class="co">#&gt;  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"</span></span>
 <span><span class="co">#&gt;  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"</span></span>
@@ -214,7 +214,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-12-17.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2023-12-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

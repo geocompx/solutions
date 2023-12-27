@@ -187,7 +187,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ```r
 library(terra)
-#> terra 1.7.55
+#> terra 1.7.65
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
@@ -257,10 +257,21 @@ two_rasts = c(ndvi_rast, ndwi_rast)
 names(two_rasts) = c("ndvi", "ndwi")
 
 # correlation -- option 1
-layerCor(two_rasts, fun = cor)
+layerCor(two_rasts, fun = "cor")
+#> $correlation
 #>        ndvi   ndwi
 #> ndvi  1.000 -0.913
 #> ndwi -0.913  1.000
+#> 
+#> $mean
+#>        ndvi  ndwi
+#> ndvi    NaN 0.215
+#> ndwi -0.238   NaN
+#> 
+#> $n
+#>         ndvi    ndwi
+#> ndvi     NaN 1610784
+#> ndwi 1610784     NaN
 
 # correlation -- option 2
 two_rasts_df = as.data.frame(two_rasts)
