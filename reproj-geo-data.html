@@ -130,12 +130,12 @@
 <span><span class="va">nz_wgs_NULL_crs</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_set_crs</a></span><span class="op">(</span><span class="va">nz_wgs</span>, <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="va">nz_27700</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nz_wgs</span>, <span class="st">"EPSG:27700"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_wgs</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_wgs_NULL_crs</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_wgs</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_wgs_NULL_crs</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># answer: it is fatter in the East-West direction</span></span>
 <span><span class="co"># because New Zealand is close to the South Pole and meridians converge there</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_27700</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_27700</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="07-reproj_files/figure-html/07-ex-e1-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e1-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E2. Transform the <code>world</code> dataset to the transverse Mercator projection (<code>"+proj=tmerc"</code>) and plot the result.
@@ -145,16 +145,16 @@ Why does the new object differ from the original one?</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># see https://github.com/r-spatial/sf/issues/509</span></span>
 <span><span class="va">world_tmerc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">world</span>, <span class="st">"+proj=tmerc"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_tmerc</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_tmerc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">world_4326</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">world_tmerc</span>, <span class="st">"EPSG:4326"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_4326</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_4326</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="07-reproj_files/figure-html/07-ex-e2-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e2-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E3. Transform the continuous raster (<code>con_raster</code>) into NAD83 / UTM zone 12N using the nearest neighbor interpolation method.
 What has changed?
 How does it influence the results?</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">con_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">con_raster_utm12n</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/project.html">project</a></span><span class="op">(</span><span class="va">con_raster</span>, <span class="st">"EPSG:32612"</span>, method <span class="op">=</span> <span class="st">"near"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">con_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">con_raster_utm12n</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/project.html">project</a></span><span class="op">(</span><span class="va">con_raster</span>, <span class="st">"EPSG:32612"</span>, method <span class="op">=</span> <span class="st">"near"</span><span class="op">)</span></span>
 <span><span class="va">con_raster_utm12n</span></span>
 <span><span class="co">#&gt; class       : SpatRaster </span></span>
 <span><span class="co">#&gt; dimensions  : 515, 422, 1  (nrow, ncol, nlyr)</span></span>
@@ -166,15 +166,15 @@ How does it influence the results?</p>
 <span><span class="co">#&gt; min value   : 1024 </span></span>
 <span><span class="co">#&gt; max value   : 2892</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster_utm12n</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster_utm12n</span><span class="op">)</span></span></code></pre></div>
 <p><img src="07-reproj_files/figure-html/07-ex-e3-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e3-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E4. Transform the categorical raster (<code>cat_raster</code>) into WGS 84 using the bilinear interpolation method.
 What has changed?
 How does it influence the results?</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cat_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/nlcd.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cat_raster_wgs84</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/terra/man/project.html">project</a></span><span class="op">(</span><span class="va">cat_raster</span>, <span class="st">"EPSG:4326"</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">cat_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/nlcd.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cat_raster_wgs84</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/project.html">project</a></span><span class="op">(</span><span class="va">cat_raster</span>, <span class="st">"EPSG:4326"</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span></span>
 <span><span class="va">cat_raster_wgs84</span></span>
 <span><span class="co">#&gt; class       : SpatRaster </span></span>
 <span><span class="co">#&gt; dimensions  : 1246, 1244, 1  (nrow, ncol, nlyr)</span></span>
@@ -186,8 +186,8 @@ How does it influence the results?</p>
 <span><span class="co">#&gt; min value   :      1 </span></span>
 <span><span class="co">#&gt; max value   :      8</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster_wgs84</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster_wgs84</span><span class="op">)</span></span></code></pre></div>
 <p><img src="07-reproj_files/figure-html/07-ex-e4-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e4-2.png" width="100%" style="display: block; margin: auto;"></p>
 <!--toDo:jn-->
 <!--improve/replace/modify the following q-->
@@ -236,7 +236,7 @@ How does it influence the results?</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-01-28.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-02-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
