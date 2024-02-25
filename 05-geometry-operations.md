@@ -57,10 +57,10 @@ Using `st_buffer()`, how many points in `nz_height` are within 100 km of Canterb
 
 ```r
 canterbury = nz[nz$Name == "Canterbury", ]
-cant_buff = st_buffer(canterbury, 100)
+cant_buff = st_buffer(canterbury, 100000)
 nz_height_near_cant = nz_height[cant_buff, ]
 nrow(nz_height_near_cant) # 75 - 5 more
-#> [1] 75
+#> [1] 95
 ```
 
 E3. Find the geographic centroid of New Zealand. 

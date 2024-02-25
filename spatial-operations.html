@@ -7,16 +7,16 @@
 <base href="https://r.geocompx.org/solutions/">
 <title>Chapter 4 Spatial data operations | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
+<meta name="description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 101 highest points in the country. How many of...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/spatial-operations.html">
 <meta property="og:image" content="https://r.geocompx.org/solutions/images/cover.png">
-<meta property="og:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
+<meta property="og:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 101 highest points in the country. How many of...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Spatial data operations | Geocomputation with R: Solutions">
-<meta name="twitter:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 100 highest points in the country. How many of...">
+<meta name="twitter:description" content="library(sf) library(dplyr) library(spData) E1. It was established in Section ?? that Canterbury was the region of New Zealand containing most of the 101 highest points in the country. How many of...">
 <meta name="twitter:image" content="https://r.geocompx.org/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +82,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jakubnowosad.com/spData/">spData</a></span><span class="op">)</span></span></code></pre></div>
-<p>E1. It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 100 highest points in the country.
+<p>E1. It was established in Section <a href="#spatial-vec"><strong>??</strong></a> that Canterbury was the region of New Zealand containing most of the 101 highest points in the country.
 How many of these high points does the Canterbury region contain?</p>
 <p><strong>Bonus:</strong> plot the result using the <code><a href="https://rspatial.github.io/terra/reference/plot.html">plot()</a></code> function to show all of New Zealand, <code>canterbury</code> region highlighted in yellow, high points in Canterbury represented by red crosses (hint: <code>pch = 7</code>) and high points in other parts of New Zealand represented by blue circles. See the help page <code><a href="https://rspatial.github.io/terra/reference/lines.html">?points</a></code> for details with an illustration of different <code>pch</code> values.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
@@ -108,7 +108,7 @@ How many of these high points does the Canterbury region contain?</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Name count</span></span>
 <span><span class="co">#&gt; 1 West Coast    22</span></span></code></pre></div>
-<p>E3. Generalizing the question to all regions: how many of New Zealand’s 16 regions contain points which belong to the top 100 highest points in the country? Which regions?</p>
+<p>E3. Generalizing the question to all regions: how many of New Zealand’s 16 regions contain points which belong to the top 101 highest points in the country? Which regions?</p>
 <ul>
 <li>Bonus: create a table listing these regions in order of the number of points and their name.</li>
 </ul>
@@ -389,7 +389,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-02-18.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-02-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
