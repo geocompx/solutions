@@ -9,7 +9,7 @@ jobs:
   bookdown:
     name: Render-Solutions
     runs-on: ubuntu-latest
-    container: geocompr/geocompr:suggests
+    container: geocompx/geocompr:suggests
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
