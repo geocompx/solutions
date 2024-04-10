@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- <base href="https://r.geocompx.org/solutions/"> --><title>Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions</title>
+<meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
+<meta name="description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) E1. Read the script 11-centroid-alg.R in the code folder of the book’s GitHub...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://r.geocompx.org/solutions/algorithms.html">
+<meta property="og:image" content="https://r.geocompx.org/solutions/images/cover.png">
+<meta property="og:description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) E1. Read the script 11-centroid-alg.R in the code folder of the book’s GitHub...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 11 Scripts, algorithms and functions | Geocomputation with R: Solutions">
+<meta name="twitter:description" content="The solutions assume the following packages are attached (other packages will be attached when needed): library(sf) E1. Read the script 11-centroid-alg.R in the code folder of the book’s GitHub...">
+<meta name="twitter:image" content="https://r.geocompx.org/solutions/images/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.9/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.7.0/transition.js"></script><script src="libs/bs3compat-0.7.0/tabs.js"></script><script src="libs/bs3compat-0.7.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS -->
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h2>
+        <a href="index.html" title="">Geocomputation with R: Solutions</a>
+      </h2>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li class="book-part">Foundations</li>
+<li><a class="" href="spatial-class.html"><span class="header-section-number">2</span> Geographic data in R</a></li>
+<li><a class="" href="attr.html"><span class="header-section-number">3</span> Attribute data operations</a></li>
+<li><a class="" href="spatial-operations.html"><span class="header-section-number">4</span> Spatial data operations</a></li>
+<li><a class="" href="geometric-operations.html"><span class="header-section-number">5</span> Geometry operations</a></li>
+<li><a class="" href="raster-vector.html"><span class="header-section-number">6</span> Raster-vector interactions</a></li>
+<li><a class="" href="reproj-geo-data.html"><span class="header-section-number">7</span> Reprojecting geographic data</a></li>
+<li><a class="" href="read-write.html"><span class="header-section-number">8</span> Geographic data I/O</a></li>
+<li class="book-part">Extensions</li>
+<li><a class="" href="adv-map.html"><span class="header-section-number">9</span> Making maps with R</a></li>
+<li><a class="" href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></li>
+<li><a class="active" href="algorithms.html"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li>
+<li><a class="" href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></li>
+<li class="book-part">Applications</li>
+<li><a class="" href="transport.html"><span class="header-section-number">13</span> Transportation</a></li>
+<li><a class="" href="location.html"><span class="header-section-number">14</span> Geomarketing</a></li>
+<li><a class="" href="eco.html"><span class="header-section-number">15</span> Ecology</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/geocompx/solutions">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="algorithms" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Scripts, algorithms and functions<a class="anchor" aria-label="anchor" href="#algorithms"><i class="fas fa-link"></i></a>
+</h1>
+<p>The solutions assume the following packages are attached (other packages will be attached when needed):</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span></code></pre></div>
+<p>E1. Read the script <a href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a> in the <code>code</code> folder of the book’s GitHub repository.</p>
+<ul>
+<li>Which of the best practices covered in Section <a href="#scripts"><strong>??</strong></a> does it follow?</li>
+<li>Create a version of the script on your computer in an IDE such as RStudio (preferably by typing-out the script line-by-line, in your own coding style and with your own comments, rather than copy-pasting — this will help you learn how to type scripts). Using the example of a square polygon (e.g., created with <code>poly_mat = cbind(x = c(0, 9, 9, 0, 0), y = c(0, 0, 9, 9, 0))</code>) execute the script line-by-line.</li>
+<li>What changes could be made to the script to make it more reproducible?</li>
+<li>How could the documentation be improved?</li>
+</ul>
+<p>The script is stored in a logical location with a sensible file name.
+The script is well documented with comments and the code is well formatted.
+The script is reproducible.</p>
+<p>Open a file and create a new script in RStudio, e.g., with the keyboard shortcut <code>Ctrl + Shift + N</code> (Windows) or <code>Cmd + Shift + N</code> (Mac), by clicking <code>File &gt; New File &gt; R Script</code> or by clicking the <code>+</code> icon in the top left of the <code>Source</code> pane.
+You can also create a new R script from the R console with the command <code>file.create("11-centroid-alg.R")</code>.</p>
+<p>The script is already reproducible, with a message stating that it needs an object called <code>poly_mat</code> to be present and, if none is present, it creates an example dataset at the outset for testing.
+For people new to R it could also contain a comment stating that R must be installed before running the script.</p>
+<p>Documentation could be improved with a more detailed description of the algorithm, including a link to the relevant section of the book.
+Furthermore, the anonymous functions could be replaced with named functions and documented with Roxygen2 comments.</p>
+<p>E2. In the geometric algorithms section we calculated that the area and geographic centroid of the polygon represented by <code>poly_mat</code> was 245 and 8.8, 9.2, respectively.</p>
+<ul>
+<li>Reproduce the results on your own computer with reference to the script <a href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>, an implementation of this algorithm (bonus: type out the commands - try to avoid copy-pasting).</li>
+<li>Are the results correct? Verify them by converting <code>poly_mat</code> into an <code>sfc</code> object (named <code>poly_sfc</code>) with <code><a href="https://r-spatial.github.io/sf/reference/st.html">st_polygon()</a></code> (hint: this function takes objects of class <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>) and then using <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid()</a></code>.</li>
+</ul>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># We can verify the answer by converting `poly_mat` into a simple feature collection</span></span>
+<span><span class="co"># as follows, which shows the calculations match:</span></span>
+<span><span class="va">x_coords</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">12</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y_coords</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">poly_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x_coords</span>, <span class="va">y_coords</span><span class="op">)</span></span>
+<span><span class="va">poly_sfc</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html">st_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">poly_mat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">poly_sfc</span><span class="op">)</span></span>
+<span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">poly_sfc</span><span class="op">)</span></span>
+<span><span class="co"># By calling the script:</span></span>
+<span><span class="co"># source("https://github.com/geocompx/geocompr/raw/main/code/11-centroid-alg.R")</span></span></code></pre></div>
+<p>E3. It was stated that the algorithm we created only works for <em>convex hulls</em>. Define convex hulls (see the geometry operations chapter) and test the algorithm on a polygon that is <em>not</em> a convex hull.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x_coords</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">12</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y_coords</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span>, <span class="fl">20</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">x_coords</span>, <span class="va">y_coords</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="va">poly_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x_coords</span>, <span class="va">y_coords</span><span class="op">)</span></span>
+<span><span class="co"># source("https://github.com/geocompx/geocompr/raw/main/code/11-centroid-alg.R")</span></span>
+<span><span class="co"># Area from our script: 270</span></span>
+<span><span class="va">poly_sfc</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html">st_polygon</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">poly_mat</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">poly_sfc</span><span class="op">)</span> <span class="co"># Actual area: 220</span></span></code></pre></div>
+<ul>
+<li>Bonus 1: Think about why the method only works for convex hulls and note changes that would need to be made to the algorithm to make it work for other types of polygon.</li>
+<li>Bonus 2: Building on the contents of <code>11-centroid-alg.R</code>, write an algorithm only using base R functions that can find the total length of linestrings represented in matrix form.</li>
+</ul>
+<!-- Todo: add example of matrix representing a linestring, demonstrate code to verify the answer, suggest alternative functions to decompose as a bonus. --><p>The algorithm would need to be able to have negative as well as positive area values.</p>
+<p>We leave Bonus 2 as an exercise for the reader.</p>
+<p>E4. In the functions section we created different versions of the <code>poly_centroid()</code> function that generated outputs of class <code>sfg</code> (<code>poly_centroid_sfg()</code>) and type-stable <code>matrix</code> outputs (<code>poly_centroid_type_stable()</code>).
+Further extend the function by creating a version (e.g., called <code>poly_centroid_sf()</code>) that is type stable (only accepts inputs of class <code>sf</code>) <em>and</em> returns <code>sf</code> objects (hint: you may need to convert the object <code>x</code> into a matrix with the command <code>sf::st_coordinates(x)</code>).</p>
+<ul>
+<li>Verify if it works by running <code>poly_centroid_sf(sf::st_sf(sf::st_sfc(poly_sfc)))</code>
+</li>
+<li>What error message do you get when you try to run <code>poly_centroid_sf(poly_mat)</code>?</li>
+</ul>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">poly_centroid_sf</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/is.html">is</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">xcoords</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">centroid_coords</span> <span class="op">=</span> <span class="fu">poly_centroid</span><span class="op">(</span><span class="va">xcoords</span><span class="op">)</span></span>
+<span>  <span class="va">centroid_sf</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span>geometry <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html">st_point</a></span><span class="op">(</span><span class="va">centroid_coords</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">centroid_sf</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">poly_centroid_sf</span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="va">poly_sfc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">poly_centroid_sf</span><span class="op">(</span><span class="va">poly_sfc</span><span class="op">)</span></span>
+<span><span class="fu">poly_centroid_sf</span><span class="op">(</span><span class="va">poly_mat</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="gis.html"><span class="header-section-number">10</span> Bridges to GIS software</a></div>
+<div class="next"><a href="spatial-cv.html"><span class="header-section-number">12</span> Statistical learning</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <h2>Note: Second Edition is under construction 🏗</h2>
+    <!--<p>Now is a great time to provide feedback</p>-->
+        <ul class="list-unstyled">
+<li><a href="https://r.geocompx.org/">Read the book <i class="fa fa-book"></i></a></li>
+          <li><a href="https://discord.gg/PMztXYgNxp">Chat on Discord <i class="fab fa-discord"></i></a></li>
+          <li><a href="https://supportukrainenow.org/">Support Ukraine 🇺🇦
+</a></li>
+        </ul>
+<hr>
+<nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#algorithms"><span class="header-section-number">11</span> Scripts, algorithms and functions</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/geocompx/solutions/blob/main/11-algorithms.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/geocompx/solutions/edit/main/11-algorithms.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-04-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
