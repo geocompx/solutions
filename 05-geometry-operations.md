@@ -38,7 +38,6 @@ nz_simple_poly = st_simplify(st_geometry(nz), dTolerance = 10000) |>
   st_sfc() |> 
   st_cast("POLYGON")
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
-
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
 nz_simple_multipoly = st_simplify(st_geometry(nz), dTolerance = 10000) |> 
   st_sfc() |> 
