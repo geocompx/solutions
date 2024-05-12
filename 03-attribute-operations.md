@@ -282,13 +282,13 @@ us_states |>
 #> Dimension:     XY
 #> Bounding box:  xmin: -125 ymin: 24.6 xmax: -67 ymax: 49.4
 #> Geodetic CRS:  NAD83
-#> # A tibble: 4 x 3
+#> # A tibble: 4 × 3
 #>   REGION   nr_of_states                                                 geometry
-#>   <fct>           <int>                              <MULTIPOLYGON [arc_degree]>
-#> 1 Norteast            9 (((-70.8 42.9, -70.7 43.1, -70.6 43.1, -70.5 43.3, -70.~
-#> 2 Midwest            12 (((-85.5 45.6, -85.5 45.8, -85.6 45.8, -85.6 45.6, -85.~
-#> 3 South              17 (((-81.4 30.7, -81.4 30.8, -81.4 30.9, -81.4 31, -81.3 ~
-#> 4 West               11 (((-118 33.4, -118 33.3, -118 33.3, -118 33.4, -119 33.~
+#>   <fct>           <int>                                       <MULTIPOLYGON [°]>
+#> 1 Norteast            9 (((-70.8 42.9, -70.7 43.1, -70.6 43.1, -70.5 43.3, -70.…
+#> 2 Midwest            12 (((-85.5 45.6, -85.5 45.8, -85.6 45.8, -85.6 45.6, -85.…
+#> 3 South              17 (((-81.4 30.7, -81.4 30.8, -81.4 30.9, -81.4 31, -81.3 …
+#> 4 West               11 (((-118 33.4, -118 33.3, -118 33.3, -118 33.4, -119 33.…
 ```
 
 E6. What was the minimum and maximum total population in 2015 in each region?
@@ -305,13 +305,13 @@ us_states |>
 #> Dimension:     XY
 #> Bounding box:  xmin: -125 ymin: 24.6 xmax: -67 ymax: 49.4
 #> Geodetic CRS:  NAD83
-#> # A tibble: 4 x 5
+#> # A tibble: 4 × 5
 #>   REGION   min_pop  max_pop   tot_pop                                   geometry
-#>   <fct>      <dbl>    <dbl>     <dbl>                <MULTIPOLYGON [arc_degree]>
-#> 1 Norteast  626604 19673174  55989520 (((-70.8 42.9, -70.7 43.1, -70.6 43.1, -7~
-#> 2 Midwest   721640 12873761  67546398 (((-85.5 45.6, -85.5 45.8, -85.6 45.8, -8~
-#> 3 South     647484 26538614 118575377 (((-81.4 30.7, -81.4 30.8, -81.4 30.9, -8~
-#> 4 West      579679 38421464  72264052 (((-118 33.4, -118 33.3, -118 33.3, -118 ~
+#>   <fct>      <dbl>    <dbl>     <dbl>                         <MULTIPOLYGON [°]>
+#> 1 Norteast  626604 19673174  55989520 (((-70.8 42.9, -70.7 43.1, -70.6 43.1, -7…
+#> 2 Midwest   721640 12873761  67546398 (((-85.5 45.6, -85.5 45.8, -85.6 45.8, -8…
+#> 3 South     647484 26538614 118575377 (((-81.4 30.7, -81.4 30.8, -81.4 30.9, -8…
+#> 4 West      579679 38421464  72264052 (((-118 33.4, -118 33.3, -118 33.3, -118 …
 ```
 
 E7. Add variables from `us_states_df` to `us_states`, and create a new object called `us_states_stats`.
@@ -332,7 +332,7 @@ How can you find them? (hint: try to use the `dplyr::anti_join()` function)
 ```r
 us_states_df |>
   anti_join(st_drop_geometry(us_states), by = c("state" = "NAME"))
-#> # A tibble: 2 x 5
+#> # A tibble: 2 × 5
 #>   state  median_income_10 median_income_15 poverty_level_10 poverty_level_15
 #>   <chr>             <dbl>            <dbl>            <dbl>            <dbl>
 #> 1 Alaska            29509            31455            64245            72957

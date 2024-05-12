@@ -33,7 +33,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x5633b3f81738>
+#> <bytecode: 0x55d4e6942450>
 #> <environment: namespace:sf>
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 

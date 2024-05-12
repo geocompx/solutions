@@ -174,7 +174,7 @@ cat(crs(nlcd)) # CRS
 #>             LENGTHUNIT["metre",1]],
 #>     USAGE[
 #>         SCOPE["Engineering survey, topographic mapping."],
-#>         AREA["North America - between 114<c2><b0>W and 108<c2><b0>W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
+#>         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
 #>         BBOX[31.33,-114,84,-108]],
 #>     ID["EPSG",26912]]
 ```
@@ -219,7 +219,7 @@ cat(crs(nlcd))
 #>             LENGTHUNIT["metre",1]],
 #>     USAGE[
 #>         SCOPE["Engineering survey, topographic mapping."],
-#>         AREA["North America - between 114<c2><b0>W and 108<c2><b0>W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
+#>         AREA["North America - between 114°W and 108°W - onshore and offshore. Canada - Alberta; Northwest Territories; Nunavut; Saskatchewan. United States (USA) - Arizona; Colorado; Idaho; Montana; New Mexico; Utah; Wyoming."],
 #>         BBOX[31.33,-114,84,-108]],
 #>     ID["EPSG",26912]]
 ```

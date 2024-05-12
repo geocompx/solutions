@@ -121,8 +121,8 @@ names(reclass) = names(input_ras)
 #************************************
 metro_names = dplyr::pull(metro_names, city) |>
   as.character() |>
-  {\(x) ifelse(x == "Velbert", "D<U+00FC>sseldorf", x)}() |>
-  {\(x) gsub("<U+00FC>", "ue", x)}()
+  {\(x) ifelse(x == "Velbert", "Düsseldorf", x)}() |>
+  {\(x) gsub("ü", "ue", x)}()
 
 pop_agg = terra::aggregate(reclass$pop, fact = 20, fun = sum, na.rm = TRUE)
 pop_agg = pop_agg[pop_agg > 500000, drop = FALSE] 
