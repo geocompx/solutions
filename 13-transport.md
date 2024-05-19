@@ -5,7 +5,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(spDataLarge)
 ```
@@ -33,7 +33,7 @@ E3. What proportion of trips represented in the `desire_lines` are accounted for
 E4. The analysis presented in this chapter is designed for teaching how geocomputation methods can be applied to transport research.
 If you were doing this for real, in government or for a transport consultancy, what top 3 things would you do differently?
 
-```r
+``` r
 # Higher level of geographic resolution.
 # Use cycle-specific routing services.
 # Identify key walking routes.

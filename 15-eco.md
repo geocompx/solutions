@@ -5,7 +5,7 @@
 
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
-```r
+``` r
 library(sf)
 library(terra)
 library(data.table)
@@ -28,7 +28,7 @@ E1. Run a NMDS\index{NMDS} using the percentage data of the community matrix.
 Report the stress value and compare it to the stress value as retrieved from the NMDS using presence-absence data.
 What might explain the observed difference?
 
-```r
+``` r
 data("comm", package = "spDataLarge")
 pa = vegan::decostand(comm, "pa")
 pa = pa[rowSums(pa) != 0, ]
@@ -60,7 +60,7 @@ Finally, construct a response-predictor matrix.
 The scores of the first NMDS\index{NMDS} axis (which were the result when using the presence-absence community matrix) rotated in accordance with elevation represent the response variable, and should be joined to `random_points` (use an inner join).
 To complete the response-predictor matrix, extract the values of the environmental predictor raster object to `random_points`.
 
-```r
+``` r
 # first compute the terrain attributes we have also used in the chapter
 library(dplyr)
 library(terra)
@@ -134,7 +134,7 @@ Parallelize\index{parallelization} the tuning level.
 Report the mean RMSE\index{RMSE} and use a boxplot to visualize all retrieved RMSEs.
 Please not that this exercise is best solved using the mlr3 functions `benchmark_grid()` and `benchmark()` (see https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking for more information).
 
-```r
+``` r
 library(dplyr)
 library(future)
 library(mlr3)

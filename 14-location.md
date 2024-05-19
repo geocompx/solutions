@@ -5,7 +5,7 @@
 
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
-```r
+``` r
 library(sf)
 library(dplyr)
 library(purrr)
@@ -22,7 +22,7 @@ This takes 30 seconds on a machine with 16 GB RAM.
 Use `dplyr::as_tibble()` to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (`inh`) we have created using class mean values.
 
-```r
+``` r
 # Coarse inhabitant raster (1 km resolution)
 #*******************************************
 
@@ -89,7 +89,7 @@ terra::global((abs(inh_fine - inh_coarse) > 5000), fun = "sum", na.rm = TRUE)
 E2. Suppose our bike shop predominantly sold electric bikes to older people. 
 Change the age raster accordingly, repeat the remaining analyses and compare the changes with our original result.
 
-```r
+``` r
 # Here, we assue that you have already created `input_ras` in the first exercise.
 # attach further necessary data
 data("metro_names", "shops", package = "spDataLarge")

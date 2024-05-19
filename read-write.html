@@ -79,7 +79,7 @@
 <h1>
 <span class="header-section-number">8</span> Geographic data I/O<a class="anchor" aria-label="anchor" href="#read-write"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
 <p>E1. List and describe three types of vector, raster, and geodatabase formats.</p>
@@ -97,27 +97,29 @@
 <code><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf()</a></code> does not convert strings to factors by default.</li>
 </ul>
 <p>The differences can be seen by running the following commands <code>nc = st_read(system.file("shape/nc.shp", package="sf"))</code> and <code>nc = read_sf(system.file("shape/nc.shp", package="sf"))</code> from the function’s help (<code><a href="https://r-spatial.github.io/sf/reference/st_read.html">?st_read</a></code>).</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">read_sf</span></span>
 <span><span class="co">#&gt; function (..., quiet = TRUE, stringsAsFactors = FALSE, as_tibble = TRUE) </span></span>
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt;     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, </span></span>
 <span><span class="co">#&gt;         as_tibble = as_tibble)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55d4e6942450&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></span>
-<span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5616ed1f0788&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `nc' from data source </span></span>
 <span><span class="co">#&gt;   `/usr/local/lib/R/site-library/sf/shape/nc.shp' using driver `ESRI Shapefile'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 100 features and 14 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: -84.3 ymin: 33.9 xmax: -75.5 ymax: 36.6</span></span>
-<span><span class="co">#&gt; Geodetic CRS:  NAD27</span></span>
-<span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; Geodetic CRS:  NAD27</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>E3. Read the <code>cycle_hire_xy.csv</code> file from the <strong>spData</strong> package as a spatial object (Hint: it is located in the <code>misc</code> folder).
 What is a geometry type of the loaded object?</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c_h</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"misc/cycle_hire_xy.csv"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">c_h</span></span>
@@ -140,34 +142,36 @@ What is a geometry type of the loaded object?</p>
 <span><span class="co">#&gt; 10 10        Park Street         Bankside      1     17 POINT (-0.0928 51.5)</span></span></code></pre></div>
 <p>E4. Download the borders of Germany using <strong>rnaturalearth</strong>, and create a new object called <code>germany_borders</code>.
 Write this new object to a file of the GeoPackage format.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rnaturalearth/">rnaturalearth</a></span><span class="op">)</span></span>
 <span><span class="va">germany_borders</span> <span class="op">=</span> <span class="fu"><a href="https://docs.ropensci.org/rnaturalearth/reference/ne_countries.html">ne_countries</a></span><span class="op">(</span>country <span class="op">=</span> <span class="st">"Germany"</span>, returnclass <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">germany_borders</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: plotting the first 10 out of 168 attributes; use max.plot = 168 to</span></span>
-<span><span class="co">#&gt; plot all</span></span>
-<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html">st_write</a></span><span class="op">(</span><span class="va">germany_borders</span>, <span class="st">"germany_borders.gpkg"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; plot all</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_write.html">st_write</a></span><span class="op">(</span><span class="va">germany_borders</span>, <span class="st">"germany_borders.gpkg"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Writing layer `germany_borders' to data source </span></span>
 <span><span class="co">#&gt;   `germany_borders.gpkg' using driver `GPKG'</span></span>
 <span><span class="co">#&gt; Writing 1 features with 168 fields and geometry type Multi Polygon.</span></span></code></pre></div>
 <div class="inline-figure"><img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the <strong>geodata</strong> package.
 Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rspatial.github.io/terra/reference/subset.html">terra::subset()</a></code>).</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">geodata</span><span class="op">)</span></span>
 <span><span class="va">gmmt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/geodata/man/worldclim.html">worldclim_global</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"tmin"</span>, res <span class="op">=</span> <span class="fl">5</span>, path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"</span></span>
 <span><span class="co">#&gt;  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"</span></span>
-<span><span class="co">#&gt;  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gmmt_june</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">gmmt</span>, <span class="st">"wc2.1_5m_tmin_06"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt_june</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">gmmt_june</span>, <span class="st">"tmin_june.tif"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="08-read-write-plot_files/figure-html/08-ex-e5-1.png" width="100%" style="display: block; margin: auto;"><img src="08-read-write-plot_files/figure-html/08-ex-e5-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E6. Create a static map of Germany’s borders, and save it to a PNG file.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"germany.png"</span>, width <span class="op">=</span> <span class="fl">350</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">germany_borders</span><span class="op">)</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, graticule <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -175,7 +179,7 @@ Extract the June values, and save them to a file named <code>tmin_june.tif</code
 <span><span class="co">#&gt;   2</span></span></code></pre></div>
 <p>E7. Create an interactive map using data from the <code>cycle_hire_xy.csv</code> file.
 Export this map to a file called <code>cycle_hire.html</code>.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview">mapview</a></span><span class="op">)</span></span>
 <span><span class="va">mapview_obj</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">c_h</span>, zcol <span class="op">=</span> <span class="st">"nbikes"</span>, legend <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapshot.html">mapshot</a></span><span class="op">(</span><span class="va">mapview_obj</span>, file <span class="op">=</span> <span class="st">"cycle_hire.html"</span><span class="op">)</span></span></code></pre></div>
@@ -215,7 +219,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-05-12.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-05-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

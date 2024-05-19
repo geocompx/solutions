@@ -5,7 +5,7 @@
 
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
-```r
+``` r
 library(sf)
 ```
 
@@ -35,7 +35,7 @@ E2. In the geometric algorithms section we calculated that the area and geograph
   - Reproduce the results on your own computer with reference to the script [`11-centroid-alg.R`](https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R), an implementation of this algorithm (bonus: type out the commands - try to avoid copy-pasting).
   - Are the results correct? Verify them by converting `poly_mat` into an `sfc` object (named `poly_sfc`) with `st_polygon()` (hint: this function takes objects of class `list()`) and then using `st_area()` and `st_centroid()`.
 
-```r
+``` r
 # We can verify the answer by converting `poly_mat` into a simple feature collection
 # as follows, which shows the calculations match:
 x_coords = c(10, 20, 12, 0, 0, 10)
@@ -50,7 +50,7 @@ sf::st_centroid(poly_sfc)
 
 E3. It was stated that the algorithm\index{algorithm} we created only works for *convex hulls*. Define convex hulls\index{convex hull} (see the geometry operations chapter) and test the algorithm on a polygon that is *not* a convex hull.
 
-```r
+``` r
 x_coords = c(10, 20, 12, 0, 0, 5, 10)
 y_coords = c(0, 15, 20, 10, 0, 5, 0)
 plot(x_coords, y_coords, type = "l")
@@ -77,7 +77,7 @@ Further extend the function by creating a version (e.g., called `poly_centroid_s
   - What error message do you get when you try to run `poly_centroid_sf(poly_mat)`?
     
 
-```r
+``` r
 poly_centroid_sf = function(x) {
   stopifnot(is(x, "sf"))
   xcoords = sf::st_coordinates(x)

@@ -114,8 +114,9 @@
 <span><span class="co">#&gt;  Mean   :70.9   Mean   : 17106                      </span></span>
 <span><span class="co">#&gt;  3rd Qu.:76.8   3rd Qu.: 24233                      </span></span>
 <span><span class="co">#&gt;  Max.   :83.6   Max.   :120860                      </span></span>
-<span><span class="co">#&gt;  NA's   :10     NA's   :17</span></span>
-<span><span class="co"># - Its geometry type?</span></span>
+<span><span class="co">#&gt;  NA's   :10     NA's   :17</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># - Its geometry type?</span></span>
 <span><span class="co">#   multipolygon</span></span>
 <span><span class="co"># - The number of countries?</span></span>
 <span><span class="co">#   177</span></span>
@@ -128,12 +129,13 @@ Find two similarities and two differences between the image on your computer and
 <li>Why was <code>cex</code> set to the <code>sqrt(world$pop) / 10000</code>?</li>
 <li>Bonus: experiment with different ways to visualize the global population.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world</span><span class="op">[</span><span class="st">"continent"</span><span class="op">]</span>, reset <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">world</span><span class="op">$</span><span class="va">pop</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10000</span></span>
 <span><span class="va">world_cents</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">world</span>, of_largest <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: st_centroid assumes attributes are constant over geometries</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_cents</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, cex <span class="op">=</span> <span class="va">cex</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: st_centroid assumes attributes are constant over geometries</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_cents</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, cex <span class="op">=</span> <span class="va">cex</span><span class="op">)</span></span>
 <span><span class="co"># - What does the `cex` argument do (see `?plot`)?</span></span>
 <span><span class="co">#   It specifies the size of the circles</span></span>
 <span><span class="co"># - Why was `cex` set to the `sqrt(world$pop) / 10000`?</span></span>
@@ -158,7 +160,7 @@ Find two similarities and two differences between the image on your computer and
 <li>Adjust the <code>lwd</code>, <code>col</code> and <code>expandBB</code> arguments of <code><a href="https://rspatial.github.io/terra/reference/plot.html">plot()</a></code>.</li>
 <li>Challenge: read the documentation of <code><a href="https://rspatial.github.io/terra/reference/text.html">text()</a></code> and annotate the map.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nigeria</span> <span class="op">=</span> <span class="va">world</span><span class="op">[</span><span class="va">world</span><span class="op">$</span><span class="va">name_long</span> <span class="op">==</span> <span class="st">"Nigeria"</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nigeria</span><span class="op">)</span>, expandBB <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">1</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"gray"</span>, lwd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -173,30 +175,35 @@ Find two similarities and two differences between the image on your computer and
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nigeria</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"yellow"</span>, add <span class="op">=</span> <span class="cn">TRUE</span>, border <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span></span>
 <span><span class="va">a</span> <span class="op">=</span> <span class="va">africa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Niger"</span>, <span class="va">africa</span><span class="op">$</span><span class="va">name_long</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="va">ncentre</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: st_centroid assumes attributes are constant over geometries</span></span>
-<span><span class="va">ncentre_num</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">ncentre</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: st_centroid assumes attributes are constant over geometries</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ncentre_num</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">ncentre</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/text.html">text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ncentre_num</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">ncentre_num</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, labels <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">name_long</span><span class="op">)</span></span></code></pre></div>
 <p><img src="02-spatial-data_files/figure-html/02-ex-e3-1.png" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e3-2.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E4. Create an empty <code>SpatRaster</code> object called <code>my_raster</code> with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>                 vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, size <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">my_raster</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-spatial-data_files/figure-html/02-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Read-in the <code>raster/nlcd.tif</code> file from the <strong>spDataLarge</strong> package.
 What kind of information can you get about the properties of this file?</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nlcd</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/nlcd.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># dimensions</span></span>
-<span><span class="co">#&gt; [1] 1359 1073    1</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">res</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># resolution</span></span>
-<span><span class="co">#&gt; [1] 31.5 31.5</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html">ext</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># extent</span></span>
-<span><span class="co">#&gt; SpatExtent : 301903.344386758, 335735.354381954, 4111244.46098842, 4154086.47216415 (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># number of layers</span></span>
-<span><span class="co">#&gt; [1] 1</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span><span class="op">)</span> <span class="co"># CRS</span></span>
+<span><span class="co">#&gt; [1] 1359 1073    1</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">res</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># resolution</span></span>
+<span><span class="co">#&gt; [1] 31.5 31.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html">ext</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># extent</span></span>
+<span><span class="co">#&gt; SpatExtent : 301903.344386758, 335735.354381954, 4111244.46098842, 4154086.47216415 (xmin, xmax, ymin, ymax)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">nlyr</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span> <span class="co"># number of layers</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span><span class="op">)</span> <span class="co"># CRS</span></span>
 <span><span class="co">#&gt; PROJCRS["NAD83 / UTM zone 12N",</span></span>
 <span><span class="co">#&gt;     BASEGEOGCRS["NAD83",</span></span>
 <span><span class="co">#&gt;         DATUM["North American Datum 1983",</span></span>
@@ -237,7 +244,7 @@ What kind of information can you get about the properties of this file?</p>
 <span><span class="co">#&gt;     ID["EPSG",26912]]</span></span></code></pre></div>
 <p>E6. Check the CRS of the <code>raster/nlcd.tif</code> file from the <strong>spDataLarge</strong> package.
 What kind of information you can learn from it?</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crs.html">crs</a></span><span class="op">(</span><span class="va">nlcd</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; PROJCRS["NAD83 / UTM zone 12N",</span></span>
 <span><span class="co">#&gt;     BASEGEOGCRS["NAD83",</span></span>
@@ -315,7 +322,7 @@ The SRID of the above CRS is “EPSG:26912”.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-05-12.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-05-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -3,7 +3,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(terra)
 ```
@@ -26,15 +26,18 @@ E2. Name at least two differences between the **sf** functions `read_sf()` and `
 
 The differences can be seen by running the following commands `nc = st_read(system.file("shape/nc.shp", package="sf"))` and `nc = read_sf(system.file("shape/nc.shp", package="sf"))` from the function's help (`?st_read`).
 
-```r
+``` r
 read_sf
 #> function (..., quiet = TRUE, stringsAsFactors = FALSE, as_tibble = TRUE) 
 #> {
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55d4e6942450>
+#> <bytecode: 0x5616ed1f0788>
 #> <environment: namespace:sf>
+```
+
+``` r
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 
 #>   `/usr/local/lib/R/site-library/sf/shape/nc.shp' using driver `ESRI Shapefile'
@@ -43,13 +46,16 @@ nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Dimension:     XY
 #> Bounding box:  xmin: -84.3 ymin: 33.9 xmax: -75.5 ymax: 36.6
 #> Geodetic CRS:  NAD27
+```
+
+``` r
 nc = read_sf(system.file("shape/nc.shp", package="sf"))
 ```
 
 E3. Read the `cycle_hire_xy.csv` file from the **spData** package as a spatial object (Hint: it is located in the `misc` folder).
 What is a geometry type of the loaded object? 
 
-```r
+``` r
 c_h = read.csv(system.file("misc/cycle_hire_xy.csv", package = "spData")) |> 
   st_as_sf(coords = c("X", "Y"))
 c_h
@@ -75,12 +81,15 @@ c_h
 E4. Download the borders of Germany using **rnaturalearth**, and create a new object called `germany_borders`.
 Write this new object to a file of the GeoPackage format.
 
-```r
+``` r
 library(rnaturalearth)
 germany_borders = ne_countries(country = "Germany", returnclass = "sf")
 plot(germany_borders)
 #> Warning: plotting the first 10 out of 168 attributes; use max.plot = 168 to
 #> plot all
+```
+
+``` r
 st_write(germany_borders, "germany_borders.gpkg")
 #> Writing layer `germany_borders' to data source 
 #>   `germany_borders.gpkg' using driver `GPKG'
@@ -92,13 +101,16 @@ st_write(germany_borders, "germany_borders.gpkg")
 E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the **geodata** package.
 Extract the June values, and save them to a file named `tmin_june.tif` file (hint: use `terra::subset()`).
 
-```r
+``` r
 library(geodata)
 gmmt = worldclim_global(var = "tmin", res = 5, path = tempdir())
 names(gmmt)
 #>  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"
 #>  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"
 #>  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"
+```
+
+``` r
 plot(gmmt)
 
 gmmt_june = terra::subset(gmmt, "wc2.1_5m_tmin_06")
@@ -110,7 +122,7 @@ writeRaster(gmmt_june, "tmin_june.tif")
 
 E6. Create a static map of Germany's borders, and save it to a PNG file.
 
-```r
+``` r
 png(filename = "germany.png", width = 350, height = 500)
 plot(st_geometry(germany_borders), axes = TRUE, graticule = TRUE)
 dev.off()
@@ -121,7 +133,7 @@ dev.off()
 E7. Create an interactive map using data from the `cycle_hire_xy.csv` file. 
 Export this map to a file called `cycle_hire.html`.
 
-```r
+``` r
 library(mapview)
 mapview_obj = mapview(c_h, zcol = "nbikes", legend = TRUE)
 mapshot(mapview_obj, file = "cycle_hire.html")

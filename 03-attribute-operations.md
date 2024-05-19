@@ -6,7 +6,7 @@
 For these exercises we will use the `us_states` and `us_states_df` datasets from the **spData** package.
 You must have attached the package, and other packages used in the attribute operations chapter (**sf**, **dplyr**, **terra**) with commands such as `library(spData)` before attempting these exercises:
 
-```r
+``` r
 library(sf)
 library(dplyr)
 library(terra)
@@ -22,10 +22,13 @@ The data comes from the United States Census Bureau, and is documented in `?us_s
 E1. Create a new object called `us_states_name` that contains only the `NAME` column from the `us_states` object using either base R (`[`) or tidyverse (`select()`) syntax.
 What is the class of the new object and what makes it geographic?
 
-```r
+``` r
 us_states_name = us_states["NAME"]
 class(us_states_name)
 #> [1] "sf"         "data.frame"
+```
+
+``` r
 attributes(us_states_name)
 #> $names
 #> [1] "NAME"     "geometry"
@@ -44,6 +47,9 @@ attributes(us_states_name)
 #> NAME 
 #> <NA> 
 #> Levels: constant aggregate identity
+```
+
+``` r
 attributes(us_states_name$geometry)
 #> $n_empty
 #> [1] 0
@@ -83,7 +89,7 @@ E2. Select columns from the `us_states` object which contain population data.
 Obtain the same result using a different command (bonus: try to find three ways of obtaining the same result).
 Hint: try to use helper functions, such as `contains` or `matches` from **dplyr** (see `?contains`).
 
-```r
+``` r
 us_states |> select(total_pop_10, total_pop_15)
 #> Simple feature collection with 49 features and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -102,6 +108,9 @@ us_states |> select(total_pop_10, total_pop_15)
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
+```
+
+``` r
 
 # or
 us_states |> select(starts_with("total_pop"))
@@ -122,6 +131,9 @@ us_states |> select(starts_with("total_pop"))
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
+```
+
+``` r
 
 # or
 us_states |> select(contains("total_pop"))
@@ -142,6 +154,9 @@ us_states |> select(contains("total_pop"))
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
+```
+
+``` r
 
 # or
 us_states |> select(matches("tal_p"))
@@ -170,7 +185,7 @@ E3. Find all states with the following characteristics (bonus find *and* plot th
 - Belong to the West region, have an area below 250,000 km^2^ *and* in 2015 a population greater than 5,000,000 residents (hint: you may need to use the function `units::set_units()` or `as.numeric()`).
 - Belong to the South region, had an area larger than 150,000 km^2^ and a total population in 2015 larger than 7,000,000 residents.
 
-```r
+``` r
 us_states |> 
   filter(REGION == "Midwest")
 #> Simple feature collection with 12 features and 6 fields
@@ -201,6 +216,9 @@ us_states |>
 #> 8  MULTIPOLYGON (((-96.5 43.5,...
 #> 9  MULTIPOLYGON (((-85.6 45.6,...
 #> 10 MULTIPOLYGON (((-104 43, -1...
+```
+
+``` r
 
 us_states |> filter(REGION == "West", AREA < units::set_units(250000, km^2), total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
@@ -212,6 +230,9 @@ us_states |> filter(REGION == "West", AREA < units::set_units(250000, km^2), tot
 #> 1    53 Washington   West 175436 [km^2]      6561297      6985464
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
+```
+
+``` r
 # or
 us_states |> filter(REGION == "West", as.numeric(AREA) < 250000, total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
@@ -223,6 +244,9 @@ us_states |> filter(REGION == "West", as.numeric(AREA) < 250000, total_pop_15 > 
 #> 1    53 Washington   West 175436 [km^2]      6561297      6985464
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
+```
+
+``` r
 
 us_states |> filter(REGION == "South", AREA > units::set_units(150000, km^2), total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
@@ -238,6 +262,9 @@ us_states |> filter(REGION == "South", AREA > units::set_units(150000, km^2), to
 #> 1 MULTIPOLYGON (((-81.8 24.6,...
 #> 2 MULTIPOLYGON (((-85.6 35, -...
 #> 3 MULTIPOLYGON (((-103 36.5, ...
+```
+
+``` r
 # or
 us_states |> filter(REGION == "South", as.numeric(AREA) > 150000, total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
@@ -258,7 +285,7 @@ us_states |> filter(REGION == "South", as.numeric(AREA) > 150000, total_pop_15 >
 E4. What was the total population in 2015 in the `us_states` dataset?
 What was the minimum and maximum total population in 2015?
 
-```r
+``` r
 us_states |> summarize(total_pop = sum(total_pop_15),
                         min_pop = min(total_pop_15),
                         max_pop = max(total_pop_15))
@@ -273,7 +300,7 @@ us_states |> summarize(total_pop = sum(total_pop_15),
 
 E5. How many states are there in each region?
 
-```r
+``` r
 us_states |>
   group_by(REGION) |>
   summarize(nr_of_states = n())
@@ -294,7 +321,7 @@ us_states |>
 E6. What was the minimum and maximum total population in 2015 in each region?
 What was the total population in 2015 in each region?
 
-```r
+``` r
 us_states |>
   group_by(REGION) |>
   summarize(min_pop = min(total_pop_15),
@@ -319,7 +346,7 @@ What function did you use and why?
 Which variable is the key in both datasets?
 What is the class of the new object?
 
-```r
+``` r
 us_states_stats = us_states |>
   left_join(us_states_df, by = c("NAME" = "state"))
 class(us_states_stats)
@@ -329,7 +356,7 @@ class(us_states_stats)
 E8. `us_states_df` has two more rows than `us_states`.
 How can you find them? (hint: try to use the `dplyr::anti_join()` function)
 
-```r
+``` r
 us_states_df |>
   anti_join(st_drop_geometry(us_states), by = c("state" = "NAME"))
 #> # A tibble: 2 × 5
@@ -342,7 +369,7 @@ us_states_df |>
 E9. What was the population density in 2015 in each state?
 What was the population density in 2010 in each state?
 
-```r
+``` r
 us_states2 = us_states |>
   mutate(pop_dens_15 = total_pop_15/AREA,
          pop_dens_10 = total_pop_10/AREA)
@@ -351,7 +378,7 @@ us_states2 = us_states |>
 E10. How much has population density changed between 2010 and 2015 in each state?
 Calculate the change in percentages and map them.
 
-```r
+``` r
 us_popdens_change = us_states2 |>
   mutate(pop_dens_diff_10_15 = pop_dens_15 - pop_dens_10,
          pop_dens_diff_10_15p = (pop_dens_diff_10_15/pop_dens_10) * 100)
@@ -362,7 +389,7 @@ plot(us_popdens_change["pop_dens_diff_10_15p"])
 
 E11. Change the columns' names in `us_states` to lowercase. (Hint: helper functions - `tolower()` and `colnames()` may help.)
 
-```r
+``` r
 us_states %>%
   setNames(tolower(colnames(.)))
 #> Simple feature collection with 49 features and 6 fields
@@ -399,7 +426,7 @@ E12. Using `us_states` and `us_states_df` create a new object called `us_states_
 The new object should have only two variables - `median_income_15` and `geometry`.
 Change the name of the `median_income_15` column to `Income`.
 
-```r
+``` r
 us_states_sel = us_states |>
   left_join(us_states_df, by = c("NAME" = "state")) |>
   select(Income = median_income_15)
@@ -408,7 +435,7 @@ us_states_sel = us_states |>
 E13. Calculate the change in the number of residents living below the poverty level between 2010 and 2015 for each state. (Hint: See ?us_states_df for documentation on the poverty level columns.)
 Bonus: Calculate the change in the *percentage* of residents living below the poverty level in each state.
 
-```r
+``` r
 us_pov_change = us_states |>
   left_join(us_states_df, by = c("NAME" = "state")) |>
   mutate(pov_change = poverty_level_15 - poverty_level_10)
@@ -424,7 +451,7 @@ us_pov_pct_change = us_states |>
 E14. What was the minimum, average and maximum state's number of people living below the poverty line in 2015 for each region?
 Bonus: What is the region with the largest increase in people living below the poverty line?
 
-```r
+``` r
 us_pov_change_reg = us_pov_change |>
   group_by(REGION) |>
   summarize(min_state_pov_15 = min(poverty_level_15),
@@ -445,7 +472,7 @@ E15. Create a raster from scratch with nine rows and columns and a resolution of
 Fill it with random numbers.
 Extract the values of the four corner cells. 
 
-```r
+``` r
 r = rast(nrow = 9, ncol = 9, res = 0.5,
          xmin = 0, xmax = 4.5, ymin = 0, ymax = 4.5,
          vals = rnorm(81))
@@ -456,6 +483,9 @@ r[c(1, 9, 81 - 9 + 1, 81)]
 #> 2 -0.265
 #> 3 -0.587
 #> 4 -2.593
+```
+
+``` r
 r[c(1, nrow(r)), c(1, ncol(r))]
 #>    lyr.1
 #> 1  1.434
@@ -466,7 +496,7 @@ r[c(1, nrow(r)), c(1, ncol(r))]
 
 E16. What is the most common class of our example raster `grain`?
 
-```r
+``` r
 grain = rast(system.file("raster/grain.tif", package = "spData"))
 freq(grain) |> 
   arrange(-count )# the most common classes are silt and sand (13 cells)
@@ -478,7 +508,7 @@ freq(grain) |>
 
 E17. Plot the histogram and the boxplot of the `dem.tif` file from the **spDataLarge** package (`system.file("raster/dem.tif", package = "spDataLarge")`). 
 
-```r
+``` r
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 hist(dem)
 boxplot(dem)
@@ -487,6 +517,9 @@ boxplot(dem)
 library(ggplot2)
 ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+``` r
 ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()
 ```
 

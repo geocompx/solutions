@@ -3,7 +3,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(terra)
 library(spData)
@@ -15,7 +15,7 @@ E1. Create a new object called `nz_wgs` by transforming `nz` object into the WGS
 - With reference to the bounding box of each object, what units does each CRS use?
 - Remove the CRS from `nz_wgs` and plot the result: what is wrong with this map of New Zealand and why?
 
-```r
+``` r
 st_crs(nz)
 #> Coordinate Reference System:
 #>   User input: EPSG:2193 
@@ -41,19 +41,34 @@ st_crs(nz)
 #>     UNIT["metre",1,
 #>         AUTHORITY["EPSG","9001"]],
 #>     AUTHORITY["EPSG","2193"]]
+```
+
+``` r
 nz_wgs = st_transform(nz, "EPSG:4326")
 nz_crs = st_crs(nz)
 nz_wgs_crs = st_crs(nz_wgs)
 nz_crs$epsg
 #> [1] 2193
+```
+
+``` r
 nz_wgs_crs$epsg
 #> [1] 4326
+```
+
+``` r
 st_bbox(nz)
 #>    xmin    ymin    xmax    ymax 
 #> 1090144 4748537 2089533 6191874
+```
+
+``` r
 st_bbox(nz_wgs)
 #>  xmin  ymin  xmax  ymax 
 #> 166.4 -47.3 178.6 -34.4
+```
+
+``` r
 nz_wgs_NULL_crs = st_set_crs(nz_wgs, NA)
 nz_27700 = st_transform(nz_wgs, "EPSG:27700")
 par(mfrow = c(1, 3))
@@ -73,7 +88,7 @@ What has changed and why?
 Try to transform it back into WGS 84 and plot the new object.
 Why does the new object differ from the original one?
 
-```r
+``` r
 # see https://github.com/r-spatial/sf/issues/509
 world_tmerc = st_transform(world, "+proj=tmerc")
 plot(st_geometry(world_tmerc))
@@ -87,7 +102,7 @@ E3. Transform the continuous raster (`con_raster`) into NAD83 / UTM zone 12N usi
 What has changed?
 How does it influence the results?
 
-```r
+``` r
 con_raster = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
 con_raster_utm12n = project(con_raster, "EPSG:32612", method = "near")
 con_raster_utm12n
@@ -100,6 +115,9 @@ con_raster_utm12n
 #> name        : srtm 
 #> min value   : 1024 
 #> max value   : 2892
+```
+
+``` r
 
 plot(con_raster)
 plot(con_raster_utm12n)
@@ -111,7 +129,7 @@ E4. Transform the categorical raster (`cat_raster`) into WGS 84 using the biline
 What has changed?
 How does it influence the results?
 
-```r
+``` r
 cat_raster = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 cat_raster_wgs84 = project(cat_raster, "EPSG:4326", method = "bilinear")
 cat_raster_wgs84
@@ -124,6 +142,9 @@ cat_raster_wgs84
 #> name        : levels 
 #> min value   :      1 
 #> max value   :      8
+```
+
+``` r
 
 plot(cat_raster)
 plot(cat_raster_wgs84)

@@ -3,7 +3,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(terra)
 library(dplyr)
@@ -17,7 +17,7 @@ Experiment with different values of `keep` (ranging from 0.5 to 0.00005) for `ms
 - At what value does the form of the result start to break down for each method, making New Zealand unrecognizable?
 - Advanced: What is different about the geometry type of the results from `st_simplify()` compared with the geometry type of `ms_simplify()`? What problems does this create and how can this be resolved?
 
-```r
+``` r
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.5))
 plot(rmapshaper::ms_simplify(st_geometry(nz), keep = 0.05))
 # Starts to breakdown here at 0.5% of the points:
@@ -39,12 +39,18 @@ nz_simple_poly = st_simplify(st_geometry(nz), dTolerance = 10000) |>
   st_cast("POLYGON")
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
+```
+
+``` r
 nz_simple_multipoly = st_simplify(st_geometry(nz), dTolerance = 10000) |> 
   st_sfc() |> 
   st_cast("MULTIPOLYGON")
 plot(nz_simple_poly)
 length(nz_simple_poly)
 #> [1] 16
+```
+
+``` r
 nrow(nz)
 #> [1] 16
 ```
@@ -54,7 +60,7 @@ nrow(nz)
 E2. In the first exercise in Chapter Spatial data operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand. 
 Using `st_buffer()`, how many points in `nz_height` are within 100 km of Canterbury?
 
-```r
+``` r
 canterbury = nz[nz$Name == "Canterbury", ]
 cant_buff = st_buffer(canterbury, 100000)
 nz_height_near_cant = nz_height[cant_buff, ]
@@ -65,9 +71,12 @@ nrow(nz_height_near_cant) # 75 - 5 more
 E3. Find the geographic centroid of New Zealand. 
 How far is it from the geographic centroid of Canterbury?
 
-```r
+``` r
 cant_cent = st_centroid(canterbury)
 #> Warning: st_centroid assumes attributes are constant over geometries
+```
+
+``` r
 nz_centre = st_centroid(st_union(nz))
 st_distance(cant_cent, nz_centre) # 234 km
 #> Units: [m]
@@ -82,11 +91,14 @@ Hint: you need to use a two-element vector for this transformation.
  Bonus: create an upside-down map of your country.
  
 
-```r
+``` r
 world_sfc = st_geometry(world)
 world_sfc_mirror = world_sfc * c(1, -1)
 #> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
 #> shorter
+```
+
+``` r
 plot(world_sfc)
 plot(world_sfc_mirror)
 
@@ -94,6 +106,9 @@ us_states_sfc = st_geometry(us_states)
 us_states_sfc_mirror = us_states_sfc * c(1, -1)
 #> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
 #> shorter
+```
+
+``` r
 plot(us_states_sfc)
 plot(us_states_sfc_mirror)
 ## nicer plot
@@ -116,7 +131,7 @@ E5. Run the code in Section [5.2.6](https://r.geocompx.org/geometry-operations.h
 - Using base subsetting operators.
 - Using an intermediary object created with `st_intersection()`\index{vector!intersection}.
 
-```r
+``` r
 p_in_y = p[y]
 p_in_xy = p_in_y[x]
 x_and_y = st_intersection(x, y)
@@ -133,7 +148,7 @@ E6. Calculate the length of the boundary lines of US states in meters.
 Which state has the longest border and which has the shortest?
 Hint: The `st_length` function computes the length of a `LINESTRING` or `MULTILINESTRING` geometry.
 
-```r
+``` r
 us_states9311 = st_transform(us_states, "EPSG:9311")
 us_states_bor = st_cast(us_states9311, "MULTILINESTRING")
 us_states_bor$borders = st_length(us_states_bor)
@@ -166,6 +181,9 @@ arrange(us_states_bor, borders)
 #> 8  1018656 [m] MULTILINESTRING ((2422968 3...
 #> 9  1275538 [m] MULTILINESTRING ((1534988 -...
 #> 10 1436255 [m] MULTILINESTRING ((1033797 -...
+```
+
+``` r
 arrange(us_states_bor, -borders)
 #> Simple feature collection with 49 features and 7 fields
 #> Geometry type: MULTILINESTRING
@@ -203,7 +221,7 @@ Change its resolution to 0.01 by 0.01 degrees using all of the method available 
 Visualize the results.
 Can you notice any differences between the results of these resampling methods?
 
-```r
+``` r
 srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
 rast_template = rast(ext(srtm), res = 0.01)
 srtm_resampl1 = resample(srtm, y = rast_template, method = "bilinear")

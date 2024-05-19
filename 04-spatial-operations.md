@@ -3,7 +3,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(dplyr)
 library(spData)
@@ -14,12 +14,15 @@ How many of these high points does the Canterbury region contain?
 
 **Bonus:** plot the result using the `plot()` function to show all of New Zealand, `canterbury` region highlighted in yellow, high points in Canterbury represented by red crosses (hint: `pch = 7`) and high points in other parts of New Zealand represented by blue circles. See the help page `?points` for details with an illustration of different `pch` values.
 
-```r
+``` r
 canterbury = nz |> filter(Name == "Canterbury")
 canterbury_height = nz_height[canterbury, ]
 nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
 nrow(canterbury_height) # answer: 70
 #> [1] 70
+```
+
+``` r
 
 plot(st_geometry(nz))
 plot(st_geometry(canterbury), col = "yellow", add = TRUE)
@@ -31,7 +34,7 @@ plot(canterbury_height$geometry, pch = 4, col = "red", add = TRUE)
 
 E2. Which region has the second highest number of `nz_height` points, and how many does it have?
 
-```r
+``` r
 nz_height_count = aggregate(nz_height, nz, length)
 nz_height_combined = cbind(nz, count = nz_height_count$elevation)
 nz_height_combined |> 
@@ -47,7 +50,7 @@ E3. Generalizing the question to all regions: how many of New Zealand's 16 regio
 
 - Bonus: create a table listing these regions in order of the number of points and their name.
 
-```r
+``` r
 # Base R way:
 nz_height_count = aggregate(nz_height, nz, length)
 nz_height_combined = cbind(nz, count = nz_height_count$elevation)
@@ -63,6 +66,9 @@ nz_height_counts = nz_height_joined |>
 # Optionally join results with nz geometries:
 nz_height_combined = left_join(nz, nz_height_counts |> sf::st_drop_geometry())
 #> Joining with `by = join_by(Name)`
+```
+
+``` r
 # plot(nz_height_combined) # Check: results identical to base R result
 
 # Generate a summary table
@@ -92,7 +98,7 @@ The starting point of this exercise is to create an object representing Colorado
 - Create another object representing all the objects that touch (have a shared boundary with) Colorado and plot the result (hint: remember you can use the argument `op = st_intersects` and other spatial relations during spatial subsetting operations in base R).
 - Bonus: create a straight line from the centroid of the District of Columbia near the East coast to the centroid of California near the West coast of the USA (hint: functions `st_centroid()`, `st_union()` and `st_cast()` described in Chapter 5 may help) and identify which states this long East-West line crosses.
 
-```r
+``` r
 colorado = us_states[us_states$NAME == "Colorado", ]
 plot(us_states$geometry)
 plot(colorado$geometry, col = "grey", add = TRUE)
@@ -100,7 +106,7 @@ plot(colorado$geometry, col = "grey", add = TRUE)
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 intersects_with_colorado = us_states[colorado, , op = st_intersects]
 plot(us_states$geometry, main = "States that intersect with Colorado")
 plot(intersects_with_colorado$geometry, col = "grey", add = TRUE)
@@ -108,7 +114,7 @@ plot(intersects_with_colorado$geometry, col = "grey", add = TRUE)
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 # Alternative but more verbose solutions
 # 2: With intermediate object, one list for each state
 sel_intersects_colorado = st_intersects(us_states, colorado)
@@ -121,9 +127,15 @@ sel_intersects_colorado2
 #> Sparse geometry binary predicate list of length 1, where the predicate
 #> was `intersects'
 #>  1: 2, 3, 9, 19, 37, 39, 45, 49
+```
+
+``` r
 us_states$NAME[unlist(sel_intersects_colorado2)]
 #> [1] "Arizona"    "Colorado"   "Kansas"     "Oklahoma"   "Nebraska"  
 #> [6] "New Mexico" "Utah"       "Wyoming"
+```
+
+``` r
 
 # 4: With tidyverse
 us_states |> 
@@ -151,6 +163,9 @@ us_states |>
 #> 6 MULTIPOLYGON (((-109 37, -1...
 #> 7 MULTIPOLYGON (((-114 42, -1...
 #> 8 MULTIPOLYGON (((-104 45, -1...
+```
+
+``` r
 touches_colorado = us_states[colorado, , op = st_touches]
 plot(us_states$geometry, main = "States that touch Colorado")
 plot(touches_colorado$geometry, col = "grey", add = TRUE)
@@ -158,22 +173,31 @@ plot(touches_colorado$geometry, col = "grey", add = TRUE)
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 washington_to_cali = us_states |> 
   filter(grepl(pattern = "Columbia|Cali", x = NAME)) |> 
   st_centroid() |> 
   st_union() |> 
   st_cast("LINESTRING")
 #> Warning: st_centroid assumes attributes are constant over geometries
+```
+
+``` r
 states_crossed = us_states[washington_to_cali, , op = st_crosses]
 #> although coordinates are longitude/latitude, st_crosses assumes that they are
 #> planar
+```
+
+``` r
 states_crossed$NAME
 #>  [1] "Colorado"             "Indiana"              "Kansas"              
 #>  [4] "Missouri"             "Nevada"               "West Virginia"       
 #>  [7] "California"           "District of Columbia" "Illinois"            
 #> [10] "Kentucky"             "Ohio"                 "Utah"                
 #> [13] "Virginia"
+```
+
+``` r
 plot(us_states$geometry, main = "States crossed by a straight line\n from the District of Columbia to central California")
 plot(states_crossed$geometry, col = "grey", add = TRUE)
 plot(washington_to_cali, add = TRUE)
@@ -185,9 +209,12 @@ plot(washington_to_cali, add = TRUE)
 E5. Use `dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))`, and reclassify the elevation in three classes: low (<300), medium and high (>500).
 Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))`) and compute the mean NDVI and the mean elevation for each altitudinal class.
 
-```r
+``` r
 library(terra)
 #> terra 1.7.71
+```
+
+``` r
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
@@ -211,7 +238,7 @@ E6. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = 
 Plot the result.
 Hint: Read `?terra::focal()`.
 
-```r
+``` r
 # from the focal help page (?terra::focal()):
 # Laplacian filter: filter=matrix(c(0,1,0,1,-4,1,0,1,0), nrow=3)
 # Sobel filters (for edge detection): 
@@ -236,7 +263,7 @@ E7. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
 Also, calculate a correlation between NDVI and NDWI for this area (hint: you can use the `layerCor()` function).
 
-```r
+``` r
 file = system.file("raster/landsat.tif", package = "spDataLarge")
 multi_rast = rast(file)
 
@@ -272,6 +299,9 @@ layerCor(two_rasts, fun = "cor")
 #>         ndvi    ndwi
 #> ndvi     NaN 1610784
 #> ndwi 1610784     NaN
+```
+
+``` r
 
 # correlation -- option 2
 two_rasts_df = as.data.frame(two_rasts)
@@ -281,12 +311,12 @@ cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 
 <img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e7-2.png" width="100%" style="display: block; margin: auto;" />
 
-E8. A StackOverflow [post](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
+E8. A StackOverflow [post (stackoverflow.com/questions/35555709)](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
 Try to do something similar but with `terra::distance()`: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `geodata::elevation_30s()`).
 Convert the resulting distances from meters to kilometers.
 Note: it may be wise to increase the cell size of the input raster to reduce compute time during this operation (`aggregate()`).
 
-```r
+``` r
 # Fetch the DEM data for Spain
 spain_dem = geodata::elevation_30s(country = "Spain", path = ".", mask = FALSE)
 
@@ -303,6 +333,9 @@ water_mask[water_mask == 0] = NA
 # Use the distance() function on this mask to get distance to the coast
 distance_to_coast = distance(water_mask)
 #> |---------|---------|---------|---------|=========================================                                          
+```
+
+``` r
 # convert distance into km
 distance_to_coast_km = distance_to_coast / 1000
 
@@ -315,7 +348,7 @@ plot(distance_to_coast_km, main = "Distance to the coast (km)")
 E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.
 
-```r
+``` r
 # now let's weight each 100 altitudinal meters by an additional distance of 10 km
 distance_to_coast_km2 = distance_to_coast_km + ((spain_dem / 100) * 10)
 # plot the result

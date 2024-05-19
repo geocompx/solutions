@@ -6,7 +6,7 @@
 Some of the following exercises use a vector (`zion_points`) and raster dataset (`srtm`) from the **spDataLarge** package.
 They also use a polygonal 'convex hull' derived from the vector dataset (`ch`) to represent the area of interest:
 
-```r
+``` r
 library(sf)
 library(terra)
 library(spData)
@@ -24,7 +24,7 @@ Next, mask `srtm` using these two datasets.
 Can you see any difference now?
 How can you explain that?
 
-```r
+``` r
 plot(srtm)
 plot(st_geometry(zion_points), add = TRUE)
 plot(ch, add = TRUE)
@@ -48,7 +48,7 @@ When would extracting values by buffers be more suitable than by points alone?
 
 - Bonus: Implement extraction using the **exactextractr** package and compare the results.
 
-```r
+``` r
 zion_points_buf = st_buffer(zion_points, dist = 90)
 plot(srtm)
 plot(st_geometry(zion_points_buf), add = TRUE)
@@ -75,7 +75,7 @@ Using these two new objects:
 - Count numbers of the highest points in each grid cell.
 - Find the maximum elevation in each grid cell.
 
-```r
+``` r
 nz_height3100 = dplyr::filter(nz_height, elevation > 3100)
 new_graticule = st_graticule(nz_height3100, datum = "EPSG:2193")
 plot(st_geometry(nz_height3100), graticule = new_graticule, axes = TRUE)
@@ -100,10 +100,13 @@ E4. Aggregate the raster counting high points in New Zealand (created in the pre
 - Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?
 - Name two advantages and disadvantages of reducing raster resolution.
 
-```r
+``` r
 nz_raster_low = raster::aggregate(nz_raster, fact = 2, fun = sum, na.rm = TRUE)
 res(nz_raster_low)
 #> [1] 6000 6000
+```
+
+``` r
 
 nz_resample = resample(nz_raster_low, nz_raster)
 plot(nz_raster_low)
@@ -126,14 +129,14 @@ Disadvantages:
 
 E5. Polygonize the `grain` dataset and filter all squares representing clay.
 
-```r
+``` r
 grain = rast(system.file("raster/grain.tif", package = "spData"))
 ```
 
 - Name two advantages and disadvantages of vector data over raster data.
 - When would it be useful to convert rasters to vectors in your work?
 
-```r
+``` r
 grain_poly = as.polygons(grain) |> 
   st_as_sf()
 levels(grain)
@@ -142,6 +145,9 @@ levels(grain)
 #> 1     0  clay
 #> 2     1  silt
 #> 3     2  sand
+```
+
+``` r
 clay = dplyr::filter(grain_poly, grain == "clay")
 plot(clay)
 ```

@@ -5,7 +5,7 @@
 
 The solutions assume the following packages are attached (other packages will be attached when needed):
 
-```r
+``` r
 library(dplyr)
 # library(kernlab)
 library(mlr3)
@@ -27,7 +27,7 @@ E1. Compute the following terrain attributes from the `elev` dataset loaded with
   - Catchment area
     
 
-```r
+``` r
 # attach data
 dem = terra::rast(system.file("raster/ta.tif", package = "spDataLarge"))$elev
 
@@ -66,7 +66,7 @@ ta = c(ta, dem, log10_carea)
 
 E2. Extract the values from the corresponding output rasters to the `lsl` data frame (`data("lsl", package = "spDataLarge"`) by adding new variables called `slope`, `cplan`, `cprof`, `elev` and `log_carea`.
 
-```r
+``` r
 # attach terrain attribute raster stack (in case you have skipped the previous
 # exercise)
 data("lsl", package = "spDataLarge")
@@ -80,7 +80,7 @@ lsl[, names(ta)] = terra::extract(ta, lsl[, c("x", "y")]) |>
 E3. Use the derived terrain attribute rasters in combination with a GLM to make a spatial prediction map similar to that shown in Figure 12.2.
 Running `data("study_mask", package = "spDataLarge")` attaches a mask of the study area.
 
-```r
+``` r
 # attach data (in case you have skipped exercises 1) and 2)
 # landslide points with terrain attributes and terrain attribute raster stack
 data("lsl", "study_mask", package = "spDataLarge")
@@ -128,7 +128,7 @@ When doing so, keep in mind that the computation can take very long, probably se
 This, of course, depends on your system.
 Computation time will be shorter the more RAM and cores you have at your disposal.
 
-```r
+``` r
 # attach data (in case you have skipped exercises 1) and 2)
 data("lsl", package = "spDataLarge")  # landslide points with terrain attributes
 
@@ -219,7 +219,7 @@ E5. Model landslide susceptibility using a quadratic discriminant analysis (QDA)
 Assess the predictive performance of the QDA. 
 What is the a difference between the spatially cross-validated mean AUROC value of the QDA and the GLM?
 
-```r
+``` r
 # attach data (in case you have skipped exercise 4)
 bmr = readRDS("extdata/12-bmr.rds")
 
@@ -233,7 +233,7 @@ E6. Run the SVM without tuning the hyperparameters.
 Use the `rbfdot` kernel with $\sigma$ = 1 and *C* = 1. 
 Leaving the hyperparameters unspecified in **kernlab**'s `ksvm()` would otherwise initialize an automatic non-spatial hyperparameter tuning.
 
-```r
+``` r
 # attach data (in case you have skipped exercise 4)
 bmr = readRDS("extdata/12-bmr.rds")
 # plot your result

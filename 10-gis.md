@@ -3,7 +3,7 @@
 
 
 
-```r
+``` r
 library(sf)
 library(terra)
 ```
@@ -11,7 +11,7 @@ library(terra)
 <!-- qgisprocess 1-3 -->
 E1. Compute global solar irradiation for an area of `system.file("raster/dem.tif", package = "spDataLarge")` for March 21 at 11:00 AM using the `r.sun` GRASS GIS through **qgisprocess**.
 
-```r
+``` r
 library(qgisprocess)
 # enable grass
 qgis_enable_plugins("grassprovider")
@@ -36,7 +36,7 @@ plot(gsi_dem)
 <!-- sagagis 1 -->
 E2. Compute catchment area\index{catchment area} and catchment slope of `system.file("raster/dem.tif", package = "spDataLarge")` using **Rsagacmd**.
 
-```r
+``` r
 library(Rsagacmd)
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 saga = saga_gis(raster_backend = "terra", vector_backend = "sf")
@@ -52,7 +52,7 @@ E3. Continue working on the `ndvi_segments` object created in the SAGA section.
 Extract average NDVI values from the `ndvi` raster and group them into six clusters using `kmeans()`. 
 Visualize the results.
 
-```r
+``` r
 library(Rsagacmd)
 saga = saga_gis(raster_backend = "terra", vector_backend = "sf")
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
@@ -104,7 +104,7 @@ Visualize your result.
 For example, plot a hillshade\index{hillshade}, the digital elevation model\index{digital elevation model}, your viewshed\index{viewshed} output, and the point.
 Additionally, give `mapview` a try.
 
-```r
+``` r
 library(rgrass)
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 data(random_points, package = "spDataLarge")
@@ -148,7 +148,7 @@ mapview(out, col = "white", map.type = "Esri.WorldImagery") +
 E5. Use `gdalinfo` via a system call for a raster\index{raster} file stored on disk of your choice.
 What kind of information you can find there?
 
-```r
+``` r
 link2GI::linkGDAL()
 our_filepath = system.file("raster/elev.tif", package = "spData")
 cmd = paste("gdalinfo", our_filepath)
@@ -158,7 +158,7 @@ system(cmd)
 
 E6. Use `gdalwarp` to decrease the resolution of your raster file (for example, if the resolution is 0.5, change it into 1). Note: `-tr` and `-r` flags will be used in this exercise.
 
-```r
+``` r
 our_filepath = system.file("raster/elev.tif", package = "spData")
 cmd2 = paste("gdalwarp", our_filepath, "new_elev.tif", "-tr 1 1", "-r bilinear")
 system(cmd2)
@@ -167,7 +167,7 @@ system(cmd2)
 <!-- postgis 1? -->
 E7. Query all Californian highways from the PostgreSQL/PostGIS\index{PostGIS} database living in the QGIS\index{QGIS} Cloud introduced in this chapter.
 
-```r
+``` r
 library(RPostgreSQL)
 conn = dbConnect(drv = PostgreSQL(), 
                  dbname = "rtafdf_zljbqm", host = "db.qgiscloud.com",
@@ -185,7 +185,7 @@ E8. The `ndvi.tif` raster (`system.file("raster/ndvi.tif", package = "spDataLarg
 Use **rstac**, **gdalcubes**, and **terra** to download Sentinel-2 images for the same area from 
 2020-08-01 to 2020-10-31, calculate its NDVI, and then compare it with the results from `ndvi.tif`.
 
-```r
+``` r
 library(rstac)
 library(gdalcubes)
 ?spDataLarge::ndvi.tif
