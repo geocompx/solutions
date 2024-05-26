@@ -211,7 +211,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ``` r
 library(terra)
-#> terra 1.7.71
+#> terra 1.7.78
 ```
 
 ``` r
