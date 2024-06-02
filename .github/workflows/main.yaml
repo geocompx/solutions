@@ -17,7 +17,7 @@ jobs:
       - name: Render Book
         run: |
           Rscript -e 'remotes::install_github("geocompr/geocompkg", dependencies = TRUE, force = TRUE)'
-          Rscript -e 'install.packages("geodata", dependencies = TRUE, force = TRUE)'
+          Rscript -e 'remotes::install_github("rspatial/geodata", dependencies = TRUE, force = TRUE)'
           Rscript -e 'library(terra)'
           Rscript -e 'bookdown::render_book("index.Rmd")'
       - name: Deploy
