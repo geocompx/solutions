@@ -33,7 +33,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x55fb411dcb28>
+#> <bytecode: 0x55670e0defa0>
 #> <environment: namespace:sf>
 ```
 

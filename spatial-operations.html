@@ -336,7 +336,7 @@ Note: it may be wise to increase the cell size of the input raster to reduce com
 <span id="cb65-2"><a href="spatial-operations.html#cb65-2" tabindex="-1"></a>spain_dem <span class="ot">=</span> geodata<span class="sc">::</span><span class="fu">elevation_30s</span>(<span class="at">country =</span> <span class="st">"Spain"</span>, <span class="at">path =</span> <span class="st">"."</span>, <span class="at">mask =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb65-3"><a href="spatial-operations.html#cb65-3" tabindex="-1"></a></span>
 <span id="cb65-4"><a href="spatial-operations.html#cb65-4" tabindex="-1"></a><span class="co"># Reduce the resolution by a factor of 20 to speed up calculations</span></span>
-<span id="cb65-5"><a href="spatial-operations.html#cb65-5" tabindex="-1"></a>spain_dem <span class="ot">=</span> <span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
+<span id="cb65-5"><a href="spatial-operations.html#cb65-5" tabindex="-1"></a>spain_dem <span class="ot">=</span> terra<span class="sc">::</span><span class="fu">aggregate</span>(spain_dem, <span class="at">fact =</span> <span class="dv">20</span>)</span>
 <span id="cb65-6"><a href="spatial-operations.html#cb65-6" tabindex="-1"></a></span>
 <span id="cb65-7"><a href="spatial-operations.html#cb65-7" tabindex="-1"></a><span class="co"># According to the documentation, terra::distance() will calculate distance</span></span>
 <span id="cb65-8"><a href="spatial-operations.html#cb65-8" tabindex="-1"></a><span class="co"># for all cells that are NA to the nearest cell that are not NA. To calculate</span></span>
@@ -401,7 +401,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-05-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-06-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
