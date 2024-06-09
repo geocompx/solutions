@@ -87,41 +87,25 @@ st_distance(cant_cent, nz_centre) # 234 km
 E4. Most world maps have a north-up orientation.
 A world map with a south-up orientation could be created by a reflection (one of the affine transformations not mentioned in this chapter) of the `world` object's geometry.
 Write code to do so.
-Hint: you need to use a two-element vector for this transformation.
- Bonus: create an upside-down map of your country.
+Hint: you can to use the `rotation()` function from this chapter for this transformation.
+Bonus: create an upside-down map of your country.
  
 
 ``` r
-world_sfc = st_geometry(world)
-world_sfc_mirror = world_sfc * c(1, -1)
-#> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
-#> shorter
-```
+rotation = function(a){
+  r = a * pi / 180 #degrees to radians
+  matrix(c(cos(r), sin(r), -sin(r), cos(r)), nrow = 2, ncol = 2)
+} 
 
-``` r
+world_sfc = st_geometry(world)
+world_sfc_mirror = world_sfc * rotation(180)
 plot(world_sfc)
 plot(world_sfc_mirror)
 
 us_states_sfc = st_geometry(us_states)
-us_states_sfc_mirror = us_states_sfc * c(1, -1)
-#> Warning in mapply(function(x, y) {: longer argument not a multiple of length of
-#> shorter
-```
-
-``` r
+us_states_sfc_mirror = us_states_sfc * rotation(180)
 plot(us_states_sfc)
 plot(us_states_sfc_mirror)
-## nicer plot
-# library(ggrepel)
-# us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) |> 
-#   st_coordinates() |>
-#   as_data_frame() |> 
-#   mutate(name = us_states$NAME)
-# us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)
-# ggplot(data = us_states_sfc_mirror_sf) +
-#   geom_sf(color = "white") +
-#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +
-#   theme_void() 
 ```
 
 <img src="05-geometry-operations_files/figure-html/05-ex-e4-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e4-4.png" width="100%" style="display: block; margin: auto;" />

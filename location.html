@@ -80,7 +80,7 @@
 <span class="header-section-number">14</span> Geomarketing<a class="anchor" aria-label="anchor" href="#location"><i class="fas fa-link"></i></a>
 </h1>
 <p>The solutions assume the following packages are attached (other packages will be attached when needed):</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
@@ -94,7 +94,7 @@ This takes 30 seconds on a machine with 16 GB RAM.
 <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html">data.table()</a></code>.
 Use <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">dplyr::as_tibble()</a></code> to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (<code>inh</code>) we have created using class mean values.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Coarse inhabitant raster (1 km resolution)</span></span>
 <span><span class="co">#*******************************************</span></span>
 <span></span>
@@ -158,7 +158,7 @@ Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compa
 <span><span class="co"># 338 cells have a deviation &gt; 5000</span></span></code></pre></div>
 <p>E2. Suppose our bike shop predominantly sold electric bikes to older people.
 Change the age raster accordingly, repeat the remaining analyses and compare the changes with our original result.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Here, we assue that you have already created `input_ras` in the first exercise.</span></span>
 <span><span class="co"># attach further necessary data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"metro_names"</span>, <span class="st">"shops"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
@@ -275,7 +275,7 @@ Change the age raster accordingly, repeat the remaining analyses and compare the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-06-02.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

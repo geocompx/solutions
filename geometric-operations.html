@@ -146,42 +146,30 @@ How far is it from the geographic centroid of Canterbury?</p>
 <p>E4. Most world maps have a north-up orientation.
 A world map with a south-up orientation could be created by a reflection (one of the affine transformations not mentioned in this chapter) of the <code>world</code> object’s geometry.
 Write code to do so.
-Hint: you need to use a two-element vector for this transformation.
+Hint: you can to use the <code>rotation()</code> function from this chapter for this transformation.
 Bonus: create an upside-down map of your country.</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">world_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span></span>
-<span><span class="va">world_sfc_mirror</span> <span class="op">=</span> <span class="va">world_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span></span>
-<span><span class="co">#&gt; shorter</span></span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">rotation</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">r</span> <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">180</span> <span class="co">#degrees to radians</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">}</span> </span>
+<span></span>
+<span><span class="va">world_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span></span>
+<span><span class="va">world_sfc_mirror</span> <span class="op">=</span> <span class="va">world_sfc</span> <span class="op">*</span> <span class="fu">rotation</span><span class="op">(</span><span class="fl">180</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">world_sfc_mirror</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">us_states_sfc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span></span>
-<span><span class="va">us_states_sfc_mirror</span> <span class="op">=</span> <span class="va">us_states_sfc</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in mapply(function(x, y) {: longer argument not a multiple of length of</span></span>
-<span><span class="co">#&gt; shorter</span></span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span></span>
-<span><span class="co">## nicer plot</span></span>
-<span><span class="co"># library(ggrepel)</span></span>
-<span><span class="co"># us_states_sfc_mirror_labels = st_centroid(us_states_sfc_mirror) |&gt; </span></span>
-<span><span class="co">#   st_coordinates() |&gt;</span></span>
-<span><span class="co">#   as_data_frame() |&gt; </span></span>
-<span><span class="co">#   mutate(name = us_states$NAME)</span></span>
-<span><span class="co"># us_states_sfc_mirror_sf = st_set_geometry(us_states, us_states_sfc_mirror)</span></span>
-<span><span class="co"># ggplot(data = us_states_sfc_mirror_sf) +</span></span>
-<span><span class="co">#   geom_sf(color = "white") +</span></span>
-<span><span class="co">#   geom_text_repel(data = us_states_sfc_mirror_labels, mapping = aes(X, Y, label = name), size = 3, min.segment.length = 0) +</span></span>
-<span><span class="co">#   theme_void() </span></span></code></pre></div>
+<span><span class="va">us_states_sfc_mirror</span> <span class="op">=</span> <span class="va">us_states_sfc</span> <span class="op">*</span> <span class="fu">rotation</span><span class="op">(</span><span class="fl">180</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">us_states_sfc_mirror</span><span class="op">)</span></span></code></pre></div>
 <p><img src="05-geometry-operations_files/figure-html/05-ex-e4-1.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-2.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-3.png" width="100%" style="display: block; margin: auto;"><img src="05-geometry-operations_files/figure-html/05-ex-e4-4.png" width="100%" style="display: block; margin: auto;"></p>
 <p>E5. Run the code in Section <a href="https://r.geocompx.org/geometry-operations.html#subsetting-and-clipping">5.2.6</a>. With reference to the objects created in that section, subset the point in <code>p</code> that is contained within <code>x</code> <em>and</em> <code>y</code>.</p>
 <ul>
 <li>Using base subsetting operators.</li>
 <li>Using an intermediary object created with <code><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection()</a></code>.</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_in_y</span> <span class="op">=</span> <span class="va">p</span><span class="op">[</span><span class="va">y</span><span class="op">]</span></span>
 <span><span class="va">p_in_xy</span> <span class="op">=</span> <span class="va">p_in_y</span><span class="op">[</span><span class="va">x</span><span class="op">]</span></span>
 <span><span class="va">x_and_y</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
@@ -195,7 +183,7 @@ Bonus: create an upside-down map of your country.</p>
 <p>E6. Calculate the length of the boundary lines of US states in meters.
 Which state has the longest border and which has the shortest?
 Hint: The <code>st_length</code> function computes the length of a <code>LINESTRING</code> or <code>MULTILINESTRING</code> geometry.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">us_states9311</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">us_states</span>, <span class="st">"EPSG:9311"</span><span class="op">)</span></span>
 <span><span class="va">us_states_bor</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast</a></span><span class="op">(</span><span class="va">us_states9311</span>, <span class="st">"MULTILINESTRING"</span><span class="op">)</span></span>
 <span><span class="va">us_states_bor</span><span class="op">$</span><span class="va">borders</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_length</a></span><span class="op">(</span><span class="va">us_states_bor</span><span class="op">)</span></span>
@@ -228,7 +216,7 @@ Hint: The <code>st_length</code> function computes the length of a <code>LINESTR
 <span><span class="co">#&gt; 8  1018656 [m] MULTILINESTRING ((2422968 3...</span></span>
 <span><span class="co">#&gt; 9  1275538 [m] MULTILINESTRING ((1534988 -...</span></span>
 <span><span class="co">#&gt; 10 1436255 [m] MULTILINESTRING ((1033797 -...</span></span></code></pre></div>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
@@ -263,7 +251,7 @@ This raster has a resolution of 0.00083 by 0.00083 degrees.
 Change its resolution to 0.01 by 0.01 degrees using all of the method available in the <strong>terra</strong> package.
 Visualize the results.
 Can you notice any differences between the results of these resampling methods?</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srtm</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rast_template</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html">ext</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span>, res <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="va">srtm_resampl1</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/resample.html">resample</a></span><span class="op">(</span><span class="va">srtm</span>, y <span class="op">=</span> <span class="va">rast_template</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span></span>
@@ -316,7 +304,7 @@ Can you notice any differences between the results of these resampling methods?<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-06-02.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
