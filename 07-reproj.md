@@ -41,34 +41,19 @@ st_crs(nz)
 #>     UNIT["metre",1,
 #>         AUTHORITY["EPSG","9001"]],
 #>     AUTHORITY["EPSG","2193"]]
-```
-
-``` r
 nz_wgs = st_transform(nz, "EPSG:4326")
 nz_crs = st_crs(nz)
 nz_wgs_crs = st_crs(nz_wgs)
 nz_crs$epsg
 #> [1] 2193
-```
-
-``` r
 nz_wgs_crs$epsg
 #> [1] 4326
-```
-
-``` r
 st_bbox(nz)
 #>    xmin    ymin    xmax    ymax 
 #> 1090144 4748537 2089533 6191874
-```
-
-``` r
 st_bbox(nz_wgs)
 #>  xmin  ymin  xmax  ymax 
 #> 166.4 -47.3 178.6 -34.4
-```
-
-``` r
 nz_wgs_NULL_crs = st_set_crs(nz_wgs, NA)
 nz_27700 = st_transform(nz_wgs, "EPSG:27700")
 par(mfrow = c(1, 3))
@@ -115,9 +100,6 @@ con_raster_utm12n
 #> name        : srtm 
 #> min value   : 1024 
 #> max value   : 2892
-```
-
-``` r
 
 plot(con_raster)
 plot(con_raster_utm12n)
@@ -142,9 +124,6 @@ cat_raster_wgs84
 #> name        : levels 
 #> min value   :      1 
 #> max value   :      8
-```
-
-``` r
 
 plot(cat_raster)
 plot(cat_raster_wgs84)

@@ -20,9 +20,6 @@ canterbury_height = nz_height[canterbury, ]
 nz_not_canterbury_height = nz_height[canterbury, , op = st_disjoint]
 nrow(canterbury_height) # answer: 70
 #> [1] 70
-```
-
-``` r
 
 plot(st_geometry(nz))
 plot(st_geometry(canterbury), col = "yellow", add = TRUE)
@@ -66,9 +63,6 @@ nz_height_counts = nz_height_joined |>
 # Optionally join results with nz geometries:
 nz_height_combined = left_join(nz, nz_height_counts |> sf::st_drop_geometry())
 #> Joining with `by = join_by(Name)`
-```
-
-``` r
 # plot(nz_height_combined) # Check: results identical to base R result
 
 # Generate a summary table
@@ -127,15 +121,9 @@ sel_intersects_colorado2
 #> Sparse geometry binary predicate list of length 1, where the predicate
 #> was `intersects'
 #>  1: 2, 3, 9, 19, 37, 39, 45, 49
-```
-
-``` r
 us_states$NAME[unlist(sel_intersects_colorado2)]
 #> [1] "Arizona"    "Colorado"   "Kansas"     "Oklahoma"   "Nebraska"  
 #> [6] "New Mexico" "Utah"       "Wyoming"
-```
-
-``` r
 
 # 4: With tidyverse
 us_states |> 
@@ -163,9 +151,6 @@ us_states |>
 #> 6 MULTIPOLYGON (((-109 37, -1...
 #> 7 MULTIPOLYGON (((-114 42, -1...
 #> 8 MULTIPOLYGON (((-104 45, -1...
-```
-
-``` r
 touches_colorado = us_states[colorado, , op = st_touches]
 plot(us_states$geometry, main = "States that touch Colorado")
 plot(touches_colorado$geometry, col = "grey", add = TRUE)
@@ -180,24 +165,15 @@ washington_to_cali = us_states |>
   st_union() |> 
   st_cast("LINESTRING")
 #> Warning: st_centroid assumes attributes are constant over geometries
-```
-
-``` r
 states_crossed = us_states[washington_to_cali, , op = st_crosses]
 #> although coordinates are longitude/latitude, st_crosses assumes that they are
 #> planar
-```
-
-``` r
 states_crossed$NAME
 #>  [1] "Colorado"             "Indiana"              "Kansas"              
 #>  [4] "Missouri"             "Nevada"               "West Virginia"       
 #>  [7] "California"           "District of Columbia" "Illinois"            
 #> [10] "Kentucky"             "Ohio"                 "Utah"                
 #> [13] "Virginia"
-```
-
-``` r
 plot(us_states$geometry, main = "States crossed by a straight line\n from the District of Columbia to central California")
 plot(states_crossed$geometry, col = "grey", add = TRUE)
 plot(washington_to_cali, add = TRUE)
@@ -212,9 +188,6 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 ``` r
 library(terra)
 #> terra 1.7.78
-```
-
-``` r
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
@@ -299,9 +272,6 @@ layerCor(two_rasts, fun = "cor")
 #>         ndvi    ndwi
 #> ndvi     NaN 1610784
 #> ndwi 1610784     NaN
-```
-
-``` r
 
 # correlation -- option 2
 two_rasts_df = as.data.frame(two_rasts)
@@ -333,9 +303,6 @@ water_mask[water_mask == 0] = NA
 # Use the distance() function on this mask to get distance to the coast
 distance_to_coast = distance(water_mask)
 #> |---------|---------|---------|---------|=========================================                                          
-```
-
-``` r
 # convert distance into km
 distance_to_coast_km = distance_to_coast / 1000
 

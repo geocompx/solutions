@@ -33,11 +33,8 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x561296155c50>
+#> <bytecode: 0x55d38ab47040>
 #> <environment: namespace:sf>
-```
-
-``` r
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 
 #>   `/usr/local/lib/R/site-library/sf/shape/nc.shp' using driver `ESRI Shapefile'
@@ -46,9 +43,6 @@ nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Dimension:     XY
 #> Bounding box:  xmin: -84.3 ymin: 33.9 xmax: -75.5 ymax: 36.6
 #> Geodetic CRS:  NAD27
-```
-
-``` r
 nc = read_sf(system.file("shape/nc.shp", package="sf"))
 ```
 
@@ -87,9 +81,6 @@ germany_borders = ne_countries(country = "Germany", returnclass = "sf")
 plot(germany_borders)
 #> Warning: plotting the first 10 out of 168 attributes; use max.plot = 168 to
 #> plot all
-```
-
-``` r
 st_write(germany_borders, "germany_borders.gpkg")
 #> Writing layer `germany_borders' to data source 
 #>   `germany_borders.gpkg' using driver `GPKG'
@@ -108,9 +99,6 @@ names(gmmt)
 #>  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"
 #>  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"
 #>  [9] "wc2.1_5m_tmin_09" "wc2.1_5m_tmin_10" "wc2.1_5m_tmin_11" "wc2.1_5m_tmin_12"
-```
-
-``` r
 plot(gmmt)
 
 gmmt_june = terra::subset(gmmt, "wc2.1_5m_tmin_06")

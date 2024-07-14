@@ -26,9 +26,6 @@ What is the class of the new object and what makes it geographic?
 us_states_name = us_states["NAME"]
 class(us_states_name)
 #> [1] "sf"         "data.frame"
-```
-
-``` r
 attributes(us_states_name)
 #> $names
 #> [1] "NAME"     "geometry"
@@ -47,9 +44,6 @@ attributes(us_states_name)
 #> NAME 
 #> <NA> 
 #> Levels: constant aggregate identity
-```
-
-``` r
 attributes(us_states_name$geometry)
 #> $n_empty
 #> [1] 0
@@ -108,9 +102,6 @@ us_states |> select(total_pop_10, total_pop_15)
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
-```
-
-``` r
 
 # or
 us_states |> select(starts_with("total_pop"))
@@ -131,9 +122,6 @@ us_states |> select(starts_with("total_pop"))
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
-```
-
-``` r
 
 # or
 us_states |> select(contains("total_pop"))
@@ -154,9 +142,6 @@ us_states |> select(contains("total_pop"))
 #> 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...
 #> 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
-```
-
-``` r
 
 # or
 us_states |> select(matches("tal_p"))
@@ -216,9 +201,6 @@ us_states |>
 #> 8  MULTIPOLYGON (((-96.5 43.5,...
 #> 9  MULTIPOLYGON (((-85.6 45.6,...
 #> 10 MULTIPOLYGON (((-104 43, -1...
-```
-
-``` r
 
 us_states |> filter(REGION == "West", AREA < units::set_units(250000, km^2), total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
@@ -230,9 +212,6 @@ us_states |> filter(REGION == "West", AREA < units::set_units(250000, km^2), tot
 #> 1    53 Washington   West 175436 [km^2]      6561297      6985464
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
-```
-
-``` r
 # or
 us_states |> filter(REGION == "West", as.numeric(AREA) < 250000, total_pop_15 > 5000000)
 #> Simple feature collection with 1 feature and 6 fields
@@ -244,9 +223,6 @@ us_states |> filter(REGION == "West", as.numeric(AREA) < 250000, total_pop_15 > 
 #> 1    53 Washington   West 175436 [km^2]      6561297      6985464
 #>                         geometry
 #> 1 MULTIPOLYGON (((-123 48.2, ...
-```
-
-``` r
 
 us_states |> filter(REGION == "South", AREA > units::set_units(150000, km^2), total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
@@ -262,9 +238,6 @@ us_states |> filter(REGION == "South", AREA > units::set_units(150000, km^2), to
 #> 1 MULTIPOLYGON (((-81.8 24.6,...
 #> 2 MULTIPOLYGON (((-85.6 35, -...
 #> 3 MULTIPOLYGON (((-103 36.5, ...
-```
-
-``` r
 # or
 us_states |> filter(REGION == "South", as.numeric(AREA) > 150000, total_pop_15 > 7000000)
 #> Simple feature collection with 3 features and 6 fields
@@ -483,9 +456,6 @@ r[c(1, 9, 81 - 9 + 1, 81)]
 #> 2 -0.265
 #> 3 -0.587
 #> 4 -2.593
-```
-
-``` r
 r[c(1, nrow(r)), c(1, ncol(r))]
 #>    lyr.1
 #> 1  1.434
@@ -517,9 +487,6 @@ boxplot(dem)
 library(ggplot2)
 ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
 #> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
-``` r
 ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()
 ```
 

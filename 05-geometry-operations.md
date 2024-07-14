@@ -39,18 +39,12 @@ nz_simple_poly = st_simplify(st_geometry(nz), dTolerance = 10000) |>
   st_cast("POLYGON")
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
 #> Warning in st_cast.MULTIPOLYGON(X[[i]], ...): polygon from first part only
-```
-
-``` r
 nz_simple_multipoly = st_simplify(st_geometry(nz), dTolerance = 10000) |> 
   st_sfc() |> 
   st_cast("MULTIPOLYGON")
 plot(nz_simple_poly)
 length(nz_simple_poly)
 #> [1] 16
-```
-
-``` r
 nrow(nz)
 #> [1] 16
 ```
@@ -74,9 +68,6 @@ How far is it from the geographic centroid of Canterbury?
 ``` r
 cant_cent = st_centroid(canterbury)
 #> Warning: st_centroid assumes attributes are constant over geometries
-```
-
-``` r
 nz_centre = st_centroid(st_union(nz))
 st_distance(cant_cent, nz_centre) # 234 km
 #> Units: [m]
@@ -165,9 +156,6 @@ arrange(us_states_bor, borders)
 #> 8  1018656 [m] MULTILINESTRING ((2422968 3...
 #> 9  1275538 [m] MULTILINESTRING ((1534988 -...
 #> 10 1436255 [m] MULTILINESTRING ((1033797 -...
-```
-
-``` r
 arrange(us_states_bor, -borders)
 #> Simple feature collection with 49 features and 7 fields
 #> Geometry type: MULTILINESTRING

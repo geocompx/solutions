@@ -81,7 +81,7 @@
 </h1>
 <p>Some of the following exercises use a vector (<code>zion_points</code>) and raster dataset (<code>srtm</code>) from the <strong>spDataLarge</strong> package.
 They also use a polygonal ‘convex hull’ derived from the vector dataset (<code>ch</code>) to represent the area of interest:</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jakubnowosad.com/spData/">spData</a></span><span class="op">)</span></span>
@@ -96,7 +96,7 @@ Are there any differences in the output maps?
 Next, mask <code>srtm</code> using these two datasets.
 Can you see any difference now?
 How can you explain that?</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">zion_points</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">ch</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -117,7 +117,7 @@ When would extracting values by buffers be more suitable than by points alone?</
 <ul>
 <li>Bonus: Implement extraction using the <strong>exactextractr</strong> package and compare the results.</li>
 </ul>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zion_points_buf</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer</a></span><span class="op">(</span><span class="va">zion_points</span>, dist <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">zion_points_buf</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -141,7 +141,7 @@ Using these two new objects:</p>
 <li>Count numbers of the highest points in each grid cell.</li>
 <li>Find the maximum elevation in each grid cell.</li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nz_height3100</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">elevation</span> <span class="op">&gt;</span> <span class="fl">3100</span><span class="op">)</span></span>
 <span><span class="va">new_graticule</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_graticule.html">st_graticule</a></span><span class="op">(</span><span class="va">nz_height3100</span>, datum <span class="op">=</span> <span class="st">"EPSG:2193"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, graticule <span class="op">=</span> <span class="va">new_graticule</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -163,12 +163,11 @@ Using these two new objects:</p>
 <li>Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?</li>
 <li>Name two advantages and disadvantages of reducing raster resolution.</li>
 </ul>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nz_raster_low</span> <span class="op">=</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">nz_raster</span>, fact <span class="op">=</span> <span class="fl">2</span>, fun <span class="op">=</span> <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">res</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 6000 6000</span></span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [1] 6000 6000</span></span>
+<span></span>
 <span><span class="va">nz_resample</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/resample.html">resample</a></span><span class="op">(</span><span class="va">nz_raster_low</span>, <span class="va">nz_raster</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_resample</span><span class="op">)</span> <span class="co"># the results are spread over a greater area and there are border issues</span></span>
@@ -186,13 +185,13 @@ Using these two new objects:</p>
 <li>adds another processing step</li>
 </ul>
 <p>E5. Polygonize the <code>grain</code> dataset and filter all squares representing clay.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grain</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/grain.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Name two advantages and disadvantages of vector data over raster data.</li>
 <li>When would it be useful to convert rasters to vectors in your work?</li>
 </ul>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">grain_poly</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.polygons.html">as.polygons</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html">st_as_sf</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/factors.html">levels</a></span><span class="op">(</span><span class="va">grain</span><span class="op">)</span></span>
@@ -200,9 +199,8 @@ Using these two new objects:</p>
 <span><span class="co">#&gt;   value grain</span></span>
 <span><span class="co">#&gt; 1     0  clay</span></span>
 <span><span class="co">#&gt; 2     1  silt</span></span>
-<span><span class="co">#&gt; 3     2  sand</span></span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 3     2  sand</span></span>
+<span><span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">clay</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-raster-vector_files/figure-html/06-ex-e5-2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Advantages:</p>
@@ -248,7 +246,7 @@ Using these two new objects:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-07-07.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-07-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

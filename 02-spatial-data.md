@@ -44,9 +44,6 @@ summary(world)
 #>  3rd Qu.:76.8   3rd Qu.: 24233                      
 #>  Max.   :83.6   Max.   :120860                      
 #>  NA's   :10     NA's   :17
-```
-
-``` r
 # - Its geometry type?
 #   multipolygon
 # - The number of countries?
@@ -67,9 +64,6 @@ plot(world["continent"], reset = FALSE)
 cex = sqrt(world$pop) / 10000
 world_cents = st_centroid(world, of_largest = TRUE)
 #> Warning: st_centroid assumes attributes are constant over geometries
-```
-
-``` r
 plot(st_geometry(world_cents), add = TRUE, cex = cex)
 # - What does the `cex` argument do (see `?plot`)?
 #   It specifies the size of the circles
@@ -114,9 +108,6 @@ plot(st_geometry(nigeria), col = "yellow", add = TRUE, border = "darkgrey")
 a = africa[grepl("Niger", africa$name_long), ]
 ncentre = st_centroid(a)
 #> Warning: st_centroid assumes attributes are constant over geometries
-```
-
-``` r
 ncentre_num = st_coordinates(ncentre)
 text(x = ncentre_num[, 1], y = ncentre_num[, 2], labels = a$name_long)
 ```
@@ -141,24 +132,12 @@ What kind of information can you get about the properties of this file?
 nlcd = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 dim(nlcd) # dimensions
 #> [1] 1359 1073    1
-```
-
-``` r
 res(nlcd) # resolution
 #> [1] 31.5 31.5
-```
-
-``` r
 ext(nlcd) # extent
 #> SpatExtent : 301903.344386758, 335735.354381954, 4111244.46098842, 4154086.47216415 (xmin, xmax, ymin, ymax)
-```
-
-``` r
 nlyr(nlcd) # number of layers
 #> [1] 1
-```
-
-``` r
 cat(crs(nlcd)) # CRS
 #> PROJCRS["NAD83 / UTM zone 12N",
 #>     BASEGEOGCRS["NAD83",

@@ -79,12 +79,12 @@
 <h1>
 <span class="header-section-number">10</span> Bridges to GIS software<a class="anchor" aria-label="anchor" href="#gis"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
 <!-- qgisprocess 1-3 -->
 <p>E1. Compute global solar irradiation for an area of <code>system.file("raster/dem.tif", package = "spDataLarge")</code> for March 21 at 11:00 AM using the <code>r.sun</code> GRASS GIS through <strong>qgisprocess</strong>.</p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co"># enable grass</span></span>
 <span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_enable_plugins.html">qgis_enable_plugins</a></span><span class="op">(</span><span class="st">"grassprovider"</span><span class="op">)</span></span>
@@ -106,7 +106,7 @@
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">gsi_dem</span><span class="op">)</span></span></code></pre></div>
 <!-- sagagis 1 -->
 <p>E2. Compute catchment area and catchment slope of <code>system.file("raster/dem.tif", package = "spDataLarge")</code> using <strong>Rsagacmd</strong>.</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stevenpawley.github.io/Rsagacmd/">Rsagacmd</a></span><span class="op">)</span></span>
 <span><span class="va">dem</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/dem.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">saga</span> <span class="op">=</span> <span class="fu"><a href="https://stevenpawley.github.io/Rsagacmd/reference/saga_gis.html">saga_gis</a></span><span class="op">(</span>raster_backend <span class="op">=</span> <span class="st">"terra"</span>, vector_backend <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
@@ -119,7 +119,7 @@
 <p>E3. Continue working on the <code>ndvi_segments</code> object created in the SAGA section.
 Extract average NDVI values from the <code>ndvi</code> raster and group them into six clusters using <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code>.
 Visualize the results.</p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stevenpawley.github.io/Rsagacmd/">Rsagacmd</a></span><span class="op">)</span></span>
 <span><span class="va">saga</span> <span class="op">=</span> <span class="fu"><a href="https://stevenpawley.github.io/Rsagacmd/reference/saga_gis.html">saga_gis</a></span><span class="op">(</span>raster_backend <span class="op">=</span> <span class="st">"terra"</span>, vector_backend <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span>
 <span><span class="va">ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/ndvi.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
@@ -168,7 +168,7 @@ Select a point randomly from <code>random_points</code> and find all <code>dem</
 Visualize your result.
 For example, plot a hillshade, the digital elevation model, your viewshed output, and the point.
 Additionally, give <code>mapview</code> a try.</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsbivand.github.io/rgrass/">rgrass</a></span><span class="op">)</span></span>
 <span><span class="va">dem</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/dem.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">random_points</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
@@ -209,20 +209,20 @@ Additionally, give <code>mapview</code> a try.</p>
 <!-- gdal 1-2 -->
 <p>E5. Use <code>gdalinfo</code> via a system call for a raster file stored on disk of your choice.
 What kind of information you can find there?</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">link2GI</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/link2GI/reference/linkGDAL.html">linkGDAL</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">our_filepath</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/elev.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span></span>
 <span><span class="va">cmd</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"gdalinfo"</span>, <span class="va">our_filepath</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="va">cmd</span><span class="op">)</span></span>
 <span><span class="co"># Driver, file path, dimensions, CRS, resolution, bounding box, summary statistics</span></span></code></pre></div>
 <p>E6. Use <code>gdalwarp</code> to decrease the resolution of your raster file (for example, if the resolution is 0.5, change it into 1). Note: <code>-tr</code> and <code>-r</code> flags will be used in this exercise.</p>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">our_filepath</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/elev.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span></span>
 <span><span class="va">cmd2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"gdalwarp"</span>, <span class="va">our_filepath</span>, <span class="st">"new_elev.tif"</span>, <span class="st">"-tr 1 1"</span>, <span class="st">"-r bilinear"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="va">cmd2</span><span class="op">)</span></span></code></pre></div>
 <!-- postgis 1? -->
 <p>E7. Query all Californian highways from the PostgreSQL/PostGIS database living in the QGIS Cloud introduced in this chapter.</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tomoakin/RPostgreSQL">RPostgreSQL</a></span><span class="op">)</span></span>
 <span><span class="va">conn</span> <span class="op">=</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span>drv <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/RPostgreSQL/man/PostgreSQL.html">PostgreSQL</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                 dbname <span class="op">=</span> <span class="st">"rtafdf_zljbqm"</span>, host <span class="op">=</span> <span class="st">"db.qgiscloud.com"</span>,</span>
@@ -237,7 +237,7 @@ What kind of information you can find there?</p>
 <p>E8. The <code>ndvi.tif</code> raster (<code>system.file("raster/ndvi.tif", package = "spDataLarge")</code>) contains NDVI calculated for the Mongón study area based on Landsat data from September 22nd, 2000.
 Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</strong> to download Sentinel-2 images for the same area from
 2020-08-01 to 2020-10-31, calculate its NDVI, and then compare it with the results from <code>ndvi.tif</code>.</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://brazil-data-cube.github.io/rstac/">rstac</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/appelmar/gdalcubes">gdalcubes</a></span><span class="op">)</span></span>
 <span><span class="op">?</span><span class="fu">spDataLarge</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/spDataLarge/man/ndvi.tif.html">ndvi.tif</a></span></span>
@@ -311,7 +311,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-07-07.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-07-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

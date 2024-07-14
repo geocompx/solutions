@@ -104,9 +104,6 @@ E4. Aggregate the raster counting high points in New Zealand (created in the pre
 nz_raster_low = raster::aggregate(nz_raster, fact = 2, fun = sum, na.rm = TRUE)
 res(nz_raster_low)
 #> [1] 6000 6000
-```
-
-``` r
 
 nz_resample = resample(nz_raster_low, nz_raster)
 plot(nz_raster_low)
@@ -145,9 +142,6 @@ levels(grain)
 #> 1     0  clay
 #> 2     1  silt
 #> 3     2  sand
-```
-
-``` r
 clay = dplyr::filter(grain_poly, grain == "clay")
 plot(clay)
 ```
