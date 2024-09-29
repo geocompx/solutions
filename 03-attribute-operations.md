@@ -164,7 +164,7 @@ us_states |> select(matches("tal_p"))
 #> 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...
 ```
 
-E3. Find all states with the following characteristics (bonus find *and* plot them):
+E3. Find all states with the following characteristics (bonus: find *and* plot them):
 
 - Belong to the Midwest region.
 - Belong to the West region, have an area below 250,000 km^2^ *and* in 2015 a population greater than 5,000,000 residents (hint: you may need to use the function `units::set_units()` or `as.numeric()`).
@@ -327,7 +327,7 @@ class(us_states_stats)
 ```
 
 E8. `us_states_df` has two more rows than `us_states`.
-How can you find them? (hint: try to use the `dplyr::anti_join()` function)
+How can you find them? (Hint: try to use the `dplyr::anti_join()` function.)
 
 ``` r
 us_states_df |>
@@ -396,7 +396,7 @@ us_states %>%
 ```
 
 E12. Using `us_states` and `us_states_df` create a new object called `us_states_sel`.
-The new object should have only two variables - `median_income_15` and `geometry`.
+The new object should have only two variables: `median_income_15` and `geometry`.
 Change the name of the `median_income_15` column to `Income`.
 
 ``` r
@@ -441,7 +441,7 @@ us_pov_change |>
 #> [1] "South"
 ```
 
-E15. Create a raster from scratch with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
+E15. Create a raster from scratch, with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
 Fill it with random numbers.
 Extract the values of the four corner cells. 
 

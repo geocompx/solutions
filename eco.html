@@ -161,7 +161,7 @@ To complete the response-predictor matrix, extract the values of the environment
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">ep</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"carea"</span>, <span class="st">"cslope"</span><span class="op">)</span></span>
 <span><span class="co"># make sure all rasters share the same origin</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/origin.html">origin</a></span><span class="op">(</span><span class="va">ep</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/origin.html">origin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
-<span><span class="co"># add dem and ndvi to the multilayer SpatRaster object</span></span>
+<span><span class="co"># add dem and ndvi to the multi-layerSpatRaster object</span></span>
 <span><span class="va">ep</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dem</span>, <span class="va">ndvi</span>, <span class="va">ep</span><span class="op">)</span> </span>
 <span><span class="va">ep</span><span class="op">$</span><span class="va">carea</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">ep</span><span class="op">$</span><span class="va">carea</span><span class="op">)</span></span>
 <span></span>
@@ -341,7 +341,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

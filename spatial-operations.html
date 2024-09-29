@@ -148,7 +148,7 @@ How many of these high points does the Canterbury region contain?</p>
 <div class="inline-figure"><img src="04-spatial-operations_files/figure-html/04-ex-e3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>E4. Test your knowledge of spatial predicates by finding out and plotting how US states relate to each other and other spatial objects.</p>
 <p>The starting point of this exercise is to create an object representing Colorado state in the USA. Do this with the command
-<code>colorado = us_states[us_states$NAME == "Colorado",]</code> (base R) or with with the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function (tidyverse) and plot the resulting object in the context of US states.</p>
+<code>colorado = us_states[us_states$NAME == "Colorado",]</code> (base R) or with the <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function (tidyverse) and plot the resulting object in the context of US states.</p>
 <ul>
 <li>Create a new object representing all the states that geographically intersect with Colorado and plot the result (hint: the most concise way to do this is with the subsetting method <code>[</code>).</li>
 <li>Create another object representing all the objects that touch (have a shared boundary with) Colorado and plot the result (hint: remember you can use the argument <code>op = st_intersects</code> and other spatial relations during spatial subsetting operations in base R).</li>
@@ -390,7 +390,7 @@ Next, compute and visualize the difference between the raster created using the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

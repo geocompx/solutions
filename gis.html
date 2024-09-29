@@ -7,16 +7,16 @@
 <base href="https://r.geocompx.org/solutions/">
 <title>Chapter 10 Bridges to GIS software | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
-<meta name="description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 AM using the r.sun GRASS GIS through...'>
+<meta name="description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 am using the r.sun GRASS GIS through...'>
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Bridges to GIS software | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/gis.html">
 <meta property="og:image" content="https://r.geocompx.org/solutions/images/cover.png">
-<meta property="og:description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 AM using the r.sun GRASS GIS through...'>
+<meta property="og:description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 am using the r.sun GRASS GIS through...'>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 10 Bridges to GIS software | Geocomputation with R: Solutions">
-<meta name="twitter:description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 AM using the r.sun GRASS GIS through...'>
+<meta name="twitter:description" content='library(sf) library(terra) E1. Compute global solar irradiation for an area of system.file("raster/dem.tif", package = "spDataLarge") for March 21 at 11:00 am using the r.sun GRASS GIS through...'>
 <meta name="twitter:image" content="https://r.geocompx.org/solutions/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -83,7 +83,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/">terra</a></span><span class="op">)</span></span></code></pre></div>
 <!-- qgisprocess 1-3 -->
-<p>E1. Compute global solar irradiation for an area of <code>system.file("raster/dem.tif", package = "spDataLarge")</code> for March 21 at 11:00 AM using the <code>r.sun</code> GRASS GIS through <strong>qgisprocess</strong>.</p>
+<p>E1. Compute global solar irradiation for an area of <code>system.file("raster/dem.tif", package = "spDataLarge")</code> for March 21 at 11:00 am using the <code>r.sun</code> GRASS GIS through <strong>qgisprocess</strong>.</p>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/qgisprocess/">qgisprocess</a></span><span class="op">)</span></span>
 <span><span class="co"># enable grass</span></span>
@@ -207,8 +207,8 @@ Additionally, give <code>mapview</code> a try.</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">out</span>, col <span class="op">=</span> <span class="st">"white"</span>, map.type <span class="op">=</span> <span class="st">"Esri.WorldImagery"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/mapview/man/mapView.html">mapview</a></span><span class="op">(</span><span class="va">point</span><span class="op">)</span></span></code></pre></div>
 <!-- gdal 1-2 -->
-<p>E5. Use <code>gdalinfo</code> via a system call for a raster file stored on disk of your choice.
-What kind of information you can find there?</p>
+<p>E5. Use <code>gdalinfo</code> via a system call for a raster file stored on a disk of your choice.
+What kind of information can you find there?</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">link2GI</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/link2GI/reference/linkGDAL.html">linkGDAL</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">our_filepath</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/elev.tif"</span>, package <span class="op">=</span> <span class="st">"spData"</span><span class="op">)</span></span>
@@ -234,7 +234,7 @@ What kind of information you can find there?</p>
 <span><span class="va">ca_highways</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="va">conn</span>, query <span class="op">=</span> <span class="va">query</span>, geom <span class="op">=</span> <span class="st">"wkb_geometry"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">ca_highways</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <!-- stac+gdalcubes 1 -->
-<p>E8. The <code>ndvi.tif</code> raster (<code>system.file("raster/ndvi.tif", package = "spDataLarge")</code>) contains NDVI calculated for the Mongón study area based on Landsat data from September 22nd, 2000.
+<p>E8. The <code>ndvi.tif</code> raster (<code>system.file("raster/ndvi.tif", package = "spDataLarge")</code>) contains NDVI calculated for the Mongón study area based on Landsat data from September 22, 2000.
 Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</strong> to download Sentinel-2 images for the same area from
 2020-08-01 to 2020-10-31, calculate its NDVI, and then compare it with the results from <code>ndvi.tif</code>.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
@@ -311,7 +311,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

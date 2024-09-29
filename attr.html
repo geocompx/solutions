@@ -231,7 +231,7 @@ Hint: try to use helper functions, such as <code>contains</code> or <code>matche
 <span><span class="co">#&gt; 8       6417398      6568645 MULTIPOLYGON (((-87.5 41.7,...</span></span>
 <span><span class="co">#&gt; 9       2809329      2892987 MULTIPOLYGON (((-102 40, -1...</span></span>
 <span><span class="co">#&gt; 10      4429940      4625253 MULTIPOLYGON (((-92 29.6, -...</span></span></code></pre></div>
-<p>E3. Find all states with the following characteristics (bonus find <em>and</em> plot them):</p>
+<p>E3. Find all states with the following characteristics (bonus: find <em>and</em> plot them):</p>
 <ul>
 <li>Belong to the Midwest region.</li>
 <li>Belong to the West region, have an area below 250,000 km<sup>2</sup><em>and</em> in 2015 a population greater than 5,000,000 residents (hint: you may need to use the function <code><a href="https://r-quantities.github.io/units/reference/units.html">units::set_units()</a></code> or <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>).</li>
@@ -380,7 +380,7 @@ What is the class of the new object?</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">us_states_stats</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "sf"         "data.frame"</span></span></code></pre></div>
 <p>E8. <code>us_states_df</code> has two more rows than <code>us_states</code>.
-How can you find them? (hint: try to use the <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">dplyr::anti_join()</a></code> function)</p>
+How can you find them? (Hint: try to use the <code><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">dplyr::anti_join()</a></code> function.)</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">us_states_df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry</a></span><span class="op">(</span><span class="va">us_states</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"state"</span> <span class="op">=</span> <span class="st">"NAME"</span><span class="op">)</span><span class="op">)</span></span>
@@ -436,7 +436,7 @@ Calculate the change in percentages and map them.</p>
 <span><span class="co">#&gt; 9  MULTIPOLYGON (((-102 40, -1...</span></span>
 <span><span class="co">#&gt; 10 MULTIPOLYGON (((-92 29.6, -...</span></span></code></pre></div>
 <p>E12. Using <code>us_states</code> and <code>us_states_df</code> create a new object called <code>us_states_sel</code>.
-The new object should have only two variables - <code>median_income_15</code> and <code>geometry</code>.
+The new object should have only two variables: <code>median_income_15</code> and <code>geometry</code>.
 Change the name of the <code>median_income_15</code> column to <code>Income</code>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">us_states_sel</span> <span class="op">=</span> <span class="va">us_states</span> <span class="op">|&gt;</span></span>
@@ -472,7 +472,7 @@ Bonus: What is the region with the largest increase in people living below the p
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">REGION</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "South"</span></span></code></pre></div>
-<p>E15. Create a raster from scratch with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
+<p>E15. Create a raster from scratch, with nine rows and columns and a resolution of 0.5 decimal degrees (WGS84).
 Fill it with random numbers.
 Extract the values of the four corner cells.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -546,7 +546,7 @@ Extract the values of the four corner cells.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-22.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

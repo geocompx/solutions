@@ -95,7 +95,7 @@ plot(st_geometry(nz_height3100), add = TRUE)
 
 <img src="06-raster-vector_files/figure-html/06-ex-e3-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-2.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-3.png" width="100%" style="display: block; margin: auto;" />
 
-E4. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 by 6 km) and plot the result.
+E4. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 x 6 km) and plot the result.
 
 - Resample the lower resolution raster back to the original resolution of 3 km. How have the results changed?
 - Name two advantages and disadvantages of reducing raster resolution.

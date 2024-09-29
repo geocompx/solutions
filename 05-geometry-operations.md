@@ -51,7 +51,7 @@ nrow(nz)
 
 <img src="05-geometry-operations_files/figure-html/05-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-2.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-3.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-4.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-5.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-6.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-7.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-8.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-9.png" width="100%" style="display: block; margin: auto;" /><img src="05-geometry-operations_files/figure-html/05-ex-e1-10.png" width="100%" style="display: block; margin: auto;" />
 
-E2. In the first exercise in Chapter Spatial data operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand. 
+E2. In the first exercise in Chapter Spatial Data Operations it was established that Canterbury region had 70 of the 101 highest points in New Zealand. 
 Using `st_buffer()`, how many points in `nz_height` are within 100 km of Canterbury?
 
 ``` r
@@ -188,8 +188,8 @@ arrange(us_states_bor, -borders)
 ```
 
 E7. Read the srtm.tif file into R (`srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))`).
-This raster has a resolution of 0.00083 by 0.00083 degrees. 
-Change its resolution to 0.01 by 0.01 degrees using all of the method available in the **terra** package.
+This raster has a resolution of 0.00083 * 0.00083 degrees. 
+Change its resolution to 0.01 * 0.01 degrees using all of the methods available in the **terra** package.
 Visualize the results.
 Can you notice any differences between the results of these resampling methods?
 

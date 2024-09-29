@@ -33,7 +33,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x559610b25d28>
+#> <bytecode: 0x55db710be6f0>
 #> <environment: namespace:sf>
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 
@@ -89,7 +89,7 @@ st_write(germany_borders, "germany_borders.gpkg")
 
 <img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;" />
 
-E5. Download the global monthly minimum temperature with a spatial resolution of five minutes using the **geodata** package.
+E5. Download the global monthly minimum temperature with a spatial resolution of 5 minutes using the **geodata** package.
 Extract the June values, and save them to a file named `tmin_june.tif` file (hint: use `terra::subset()`).
 
 ``` r
