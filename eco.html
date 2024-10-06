@@ -161,7 +161,7 @@ To complete the response-predictor matrix, extract the values of the environment
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">ep</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"carea"</span>, <span class="st">"cslope"</span><span class="op">)</span></span>
 <span><span class="co"># make sure all rasters share the same origin</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/origin.html">origin</a></span><span class="op">(</span><span class="va">ep</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/origin.html">origin</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
-<span><span class="co"># add dem and ndvi to the multi-layerSpatRaster object</span></span>
+<span><span class="co"># add dem and ndvi to the multi-layer SpatRaster object</span></span>
 <span><span class="va">ep</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dem</span>, <span class="va">ndvi</span>, <span class="va">ep</span><span class="op">)</span> </span>
 <span><span class="va">ep</span><span class="op">$</span><span class="va">carea</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">ep</span><span class="op">$</span><span class="va">carea</span><span class="op">)</span></span>
 <span></span>
@@ -198,7 +198,7 @@ To complete the response-predictor matrix, extract the values of the environment
 The random forest modeling should include the estimation of optimal hyperparameter combinations (random search with 50 iterations) in an inner tuning loop.
 Parallelize the tuning level.
 Report the mean RMSE and use a boxplot to visualize all retrieved RMSEs.
-Please not that this exercise is best solved using the mlr3 functions <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid()</a></code> and <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark()</a></code> (see <a href="https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking" class="uri">https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking</a> for more information).</p>
+Please note that this exercise is best solved using the mlr3 functions <code><a href="https://mlr3.mlr-org.com/reference/benchmark_grid.html">benchmark_grid()</a></code> and <code><a href="https://mlr3.mlr-org.com/reference/benchmark.html">benchmark()</a></code> (see <a href="https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking" class="uri">https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking</a> for more information).</p>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span></span>
@@ -341,7 +341,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

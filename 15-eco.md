@@ -93,7 +93,7 @@ ep = ep[c("AREA", "SLOPE")] |>
 names(ep) = c("carea", "cslope")
 # make sure all rasters share the same origin
 origin(ep) = origin(dem)
-# add dem and ndvi to the multi-layerSpatRaster object
+# add dem and ndvi to the multi-layer SpatRaster object
 ep = c(dem, ndvi, ep) 
 ep$carea = log10(ep$carea)
 
@@ -132,7 +132,7 @@ E3. Retrieve the bias-reduced RMSE of a random forest\index{random forest} and a
 The random forest modeling should include the estimation of optimal hyperparameter\index{hyperparameter} combinations (random search with 50 iterations) in an inner tuning loop.
 Parallelize\index{parallelization} the tuning level.
 Report the mean RMSE\index{RMSE} and use a boxplot to visualize all retrieved RMSEs.
-Please not that this exercise is best solved using the mlr3 functions `benchmark_grid()` and `benchmark()` (see https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking for more information).
+Please note that this exercise is best solved using the mlr3 functions `benchmark_grid()` and `benchmark()` (see https://mlr3book.mlr-org.com/perf-eval-cmp.html#benchmarking for more information).
 
 ``` r
 library(dplyr)

@@ -85,7 +85,7 @@
 <p>E1. Read the script <a href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a> in the <code>code</code> folder of the book’s GitHub repository.</p>
 <ul>
 <li>Which of the best practices covered in Section <a href="#scripts"><strong>??</strong></a> does it follow?</li>
-<li>Create a version of the script on your computer in an IDE such as RStudio (preferably by typing-out the script line-by-line, in your own coding style and with your own comments, rather than copy-pasting — this will help you learn how to type scripts). Using the example of a square polygon (e.g., created with <code>poly_mat = cbind(x = c(0, 9, 9, 0, 0), y = c(0, 0, 9, 9, 0))</code>) execute the script line-by-line.</li>
+<li>Create a version of the script on your computer in an IDE such as RStudio (preferably by typing the script line-by-line, in your own coding style and with your own comments, rather than copy-pasting — this will help you learn how to type scripts). Using the example of a square polygon (e.g., created with <code>poly_mat = cbind(x = c(0, 9, 9, 0, 0), y = c(0, 0, 9, 9, 0))</code>) execute the script line-by-line.</li>
 <li>What changes could be made to the script to make it more reproducible?</li>
 <li>How could the documentation be improved?</li>
 </ul>
@@ -98,9 +98,9 @@ You can also create a new R script from the R console with the command <code>fil
 For people new to R it could also contain a comment stating that R must be installed before running the script.</p>
 <p>Documentation could be improved with a more detailed description of the algorithm, including a link to the relevant section of the book.
 Furthermore, the anonymous functions could be replaced with named functions and documented with Roxygen2 comments.</p>
-<p>E2. In the geometric algorithms section we calculated that the area and geographic centroid of the polygon represented by <code>poly_mat</code> was 245 and 8.8, 9.2, respectively.</p>
+<p>E2. In the geometric algorithms section, we calculated that the area of the polygon <code>poly_mat</code> was 245 units squared and that its centroid as at the coordinates (8.8, 9.2).</p>
 <ul>
-<li>Reproduce the results on your own computer with reference to the script <a href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>, an implementation of this algorithm (bonus: type out the commands - try to avoid copy-pasting).</li>
+<li>Reproduce the results on your own computer with reference to the script <a href="https://github.com/geocompx/geocompr/blob/main/code/11-centroid-alg.R"><code>11-centroid-alg.R</code></a>, an implementation of this algorithm (bonus: type the commands - try to avoid copy-pasting).</li>
 <li>Are the results correct? Verify them by converting <code>poly_mat</code> into an <code>sfc</code> object (named <code>poly_sfc</code>) with <code><a href="https://r-spatial.github.io/sf/reference/st.html">st_polygon()</a></code> (hint: this function takes objects of class <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>) and then using <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
@@ -130,7 +130,7 @@ Furthermore, the anonymous functions could be replaced with named functions and 
 </ul>
 <!-- Todo: add example of matrix representing a linestring, demonstrate code to verify the answer, suggest alternative functions to decompose as a bonus. --><p>The algorithm would need to be able to have negative as well as positive area values.</p>
 <p>We leave Bonus 2 as an exercise for the reader.</p>
-<p>E4. In the functions section we created different versions of the <code>poly_centroid()</code> function that generated outputs of class <code>sfg</code> (<code>poly_centroid_sfg()</code>) and type-stable <code>matrix</code> outputs (<code>poly_centroid_type_stable()</code>).
+<p>E4. In the functions section, we created different versions of the <code>poly_centroid()</code> function that generated outputs of class <code>sfg</code> (<code>poly_centroid_sfg()</code>) and type-stable <code>matrix</code> outputs (<code>poly_centroid_type_stable()</code>).
 Further extend the function by creating a version (e.g., called <code>poly_centroid_sf()</code>) that is type stable (only accepts inputs of class <code>sf</code>) <em>and</em> returns <code>sf</code> objects (hint: you may need to convert the object <code>x</code> into a matrix with the command <code>sf::st_coordinates(x)</code>).</p>
 <ul>
 <li>Verify if it works by running <code>poly_centroid_sf(sf::st_sf(sf::st_sfc(poly_sfc)))</code>
@@ -181,7 +181,7 @@ Further extend the function by creating a version (e.g., called <code>poly_centr
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-09-29.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-10-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
