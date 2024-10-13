@@ -95,7 +95,7 @@ The starting point of this exercise is to create an object representing Colorado
 ``` r
 colorado = us_states[us_states$NAME == "Colorado", ]
 plot(us_states$geometry)
-plot(colorado$geometry, col = "grey", add = TRUE)
+plot(colorado$geometry, col = "gray", add = TRUE)
 ```
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" width="100%" style="display: block; margin: auto;" />
@@ -103,7 +103,7 @@ plot(colorado$geometry, col = "grey", add = TRUE)
 ``` r
 intersects_with_colorado = us_states[colorado, , op = st_intersects]
 plot(us_states$geometry, main = "States that intersect with Colorado")
-plot(intersects_with_colorado$geometry, col = "grey", add = TRUE)
+plot(intersects_with_colorado$geometry, col = "gray", add = TRUE)
 ```
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -153,7 +153,7 @@ us_states |>
 #> 8 MULTIPOLYGON (((-104 45, -1...
 touches_colorado = us_states[colorado, , op = st_touches]
 plot(us_states$geometry, main = "States that touch Colorado")
-plot(touches_colorado$geometry, col = "grey", add = TRUE)
+plot(touches_colorado$geometry, col = "gray", add = TRUE)
 ```
 
 <img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;" />
@@ -175,7 +175,7 @@ states_crossed$NAME
 #> [10] "Kentucky"             "Ohio"                 "Utah"                
 #> [13] "Virginia"
 plot(us_states$geometry, main = "States crossed by a straight line\n from the District of Columbia to central California")
-plot(states_crossed$geometry, col = "grey", add = TRUE)
+plot(states_crossed$geometry, col = "gray", add = TRUE)
 plot(washington_to_cali, add = TRUE)
 ```
 
