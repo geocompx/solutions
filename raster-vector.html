@@ -8,7 +8,7 @@
 <title>Chapter 6 Raster-vector interactions | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
 <meta name="description" content="Some of the following exercises use a vector (zion_points) and raster dataset (srtm) from the spDataLarge package. They also use a polygonal ‘convex hull’ derived from the vector dataset (ch) to...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Raster-vector interactions | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/raster-vector.html">
@@ -142,7 +142,7 @@ Using these two new objects:</p>
 <li>Find the maximum elevation in each grid cell.</li>
 </ul>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nz_height3100</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">elevation</span> <span class="op">&gt;</span> <span class="fl">3100</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">nz_height3100</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nz_height</span>, <span class="va">elevation</span> <span class="op">&gt;</span> <span class="fl">3100</span><span class="op">)</span></span>
 <span><span class="va">new_graticule</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_graticule.html">st_graticule</a></span><span class="op">(</span><span class="va">nz_height3100</span>, datum <span class="op">=</span> <span class="st">"EPSG:2193"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_height3100</span><span class="op">)</span>, graticule <span class="op">=</span> <span class="va">new_graticule</span>, axes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -200,7 +200,7 @@ Using these two new objects:</p>
 <span><span class="co">#&gt; 1     0  clay</span></span>
 <span><span class="co">#&gt; 2     1  silt</span></span>
 <span><span class="co">#&gt; 3     2  sand</span></span>
-<span><span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span></span>
+<span><span class="va">clay</span> <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">grain_poly</span>, <span class="va">grain</span> <span class="op">==</span> <span class="st">"clay"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">clay</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-raster-vector_files/figure-html/06-ex-e5-2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Advantages:</p>
@@ -246,7 +246,7 @@ Using these two new objects:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-10-13.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-10-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
