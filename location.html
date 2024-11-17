@@ -91,7 +91,7 @@
 Please note that the unzipped file has a size of 1.23 GB.
 To read it into R, you can use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv</a></code>.
 This takes 30 seconds on a machine with 16 GB RAM.
-<code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code><a href="https://rdatatable.gitlab.io/data.table/reference/data.table.html">data.table()</a></code>.
+<code><a href="https://rdrr.io/pkg/data.table/man/fread.html">data.table::fread()</a></code> might be even faster, and returns an object of class <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html">data.table()</a></code>.
 Use <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">dplyr::as_tibble()</a></code> to convert it into a tibble.
 Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compare the difference with the inhabitant raster (<code>inh</code>) we have created using class mean values.</p>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
@@ -126,7 +126,7 @@ Build an inhabitant raster, aggregate it to a cell resolution of 1 km, and compa
 <span><span class="va">base_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">".csv$"</span>, <span class="va">nms</span><span class="op">$</span><span class="va">Name</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/unzip.html">unzip</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"census.zip"</span><span class="op">)</span>, files <span class="op">=</span> <span class="va">base_name</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># read in the csv file</span></span>
-<span><span class="va">input</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">base_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="va">input</span> <span class="op">=</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">base_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">input</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">input</span>, x <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"x_mp_1"</span><span class="op">)</span>,</span>
 <span>                      y <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"y_mp_1"</span><span class="op">)</span>, inh <span class="op">=</span> <span class="va">Einwohner</span><span class="op">)</span></span>
@@ -275,7 +275,7 @@ Change the age raster accordingly, repeat the remaining analyses and compare the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-11-10.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-11-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
