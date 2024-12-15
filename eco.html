@@ -103,8 +103,8 @@ What might explain the observed difference?</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"comm"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">comm</span>, <span class="st">"pa"</span><span class="op">)</span></span>
-<span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
-<span><span class="va">comm</span> <span class="op">=</span> <span class="va">comm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
+<span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rowSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
+<span><span class="va">comm</span> <span class="op">=</span> <span class="va">comm</span><span class="op">[</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rowSums.html">rowSums</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">25072018</span><span class="op">)</span></span>
 <span><span class="va">nmds_pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">pa</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="va">nmds_per</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/metaMDS.html">metaMDS</a></span><span class="op">(</span>comm <span class="op">=</span> <span class="va">comm</span>, k <span class="op">=</span> <span class="fl">4</span>, try <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
@@ -140,7 +140,7 @@ To complete the response-predictor matrix, extract the values of the environment
 <span></span>
 <span><span class="co"># use presence-absence matrix and get rid of empty</span></span>
 <span><span class="va">pa</span> <span class="op">=</span> <span class="fu">vegan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/decostand.html">decostand</a></span><span class="op">(</span><span class="va">comm</span>, <span class="st">"pa"</span><span class="op">)</span></span>
-<span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
+<span><span class="va">pa</span> <span class="op">=</span> <span class="va">pa</span><span class="op">[</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rowSums.html">rowSums</a></span><span class="op">(</span><span class="va">pa</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="co"># enable plugins if not already done so</span></span>
 <span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_enable_plugins.html">qgis_enable_plugins</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"grassprovider"</span>, <span class="st">"processing_saga_nextgen"</span><span class="op">)</span><span class="op">)</span></span>
@@ -341,7 +341,7 @@ But keep in mind that the used dataset is small in terms of observations and pre
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-12-08.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-12-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

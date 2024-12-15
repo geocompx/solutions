@@ -103,7 +103,7 @@ E4. Aggregate the raster counting high points in New Zealand (created in the pre
 ``` r
 nz_raster_low = raster::aggregate(nz_raster, fact = 2, fun = sum, na.rm = TRUE)
 res(nz_raster_low)
-#> [1] 6000 6000
+#> [1] 6380 5770
 
 nz_resample = resample(nz_raster_low, nz_raster)
 plot(nz_raster_low)

@@ -166,7 +166,7 @@ Using these two new objects:</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nz_raster_low</span> <span class="op">=</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">nz_raster</span>, fact <span class="op">=</span> <span class="fl">2</span>, fun <span class="op">=</span> <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">res</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 6000 6000</span></span>
+<span><span class="co">#&gt; [1] 6380 5770</span></span>
 <span></span>
 <span><span class="va">nz_resample</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/resample.html">resample</a></span><span class="op">(</span><span class="va">nz_raster_low</span>, <span class="va">nz_raster</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">nz_raster_low</span><span class="op">)</span></span>
@@ -246,7 +246,7 @@ Using these two new objects:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-12-08.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2024-12-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
