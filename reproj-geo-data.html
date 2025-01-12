@@ -8,7 +8,7 @@
 <title>Chapter 7 Reprojecting geographic data | Geocomputation with R: Solutions</title>
 <meta name="author" content="Robin Lovelace, Jakub Nowosad, Jannes Muenchow">
 <meta name="description" content="library(sf) library(terra) library(spData) E1. Create a new object called nz_wgs by transforming nz object into the WGS84 CRS. Create an object of class crs for both and use this to query their...">
-<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Reprojecting geographic data | Geocomputation with R: Solutions">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r.geocompx.org/solutions/reproj-geo-data.html">
@@ -94,27 +94,44 @@
 <span><span class="co">#&gt; Coordinate Reference System:</span></span>
 <span><span class="co">#&gt;   User input: EPSG:2193 </span></span>
 <span><span class="co">#&gt;   wkt:</span></span>
-<span><span class="co">#&gt; PROJCS["NZGD2000 / New Zealand Transverse Mercator 2000",</span></span>
-<span><span class="co">#&gt;     GEOGCS["NZGD2000",</span></span>
-<span><span class="co">#&gt;         DATUM["New_Zealand_Geodetic_Datum_2000",</span></span>
-<span><span class="co">#&gt;             SPHEROID["GRS 1980",6378137,298.257222101,</span></span>
-<span><span class="co">#&gt;                 AUTHORITY["EPSG","7019"]],</span></span>
-<span><span class="co">#&gt;             TOWGS84[0,0,0,0,0,0,0],</span></span>
-<span><span class="co">#&gt;             AUTHORITY["EPSG","6167"]],</span></span>
+<span><span class="co">#&gt; PROJCRS["NZGD2000 / New Zealand Transverse Mercator 2000",</span></span>
+<span><span class="co">#&gt;     BASEGEOGCRS["NZGD2000",</span></span>
+<span><span class="co">#&gt;         DATUM["New Zealand Geodetic Datum 2000",</span></span>
+<span><span class="co">#&gt;             ELLIPSOID["GRS 1980",6378137,298.257222101,</span></span>
+<span><span class="co">#&gt;                 LENGTHUNIT["metre",1]]],</span></span>
 <span><span class="co">#&gt;         PRIMEM["Greenwich",0,</span></span>
-<span><span class="co">#&gt;             AUTHORITY["EPSG","8901"]],</span></span>
-<span><span class="co">#&gt;         UNIT["degree",0.0174532925199433,</span></span>
-<span><span class="co">#&gt;             AUTHORITY["EPSG","9122"]],</span></span>
-<span><span class="co">#&gt;         AUTHORITY["EPSG","4167"]],</span></span>
-<span><span class="co">#&gt;     PROJECTION["Transverse_Mercator"],</span></span>
-<span><span class="co">#&gt;     PARAMETER["latitude_of_origin",0],</span></span>
-<span><span class="co">#&gt;     PARAMETER["central_meridian",173],</span></span>
-<span><span class="co">#&gt;     PARAMETER["scale_factor",0.9996],</span></span>
-<span><span class="co">#&gt;     PARAMETER["false_easting",1600000],</span></span>
-<span><span class="co">#&gt;     PARAMETER["false_northing",10000000],</span></span>
-<span><span class="co">#&gt;     UNIT["metre",1,</span></span>
-<span><span class="co">#&gt;         AUTHORITY["EPSG","9001"]],</span></span>
-<span><span class="co">#&gt;     AUTHORITY["EPSG","2193"]]</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433]],</span></span>
+<span><span class="co">#&gt;         ID["EPSG",4167]],</span></span>
+<span><span class="co">#&gt;     CONVERSION["New Zealand Transverse Mercator 2000",</span></span>
+<span><span class="co">#&gt;         METHOD["Transverse Mercator",</span></span>
+<span><span class="co">#&gt;             ID["EPSG",9807]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Latitude of natural origin",0,</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8801]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Longitude of natural origin",173,</span></span>
+<span><span class="co">#&gt;             ANGLEUNIT["degree",0.0174532925199433],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8802]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["Scale factor at natural origin",0.9996,</span></span>
+<span><span class="co">#&gt;             SCALEUNIT["unity",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8805]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["False easting",1600000,</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8806]],</span></span>
+<span><span class="co">#&gt;         PARAMETER["False northing",10000000,</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1],</span></span>
+<span><span class="co">#&gt;             ID["EPSG",8807]]],</span></span>
+<span><span class="co">#&gt;     CS[Cartesian,2],</span></span>
+<span><span class="co">#&gt;         AXIS["northing (N)",north,</span></span>
+<span><span class="co">#&gt;             ORDER[1],</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
+<span><span class="co">#&gt;         AXIS["easting (E)",east,</span></span>
+<span><span class="co">#&gt;             ORDER[2],</span></span>
+<span><span class="co">#&gt;             LENGTHUNIT["metre",1]],</span></span>
+<span><span class="co">#&gt;     USAGE[</span></span>
+<span><span class="co">#&gt;         SCOPE["Engineering survey, topographic mapping."],</span></span>
+<span><span class="co">#&gt;         AREA["New Zealand - North Island, South Island, Stewart Island - onshore."],</span></span>
+<span><span class="co">#&gt;         BBOX[-47.33,166.37,-34.1,178.63]],</span></span>
+<span><span class="co">#&gt;     ID["EPSG",2193]]</span></span>
 <span><span class="va">nz_wgs</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">nz</span>, <span class="st">"EPSG:4326"</span><span class="op">)</span></span>
 <span><span class="va">nz_crs</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">nz</span><span class="op">)</span></span>
 <span><span class="va">nz_wgs_crs</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html">st_crs</a></span><span class="op">(</span><span class="va">nz_wgs</span><span class="op">)</span></span>
@@ -237,7 +254,7 @@ How does it influence the results?</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-01-05.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
