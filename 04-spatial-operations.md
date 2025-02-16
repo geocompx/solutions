@@ -187,7 +187,7 @@ Secondly, read the NDVI raster (`ndvi = rast(system.file("raster/ndvi.tif", pack
 
 ``` r
 library(terra)
-#> terra 1.8.15
+#> terra 1.8.21
 dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))
 ndvi = rast(system.file("raster/ndvi.tif", package = "spDataLarge"))
 
@@ -302,7 +302,6 @@ water_mask[water_mask == 0] = NA
 
 # Use the distance() function on this mask to get distance to the coast
 distance_to_coast = distance(water_mask)
-#> |---------|---------|---------|---------|=========================================                                          
 # convert distance into km
 distance_to_coast_km = distance_to_coast / 1000
 
