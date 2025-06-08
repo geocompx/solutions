@@ -109,7 +109,7 @@ con_raster = rast(system.file("raster/srtm.tif", package = "spDataLarge"))
 con_raster_utm12n = project(con_raster, "EPSG:32612", method = "near")
 con_raster_utm12n
 #> class       : SpatRaster 
-#> dimensions  : 515, 422, 1  (nrow, ncol, nlyr)
+#> size        : 515, 422, 1  (nrow, ncol, nlyr)
 #> resolution  : 83.5, 83.5  (x, y)
 #> extent      : 301062, 336313, 4111111, 4154131  (xmin, xmax, ymin, ymax)
 #> coord. ref. : WGS 84 / UTM zone 12N (EPSG:32612) 
@@ -133,7 +133,7 @@ cat_raster = rast(system.file("raster/nlcd.tif", package = "spDataLarge"))
 cat_raster_wgs84 = project(cat_raster, "EPSG:4326", method = "bilinear")
 cat_raster_wgs84
 #> class       : SpatRaster 
-#> dimensions  : 1246, 1244, 1  (nrow, ncol, nlyr)
+#> size        : 1246, 1244, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.000315, 0.000315  (x, y)
 #> extent      : -113, -113, 37.1, 37.5  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
