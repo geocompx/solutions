@@ -312,7 +312,7 @@ plot(distance_to_coast_km, main = "Distance to the coast (km)")
 <img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;" />
 
 E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
-Next, compute and visualize the difference between the raster created using the Euclidean distance (E7) and the raster weighted by elevation.
+Next, compute and visualize the difference between the raster created using the Euclidean distance (E8) and the raster weighted by elevation.
 
 ``` r
 # now let's weight each 100 altitudinal meters by an additional distance of 10 km
