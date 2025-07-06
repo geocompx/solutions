@@ -1,7 +1,7 @@
 --- 
 title: 'Geocomputation with R: Solutions'
 author: 'Robin Lovelace, Jakub Nowosad, Jannes Muenchow'
-date: '2025-06-29'
+date: '2025-07-06'
 site: bookdown::bookdown_site
 output: bookdown::bs4_book
 biblio-style: apalike
