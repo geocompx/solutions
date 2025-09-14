@@ -486,7 +486,7 @@ boxplot(dem)
 # we can also use ggplot2 after converting SpatRaster to a data frame
 library(ggplot2)
 ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
-#> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()
 ```
 
