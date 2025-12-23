@@ -27,7 +27,7 @@ plot(nz_not_canterbury_height$geometry, pch = 1, col = "blue", add = TRUE)
 plot(canterbury_height$geometry, pch = 4, col = "red", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e1-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E2. Which region has the second highest number of `nz_height` points, and how many does it have?
 
@@ -81,7 +81,7 @@ nz_height_combined |>
 #> 7       Marlborough     1
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E4. Test your knowledge of spatial predicates by finding out and plotting how US states relate to each other and other spatial objects.
 
@@ -98,7 +98,7 @@ plot(us_states$geometry)
 plot(colorado$geometry, col = "gray", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-4-1-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 ``` r
 intersects_with_colorado = us_states[colorado, , op = st_intersects]
@@ -106,7 +106,7 @@ plot(us_states$geometry, main = "States that intersect with Colorado")
 plot(intersects_with_colorado$geometry, col = "gray", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-4-2-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 ``` r
 # Alternative but more verbose solutions
@@ -156,7 +156,7 @@ plot(us_states$geometry, main = "States that touch Colorado")
 plot(touches_colorado$geometry, col = "gray", add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-4-4-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 ``` r
 washington_to_cali = us_states |> 
@@ -179,7 +179,7 @@ plot(states_crossed$geometry, col = "gray", add = TRUE)
 plot(washington_to_cali, add = TRUE)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-4-5-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-4-5-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 
 E5. Use `dem = rast(system.file("raster/dem.tif", package = "spDataLarge"))`, and reclassify the elevation in three classes: low (<300), medium and high (>500).
@@ -205,7 +205,7 @@ zonal(c(dem, ndvi), dem_reclass, fun = "mean")
 #> 3   high 765 -0.208
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e5-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E6. Apply a line detection filter to `rast(system.file("ex/logo.tif", package = "terra"))`.
 Plot the result.
@@ -230,7 +230,7 @@ sobel_y = focal(r, w = filter_y)
 plot(sobel_y, col = c("black", "white"))
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e6-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e6-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E7. Calculate the Normalized Difference Water Index	(NDWI; `(green - nir)/(green + nir)`) of a Landsat image. 
 Use the Landsat image provided by the **spDataLarge** package (`system.file("raster/landsat.tif", package = "spDataLarge")`).
@@ -279,7 +279,7 @@ cor(two_rasts_df$ndvi, two_rasts_df$ndwi)
 #> [1] -0.913
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e7-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e7-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e7-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E8. A StackOverflow [post (stackoverflow.com/questions/35555709)](https://stackoverflow.com/questions/35555709/global-raster-of-geographic-distances) shows how to compute distances to the nearest coastline using `raster::distance()`.
 Try to do something similar but with `terra::distance()`: retrieve a digital elevation model of Spain, and compute a raster which represents distances to the coast across the country (hint: use `geodata::elevation_30s()`).
@@ -309,7 +309,7 @@ distance_to_coast_km = distance_to_coast / 1000
 plot(distance_to_coast_km, main = "Distance to the coast (km)")
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e8-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E9. Try to modify the approach used in the above exercise by weighting the distance raster with the elevation raster; every 100 altitudinal meters should increase the distance to the coast by 10 km.
 Next, compute and visualize the difference between the raster created using the Euclidean distance (E8) and the raster weighted by elevation.
@@ -323,4 +323,4 @@ plot(distance_to_coast_km2)
 plot(distance_to_coast_km - distance_to_coast_km2)
 ```
 
-<img src="04-spatial-operations_files/figure-html/04-ex-e9-1.png" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e9-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-spatial-operations_files/figure-html/04-ex-e9-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="04-spatial-operations_files/figure-html/04-ex-e9-2.png" alt="" width="100%" style="display: block; margin: auto;" />

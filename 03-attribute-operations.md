@@ -358,7 +358,7 @@ us_popdens_change = us_states2 |>
 plot(us_popdens_change["pop_dens_diff_10_15p"])
 ```
 
-<img src="03-attribute-operations_files/figure-html/03-ex-e10-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="03-attribute-operations_files/figure-html/03-ex-e10-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E11. Change the columns' names in `us_states` to lowercase. (Hint: helper functions - `tolower()` and `colnames()` may help.)
 
@@ -490,4 +490,4 @@ ggplot(as.data.frame(dem), aes(dem)) + geom_histogram()
 ggplot(as.data.frame(dem), aes(dem)) + geom_boxplot()
 ```
 
-<img src="03-attribute-operations_files/figure-html/03-ex-e17-1.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-2.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-3.png" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="03-attribute-operations_files/figure-html/03-ex-e17-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-2.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-3.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="03-attribute-operations_files/figure-html/03-ex-e17-4.png" alt="" width="100%" style="display: block; margin: auto;" />

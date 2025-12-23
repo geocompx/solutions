@@ -155,7 +155,7 @@
 <span><span class="co"># because New Zealand is close to the South Pole and meridians converge there</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">nz_27700</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="07-reproj_files/figure-html/07-ex-e1-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e1-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="07-reproj_files/figure-html/07-ex-e1-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e1-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E2. Transform the <code>world</code> dataset to the transverse Mercator projection (<code>"+proj=tmerc"</code>) and plot the result.
 What has changed and why?
 Try to transform it back into WGS 84 and plot the new object.
@@ -166,7 +166,7 @@ Why does the new object differ from the original one?</p>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_tmerc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">world_4326</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform</a></span><span class="op">(</span><span class="va">world_tmerc</span>, <span class="st">"EPSG:4326"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_geometry</a></span><span class="op">(</span><span class="va">world_4326</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="07-reproj_files/figure-html/07-ex-e2-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e2-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="07-reproj_files/figure-html/07-ex-e2-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e2-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E3. Transform the continuous raster (<code>con_raster</code>) into NAD83 / UTM zone 12N using the nearest neighbor interpolation method.
 What has changed?
 How does it influence the results?</p>
@@ -186,7 +186,7 @@ How does it influence the results?</p>
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster_utm12n</span><span class="op">)</span></span></code></pre></div>
-<p><img src="07-reproj_files/figure-html/07-ex-e3-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e3-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="07-reproj_files/figure-html/07-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e3-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E4. Transform the categorical raster (<code>cat_raster</code>) into WGS 84 using the bilinear interpolation method.
 What has changed?
 How does it influence the results?</p>
@@ -206,7 +206,7 @@ How does it influence the results?</p>
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster_wgs84</span><span class="op">)</span></span></code></pre></div>
-<p><img src="07-reproj_files/figure-html/07-ex-e4-1.png" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e4-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="07-reproj_files/figure-html/07-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="07-reproj_files/figure-html/07-ex-e4-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <!--toDo:jn-->
 <!--improve/replace/modify the following q-->
 <!-- E5. Create your own proj-string.  -->
@@ -254,7 +254,7 @@ How does it influence the results?</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-14.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

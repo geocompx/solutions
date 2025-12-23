@@ -85,7 +85,7 @@ plot(world["pop"], logz = TRUE)
 # It was set to the square route of the population divided by 10,000 because a) otherwise the symbols would not fit on the map and b) to make circle area proportional to population.
 ```
 
-<img src="02-spatial-data_files/figure-html/02-ex-e2-1.png" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-2.png" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-3.png" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="02-spatial-data_files/figure-html/02-ex-e2-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-2.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-3.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e2-4.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E3. Use `plot()` to create maps of Nigeria in context (see Section 2.2.3).
 
@@ -112,7 +112,7 @@ ncentre_num = st_coordinates(ncentre)
 text(x = ncentre_num[, 1], y = ncentre_num[, 2], labels = a$name_long)
 ```
 
-<img src="02-spatial-data_files/figure-html/02-ex-e3-1.png" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e3-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="02-spatial-data_files/figure-html/02-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="02-spatial-data_files/figure-html/02-ex-e3-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E4. Create an empty `SpatRaster` object called `my_raster` with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.
@@ -123,7 +123,7 @@ my_raster = rast(ncol = 10, nrow = 10,
 plot(my_raster)
 ```
 
-<img src="02-spatial-data_files/figure-html/02-ex-e4-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="02-spatial-data_files/figure-html/02-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E5. Read-in the `raster/nlcd.tif` file from the **spDataLarge** package. 
 What kind of information can you get about the properties of this file?

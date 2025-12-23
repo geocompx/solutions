@@ -104,7 +104,7 @@
 <span><span class="co">#&gt;     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, </span></span>
 <span><span class="co">#&gt;         as_tibble = as_tibble)</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55d025a31fc0&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x556a395199b8&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:sf&gt;</span></span>
 <span><span class="va">nc</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">st_read</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shape/nc.shp"</span>, package<span class="op">=</span><span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `nc' from data source </span></span>
@@ -150,7 +150,7 @@ Write this new object to a file of the GeoPackage format.</p>
 <span><span class="co">#&gt; Writing layer `germany_borders' to data source </span></span>
 <span><span class="co">#&gt;   `germany_borders.gpkg' using driver `GPKG'</span></span>
 <span><span class="co">#&gt; Writing 1 features with 168 fields and geometry type Multi Polygon.</span></span></code></pre></div>
-<div class="inline-figure"><img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="08-read-write-plot_files/figure-html/08-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Download the global monthly minimum temperature with a spatial resolution of 5 minutes using the <strong>geodata</strong> package.
 Extract the June values, and save them to a file named <code>tmin_june.tif</code> file (hint: use <code><a href="https://rspatial.github.io/terra/reference/subset.html">terra::subset()</a></code>).</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
@@ -165,7 +165,7 @@ Extract the June values, and save them to a file named <code>tmin_june.tif</code
 <span><span class="va">gmmt_june</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/subset.html">subset</a></span><span class="op">(</span><span class="va">gmmt</span>, <span class="st">"wc2.1_5m_tmin_06"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">gmmt_june</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/writeRaster.html">writeRaster</a></span><span class="op">(</span><span class="va">gmmt_june</span>, <span class="st">"tmin_june.tif"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="08-read-write-plot_files/figure-html/08-ex-e5-1.png" width="100%" style="display: block; margin: auto;"><img src="08-read-write-plot_files/figure-html/08-ex-e5-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="08-read-write-plot_files/figure-html/08-ex-e5-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="08-read-write-plot_files/figure-html/08-ex-e5-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E6. Create a static map of Germany’s borders, and save it to a PNG file.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"germany.png"</span>, width <span class="op">=</span> <span class="fl">350</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
@@ -215,7 +215,7 @@ Export this map to a file called <code>cycle_hire.html</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-14.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

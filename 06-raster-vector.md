@@ -40,7 +40,7 @@ plot(srtm_mask1)
 plot(srtm_mask2)
 ```
 
-<img src="06-raster-vector_files/figure-html/06-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-2.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-3.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-raster-vector_files/figure-html/06-ex-e1-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-2.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-3.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e1-4.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E2. Firstly, extract values from `srtm` at the points represented in `zion_points`.
 Next, extract average values of `srtm` using a 90 buffer around each point from `zion_points` and compare these two sets of values. 
@@ -67,7 +67,7 @@ plot(zion_points_points$srtm, zion_points_buffer$srtm)
 # plot(zion_points_buffer$srtm, zion_points_buf_2)
 ```
 
-<img src="06-raster-vector_files/figure-html/06-ex-e2-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e2-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-raster-vector_files/figure-html/06-ex-e2-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e2-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E3. Subset points higher than 3100 meters in New Zealand (the `nz_height` object) and create a template raster with a resolution of 3 km for the extent of the new point dataset. 
 Using these two new objects:
@@ -93,7 +93,7 @@ plot(nz_raster2)
 plot(st_geometry(nz_height3100), add = TRUE)
 ```
 
-<img src="06-raster-vector_files/figure-html/06-ex-e3-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-2.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-3.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-raster-vector_files/figure-html/06-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-2.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e3-3.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E4. Aggregate the raster counting high points in New Zealand (created in the previous exercise), reduce its geographic resolution by half (so cells are 6 x 6 km) and plot the result.
 
@@ -111,7 +111,7 @@ plot(nz_resample) # the results are spread over a greater area and there are bor
 plot(nz_raster)
 ```
 
-<img src="06-raster-vector_files/figure-html/06-ex-e4-1.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e4-2.png" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e4-3.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-raster-vector_files/figure-html/06-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e4-2.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="06-raster-vector_files/figure-html/06-ex-e4-3.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 Advantages:
 
@@ -146,7 +146,7 @@ clay = dplyr::filter(grain_poly, grain == "clay")
 plot(clay)
 ```
 
-<img src="06-raster-vector_files/figure-html/06-ex-e5-2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="06-raster-vector_files/figure-html/06-ex-e5-2-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 Advantages: 
 

@@ -83,7 +83,7 @@ plot(st_geometry(nz_27700))
 par(mfrow = c(1, 1))
 ```
 
-<img src="07-reproj_files/figure-html/07-ex-e1-1.png" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e1-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproj_files/figure-html/07-ex-e1-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e1-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E2. Transform the `world` dataset to the transverse Mercator projection (`"+proj=tmerc"`) and plot the result.
 What has changed and why?
@@ -98,7 +98,7 @@ world_4326 = st_transform(world_tmerc, "EPSG:4326")
 plot(st_geometry(world_4326))
 ```
 
-<img src="07-reproj_files/figure-html/07-ex-e2-1.png" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e2-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproj_files/figure-html/07-ex-e2-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e2-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E3. Transform the continuous raster (`con_raster`) into NAD83 / UTM zone 12N using the nearest neighbor interpolation method.
 What has changed?
@@ -122,7 +122,7 @@ plot(con_raster)
 plot(con_raster_utm12n)
 ```
 
-<img src="07-reproj_files/figure-html/07-ex-e3-1.png" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e3-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproj_files/figure-html/07-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e3-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 E4. Transform the categorical raster (`cat_raster`) into WGS 84 using the bilinear interpolation method.
 What has changed?
@@ -146,7 +146,7 @@ plot(cat_raster)
 plot(cat_raster_wgs84)
 ```
 
-<img src="07-reproj_files/figure-html/07-ex-e4-1.png" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e4-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="07-reproj_files/figure-html/07-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;" /><img src="07-reproj_files/figure-html/07-ex-e4-2.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 <!--toDo:jn-->
 <!--improve/replace/modify the following q-->

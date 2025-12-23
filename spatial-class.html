@@ -152,7 +152,7 @@ Find two similarities and two differences between the image on your computer and
 <span><span class="co"># </span></span>
 <span><span class="co"># `cex` refers to the diameter of symbols plotted, as explained by the help page `?graphics::points`. It is an acronym for 'Chacter symbol EXpansion'.</span></span>
 <span><span class="co"># It was set to the square route of the population divided by 10,000 because a) otherwise the symbols would not fit on the map and b) to make circle area proportional to population.</span></span></code></pre></div>
-<p><img src="02-spatial-data_files/figure-html/02-ex-e2-1.png" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-2.png" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-3.png" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-4.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="02-spatial-data_files/figure-html/02-ex-e2-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-2.png" alt="" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-3.png" alt="" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e2-4.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E3. Use <code><a href="https://rspatial.github.io/terra/reference/plot.html">plot()</a></code> to create maps of Nigeria in context (see Section 2.2.3).</p>
 <ul>
 <li>Adjust the <code>lwd</code>, <code>col</code> and <code>expandBB</code> arguments of <code><a href="https://rspatial.github.io/terra/reference/plot.html">plot()</a></code>.</li>
@@ -176,14 +176,14 @@ Find two similarities and two differences between the image on your computer and
 <span><span class="co">#&gt; Warning: st_centroid assumes attributes are constant over geometries</span></span>
 <span><span class="va">ncentre_num</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html">st_coordinates</a></span><span class="op">(</span><span class="va">ncentre</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/text.html">text</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ncentre_num</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">ncentre_num</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, labels <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">name_long</span><span class="op">)</span></span></code></pre></div>
-<p><img src="02-spatial-data_files/figure-html/02-ex-e3-1.png" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e3-2.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="02-spatial-data_files/figure-html/02-ex-e3-1.png" alt="" width="100%" style="display: block; margin: auto;"><img src="02-spatial-data_files/figure-html/02-ex-e3-2.png" alt="" width="100%" style="display: block; margin: auto;"></p>
 <p>E4. Create an empty <code>SpatRaster</code> object called <code>my_raster</code> with 10 columns and 10 rows.
 Assign random values between 0 and 10 to the new raster and plot it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>                 vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, size <span class="op">=</span> <span class="fl">10</span> <span class="op">*</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">my_raster</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-spatial-data_files/figure-html/02-ex-e4-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-spatial-data_files/figure-html/02-ex-e4-1.png" alt="" width="100%" style="display: block; margin: auto;"></div>
 <p>E5. Read-in the <code>raster/nlcd.tif</code> file from the <strong>spDataLarge</strong> package.
 What kind of information can you get about the properties of this file?</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -315,7 +315,7 @@ The SRID of the above CRS is “EPSG:26912”.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-14.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
