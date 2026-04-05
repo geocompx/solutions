@@ -289,6 +289,7 @@ Note: it may be wise to increase the cell size of the input raster to reduce com
 ``` r
 # Fetch the DEM data for Spain
 spain_dem = geodata::elevation_30s(country = "Spain", path = ".", mask = FALSE)
+#> Cached as: ./elevation/ESP_elv.zip
 
 # Reduce the resolution by a factor of 20 to speed up calculations
 spain_dem = terra::aggregate(spain_dem, fact = 20)
