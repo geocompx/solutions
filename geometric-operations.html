@@ -188,7 +188,7 @@ Hint: The <code>st_length</code> function computes the length of a <code>LINESTR
 <span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -2040000 ymin: -2110000 xmax: 2520000 ymax: 731000</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD27 / US National Atlas Equal Area</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
 <span><span class="co">#&gt;    GEOID                 NAME   REGION         AREA total_pop_10 total_pop_15</span></span>
@@ -203,45 +203,45 @@ Hint: The <code>st_length</code> function computes the length of a <code>LINESTR
 <span><span class="co">#&gt; 9     45       South Carolina    South 80904 [km^2]      4511428      4777576</span></span>
 <span><span class="co">#&gt; 10    18              Indiana  Midwest 93648 [km^2]      6417398      6568645</span></span>
 <span><span class="co">#&gt;        borders                       geometry</span></span>
-<span><span class="co">#&gt; 1    60330 [m] MULTILINESTRING ((1955479 -...</span></span>
-<span><span class="co">#&gt; 2   304697 [m] MULTILINESTRING ((2338362 4...</span></span>
-<span><span class="co">#&gt; 3   407939 [m] MULTILINESTRING ((2041302 -...</span></span>
-<span><span class="co">#&gt; 4   514571 [m] MULTILINESTRING ((2148010 2...</span></span>
-<span><span class="co">#&gt; 5   747090 [m] MULTILINESTRING ((2062773 -...</span></span>
-<span><span class="co">#&gt; 6   778660 [m] MULTILINESTRING ((2054045 3...</span></span>
-<span><span class="co">#&gt; 7   782892 [m] MULTILINESTRING ((2188613 3...</span></span>
-<span><span class="co">#&gt; 8  1018656 [m] MULTILINESTRING ((2422968 3...</span></span>
-<span><span class="co">#&gt; 9  1275538 [m] MULTILINESTRING ((1534988 -...</span></span>
-<span><span class="co">#&gt; 10 1436255 [m] MULTILINESTRING ((1033797 -...</span></span>
+<span><span class="co">#&gt; 1    60323 [m] MULTILINESTRING ((1950799 -...</span></span>
+<span><span class="co">#&gt; 2   304591 [m] MULTILINESTRING ((2332201 4...</span></span>
+<span><span class="co">#&gt; 3   408049 [m] MULTILINESTRING ((2036279 -...</span></span>
+<span><span class="co">#&gt; 4   514082 [m] MULTILINESTRING ((2142311 2...</span></span>
+<span><span class="co">#&gt; 5   746937 [m] MULTILINESTRING ((2057711 -...</span></span>
+<span><span class="co">#&gt; 6   778173 [m] MULTILINESTRING ((2048129 3...</span></span>
+<span><span class="co">#&gt; 7   782614 [m] MULTILINESTRING ((2182288 3...</span></span>
+<span><span class="co">#&gt; 8  1017357 [m] MULTILINESTRING ((2416640 3...</span></span>
+<span><span class="co">#&gt; 9  1275271 [m] MULTILINESTRING ((1531815 -...</span></span>
+<span><span class="co">#&gt; 10 1436282 [m] MULTILINESTRING ((1031131 -...</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">us_states_bor</span>, <span class="op">-</span><span class="va">borders</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 49 features and 7 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTILINESTRING</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -2040000 ymin: -2110000 xmax: 2520000 ymax: 731000</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -2030000 ymin: -2120000 xmax: 2510000 ymax: 732000</span></span>
 <span><span class="co">#&gt; Projected CRS: NAD27 / US National Atlas Equal Area</span></span>
 <span><span class="co">#&gt; First 10 features:</span></span>
 <span><span class="co">#&gt;    GEOID       NAME  REGION          AREA total_pop_10 total_pop_15     borders</span></span>
-<span><span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4959186 [m]</span></span>
-<span><span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810350 [m]</span></span>
-<span><span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3579183 [m]</span></span>
-<span><span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2949048 [m]</span></span>
-<span><span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2826586 [m]</span></span>
-<span><span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2570606 [m]</span></span>
-<span><span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2567386 [m]</span></span>
-<span><span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2407299 [m]</span></span>
-<span><span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378172 [m]</span></span>
-<span><span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2344358 [m]</span></span>
+<span><span class="co">#&gt; 1     48      Texas   South 687714 [km^2]     24311891     26538614 4961592 [m]</span></span>
+<span><span class="co">#&gt; 2     06 California    West 409747 [km^2]     36637290     38421464 3810215 [m]</span></span>
+<span><span class="co">#&gt; 3     26   Michigan Midwest 151119 [km^2]      9952687      9900571 3574870 [m]</span></span>
+<span><span class="co">#&gt; 4     12    Florida   South 151052 [km^2]     18511620     19645772 2951062 [m]</span></span>
+<span><span class="co">#&gt; 5     30    Montana    West 380829 [km^2]       973739      1014699 2821726 [m]</span></span>
+<span><span class="co">#&gt; 6     16      Idaho    West 216513 [km^2]      1526797      1616547 2568683 [m]</span></span>
+<span><span class="co">#&gt; 7     27  Minnesota Midwest 218566 [km^2]      5241914      5419171 2563899 [m]</span></span>
+<span><span class="co">#&gt; 8     51   Virginia   South 105405 [km^2]      7841754      8256630 2405695 [m]</span></span>
+<span><span class="co">#&gt; 9     35 New Mexico    West 314886 [km^2]      2013122      2084117 2378719 [m]</span></span>
+<span><span class="co">#&gt; 10    53 Washington    West 175436 [km^2]      6561297      6985464 2340766 [m]</span></span>
 <span><span class="co">#&gt;                          geometry</span></span>
-<span><span class="co">#&gt; 1  MULTILINESTRING ((-269579 -...</span></span>
-<span><span class="co">#&gt; 2  MULTILINESTRING ((-1720565 ...</span></span>
-<span><span class="co">#&gt; 3  MULTILINESTRING ((1113866 1...</span></span>
-<span><span class="co">#&gt; 4  MULTILINESTRING ((1855611 -...</span></span>
-<span><span class="co">#&gt; 5  MULTILINESTRING ((-1165102 ...</span></span>
-<span><span class="co">#&gt; 6  MULTILINESTRING ((-1298509 ...</span></span>
-<span><span class="co">#&gt; 7  MULTILINESTRING ((202873 44...</span></span>
-<span><span class="co">#&gt; 8  MULTILINESTRING ((2104821 -...</span></span>
-<span><span class="co">#&gt; 9  MULTILINESTRING ((-805019 -...</span></span>
-<span><span class="co">#&gt; 10 MULTILINESTRING ((-1663690 ...</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  MULTILINESTRING ((-268997 -...</span></span>
+<span><span class="co">#&gt; 2  MULTILINESTRING ((-1717198 ...</span></span>
+<span><span class="co">#&gt; 3  MULTILINESTRING ((1110640 1...</span></span>
+<span><span class="co">#&gt; 4  MULTILINESTRING ((1853163 -...</span></span>
+<span><span class="co">#&gt; 5  MULTILINESTRING ((-1161418 ...</span></span>
+<span><span class="co">#&gt; 6  MULTILINESTRING ((-1294707 ...</span></span>
+<span><span class="co">#&gt; 7  MULTILINESTRING ((202240 44...</span></span>
+<span><span class="co">#&gt; 8  MULTILINESTRING ((2099933 -...</span></span>
+<span><span class="co">#&gt; 9  MULTILINESTRING ((-803244 -...</span></span>
+<span><span class="co">#&gt; 10 MULTILINESTRING ((-1658500 ...</span></span></code></pre></div>
 <p>E7. Read the srtm.tif file into R (<code>srtm = rast(system.file("raster/srtm.tif", package = "spDataLarge"))</code>).
 This raster has a resolution of 0.00083 * 0.00083 degrees.
 Change its resolution to 0.01 * 0.01 degrees using all of the methods available in the <strong>terra</strong> package.
@@ -300,7 +300,7 @@ Can you notice any differences between the results of these resampling methods?<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-04-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-05-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -174,14 +174,14 @@ How does it influence the results?</p>
 <code class="sourceCode R"><span><span class="va">con_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">con_raster_utm12n</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/project.html">project</a></span><span class="op">(</span><span class="va">con_raster</span>, <span class="st">"EPSG:32612"</span>, method <span class="op">=</span> <span class="st">"near"</span><span class="op">)</span></span>
 <span><span class="va">con_raster_utm12n</span></span>
-<span><span class="co">#&gt; class       : SpatRaster </span></span>
+<span><span class="co">#&gt; class       : SpatRaster</span></span>
 <span><span class="co">#&gt; size        : 515, 422, 1  (nrow, ncol, nlyr)</span></span>
-<span><span class="co">#&gt; resolution  : 83.5, 83.5  (x, y)</span></span>
-<span><span class="co">#&gt; extent      : 301062, 336313, 4111111, 4154131  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; coord. ref. : WGS 84 / UTM zone 12N (EPSG:32612) </span></span>
+<span><span class="co">#&gt; resolution  : 83.5334, 83.5334  (x, y)</span></span>
+<span><span class="co">#&gt; extent      : 301062, 336313.1, 4111111, 4154131  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; coord. ref. : WGS 84 / UTM zone 12N (EPSG:32612)</span></span>
 <span><span class="co">#&gt; source(s)   : memory</span></span>
-<span><span class="co">#&gt; name        : srtm </span></span>
-<span><span class="co">#&gt; min value   : 1024 </span></span>
+<span><span class="co">#&gt; name        : srtm</span></span>
+<span><span class="co">#&gt; min value   : 1024</span></span>
 <span><span class="co">#&gt; max value   : 2892</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">con_raster</span><span class="op">)</span></span>
@@ -194,14 +194,14 @@ How does it influence the results?</p>
 <code class="sourceCode R"><span><span class="va">cat_raster</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/nlcd.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">cat_raster_wgs84</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/project.html">project</a></span><span class="op">(</span><span class="va">cat_raster</span>, <span class="st">"EPSG:4326"</span>, method <span class="op">=</span> <span class="st">"bilinear"</span><span class="op">)</span></span>
 <span><span class="va">cat_raster_wgs84</span></span>
-<span><span class="co">#&gt; class       : SpatRaster </span></span>
+<span><span class="co">#&gt; class       : SpatRaster</span></span>
 <span><span class="co">#&gt; size        : 1246, 1244, 1  (nrow, ncol, nlyr)</span></span>
-<span><span class="co">#&gt; resolution  : 0.000315, 0.000315  (x, y)</span></span>
-<span><span class="co">#&gt; extent      : -113, -113, 37.1, 37.5  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span></span>
+<span><span class="co">#&gt; resolution  : 0.0003150632, 0.0003150632  (x, y)</span></span>
+<span><span class="co">#&gt; extent      : -113.2414, -112.8494, 37.12656, 37.51913  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span></span>
 <span><span class="co">#&gt; source(s)   : memory</span></span>
-<span><span class="co">#&gt; name        : levels </span></span>
-<span><span class="co">#&gt; min value   :      1 </span></span>
+<span><span class="co">#&gt; name        : levels</span></span>
+<span><span class="co">#&gt; min value   :      1</span></span>
 <span><span class="co">#&gt; max value   :      8</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html">plot</a></span><span class="op">(</span><span class="va">cat_raster</span><span class="op">)</span></span>
@@ -254,7 +254,7 @@ How does it influence the results?</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-04-26.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-05-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
