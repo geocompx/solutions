@@ -20,22 +20,22 @@ E1. Use `summary()` on the geometry column of the `world` data object that is in
 
 ``` r
 summary(world)
-#>     iso_a2           name_long          continent          region_un        
-#>  Length:177         Length:177         Length:177         Length:177        
-#>  Class :character   Class :character   Class :character   Class :character  
-#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-#>                                                                             
-#>                                                                             
-#>                                                                             
-#>                                                                             
-#>   subregion             type              area_km2             pop          
-#>  Length:177         Length:177         Min.   :    2417   Min.   :5.63e+04  
-#>  Class :character   Class :character   1st Qu.:   46185   1st Qu.:3.75e+06  
-#>  Mode  :character   Mode  :character   Median :  185004   Median :1.04e+07  
-#>                                        Mean   :  832558   Mean   :4.28e+07  
-#>                                        3rd Qu.:  621860   3rd Qu.:3.07e+07  
-#>                                        Max.   :17018507   Max.   :1.36e+09  
-#>                                                           NA's   :10        
+#>        iso_a2        name_long       continent       region_un  
+#>  Length   :177   Length   :177   Length   :177   Length   :177  
+#>  N.unique :175   N.unique :177   N.unique :  8   N.unique :  7  
+#>  N.blank  :  0   N.blank  :  0   N.blank  :  0   N.blank  :  0  
+#>  Min.nchar:  2   Min.nchar:  4   Min.nchar:  4   Min.nchar:  4  
+#>  Max.nchar:  2   Max.nchar: 35   Max.nchar: 23   Max.nchar: 23  
+#>  NAs      :  2                                                  
+#>                                                                 
+#>      subregion          type        area_km2             pop          
+#>  Length   :177   Length   :177   Min.   :    2417   Min.   :5.63e+04  
+#>  N.unique : 22   N.unique :  5   1st Qu.:   46185   1st Qu.:3.75e+06  
+#>  N.blank  :  0   N.blank  :  0   Median :  185004   Median :1.04e+07  
+#>  Min.nchar:  9   Min.nchar:  7   Mean   :  832558   Mean   :4.28e+07  
+#>  Max.nchar: 25   Max.nchar: 17   3rd Qu.:  621860   3rd Qu.:3.07e+07  
+#>                                  Max.   :17018507   Max.   :1.36e+09  
+#>                                                     NAs    :10        
 #>     lifeExp       gdpPercap                 geom    
 #>  Min.   :50.6   Min.   :   597   MULTIPOLYGON :177  
 #>  1st Qu.:65.0   1st Qu.:  3752   epsg:4326    :  0  
@@ -43,7 +43,7 @@ summary(world)
 #>  Mean   :70.9   Mean   : 17106                      
 #>  3rd Qu.:76.8   3rd Qu.: 24233                      
 #>  Max.   :83.6   Max.   :120860                      
-#>  NA's   :10     NA's   :17
+#>  NAs    :10     NAs    :17
 # - Its geometry type?
 #   multipolygon
 # - The number of countries?

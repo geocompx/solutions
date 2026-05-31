@@ -91,22 +91,22 @@
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html">summary</a></span><span class="op">(</span><span class="va">world</span><span class="op">)</span></span>
-<span><span class="co">#&gt;     iso_a2           name_long          continent          region_un        </span></span>
-<span><span class="co">#&gt;  Length:177         Length:177         Length:177         Length:177        </span></span>
-<span><span class="co">#&gt;  Class :character   Class :character   Class :character   Class :character  </span></span>
-<span><span class="co">#&gt;  Mode  :character   Mode  :character   Mode  :character   Mode  :character  </span></span>
-<span><span class="co">#&gt;                                                                             </span></span>
-<span><span class="co">#&gt;                                                                             </span></span>
-<span><span class="co">#&gt;                                                                             </span></span>
-<span><span class="co">#&gt;                                                                             </span></span>
-<span><span class="co">#&gt;   subregion             type              area_km2             pop          </span></span>
-<span><span class="co">#&gt;  Length:177         Length:177         Min.   :    2417   Min.   :5.63e+04  </span></span>
-<span><span class="co">#&gt;  Class :character   Class :character   1st Qu.:   46185   1st Qu.:3.75e+06  </span></span>
-<span><span class="co">#&gt;  Mode  :character   Mode  :character   Median :  185004   Median :1.04e+07  </span></span>
-<span><span class="co">#&gt;                                        Mean   :  832558   Mean   :4.28e+07  </span></span>
-<span><span class="co">#&gt;                                        3rd Qu.:  621860   3rd Qu.:3.07e+07  </span></span>
-<span><span class="co">#&gt;                                        Max.   :17018507   Max.   :1.36e+09  </span></span>
-<span><span class="co">#&gt;                                                           NA's   :10        </span></span>
+<span><span class="co">#&gt;        iso_a2        name_long       continent       region_un  </span></span>
+<span><span class="co">#&gt;  Length   :177   Length   :177   Length   :177   Length   :177  </span></span>
+<span><span class="co">#&gt;  N.unique :175   N.unique :177   N.unique :  8   N.unique :  7  </span></span>
+<span><span class="co">#&gt;  N.blank  :  0   N.blank  :  0   N.blank  :  0   N.blank  :  0  </span></span>
+<span><span class="co">#&gt;  Min.nchar:  2   Min.nchar:  4   Min.nchar:  4   Min.nchar:  4  </span></span>
+<span><span class="co">#&gt;  Max.nchar:  2   Max.nchar: 35   Max.nchar: 23   Max.nchar: 23  </span></span>
+<span><span class="co">#&gt;  NAs      :  2                                                  </span></span>
+<span><span class="co">#&gt;                                                                 </span></span>
+<span><span class="co">#&gt;      subregion          type        area_km2             pop          </span></span>
+<span><span class="co">#&gt;  Length   :177   Length   :177   Min.   :    2417   Min.   :5.63e+04  </span></span>
+<span><span class="co">#&gt;  N.unique : 22   N.unique :  5   1st Qu.:   46185   1st Qu.:3.75e+06  </span></span>
+<span><span class="co">#&gt;  N.blank  :  0   N.blank  :  0   Median :  185004   Median :1.04e+07  </span></span>
+<span><span class="co">#&gt;  Min.nchar:  9   Min.nchar:  7   Mean   :  832558   Mean   :4.28e+07  </span></span>
+<span><span class="co">#&gt;  Max.nchar: 25   Max.nchar: 17   3rd Qu.:  621860   3rd Qu.:3.07e+07  </span></span>
+<span><span class="co">#&gt;                                  Max.   :17018507   Max.   :1.36e+09  </span></span>
+<span><span class="co">#&gt;                                                     NAs    :10        </span></span>
 <span><span class="co">#&gt;     lifeExp       gdpPercap                 geom    </span></span>
 <span><span class="co">#&gt;  Min.   :50.6   Min.   :   597   MULTIPOLYGON :177  </span></span>
 <span><span class="co">#&gt;  1st Qu.:65.0   1st Qu.:  3752   epsg:4326    :  0  </span></span>
@@ -114,7 +114,7 @@
 <span><span class="co">#&gt;  Mean   :70.9   Mean   : 17106                      </span></span>
 <span><span class="co">#&gt;  3rd Qu.:76.8   3rd Qu.: 24233                      </span></span>
 <span><span class="co">#&gt;  Max.   :83.6   Max.   :120860                      </span></span>
-<span><span class="co">#&gt;  NA's   :10     NA's   :17</span></span>
+<span><span class="co">#&gt;  NAs    :10     NAs    :17</span></span>
 <span><span class="co"># - Its geometry type?</span></span>
 <span><span class="co">#   multipolygon</span></span>
 <span><span class="co"># - The number of countries?</span></span>
@@ -315,7 +315,7 @@ The SRID of the above CRS is “EPSG:26912”.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-05-24.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-05-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
