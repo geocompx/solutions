@@ -20,6 +20,7 @@ library(mlr3tuning)
 library(mlr3viz)
 library(progressr)
 library(qgisprocess)
+library(Rsagacmd)
 library(tictoc)
 library(vegan)
 ```
@@ -55,7 +56,7 @@ One compromise would be to use a categorical scale such as the Londo scale.
 
 E2. Compute all the predictor rasters\index{raster} we have used in the chapter (catchment slope, catchment area), and put them into a `SpatRaster`-object.
 Add `dem` and `ndvi` to it.
-Next, compute profile and tangential curvature and add them as additional predictor rasters (hint: `grass7:r.slope.aspect`).
+Next, compute profile and tangential curvature and add them as additional predictor rasters (hint: `grass:r.slope.aspect`).
 Finally, construct a response-predictor matrix. 
 The scores of the first NMDS\index{NMDS} axis (which were the result when using the presence-absence community matrix) rotated in accordance with elevation represent the response variable, and should be joined to `random_points` (use an inner join).
 To complete the response-predictor matrix, extract the values of the environmental predictor raster object to `random_points`.
@@ -75,32 +76,22 @@ pa = vegan::decostand(comm, "pa")
 pa = pa[rowSums(pa) != 0, ]
 
 # enable plugins if not already done so
-qgisprocess::qgis_enable_plugins(c("grassprovider", "processing_saga_nextgen"))
+qgisprocess::qgis_enable_plugins("grassprovider")
 
-# compute environmental predictors (ep) catchment slope and catchment area
-ep = qgisprocess::qgis_run_algorithm(
-  alg = "sagang:sagawetnessindex",
-  DEM = dem,
-  SLOPE_TYPE = 1,
-  SLOPE = tempfile(fileext = ".sdat"),
-  AREA = tempfile(fileext = ".sdat"),
-  .quiet = TRUE)
-# read in catchment area and catchment slope
-ep = ep[c("AREA", "SLOPE")] |>
-  unlist() |>
-  terra::rast()
-# assign proper names 
-names(ep) = c("carea", "cslope")
-# make sure all rasters share the same origin
-origin(ep) = origin(dem)
-# add dem and ndvi to the multi-layer SpatRaster object
-ep = c(dem, ndvi, ep) 
+# compute environmental predictors (ep): catchment slope and catchment area
+# via Rsagacmd (SAGA GIS must be installed on the system)
+saga = saga_gis()
+saga_twi = saga$ta_hydrology$saga_wetness_index(dem = dem, slope_type = 1)
+
+# assemble ep and log10-transform catchment area
+ep = c(dem, ndvi, saga_twi$area, saga_twi$slope)
+names(ep) = c("dem", "ndvi", "carea", "cslope")
 ep$carea = log10(ep$carea)
 
 # compute the curvatures
-qgis_show_help("grass7:r.slope.aspect")
+qgis_show_help("grass:r.slope.aspect")
 curvs = qgis_run_algorithm(
-  "grass7:r.slope.aspect",
+  "grass:r.slope.aspect",
   elevation = dem,
   .quiet = TRUE)
 # adding curvatures to ep

@@ -31,37 +31,36 @@ E1. Compute the following terrain attributes from the `elev` dataset loaded with
 # attach data
 dem = terra::rast(system.file("raster/ta.tif", package = "spDataLarge"))$elev
 
-algs = qgisprocess::qgis_algorithms()
-qgis_search_algorithms("curvature")
-alg = "sagang:slopeaspectcurvature"
-qgisprocess::qgis_show_help(alg)
-qgisprocess::qgis_get_argument_specs(alg)
-# terrain attributes (ta)
-out_nms = paste0(tempdir(), "/", c("slope", "cplan", "cprof"),
-                 ".sdat")
-args = rlang::set_names(out_nms, c("SLOPE", "C_PLAN", "C_PROF"))
-out = qgis_run_algorithm(alg, ELEVATION = dem, METHOD = 6, 
-                         UNIT_SLOPE = "[1] degree",
-                         !!!args,
-                         .quiet = TRUE
-                         )
-ta = out[names(args)] |> unlist() |> terra::rast()
+qgisprocess::qgis_enable_plugins("grassprovider", quiet = TRUE)
+
+# slope and curvatures via GRASS r.slope.aspect
+qgis_show_help("grass:r.slope.aspect")
+sa = qgis_run_algorithm(
+  "grass:r.slope.aspect",
+  elevation = dem,
+  .quiet = TRUE
+)
+ta = c(qgis_as_terra(sa$slope),
+       qgis_as_terra(sa$tcurvature),
+       qgis_as_terra(sa$pcurvature))
 names(ta) = c("slope", "cplan", "cprof")
-# catchment area
-qgis_search_algorithms("[Cc]atchment")
-alg = "sagang:catchmentarea"
-qgis_show_help(alg)
-qgis_get_argument_specs(alg)
-carea = qgis_run_algorithm(alg,
-                           ELEVATION = dem, 
-                           METHOD = 4, 
-                           FLOW = file.path(tempdir(), "carea.sdat"))
-# transform carea
-carea = terra::rast(carea$FLOW[1])
-log10_carea = log10(carea)
+
+# catchment area via GRASS r.watershed; accumulation is in number of cells, so
+# multiply by cell area to get m^2 (the DEM is in a UTM CRS, see ?ta.tif)
+qgis_show_help("grass:r.watershed")
+ws = qgis_run_algorithm(
+  "grass:r.watershed",
+  elevation = dem,
+  threshold = 1,
+  .quiet = TRUE
+)
+carea = qgis_as_terra(ws$accumulation)
+log10_carea = log10(abs(carea) * prod(res(dem)))
 names(log10_carea) = "log10_carea"
-# add log_carea and dem to the terrain attributes
+
+# add elev and log10_carea
 ta = c(ta, dem, log10_carea)
+names(ta)[4] = "elev"
 ```
 
 E2. Extract the values from the corresponding output rasters to the `lsl` data frame (`data("lsl", package = "spDataLarge"`) by adding new variables called `slope`, `cplan`, `cprof`, `elev` and `log_carea`.

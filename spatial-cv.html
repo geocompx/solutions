@@ -103,37 +103,36 @@
 <code class="sourceCode R"><span><span class="co"># attach data</span></span>
 <span><span class="va">dem</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/ta.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">elev</span></span>
 <span></span>
-<span><span class="va">algs</span> <span class="op">=</span> <span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_algorithms.html">qgis_algorithms</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_search_algorithms.html">qgis_search_algorithms</a></span><span class="op">(</span><span class="st">"curvature"</span><span class="op">)</span></span>
-<span><span class="va">alg</span> <span class="op">=</span> <span class="st">"sagang:slopeaspectcurvature"</span></span>
-<span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="va">alg</span><span class="op">)</span></span>
-<span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_get_argument_specs</a></span><span class="op">(</span><span class="va">alg</span><span class="op">)</span></span>
-<span><span class="co"># terrain attributes (ta)</span></span>
-<span><span class="va">out_nms</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"/"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"slope"</span>, <span class="st">"cplan"</span>, <span class="st">"cprof"</span><span class="op">)</span>,</span>
-<span>                 <span class="st">".sdat"</span><span class="op">)</span></span>
-<span><span class="va">args</span> <span class="op">=</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">out_nms</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SLOPE"</span>, <span class="st">"C_PLAN"</span>, <span class="st">"C_PROF"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span><span class="va">alg</span>, ELEVATION <span class="op">=</span> <span class="va">dem</span>, METHOD <span class="op">=</span> <span class="fl">6</span>, </span>
-<span>                         UNIT_SLOPE <span class="op">=</span> <span class="st">"[1] degree"</span>,</span>
-<span>                         <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">args</span>,</span>
-<span>                         .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>                         <span class="op">)</span></span>
-<span><span class="va">ta</span> <span class="op">=</span> <span class="va">out</span><span class="op">[</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">args</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">qgisprocess</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_enable_plugins.html">qgis_enable_plugins</a></span><span class="op">(</span><span class="st">"grassprovider"</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># slope and curvatures via GRASS r.slope.aspect</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"grass:r.slope.aspect"</span><span class="op">)</span></span>
+<span><span class="va">sa</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
+<span>  <span class="st">"grass:r.slope.aspect"</span>,</span>
+<span>  elevation <span class="op">=</span> <span class="va">dem</span>,</span>
+<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">ta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">sa</span><span class="op">$</span><span class="va">slope</span><span class="op">)</span>,</span>
+<span>       <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">sa</span><span class="op">$</span><span class="va">tcurvature</span><span class="op">)</span>,</span>
+<span>       <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">sa</span><span class="op">$</span><span class="va">pcurvature</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">ta</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"slope"</span>, <span class="st">"cplan"</span>, <span class="st">"cprof"</span><span class="op">)</span></span>
-<span><span class="co"># catchment area</span></span>
-<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_search_algorithms.html">qgis_search_algorithms</a></span><span class="op">(</span><span class="st">"[Cc]atchment"</span><span class="op">)</span></span>
-<span><span class="va">alg</span> <span class="op">=</span> <span class="st">"sagang:catchmentarea"</span></span>
-<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="va">alg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_get_argument_specs</a></span><span class="op">(</span><span class="va">alg</span><span class="op">)</span></span>
-<span><span class="va">carea</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span><span class="va">alg</span>,</span>
-<span>                           ELEVATION <span class="op">=</span> <span class="va">dem</span>, </span>
-<span>                           METHOD <span class="op">=</span> <span class="fl">4</span>, </span>
-<span>                           FLOW <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"carea.sdat"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># transform carea</span></span>
-<span><span class="va">carea</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="va">carea</span><span class="op">$</span><span class="va">FLOW</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">log10_carea</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">carea</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># catchment area via GRASS r.watershed; accumulation is in number of cells, so</span></span>
+<span><span class="co"># multiply by cell area to get m^2 (the DEM is in a UTM CRS, see ?ta.tif)</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_show_help.html">qgis_show_help</a></span><span class="op">(</span><span class="st">"grass:r.watershed"</span><span class="op">)</span></span>
+<span><span class="va">ws</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_run_algorithm.html">qgis_run_algorithm</a></span><span class="op">(</span></span>
+<span>  <span class="st">"grass:r.watershed"</span>,</span>
+<span>  elevation <span class="op">=</span> <span class="va">dem</span>,</span>
+<span>  threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  .quiet <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">carea</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/qgisprocess/reference/qgis_as_terra.html">qgis_as_terra</a></span><span class="op">(</span><span class="va">ws</span><span class="op">$</span><span class="va">accumulation</span><span class="op">)</span></span>
+<span><span class="va">log10_carea</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">carea</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">res</a></span><span class="op">(</span><span class="va">dem</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">log10_carea</span><span class="op">)</span> <span class="op">=</span> <span class="st">"log10_carea"</span></span>
-<span><span class="co"># add log_carea and dem to the terrain attributes</span></span>
-<span><span class="va">ta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ta</span>, <span class="va">dem</span>, <span class="va">log10_carea</span><span class="op">)</span></span></code></pre></div>
+<span></span>
+<span><span class="co"># add elev and log10_carea</span></span>
+<span><span class="va">ta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ta</span>, <span class="va">dem</span>, <span class="va">log10_carea</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html">names</a></span><span class="op">(</span><span class="va">ta</span><span class="op">)</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span> <span class="op">=</span> <span class="st">"elev"</span></span></code></pre></div>
 <p>E2. Extract the values from the corresponding output rasters to the <code>lsl</code> data frame (<code>data("lsl", package = "spDataLarge"</code>) by adding new variables called <code>slope</code>, <code>cplan</code>, <code>cprof</code>, <code>elev</code> and <code>log_carea</code>.</p>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># attach terrain attribute raster stack (in case you have skipped the previous</span></span>
@@ -329,7 +328,7 @@ Leaving the hyperparameters unspecified in <strong>kernlab</strong>’s <code>ks
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-06-07.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-06-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
