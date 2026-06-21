@@ -135,7 +135,7 @@ dim(nlcd) # dimensions
 res(nlcd) # resolution
 #> [1] 31.5 31.5
 ext(nlcd) # extent
-#> SpatExtent : 301903.344386758, 335735.354381954, 4111244.46098842, 4154086.47216415 (xmin, xmax, ymin, ymax)
+#> SpatExtent : 301903.34438675799, 335735.35438195401, 4111244.4609884201, 4154086.4721641499 (xmin, xmax, ymin, ymax)
 nlyr(nlcd) # number of layers
 #> [1] 1
 cat(crs(nlcd)) # CRS
