@@ -33,7 +33,7 @@ read_sf
 #>     st_read(..., quiet = quiet, stringsAsFactors = stringsAsFactors, 
 #>         as_tibble = as_tibble)
 #> }
-#> <bytecode: 0x563245069180>
+#> <bytecode: 0x557f892ae8d0>
 #> <environment: namespace:sf>
 nc = st_read(system.file("shape/nc.shp", package="sf"))
 #> Reading layer `nc' from data source 
@@ -95,7 +95,7 @@ Extract the June values, and save them to a file named `tmin_june.tif` file (hin
 ``` r
 library(geodata)
 gmmt = worldclim_global(var = "tmin", res = 5, path = tempdir())
-#> Cached as: /tmp/RtmplXN3i1/climate/wc2.1_5m//wc2.1_5m_tmin.zip
+#> Cached as: /tmp/RtmpWQmQT1/climate/wc2.1_5m//wc2.1_5m_tmin.zip
 names(gmmt)
 #>  [1] "wc2.1_5m_tmin_01" "wc2.1_5m_tmin_02" "wc2.1_5m_tmin_03" "wc2.1_5m_tmin_04"
 #>  [5] "wc2.1_5m_tmin_05" "wc2.1_5m_tmin_06" "wc2.1_5m_tmin_07" "wc2.1_5m_tmin_08"
