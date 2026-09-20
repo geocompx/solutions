@@ -239,7 +239,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 2020-08-01 to 2020-10-31, calculate its NDVI, and then compare it with the results from <code>ndvi.tif</code>.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://brazil-data-cube.github.io/rstac/">rstac</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/appelmar/gdalcubes">gdalcubes</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gdalcubes</span><span class="op">)</span></span>
 <span><span class="op">?</span><span class="fu">spDataLarge</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/spDataLarge/man/ndvi.tif.html">ndvi.tif</a></span></span>
 <span><span class="va">ndvi1</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/ndvi.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">bbox1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/project.html">project</a></span><span class="op">(</span><span class="va">ndvi1</span>, <span class="st">"EPSG:4326"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -251,20 +251,20 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 <span>              bbox <span class="op">=</span> <span class="va">bbox1</span>, </span>
 <span>              datetime <span class="op">=</span> <span class="st">"2020-08-01/2020-10-31"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://brazil-data-cube.github.io/rstac/reference/request.html">post_request</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://brazil-data-cube.github.io/rstac/reference/items_functions.html">items_fetch</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">collection</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/stac_image_collection.html">stac_image_collection</a></span><span class="op">(</span><span class="va">items</span><span class="op">$</span><span class="va">features</span>, </span>
+<span><span class="va">collection</span> <span class="op">=</span> <span class="fu">stac_image_collection</span><span class="op">(</span><span class="va">items</span><span class="op">$</span><span class="va">features</span>, </span>
 <span>                  property_filter <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="va">x</span><span class="op">[[</span><span class="st">"eo:cloud_cover"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="va">v</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/cube_view.html">cube_view</a></span><span class="op">(</span>srs <span class="op">=</span> <span class="st">"EPSG:32717"</span>, extent <span class="op">=</span> <span class="va">collection</span>,</span>
+<span><span class="va">v</span> <span class="op">=</span> <span class="fu">cube_view</span><span class="op">(</span>srs <span class="op">=</span> <span class="st">"EPSG:32717"</span>, extent <span class="op">=</span> <span class="va">collection</span>,</span>
 <span>              dx <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">xres</a></span><span class="op">(</span><span class="va">ndvi1</span><span class="op">)</span>, dy <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html">yres</a></span><span class="op">(</span><span class="va">ndvi1</span><span class="op">)</span>,</span>
 <span>              dt <span class="op">=</span> <span class="st">"P1D"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># calculate ndvi</span></span>
-<span><span class="va">ndvi2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/raster_cube.html">raster_cube</a></span><span class="op">(</span><span class="va">collection</span>, <span class="va">v</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/select_bands.html">select_bands</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B04"</span>, <span class="st">"B08"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/apply_pixel.html">apply_pixel</a></span><span class="op">(</span><span class="st">"(B08-B04)/(B08+B04)"</span>, <span class="st">"NDVI"</span><span class="op">)</span></span>
+<span><span class="va">ndvi2</span> <span class="op">=</span> <span class="fu">raster_cube</span><span class="op">(</span><span class="va">collection</span>, <span class="va">v</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select_bands</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"B04"</span>, <span class="st">"B08"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">apply_pixel</span><span class="op">(</span><span class="st">"(B08-B04)/(B08+B04)"</span>, <span class="st">"NDVI"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># write results to file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/gdalcubes_options.html">gdalcubes_options</a></span><span class="op">(</span>parallel <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu">gdalcubes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gdalcubes/man/write_tif.html">write_tif</a></span><span class="op">(</span><span class="va">ndvi2</span>, dir <span class="op">=</span> <span class="st">"."</span>, prefix <span class="op">=</span> <span class="st">"ndvi2"</span><span class="op">)</span></span>
+<span><span class="fu">gdalcubes_options</span><span class="op">(</span>parallel <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu">gdalcubes</span><span class="fu">::</span><span class="fu">write_tif</span><span class="op">(</span><span class="va">ndvi2</span>, dir <span class="op">=</span> <span class="st">"."</span>, prefix <span class="op">=</span> <span class="st">"ndvi2"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># unify two datasets</span></span>
 <span><span class="va">ndvi2</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html">rast</a></span><span class="op">(</span><span class="st">"ndvi22020-10-10.tif"</span><span class="op">)</span></span>
@@ -311,7 +311,7 @@ Use <strong>rstac</strong>, <strong>gdalcubes</strong>, and <strong>terra</stron
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-09-13.</p>
+    <p>"<strong>Geocomputation with R: Solutions</strong>" was written by Robin Lovelace, Jakub Nowosad, Jannes Muenchow. It was last built on 2026-09-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
